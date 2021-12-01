@@ -1,4 +1,5 @@
-﻿using HPCL.DataModel.Settings;
+﻿using HPCL.DataModel;
+using HPCL.DataModel.Settings;
 using HPCL.DataRepository.Settings;
 using HPCL.Infrastructure.Response;
 using HPCL_WebApi.ActionFilters;
@@ -26,7 +27,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        //[CustomAuthenticationFilter]
         [Route("get_hq")]
         public async Task<IActionResult> GetHQ([FromBody] SettingGetHQModelInput ObjClass)
         {

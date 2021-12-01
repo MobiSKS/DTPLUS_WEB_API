@@ -4,14 +4,12 @@ using System.Text;
 
 namespace HPCL.DataModel.Settings
 {
-    public class SettingGetHQModelInput 
-    {
-        public string Useragent { get; set; }
-        public string Userip { get; set; }
-        public string Userid { get; set; }
-    }
 
-    public class SettingGetHQModelOutput 
+    public class SettingGetHQModelInput : BaseClass
+    {
+
+    }
+    public class SettingGetHQModelOutput
     {
         public int HQID { get; set; }
         public string HQName { get; set; }
