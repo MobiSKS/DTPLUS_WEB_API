@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Account\" />
+    <Folder Include="EncryptRequest\" />
+    <Folder Include="Merchant\" />
+    <Folder Include="RBE\" />
+    <Folder Include="PmtGateway\" />
+  </ItemGroup>
+
+</Project>

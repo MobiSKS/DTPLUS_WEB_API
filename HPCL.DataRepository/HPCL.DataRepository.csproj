@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Account - Copy\**" />
+    <Compile Remove="EncryptRequest - Copy\**" />
+    <Compile Remove="Merchant - Copy\**" />
+    <Compile Remove="PmtGateway - Copy\**" />
+    <Compile Remove="RBE - Copy\**" />
+    <EmbeddedResource Remove="Account - Copy\**" />
+    <EmbeddedResource Remove="EncryptRequest - Copy\**" />
+    <EmbeddedResource Remove="Merchant - Copy\**" />
+    <EmbeddedResource Remove="PmtGateway - Copy\**" />
+    <EmbeddedResource Remove="RBE - Copy\**" />
+    <None Remove="Account - Copy\**" />
+    <None Remove="EncryptRequest - Copy\**" />
+    <None Remove="Merchant - Copy\**" />
+    <None Remove="PmtGateway - Copy\**" />
+    <None Remove="RBE - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HPCL.DataModel\HPCL.DataModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Account\" />
+    <Folder Include="EncryptRequest\" />
+    <Folder Include="Merchant\" />
+    <Folder Include="RBE\" />
+    <Folder Include="PmtGateway\" />
+  </ItemGroup>
+
+</Project>
