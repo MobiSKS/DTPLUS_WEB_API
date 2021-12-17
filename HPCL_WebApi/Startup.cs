@@ -19,6 +19,8 @@ using HPCL.DataRepository.Login;
 using System.Reflection;
 using System.IO;
 using HPCL.DataRepository.Wallet;
+using HPCL.Infrastructure.Swagger;
+using HPCL.DataRepository.Account;
 
 namespace HPCL_WebApi
 {
@@ -49,12 +51,14 @@ namespace HPCL_WebApi
 
             services.AddSingleton<DapperContext>();
             services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IWalletRepository, WalletRepository>();
             services.AddControllers();
 
             //services.AddSwaggerGen();
             services.AddSwaggerGen(options =>
             {
+                options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
                 options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "MQWebAPI",

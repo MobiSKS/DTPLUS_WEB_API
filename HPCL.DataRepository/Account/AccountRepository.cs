@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using HPCL.DataModel.Login;
+using System.Data.SqlClient;
+using HPCL.DataModel.Account;
 
 namespace HPCL.DataRepository.Account
 {
@@ -18,24 +20,40 @@ namespace HPCL.DataRepository.Account
             _context = context;
         }
 
-        public async Task<object> User_Login([FromBody] LoginModel ObjUser)
+        public bool GenerateToken(AccountModel accountObj)
         {
+            using (var connection = _context.CreateConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    //connection.Open();
+                    //cmd.Connection = connection;
+                    //cmd.CommandText = "insert into tbl_api_entry(api_flag,useragent,Userip,userid) values('" + Method_Name + "','" + Useragent
+                    //    + "','" + Userip + "','" + Userid + "')";
+                    //cmd.CommandType = CommandType.Text;
+                    //int i = cmd.ExecuteNonQuery();
+                    //connection.Close();
+                    //IsResult = true;
+                }
+            }
+
             var procedureName = "sp_Test";
             //var parameters = new DynamicParameters();
             //parameters.Add("username", ObjUser.Username, DbType.String, ParameterDirection.Input);
             //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
             //parameters.Add("password", ObjUser.Password, DbType.String, ParameterDirection.Input);
-            
-            var parameters = new DynamicParameters();
-            parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
 
-            using (var connection = _context.CreateConnection())
-            {
-                var login_input = await connection.QueryFirstOrDefaultAsync<LoginModel>
-                    (procedureName, parameters, commandType: CommandType.StoredProcedure);
-                return login_input;
-            }
+            //var parameters = new DynamicParameters();
+            //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
 
+            //using (var connection = _context.CreateConnection())
+            //{
+            //    var login_input = await connection.QueryFirstOrDefaultAsync<LoginModel>
+            //        (procedureName, parameters, commandType: CommandType.StoredProcedure);
+            //    return login_input;
+            //}
+
+            return true;
         }
     }
 }
