@@ -1,6 +1,5 @@
 ﻿using HPCL.DataRepository.Account;
-using HPCL.DataRepository.Login;
-using HPCL.Infrastructure.HPCL.Infrastructure.CommonClass;
+using HPCL.Infrastructure.CommonClass;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,11 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
-using static HPCL.Infrastructure.HPCL.Infrastructure.CommonClass.TokenManager;
+using HPCL.Infrastructure.TokenManager;
 using HPCL.Infrastructure.Extension;
 using Microsoft.Extensions.Configuration;
-using HPCL.DataModel.Account;
-using HPCL.Infrastructure.TokenManager;
 
 namespace HPCL_WebApi.Controllers
 {
