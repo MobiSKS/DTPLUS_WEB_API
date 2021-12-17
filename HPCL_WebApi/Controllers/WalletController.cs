@@ -1,6 +1,7 @@
 ﻿using HPCL.DataModel.Wallet;
 using HPCL.DataRepository.Wallet;
 using HPCL.Infrastructure.Response;
+using HPCL_WebApi.ActionFilters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -43,6 +44,7 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
+        [CustomAuthenticationFilter]
         [Route("get_all_cards_by_customer_id")]
         public async Task<IActionResult> Getallcardsbycustomerid([FromBody] AllcardsbycustomeridInputModel ObjClass)
         {
@@ -56,6 +58,7 @@ namespace HPCL_WebApi.Controllers
                     response.Success = false;
                     response.Status_Code = BadRequest().StatusCode;
                     response.Data = null;
+                    _logger.LogInformation("Getallcardsbycustomerid: "+ response.Message);
                     return BadRequest(response);
                 }
                 else
@@ -67,6 +70,7 @@ namespace HPCL_WebApi.Controllers
                         response.Success = false;
                         response.Status_Code = NotFound().StatusCode;
                         response.Data = null;
+                        _logger.LogInformation("Getallcardsbycustomerid: " + response.Message);
                         return NotFound(response);
                     }
 
@@ -83,12 +87,14 @@ namespace HPCL_WebApi.Controllers
                     response.Success = true;
                     response.Status_Code = Ok().StatusCode;
                     response.Data = output;
+                    _logger.LogInformation("Getallcardsbycustomerid: " + response.Message);
                     return Ok(response);
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                _logger.LogError(0, "Processing request from {Message}", ex.Message);
+                return StatusCode(500, ex.Message);                
             }
         }
 

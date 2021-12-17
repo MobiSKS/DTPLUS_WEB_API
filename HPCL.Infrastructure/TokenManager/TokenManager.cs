@@ -11,8 +11,9 @@ using System.Web.Http.ModelBinding;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using Microsoft.OpenApi.Extensions;
 using HPCL.DataRepository.Account;
+using HPCL.Infrastructure.CommonClass;
 
-namespace HPCL.Infrastructure.HPCL.Infrastructure.CommonClass
+namespace HPCL.Infrastructure.TokenManager
 {
 
     public class TokenManager
