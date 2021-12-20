@@ -35,7 +35,14 @@ namespace HPCL.DataRepository.Account
                     //connection.Close();
                     //IsResult = true;
                 }
+
+               using (var connectio1n = _context.CreateConnection())
+                {
+                    var companies = await connectio1n.QueryAsync<Company>(query);
+                    return companies.ToList();
+                }
             }
+        }
 
             var procedureName = "sp_Test";
             //var parameters = new DynamicParameters();
