@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-using static HPCL.Infrastructure.HPCL.Infrastructure.CommonClass.TokenManager;
+using HPCL.Infrastructure.TokenManager;
 
-namespace HPCL.Infrastructure.HPCL.Infrastructure.CommonClass
+namespace HPCL.Infrastructure.CommonClass
 {
 
     public class Variables

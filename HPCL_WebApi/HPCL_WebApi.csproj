@@ -11,30 +11,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ActionFilters\**" />
     <Compile Remove="Areas\**" />
     <Compile Remove="Content\**" />
     <Compile Remove="ErrorHelper\**" />
     <Compile Remove="Log\**" />
     <Compile Remove="Models\**" />
-    <Content Remove="ActionFilters\**" />
     <Content Remove="Areas\**" />
     <Content Remove="Content\**" />
     <Content Remove="ErrorHelper\**" />
     <Content Remove="Log\**" />
     <Content Remove="Models\**" />
-    <EmbeddedResource Remove="ActionFilters\**" />
     <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Content\**" />
     <EmbeddedResource Remove="ErrorHelper\**" />
     <EmbeddedResource Remove="Log\**" />
     <EmbeddedResource Remove="Models\**" />
-    <None Remove="ActionFilters\**" />
     <None Remove="Areas\**" />
     <None Remove="Content\**" />
     <None Remove="ErrorHelper\**" />
     <None Remove="Log\**" />
     <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ActionFilters\GlobalExceptionAttribute.cs" />
+    <Compile Remove="ActionFilters\LoggingFilterAttribute .cs" />
   </ItemGroup>
 
   <ItemGroup>
