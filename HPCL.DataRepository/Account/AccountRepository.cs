@@ -35,32 +35,32 @@ namespace HPCL.DataRepository.Account
                     //connection.Close();
                     //IsResult = true;
                 }
-
-               using (var connectio1n = _context.CreateConnection())
-                {
-                    var companies = await connectio1n.QueryAsync<Company>(query);
-                    return companies.ToList();
-                }
+                return true;
+                //using (var connectio1n = _context.CreateConnection())
+                // {
+                //  //   var companies = await connection.QueryAsync<Company>(query);
+                //     //return companies.ToList();
+                // }
             }
         }
 
-            var procedureName = "sp_Test";
-            //var parameters = new DynamicParameters();
-            //parameters.Add("username", ObjUser.Username, DbType.String, ParameterDirection.Input);
-            //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
-            //parameters.Add("password", ObjUser.Password, DbType.String, ParameterDirection.Input);
+        //  var procedureName = "sp_Test";
+        //var parameters = new DynamicParameters();
+        //parameters.Add("username", ObjUser.Username, DbType.String, ParameterDirection.Input);
+        //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
+        //parameters.Add("password", ObjUser.Password, DbType.String, ParameterDirection.Input);
 
-            //var parameters = new DynamicParameters();
-            //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
+        //var parameters = new DynamicParameters();
+        //parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
 
-            //using (var connection = _context.CreateConnection())
-            //{
-            //    var login_input = await connection.QueryFirstOrDefaultAsync<LoginModel>
-            //        (procedureName, parameters, commandType: CommandType.StoredProcedure);
-            //    return login_input;
-            //}
+        //using (var connection = _context.CreateConnection())
+        //{
+        //    var login_input = await connection.QueryFirstOrDefaultAsync<LoginModel>
+        //        (procedureName, parameters, commandType: CommandType.StoredProcedure);
+        //    return login_input;
+        //}
 
-            return true;
-        }
+        // return true;
     }
 }
+//}

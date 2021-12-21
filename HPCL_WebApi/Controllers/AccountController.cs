@@ -23,62 +23,60 @@ namespace HPCL_WebApi.Controllers
         private readonly Variables ObjVariable;
         private readonly IAccountRepository _accountRepo;
         private readonly ILogger<AccountController> _logger;
-        public AccountController(IAccountRepository accountRepo, ILogger<AccountController> logger,IConfiguration configuration)
+        public AccountController(IAccountRepository accountRepo, ILogger<AccountController> logger, IConfiguration configuration)
         {
             _accountRepo = accountRepo;
             _logger = logger;
-             ObjVariable = new Variables(configuration);
+            ObjVariable = new Variables(configuration);
         }
 
-        
+
 
         [HttpPost]
         [Route("generatetoken")]
         public async Task<IActionResult> GenerateToken(GenerateTokenInput ObjClass)
         {
+            ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
+            string MethodName = "GENERATE_TOKEN";
+            try
             {
-                ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
-                string MethodName = "GENERATE_TOKEN";
-                try
+                StatusInformation.API_Key_Is_Null.GetDisplayName();
+                var request = Request;
+                var headers = request.Headers;
+                string API_Key = string.Empty;
+                string Secret_Key = string.Empty;
+                byte[] bytes = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70 };
+                string SecretKey = Convert.ToBase64String(bytes);
+                bool IsResult = TokenManager.Return_Key(Request, ObjVariable, _accountRepo, out string UserMessage, 0, out int IntStatusCode, ObjClass.Useragent, ObjClass.Userip, MethodName, ObjClass.Userid);
+
+                if (IsResult == true)
                 {
-                    StatusInformation.API_Key_Is_Null.GetDisplayName();
-                    var request = Request;
-                    var headers = request.Headers;
-                    string API_Key = string.Empty;
-                    string Secret_Key = string.Empty;
-                    byte[] bytes = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70 };
-                    string SecretKey = Convert.ToBase64String(bytes);
-                    bool IsResult = TokenManager. Return_Key(Request ,ObjVariable, _accountRepo,out string UserMessage, 0, out int IntStatusCode, ObjClass.Useragent, ObjClass.Userip, MethodName, ObjClass.Userid);
+                    TokenManager.Secret = SecretKey;
+                    TokenObject.Message = StatusInformation.Success.GetDisplayName();
+                    TokenObject.Method_Name = MethodName;
+                    TokenObject.Status_Code = (int)StatusInformation.Success;
+                    TokenObject.Success = true;
+                    TokenObject.Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip);
+                    // TokenObject.Model_State = ModelState,
 
-                    if (IsResult == true)
-                    {
-                        //TokenManager.Secret = objVariable.StrSecretKey;
-                        TokenManager.Secret = SecretKey;
-                        TokenObject.Message = StatusInformation.Success.GetDisplayName();
-                        TokenObject.Method_Name = MethodName;
-                        TokenObject.Status_Code = (int)StatusInformation.Success;
-                        TokenObject.Success = true;
-                        TokenObject.Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip);
-                       // TokenObject.Model_State = ModelState,
-
-                    }
-                    else
-                    {
-                        TokenManager.Secret = SecretKey;
-                        TokenObject.Message = UserMessage;
-                        TokenObject.Method_Name = MethodName;
-                        TokenObject.Status_Code = IntStatusCode;
-                        TokenObject.Success = false;
-                        TokenObject.Token = string.Empty;
-
-                    }
-                    return Ok(TokenObject);
                 }
-                catch (Exception ex)
+                else
                 {
-                    //log error
-                    return StatusCode(500, ex.Message);
+                    TokenManager.Secret = SecretKey;
+                    TokenObject.Message = UserMessage;
+                    TokenObject.Method_Name = MethodName;
+                    TokenObject.Status_Code = IntStatusCode;
+                    TokenObject.Success = false;
+                    TokenObject.Token = string.Empty;
+
                 }
+                _logger.LogInformation("Token " + TokenObject.Token);
+                return Ok(TokenObject);
+            }
+            catch (Exception ex)
+            {
+                //log error
+                return StatusCode(500, ex.Message);
             }
 
         }
