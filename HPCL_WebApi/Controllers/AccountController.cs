@@ -57,7 +57,7 @@ namespace HPCL_WebApi.Controllers
                     TokenObject.Status_Code = (int)StatusInformation.Success;
                     TokenObject.Success = true;
                     TokenObject.Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip);
-                    // TokenObject.Model_State = ModelState,
+                    TokenObject.Model_State = ModelState;
 
                 }
                 else
@@ -68,6 +68,7 @@ namespace HPCL_WebApi.Controllers
                     TokenObject.Status_Code = IntStatusCode;
                     TokenObject.Success = false;
                     TokenObject.Token = string.Empty;
+                    TokenObject.Model_State = ModelState;
 
                 }
                 _logger.LogInformation("Token " + TokenObject.Token);

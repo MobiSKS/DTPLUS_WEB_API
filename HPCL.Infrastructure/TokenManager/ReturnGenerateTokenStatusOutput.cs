@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Web.Http.ModelBinding;
+//using System.Web.Http.ModelBinding;
 
 namespace HPCL.Infrastructure.TokenManager
 {

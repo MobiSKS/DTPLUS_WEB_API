@@ -22,7 +22,9 @@ namespace HPCL.DataRepository.DBDapper
         public IDbConnection CreateConnection()
             => new SqlConnection(_connectionString);
 
-     
+        public SqlConnection CreateSqlConnection()
+           => new SqlConnection(_connectionString);
+
         public void Dispose()
         {
 

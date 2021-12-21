@@ -12,6 +12,7 @@ using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using Microsoft.OpenApi.Extensions;
 using HPCL.DataRepository.Account;
 using HPCL.Infrastructure.CommonClass;
+using HPCL.DataModel.Account;
 
 namespace HPCL.Infrastructure.TokenManager
 {
@@ -101,7 +102,7 @@ namespace HPCL.Infrastructure.TokenManager
             string Secret_Key = string.Empty;
             string StrMessage = string.Empty;
             int IntStatusCode = 0;
-           
+
             var Header = request.Headers;
             try
             {
@@ -234,8 +235,12 @@ namespace HPCL.Infrastructure.TokenManager
 
                 if (Useragent != "" && Userip != "" && Userid != "")
                 {
-                    //AccountModel obj = new AccountModel();
-                    //IsResult = _accountRepo.GenerateToken(obj);
+                    AccountModel objAccountModel = new AccountModel();
+                    objAccountModel.MethodName = Method_Name;
+                    objAccountModel.Useragent = Useragent;
+                    objAccountModel.Userid = Userid;
+                    objAccountModel.Userip = Userip;
+                    IsResult = accountRepo.GenerateToken(objAccountModel);
                     IsResult = true;
                 }
                 else
