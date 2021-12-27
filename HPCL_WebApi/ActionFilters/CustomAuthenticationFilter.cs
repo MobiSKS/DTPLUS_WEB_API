@@ -18,125 +18,109 @@ using HPCL.Infrastructure.CommonClass;
 using HPCL.Infrastructure.TokenManager;
 using Microsoft.AspNetCore.Mvc;
 using HPCL.Infrastructure.Response;
+using Microsoft.AspNetCore.Mvc.Filters;
+using IAuthorizationFilter = Microsoft.AspNetCore.Mvc.Filters.IAuthorizationFilter;
+using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace HPCL_WebApi.ActionFilters
 {
 
-    public class CustomAuthenticationFilter : AuthorizeAttribute, IAuthenticationFilter
+    public class CustomAuthenticationFilter : Attribute, IAuthorizationFilter
     {
-
-        private readonly IConfiguration _configuration;
-        private readonly Variables ObjVariable;
-
-        //public CustomAuthenticationFilter(IConfiguration configuration)
-        //{
-        //    _configuration = configuration;
-        //    ObjVariable = new Variables(configuration);
-        //}
-
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
-            
-            HttpRequestMessage request = context.Request;
-            AuthenticationHeaderValue authorization = request.Headers.Authorization;
+            // string authString;
+            HttpRequest request = context.HttpContext.Request;
+            var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
+            var actionName = descriptor.ActionName;
 
-            //var myModel = context.ActionContext.Request.Content.ReadAsStringAsync();
-
-            Task<string> content = context.ActionContext.Request.Content.ReadAsStringAsync();
-            string jsonData = content.Result;
-
-            var settings = new JsonSerializerSettings
+            string authorization = request.Headers["Authorization"];
+            if (string.IsNullOrEmpty(authorization))
             {
-                NullValueHandling = NullValueHandling.Ignore,
-                MissingMemberHandling = MissingMemberHandling.Ignore
-            };
-
-            jsonData = jsonData.Replace("'", "''");
-            BaseClass objObject = JsonConvert.DeserializeObject<BaseClass>(jsonData, settings);
-
-            if (authorization == null)
-            {
-                context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Missing Authorization Header", request);
-                return;
-            }
-            if (authorization.Scheme != "Bearer")
-            {
-                context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Invalid Authorization Scheme", request);
-                return;
+                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                     (
+                     new RouteValueDictionary(new AuthenticationFailureResult("Missing Authorization Header", request, actionName).Execute()
+                     ));
             }
 
-            if (String.IsNullOrEmpty(authorization.Parameter))
+            if (authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
             {
-                context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Missing Token", request);
-                return;
-            }
-
-
-
-            string API_Key = string.Empty;
-            if (request.Headers.Contains("API_Key"))
-            {
-                IEnumerable<string> headerValues = request.Headers.GetValues("API_Key");
-                API_Key = headerValues.FirstOrDefault();
-            }
-
-            if (API_Key == "")
-            {
-                context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("API Key is null.Please pass API Key", request);
+                string token = authorization.Substring("Bearer ".Length).Trim();
+                if (String.IsNullOrEmpty(token))
+                {
+                    context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                   (
+                   new RouteValueDictionary(new AuthenticationFailureResult("Missing Token", request, actionName).Execute()
+                   ));
+                }
             }
             else
             {
-                string API_Key_Check = "3C25F265-F86D-419D-9A04-EA74A503C197"; //ObjVariable.StrAPI_Key;
-                if (API_Key == API_Key_Check)
-                {
-                    context.Principal = TokenManager.GetPrincipal(authorization.Parameter, objObject.Useragent, objObject.Userip);
-                    if (context.Principal == null)
-                    {
-                        context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Unauthorized Access", request);
-                    }
-                }
-                else
-                {
-                    context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("API key is invalid", request);
-                }
+                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                  (
+                  new RouteValueDictionary(new AuthenticationFailureResult("Invalid Authorization Scheme", request, actionName).Execute()
+                  ));
             }
-        }
 
-        public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
-        {
-            var result = await context.Result.ExecuteAsync(cancellationToken);
-            if (result.StatusCode == HttpStatusCode.Unauthorized)
+            context.HttpContext.Request.Headers.TryGetValue("API_Key", out var HAPI_Key);
+            string API_Key = HAPI_Key.ToString();
+            context.HttpContext.Request.Headers.TryGetValue("SecretKey", out var HSecretKey);
+            string SecretKey = HSecretKey.ToString();
+
+            if (API_Key == "")
             {
-                result.Headers.WwwAuthenticate.Add(new AuthenticationHeaderValue("Basic", "realm=localhost"));
+                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                  (
+                  new RouteValueDictionary(new AuthenticationFailureResult("API Key is null.Please pass API Key", request, actionName).Execute()
+                  ));
             }
-            context.Result = new ResponseMessageResult(result);
+            //else
+            //{
+            //    string API_Key_Check = "3C25F265-F86D-419D-9A04-EA74A503C197"; //ObjVariable.StrAPI_Key;
+            //    if (API_Key == API_Key_Check)
+            //    {
+            //        context.Principal = TokenManager.GetPrincipal(authorization.Parameter, objObject.Useragent, objObject.Userip);
+            //        if (context.Principal == null)
+            //        {
+            //            context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Unauthorized Access", request);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("API key is invalid", request);
+            //    }
+            //}
+            // }
+
+            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                 (
+                 new RouteValueDictionary(new AuthenticationFailureResult("API key is invalid", request, actionName).Execute()
+                 ));
         }
 
-        public class AuthenticationFailureResult 
+        public class AuthenticationFailureResult
         {
             public string ReasonPhrase = string.Empty;
-            public HttpRequestMessage Request { get; set; }
+            public string MethodName = string.Empty;
+            public HttpRequest Request { get; set; }
 
-            public AuthenticationFailureResult(string reasonphrase, HttpRequestMessage request)
+            public AuthenticationFailureResult(string reasonphrase, HttpRequest request, string methodName)
             {
+                MethodName = methodName;
                 ReasonPhrase = reasonphrase;
                 Request = request;
-            }
-            public Task<ApiResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
-            {
-                return Task.FromResult(Execute());
             }
 
             public ApiResponseMessage Execute()
             {
                 ApiResponseMessage response = new ApiResponseMessage();
-
                 response.Status_Code = (int)HttpStatusCode.Unauthorized;
                 response.Message = "Token Expired";
                 response.Success = false;
-                response.Method_Name = Request.GetActionDescriptor().ActionName;
+                response.Method_Name = MethodName;
                 response.Data = new { Message = ReasonPhrase };
                 response.Model_State = null;
                 return (response);
@@ -146,6 +130,7 @@ namespace HPCL_WebApi.ActionFilters
 
 
         }
-
     }
+
+
 }

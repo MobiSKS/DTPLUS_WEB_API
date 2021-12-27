@@ -13,22 +13,18 @@
   <ItemGroup>
     <Compile Remove="Areas\**" />
     <Compile Remove="Content\**" />
-    <Compile Remove="ErrorHelper\**" />
     <Compile Remove="Log\**" />
     <Compile Remove="Models\**" />
     <Content Remove="Areas\**" />
     <Content Remove="Content\**" />
-    <Content Remove="ErrorHelper\**" />
     <Content Remove="Log\**" />
     <Content Remove="Models\**" />
     <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Content\**" />
-    <EmbeddedResource Remove="ErrorHelper\**" />
     <EmbeddedResource Remove="Log\**" />
     <EmbeddedResource Remove="Models\**" />
     <None Remove="Areas\**" />
     <None Remove="Content\**" />
-    <None Remove="ErrorHelper\**" />
     <None Remove="Log\**" />
     <None Remove="Models\**" />
   </ItemGroup>
@@ -40,8 +36,13 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="NLog.Appsettings.Standard" Version="2.1.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="NLog.WindowsEventLog" Version="4.7.13" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />

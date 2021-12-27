@@ -1,6 +1,7 @@
 ﻿using HPCL.DataRepository.Account;
 using HPCL.DataRepository.EncryptRequest;
 using HPCL.DataRepository.Login;
+using HPCL_WebApi.ActionFilters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,6 +29,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [Route("encrypt_request")]
+        [CustomAuthenticationFilter]
         public async Task<IActionResult> EncryptRequest()
         {
 

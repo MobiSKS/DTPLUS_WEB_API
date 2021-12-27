@@ -12,6 +12,7 @@ using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using HPCL.Infrastructure.TokenManager;
 using HPCL.Infrastructure.Extension;
 using Microsoft.Extensions.Configuration;
+using HPCL_WebApi.ActionFilters;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -34,6 +35,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [Route("generatetoken")]
+       // [CustomHttpsOnlyFilter]
         public async Task<IActionResult> GenerateToken(GenerateTokenInput ObjClass)
         {
             ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
