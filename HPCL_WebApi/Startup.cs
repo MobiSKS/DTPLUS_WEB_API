@@ -13,6 +13,7 @@ using HPCL.DataRepository.Account;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ErrorHelper;
 using Newtonsoft.Json.Serialization;
+using HPCL.DataRepository.Settings;
 
 namespace HPCL_WebApi
 {
@@ -43,6 +44,7 @@ namespace HPCL_WebApi
 
             services.AddSingleton<DapperContext>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
             // services.AddControllers();
             services.AddControllers(config =>
             {
