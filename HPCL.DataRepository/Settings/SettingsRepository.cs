@@ -104,5 +104,56 @@ namespace HPCL.DataRepository.Settings
             return login_input;
         }
 
+        public async Task<SettingGetStateModelOutput> GetState([FromBody] SettingGetStateModelInput ObjClass)
+        {
+            var procedureName = "UspGetState";
+            var parameters = new DynamicParameters();
+            parameters.Add("CountryID", ObjClass.CountryID, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetStateModelOutput>
+            (procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetSBUModelOutput> GetSBU([FromBody] SettingGetSBUModelInput ObjClass)
+        {
+            var procedureName = "UspGetSBU";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetSBUModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetRoleModelOutput> GetRole([FromBody] SettingGetRoleModelInput ObjClass)
+        {
+            var procedureName = "UspGetRole";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetRoleModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetProductModelOutput> GetProduct([FromBody] SettingGetProductModelInput ObjClass)
+        {
+            var procedureName = "UspGetProduct";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetProductModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+
+        public async Task<SettingGetEntityTypesModelOutput> GetEntityTypes([FromBody] SettingGetEntityTypesModelInput ObjClass)
+        {
+            var procedureName = "UspGetEntityTypes";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetEntityTypesModelOutput>
+            (procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+
     }
 }
