@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
-
+using HPCL_WebApi.ExtensionMethod;
 namespace HPCL_WebApi.Controllers
 {
 
@@ -37,45 +37,22 @@ namespace HPCL_WebApi.Controllers
                 
                 if (ObjClass == null)
                 {
-                    response.Message = StatusInformation.Request_JSON_Body_Is_Null.ToString();
-                    response.Success = false;
-                    response.Status_Code = BadRequest().StatusCode;
-                    response.Data = null;
-                    _logger.LogInformation(Request.Method + ":" + response.Message);
-                    return BadRequest(response);
+                    return this.BadRequestCustom(null, _logger);
                 }
                 else
                 {
                     var result = await _settingRepo.GetHQ(ObjClass);
                     if (result == null)
                     {
-                        response.Message = StatusInformation.Fail.ToString();
-                        response.Success = false;
-                        response.Status_Code = NotFound().StatusCode;
-                        response.Data = null;
-                        _logger.LogInformation(response.Method_Name + ":" + response.Message);
-                        return NotFound(response);
+                        return this.NotFoundCustom(null, _logger);
                     }
-
-                    //SettingGetHQModelOutput ObjA = new SettingGetHQModelOutput();
-
-                    //ObjA.HQID = result.HQID;
-                    //ObjA.HQName = result.HQName;
-                    //ObjA.HQShortName = result.HQShortName;
-
                     var output = new SettingGetHQModelOutput()
                     {
                         HQID = result.HQID,
                         HQName = result.HQName,
                         HQShortName = result.HQShortName
                     };
-
-                    response.Message = StatusInformation.Success.ToString();
-                    response.Success = true;
-                    response.Status_Code = Ok().StatusCode;
-                    response.Data = output;
-                    _logger.LogInformation(response.Method_Name + ":" + response.Message);
-                    return Ok(response);
+                    return this.OkCustom(output, _logger);
                 }
             }
             catch (Exception ex)

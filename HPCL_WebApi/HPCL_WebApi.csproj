@@ -55,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ExtensionMethod\" />
     <Folder Include="Logs\" />
   </ItemGroup>
 

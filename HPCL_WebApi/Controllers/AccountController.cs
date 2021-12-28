@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using HPCL.Infrastructure.TokenManager;
 using Microsoft.Extensions.Configuration;
-
+using HPCL_WebApi.ExtensionMethod;
 namespace HPCL_WebApi.Controllers
 {
 
@@ -48,27 +48,14 @@ namespace HPCL_WebApi.Controllers
                 if (IsResult == true)
                 {
                     TokenManager.Secret = SecretKey;
-                    TokenObject.Message = StatusInformation.Success.GetDisplayName();
-                    TokenObject.Method_Name = MethodName;
-                    TokenObject.Status_Code = (int)StatusInformation.Success;
-                    TokenObject.Success = true;
-                    TokenObject.Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip);
-                    TokenObject.Model_State = ModelState;
+                    return this.OkToken(_logger, ObjClass, MethodName);
 
                 }
                 else
                 {
                     TokenManager.Secret = SecretKey;
-                    TokenObject.Message = UserMessage;
-                    TokenObject.Method_Name = MethodName;
-                    TokenObject.Status_Code = IntStatusCode;
-                    TokenObject.Success = false;
-                    TokenObject.Token = string.Empty;
-                    TokenObject.Model_State = ModelState;
-
+                 return   this.BadRequestToken(_logger, MethodName,UserMessage,IntStatusCode);
                 }
-                _logger.LogInformation("Token " + TokenObject.Token);
-                return Ok(TokenObject);
             }
             catch (Exception ex)
             {
