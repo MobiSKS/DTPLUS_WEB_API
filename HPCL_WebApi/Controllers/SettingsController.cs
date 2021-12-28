@@ -41,7 +41,7 @@ namespace HPCL_WebApi.Controllers
                     response.Success = false;
                     response.Status_Code = BadRequest().StatusCode;
                     response.Data = null;
-                    _logger.LogInformation(response.Method_Name + ":" + response.Message);
+                    _logger.LogInformation(Request.Method + ":" + response.Message);
                     return BadRequest(response);
                 }
                 else
