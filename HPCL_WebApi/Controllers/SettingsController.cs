@@ -57,6 +57,12 @@ namespace HPCL_WebApi.Controllers
                         return NotFound(response);
                     }
 
+                    //SettingGetHQModelOutput ObjA = new SettingGetHQModelOutput();
+
+                    //ObjA.HQID = result.HQID;
+                    //ObjA.HQName = result.HQName;
+                    //ObjA.HQShortName = result.HQShortName;
+
                     var output = new SettingGetHQModelOutput()
                     {
                         HQID = result.HQID,
