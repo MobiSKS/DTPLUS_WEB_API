@@ -7,9 +7,14 @@ namespace HPCL.DataRepository.Settings
 {
     public interface ISettingsRepository
     {
-        public Task<SettingGetCustomerTypeOutput> GetCustomerType([FromBody] SettingGetCustomerTypeInput ObjClass);
-        public Task<SettingGetCustomerSubTypeOutput> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeInput ObjClass);
+        public Task<SettingGetCustomerTypeModelOutput> GetCustomerType([FromBody] SettingGetCustomerTypeModelInput ObjClass);
+        public Task<SettingGetCustomerSubTypeModelOutput> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeModelInput ObjClass);
         public Task<SettingGetHQModelOutput> GetHQ([FromBody] SettingGetHQModelInput ObjClass);
-        public Task<SettingGetZoneOutput> GetGetZone([FromBody] SettingGetZoneInput ObjClass);
+        public Task<SettingGetZoneModelOutput> GetZone([FromBody] SettingGetZoneModelInput ObjClass);
+        public Task<SettingGetRegionModelOutput> GetRegion([FromBody] SettingGetRegionModelInput ObjClass);
+        public Task<SettingGetSalesareaModelOutput> GetSalesarea([FromBody] SettingGetSalesareaModelInput ObjClass);
+        public Task<SettingGetTransactionTypeModelOutput> GetTransactionType([FromBody] SettingGetTransactionTypeModelInput ObjClass);
+        public Task<SettingGetStoreCategoriesModelOutput> GetStoreCategories([FromBody] SettingGetStoreCategoriesModelInput ObjClass);
+        public Task<SettingGetCountryModelOutput> GetCountry([FromBody] SettingGetCountryModelInput ObjClass);
     }
 }

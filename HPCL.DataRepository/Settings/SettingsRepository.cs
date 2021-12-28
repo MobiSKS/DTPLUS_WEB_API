@@ -15,22 +15,22 @@ namespace HPCL.DataRepository.Settings
         {
             _context = context;
         }
-        public async Task<SettingGetCustomerTypeOutput> GetCustomerType([FromBody] SettingGetCustomerTypeInput ObjClass)
+        public async Task<SettingGetCustomerTypeModelOutput> GetCustomerType([FromBody] SettingGetCustomerTypeModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerType";
             using var connection = _context.CreateConnection();
-            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetCustomerTypeOutput>
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetCustomerTypeModelOutput>
             (procedureName, null, commandType: CommandType.StoredProcedure);
             return login_input;
         }
 
-        public async Task<SettingGetCustomerSubTypeOutput> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeInput ObjClass)
+        public async Task<SettingGetCustomerSubTypeModelOutput> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerSubType";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetCustomerSubTypeOutput>
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetCustomerSubTypeModelOutput>
             (procedureName, parameters, commandType: CommandType.StoredProcedure);
             return login_input;
         }
@@ -44,15 +44,65 @@ namespace HPCL.DataRepository.Settings
             return login_input;
         }
 
-        public async Task<SettingGetZoneOutput> GetGetZone([FromBody] SettingGetZoneInput ObjClass)
+        public async Task<SettingGetZoneModelOutput> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
         {
             var procedureName = "UspGetZone";
             var parameters = new DynamicParameters();
             parameters.Add("HQID", ObjClass.HQID, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetZoneOutput>
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetZoneModelOutput>
             (procedureName, parameters, commandType: CommandType.StoredProcedure);
             return login_input;
         }
+
+        public async Task<SettingGetRegionModelOutput> GetRegion([FromBody] SettingGetRegionModelInput ObjClass)
+        {
+            var procedureName = "UspGetRegion";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZoneID", ObjClass.ZoneID, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetRegionModelOutput>
+            (procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetSalesareaModelOutput> GetSalesarea([FromBody] SettingGetSalesareaModelInput ObjClass)
+        {
+            var procedureName = "UspGetSalesarea";
+            var parameters = new DynamicParameters();
+            parameters.Add("RegionID", ObjClass.RegionID, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetSalesareaModelOutput>
+            (procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetTransactionTypeModelOutput> GetTransactionType([FromBody] SettingGetTransactionTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetTransactionType";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetTransactionTypeModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetStoreCategoriesModelOutput> GetStoreCategories([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
+        {
+            var procedureName = "UspGetStoreCategories";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetStoreCategoriesModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
+        public async Task<SettingGetCountryModelOutput> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
+        {
+            var procedureName = "UspGetCountry";
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetCountryModelOutput>
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
+        }
+
     }
 }

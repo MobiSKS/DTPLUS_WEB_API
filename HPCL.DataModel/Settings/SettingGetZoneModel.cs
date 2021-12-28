@@ -1,11 +1,11 @@
 ﻿namespace HPCL.DataModel.Settings
 {
 
-    public class SettingGetZoneInput : BaseClass
+    public class SettingGetZoneModelInput : BaseClass
     {
         public int HQID { get; set; }
     }
-    public class SettingGetZoneOutput
+    public class SettingGetZoneModelOutput
     {
         public int HQID { get; set; }
         public int ZoneID { get; set; }

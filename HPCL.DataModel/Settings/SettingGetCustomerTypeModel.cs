@@ -1,11 +1,11 @@
 ﻿namespace HPCL.DataModel.Settings
 {
 
-    public class SettingGetCustomerTypeInput : BaseClass
+    public class SettingGetCustomerTypeModelInput : BaseClass
     {
 
     }
-    public class SettingGetCustomerTypeOutput
+    public class SettingGetCustomerTypeModelOutput
     {
         public int CustomerTypeId { get; set; }
         public string CustomerTypeName { get; set; }
