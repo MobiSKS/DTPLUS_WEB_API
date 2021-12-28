@@ -1,18 +1,13 @@
 ﻿using HPCL.DataRepository.Account;
 using HPCL.Infrastructure.CommonClass;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using HPCL.Infrastructure.TokenManager;
-using HPCL.Infrastructure.Extension;
 using Microsoft.Extensions.Configuration;
-using HPCL_WebApi.ActionFilters;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -35,8 +30,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [Route("generatetoken")]
-       // [CustomHttpsOnlyFilter]
-        public async Task<IActionResult> GenerateToken(GenerateTokenInput ObjClass)
+        public IActionResult GenerateToken(GenerateTokenInput ObjClass)
         {
             ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
             string MethodName = "GENERATE_TOKEN";
@@ -83,22 +77,5 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
-        [HttpPost]
-        [Route("/api/Account")]
-        public async Task<IActionResult> AccountDetsils()
-        {
-
-
-            try
-            {
-                return Ok("Account");
-            }
-            catch (Exception ex)
-            {
-                //log error
-                return StatusCode(500, ex.Message);
-            }
-        }
-
     }
 }

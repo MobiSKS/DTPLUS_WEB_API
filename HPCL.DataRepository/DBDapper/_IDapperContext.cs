@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HPCL.DataRepository.DBDapper
 {
-    public interface _IDapperContext : IDisposable
+    public interface IDapperContext : IDisposable
     {
         DbConnection GetDbconnection();
         T Get<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure);

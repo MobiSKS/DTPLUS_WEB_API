@@ -9,6 +9,6 @@ namespace HPCL.DataRepository.Settings
 {
     public interface ISettingsRepository
     {
-        public Task<object> User_Login([FromBody] SettingModel ObjUser);
+        public Task<SettingGetHQModelOutput> GetHQ([FromBody] SettingGetHQModelInput ObjClass);
     }
 }

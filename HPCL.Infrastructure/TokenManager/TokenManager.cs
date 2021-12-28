@@ -98,14 +98,12 @@ namespace HPCL.Infrastructure.TokenManager
         public static bool Return_Key(HttpRequest request, Variables ObjVariable, IAccountRepository accountRepo, out string UserMessage, int Header_Parameter_Value, out int Status_Code, string Useragent, string Userip, string Method_Name, string Userid)
         {
             bool IsResult = false;
-            string API_Key = string.Empty;
             string Secret_Key = string.Empty;
             string StrMessage = string.Empty;
             int IntStatusCode = 0;
-
-            var Header = request.Headers;
             try
             {
+                string API_Key;
                 if (Header_Parameter_Value == 0)
                 {
                     API_Key = request.GetHeader("API_Key");
@@ -235,12 +233,14 @@ namespace HPCL.Infrastructure.TokenManager
 
                 if (Useragent != "" && Userip != "" && Userid != "")
                 {
-                    AccountModel objAccountModel = new AccountModel();
-                    objAccountModel.MethodName = Method_Name;
-                    objAccountModel.Useragent = Useragent;
-                    objAccountModel.Userid = Userid;
-                    objAccountModel.Userip = Userip;
-                    IsResult = accountRepo.GenerateToken(objAccountModel);
+                    AccountModel objAccountModel = new AccountModel
+                    {
+                        MethodName = Method_Name,
+                        Useragent = Useragent,
+                        Userid = Userid,
+                        Userip = Userip
+                    };
+                    accountRepo.GenerateToken(objAccountModel);
                     IsResult = true;
                 }
                 else

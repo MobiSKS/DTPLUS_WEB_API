@@ -1,24 +1,13 @@
 using HPCL.DataRepository.DBDapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.HttpsPolicy;
-using HPCL.DataRepository.DataContext;
-using HPCL.DataRepository.Login;
 using System.Reflection;
 using System.IO;
-using HPCL.DataRepository.Wallet;
 using HPCL.Infrastructure.Swagger;
 using HPCL.DataRepository.Account;
 using HPCL_WebApi.ActionFilters;
@@ -53,9 +42,7 @@ namespace HPCL_WebApi
             //services.AddSingleton<_IDapperContext, DapperContext>();
 
             services.AddSingleton<DapperContext>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<IWalletRepository, WalletRepository>();
             // services.AddControllers();
             services.AddControllers(config =>
             {

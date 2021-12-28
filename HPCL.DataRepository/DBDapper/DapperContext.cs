@@ -30,8 +30,20 @@ namespace HPCL.DataRepository.DBDapper
 
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
+            if (sp is null)
+            {
+                throw new ArgumentNullException(nameof(sp));
+            }
+
+            if (parms is null)
+            {
+                throw new ArgumentNullException(nameof(parms));
+            }
+
             throw new NotImplementedException();
         }
 

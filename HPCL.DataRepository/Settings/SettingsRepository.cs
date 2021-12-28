@@ -1,9 +1,6 @@
 ﻿using Dapper;
 using HPCL.DataRepository.DBDapper;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using HPCL.DataModel.Settings;
@@ -17,19 +14,16 @@ namespace HPCL.DataRepository.Settings
         {
             _context = context;
         }
-
-        public async Task<object> User_Login([FromBody] SettingModel ObjUser)
+        public async Task<SettingGetHQModelOutput> GetHQ([FromBody] SettingGetHQModelInput ObjClass)
         {
-            var procedureName = "sp_Test";
-            var parameters = new DynamicParameters();
-            parameters.Add("Mobileno", ObjUser.Mobileno, DbType.String, ParameterDirection.Input);
-
-            using (var connection = _context.CreateConnection())
-            {
-                var login_input = await connection.QueryFirstOrDefaultAsync<SettingModel>
-                    (procedureName, parameters, commandType: CommandType.StoredProcedure);
-                return login_input;
-            }
+            var procedureName = "UspGetHQ";
+            //var parameters = new DynamicParameters();
+            //parameters.Add("Mobileno", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var login_input = await connection.QueryFirstOrDefaultAsync<SettingGetHQModelOutput>
+            //(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            (procedureName, null, commandType: CommandType.StoredProcedure);
+            return login_input;
 
         }
     }
