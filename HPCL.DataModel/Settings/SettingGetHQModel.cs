@@ -7,7 +7,6 @@ namespace HPCL.DataModel.Settings
 
     public class SettingGetHQModelInput : BaseClass
     {
-
     }
     public class SettingGetHQModelOutput
     {
