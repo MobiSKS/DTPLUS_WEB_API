@@ -39,8 +39,4 @@
     <ProjectReference Include="..\HPCL.DataModel\HPCL.DataModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Account\" />
-  </ItemGroup>
-
 </Project>

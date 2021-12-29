@@ -17,31 +17,7 @@ namespace HPCL.DataRepository.Account
             _logger = logger;
         }
 
-        public bool GenerateToken(AccountModel accountObj)
-        {
-            bool IsResult = false;
-            try
-            {
-                using var connection = _context.CreateSqlConnection();
-                using SqlCommand cmd = new SqlCommand();
-                connection.Open();
-                cmd.Connection = connection;
-                cmd.CommandText = "insert into tbl_api_entry(api_flag,useragent,Userip,userid) values('" + accountObj.MethodName + "','" + accountObj.Useragent
-                    + "','" + accountObj.Userip + "','" + accountObj.Userid + "')";
-                cmd.CommandType = CommandType.Text;
-                int i = cmd.ExecuteNonQuery();
-                connection.Close();
-                IsResult = true;
-                _logger.LogInformation("GenerateToken");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                IsResult = false;
-            }
-            return IsResult;
-
-        }
+        
     }
     //using (var connectio1n = _context.CreateConnection())
     // {

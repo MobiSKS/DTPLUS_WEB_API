@@ -54,7 +54,7 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     TokenManager.Secret = SecretKey;
-                 return   this.BadRequestToken(_logger, MethodName,UserMessage,IntStatusCode);
+                    return this.BadRequestToken(_logger, MethodName, UserMessage, IntStatusCode);
                 }
             }
             catch (Exception ex)

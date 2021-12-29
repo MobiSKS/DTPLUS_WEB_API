@@ -1,13 +1,9 @@
 ﻿using HPCL.Infrastructure.Extension;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
-using System.Web.Http.ModelBinding;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using Microsoft.OpenApi.Extensions;
 using HPCL.DataRepository.Account;
@@ -95,7 +91,8 @@ namespace HPCL.Infrastructure.TokenManager
             return username;
         }
 
-        public static bool Return_Key(HttpRequest request, Variables ObjVariable, IAccountRepository accountRepo, out string UserMessage, int Header_Parameter_Value, out int Status_Code, string Useragent, string Userip, string Method_Name, string Userid)
+        public static bool Return_Key(HttpRequest request, Variables ObjVariable, IAccountRepository accountRepo, 
+            out string UserMessage, int Header_Parameter_Value, out int Status_Code, string Useragent, string Userip, string Method_Name, string Userid)
         {
             bool IsResult = false;
             string Secret_Key = string.Empty;
@@ -240,7 +237,6 @@ namespace HPCL.Infrastructure.TokenManager
                         Userid = Userid,
                         Userip = Userip
                     };
-                    accountRepo.GenerateToken(objAccountModel);
                     IsResult = true;
                 }
                 else
@@ -255,10 +251,6 @@ namespace HPCL.Infrastructure.TokenManager
             Status_Code = IntStatusCode;
             return IsResult;
         }
-
-
-
-
 
     }
 }
