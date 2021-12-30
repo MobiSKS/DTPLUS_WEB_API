@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using NLog;
@@ -63,6 +64,11 @@ namespace HPCL_WebApi.ActionFilters
             //    filterContext.Response = MessageHelper.Message(filterContext.Request, HttpStatusCode.OK, false, (int)StatusInformation.Manadatory_Feild_Required, null, filterContext.ModelState);
             //}
             // Do something before the action executes.
+
+            if (!filterContext.ModelState.IsValid)
+            {
+                filterContext.Result = new BadRequestObjectResult(filterContext.ModelState);
+            }
         }
 
         public void OnActionExecuted(ActionExecutedContext context)

@@ -15,6 +15,7 @@ using HPCL_WebApi.ErrorHelper;
 using Newtonsoft.Json.Serialization;
 using HPCL.DataRepository.Settings;
 using HPCL.DataRepository.Officer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HPCL_WebApi
 {
@@ -47,18 +48,28 @@ namespace HPCL_WebApi
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<IOfficerRepository, OfficerRepository>();
+
+            services.Configure<ApiBehaviorOptions>(opt =>
+            {
+                opt.SuppressModelStateInvalidFilter = true;
+            });
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelAttribute));
+            });
             // services.AddControllers();
             services.AddControllers(config =>
             {
                 config.Filters.Add(typeof(LoggingFilterAttribute));
             })
+
              .AddNewtonsoftJson(options =>
              {
                  options.SerializerSettings.TraceWriter = new NLogTraceWriter();
                  //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 
              }); ;
-
+         
             //services.AddSwaggerGen();
             services.AddSwaggerGen(options =>
             {
