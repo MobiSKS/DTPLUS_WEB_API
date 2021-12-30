@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
-using HPCL.Infrastructure.TokenManager;
 
 namespace HPCL.Infrastructure.CommonClass
 {
@@ -17,7 +14,7 @@ namespace HPCL.Infrastructure.CommonClass
             _configuration = configuration;
         }
 
-        public string FunGenerateStringUId()
+        public static string FunGenerateStringUId()
         {
             byte[] bytBuffer = Guid.NewGuid().ToByteArray();
             return BitConverter.ToInt64(bytBuffer, 0).ToString();
