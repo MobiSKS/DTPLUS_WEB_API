@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPCL_WebApi", "HPCL_WebApi.csproj", "{4A705208-4389-4042-9F0C-B0B7B5044AAE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D983F28-2753-4B6D-A662-4BB781706F57} = {9D983F28-2753-4B6D-A662-4BB781706F57}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HPCL.DataRepository", "..\HPCL.DataRepository\HPCL.DataRepository.csproj", "{F3868F69-8142-448B-B078-F81882D0B06C}"
 EndProject

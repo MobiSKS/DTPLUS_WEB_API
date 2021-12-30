@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HPCL.DataModel\HPCL.DataModel.csproj" />
+    <ProjectReference Include="..\HPCL.Infrastructure\HPCL.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
