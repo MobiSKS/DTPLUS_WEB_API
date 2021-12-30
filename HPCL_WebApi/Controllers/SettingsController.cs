@@ -368,6 +368,56 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
+
+        [HttpPost]
+        [CustomAuthenticationFilter]
+        [Route("get_officer_type")]
+        public async Task<IActionResult> GetOfficerType([FromBody] SettingGetOfficerTypeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetOfficerType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [CustomAuthenticationFilter]
+        [Route("get_officer_type")]
+        public async Task<IActionResult> GetCity([FromBody] SettingGetCityModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetCity(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(result, _logger);
+                }
+            }
+
+        }
     }
 
 }

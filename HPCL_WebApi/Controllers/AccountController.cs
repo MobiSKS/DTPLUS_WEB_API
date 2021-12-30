@@ -198,7 +198,7 @@ namespace HPCL_WebApi.Controllers
         [Route("generatetoken")]
         public IActionResult GenerateToken(GenerateTokenInput ObjClass)
         {
-            ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
+            //ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
             string MethodName = "GENERATE_TOKEN";
             try
             {
@@ -220,7 +220,7 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     TokenManager.Secret = SecretKey;
-                    return this.BadRequestToken(_logger, MethodName, UserMessage, IntStatusCode);
+                    return this.BadRequestToken(_logger, MethodName);
                 }
             }
             catch (Exception ex)
