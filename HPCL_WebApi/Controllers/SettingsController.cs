@@ -396,7 +396,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [CustomAuthenticationFilter]
-        [Route("get_officer_type")]
+        [Route("get_get_city")]
         public async Task<IActionResult> GetCity([FromBody] SettingGetCityModelInput ObjClass)
         {
 
