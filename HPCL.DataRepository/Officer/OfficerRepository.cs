@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Collections.Generic;
 using HPCL.DataModel.Officer;
+using HPCL.Infrastructure.CommonClass;
 
 namespace HPCL.DataRepository.Officer
 {
@@ -36,7 +37,8 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
             parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
-            //parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("OfficerType", ObjClass.OfficerType, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
