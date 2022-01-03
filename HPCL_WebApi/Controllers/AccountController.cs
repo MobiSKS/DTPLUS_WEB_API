@@ -13,7 +13,7 @@ using HPCL.Infrastructure.TokenManager;
 using HPCL.Infrastructure.Extension;
 using Microsoft.Extensions.Configuration;
 using HPCL_WebApi.ActionFilters;
-
+using HPCL_WebApi.ExtensionMethod;
 namespace HPCL_WebApi.Controllers
 {
 
@@ -74,7 +74,7 @@ namespace HPCL_WebApi.Controllers
 
                 }
                 _logger.LogInformation("Token " + TokenObject.Token);
-                return Ok(TokenObject);
+                return this.OkCustom();
             }
             catch (Exception ex)
             {
