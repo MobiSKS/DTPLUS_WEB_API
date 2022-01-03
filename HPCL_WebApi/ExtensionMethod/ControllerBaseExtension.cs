@@ -8,7 +8,7 @@ namespace HPCL_WebApi.ExtensionMethod
 {
     public static class ControllerBaseExtension
     {
-        public static IActionResult OkCustom(this ControllerBase controller, object data, ILogger logger)
+        public static IActionResult OkCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Success.ToString();
@@ -19,7 +19,7 @@ namespace HPCL_WebApi.ExtensionMethod
             logger.LogInformation(response.Method_Name + ":" + response.Message);
             return controller.Ok(response);
         }
-        public static IActionResult BadRequestCustom(this ControllerBase controller, object data, ILogger logger)
+        public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Request_JSON_Body_Is_Null.ToString();
@@ -31,7 +31,7 @@ namespace HPCL_WebApi.ExtensionMethod
             return controller.BadRequest(response);
 
         }
-        public static IActionResult NotFoundCustom(this ControllerBase controller, object data, ILogger logger)
+        public static IActionResult NotFoundCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Fail.ToString();
@@ -44,8 +44,9 @@ namespace HPCL_WebApi.ExtensionMethod
 
         }
 
-        public static IActionResult OkToken(this ControllerBase controller, ILogger logger, GenerateTokenInput ObjClass, string MethodName)
+        public static IActionResult OkToken(this ControllerBase controller, ILogger logger, object input,GenerateTokenInput ObjClass, string MethodName)
         {
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ReturnGenerateTokenStatusOutput response = new ReturnGenerateTokenStatusOutput();
             response.Message = StatusInformation.Success.GetDisplayName();
             response.Method_Name = MethodName;
@@ -54,12 +55,13 @@ namespace HPCL_WebApi.ExtensionMethod
             response.Success = true;
             response.Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip);
             response.Model_State = controller.ModelState;
-            logger.LogInformation(response.Method_Name + ":" + response.Message);
+            logger.LogInformation(response.Method_Name +"JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.Ok(response);
 
         }
-        public static IActionResult BadRequestToken(this ControllerBase controller, ILogger logger, string MethodName)
+        public static IActionResult BadRequestToken(this ControllerBase controller, ILogger logger, object input,string MethodName)
         {
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ReturnGenerateTokenStatusOutput response = new ReturnGenerateTokenStatusOutput();
             response.Message = StatusInformation.Request_JSON_Body_Is_Null.ToString();
             response.Method_Name = MethodName;
@@ -69,6 +71,7 @@ namespace HPCL_WebApi.ExtensionMethod
             response.Token = string.Empty;
             response.Model_State = controller.ModelState;
             logger.LogInformation(MethodName + ":" + response.Message);
+            logger.LogInformation(MethodName + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.BadRequest(response);
 
         }

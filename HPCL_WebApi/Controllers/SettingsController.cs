@@ -29,18 +29,18 @@ namespace HPCL_WebApi.Controllers
         {
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetCustomerType(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
         }
@@ -52,18 +52,18 @@ namespace HPCL_WebApi.Controllers
         {
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetCustomerSubType(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
         }
@@ -76,18 +76,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetHQ(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -102,18 +102,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetZone(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -127,18 +127,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetRegion(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -152,18 +152,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetSalesarea(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -177,18 +177,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetTransactionType(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -202,18 +202,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetStoreCategories(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -227,18 +227,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetCountry(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -252,18 +252,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetState(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -277,18 +277,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetSBU(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -302,18 +302,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetRole(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -327,18 +327,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetProduct(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -352,18 +352,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetEntityTypes(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -377,18 +377,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetOfficerType(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 
@@ -402,18 +402,18 @@ namespace HPCL_WebApi.Controllers
 
             if (ObjClass == null)
             {
-                return this.BadRequestCustom(null, _logger);
+                return this.BadRequestCustom(ObjClass,null, _logger);
             }
             else
             {
                 var result = await _settingRepo.GetCity(ObjClass);
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, _logger);
+                    return this.NotFoundCustom(ObjClass,null, _logger);
                 }
                 else
                 {
-                    return this.OkCustom(result, _logger);
+                    return this.OkCustom(ObjClass,result, _logger);
                 }
             }
 

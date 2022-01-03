@@ -214,13 +214,13 @@ namespace HPCL_WebApi.Controllers
                 if (IsResult == true)
                 {
                     TokenManager.Secret = SecretKey;
-                    return this.OkToken(_logger, ObjClass, MethodName);
+                    return this.OkToken(_logger, ObjClass, ObjClass, MethodName);
 
                 }
                 else
                 {
                     TokenManager.Secret = SecretKey;
-                    return this.BadRequestToken(_logger, MethodName);
+                    return this.BadRequestToken(_logger, ObjClass, MethodName);
                 }
             }
             catch (Exception ex)
