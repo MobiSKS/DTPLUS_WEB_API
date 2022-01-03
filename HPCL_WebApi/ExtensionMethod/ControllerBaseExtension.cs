@@ -10,36 +10,39 @@ namespace HPCL_WebApi.ExtensionMethod
     {
         public static IActionResult OkCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Success.ToString();
             response.Success = true;
             response.Internel_Status_Code = (int)StatusInformation.Success;
             response.Status_Code = controller.Ok().StatusCode;
             response.Data = data;
-            logger.LogInformation(response.Method_Name + ":" + response.Message);
+            logger.LogInformation(response.Method_Name + "JSON INPUT " + jsonInput.ToString()  + ":" + response.Message);
             return controller.Ok(response);
         }
         public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Request_JSON_Body_Is_Null.ToString();
             response.Success = false;
             response.Internel_Status_Code = (int)StatusInformation.Request_JSON_Body_Is_Null;
             response.Status_Code = controller.BadRequest().StatusCode;
             response.Data = null;
-            logger.LogInformation(controller.Request.Method + ":" + response.Message);
+            logger.LogInformation(controller.Request.Method + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.BadRequest(response);
 
         }
         public static IActionResult NotFoundCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ApiResponseMessage response = new ApiResponseMessage();
             response.Message = StatusInformation.Fail.ToString();
             response.Success = false;
             response.Status_Code = controller.NotFound().StatusCode;
             response.Internel_Status_Code = (int)StatusInformation.Fail;
             response.Data = data;
-            logger.LogInformation(controller.Request.Method + ":" + response.Message);
+            logger.LogInformation(controller.Request.Method + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.NotFound(response);
 
         }
