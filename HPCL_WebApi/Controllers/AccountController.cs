@@ -9,6 +9,9 @@ using static HPCL.Infrastructure.CommonClass.StatusMessage;
 using HPCL.Infrastructure.TokenManager;
 using Microsoft.Extensions.Configuration;
 using HPCL_WebApi.ActionFilters;
+using HPCL.Infrastructure.Extension;
+using HPCL.DataModel.Account;
+using HPCL_WebApi.ExtensionMethod;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -219,8 +222,6 @@ namespace HPCL_WebApi.Controllers
                     TokenManager.Secret = SecretKey;
                     return this.BadRequestToken(_logger, MethodName);
                 }
-                _logger.LogInformation("Token " + TokenObject.Token);
-                return Ok(TokenObject);
             }
             catch (Exception ex)
             {
