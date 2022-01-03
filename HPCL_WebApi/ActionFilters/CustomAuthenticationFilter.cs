@@ -1,26 +1,9 @@
-﻿using HPCL.DataModel;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using System;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Filters;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.Results;
-using Microsoft.Extensions.Configuration;
-using HPCL.Infrastructure.CommonClass;
-using HPCL.Infrastructure.TokenManager;
 using Microsoft.AspNetCore.Mvc;
 using HPCL.Infrastructure.Response;
 using Microsoft.AspNetCore.Mvc.Filters;
 using IAuthorizationFilter = Microsoft.AspNetCore.Mvc.Filters.IAuthorizationFilter;
-using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -40,7 +23,7 @@ namespace HPCL_WebApi.ActionFilters
             string authorization = request.Headers["Authorization"];
             if (string.IsNullOrEmpty(authorization))
             {
-                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                context.Result = new JsonResult
                      (
                      new RouteValueDictionary(new AuthenticationFailureResult("Missing Authorization Header", request, actionName).Execute()
                      ));
@@ -48,10 +31,11 @@ namespace HPCL_WebApi.ActionFilters
 
             if (authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
             {
-                string token = authorization.Substring("Bearer ".Length).Trim();
-                if (String.IsNullOrEmpty(token))
+                //string token = authorization.Substring("Bearer ".Length).Trim();
+                string token = authorization["Bearer ".Length..].Trim();
+                if (string.IsNullOrEmpty(token))
                 {
-                    context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                    context.Result = new JsonResult
                    (
                    new RouteValueDictionary(new AuthenticationFailureResult("Missing Token", request, actionName).Execute()
                    ));
@@ -59,7 +43,7 @@ namespace HPCL_WebApi.ActionFilters
             }
             else
             {
-                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                context.Result = new JsonResult
                   (
                   new RouteValueDictionary(new AuthenticationFailureResult("Invalid Authorization Scheme", request, actionName).Execute()
                   ));
@@ -67,12 +51,12 @@ namespace HPCL_WebApi.ActionFilters
 
             context.HttpContext.Request.Headers.TryGetValue("API_Key", out var HAPI_Key);
             string API_Key = HAPI_Key.ToString();
-            context.HttpContext.Request.Headers.TryGetValue("SecretKey", out var HSecretKey);
-            string SecretKey = HSecretKey.ToString();
+            context.HttpContext.Request.Headers.TryGetValue("SecretKey", out _);
+            //string SecretKey = HSecretKey.ToString();
 
             if (API_Key == "")
             {
-                context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+                context.Result = new JsonResult
                   (
                   new RouteValueDictionary(new AuthenticationFailureResult("API Key is null.Please pass API Key", request, actionName).Execute()
                   ));
@@ -95,7 +79,7 @@ namespace HPCL_WebApi.ActionFilters
             //}
             // }
 
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult
+            context.Result = new JsonResult
                  (
                  new RouteValueDictionary(new AuthenticationFailureResult("API key is invalid", request, actionName).Execute()
                  ));
@@ -116,13 +100,15 @@ namespace HPCL_WebApi.ActionFilters
 
             public ApiResponseMessage Execute()
             {
-                ApiResponseMessage response = new ApiResponseMessage();
-                response.Status_Code = (int)HttpStatusCode.Unauthorized;
-                response.Message = "Token Expired";
-                response.Success = false;
-                response.Method_Name = MethodName;
-                response.Data = new { Message = ReasonPhrase };
-                response.Model_State = null;
+                ApiResponseMessage response = new ApiResponseMessage
+                {
+                    Status_Code = (int)HttpStatusCode.Unauthorized,
+                    Message = "Token Expired",
+                    Success = false,
+                    Method_Name = MethodName,
+                    Data = new { Message = ReasonPhrase },
+                    Model_State = null
+                };
                 return (response);
 
             }

@@ -1,6 +1,4 @@
-﻿
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HPCL.Infrastructure.CommonClass
@@ -41,6 +39,7 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Merchant was deactivate")] Merchant_deactivate = 1029,
             [Display(Name = "Transaction Success")] Transaction_Success = 1030,
             [Display(Name = "Transaction Failed")] Transaction_Failed = 1031,
+            [Display(Name = "Vechile No is already present.Please pass different vechile no")] Vechile_No = 1032,
             None = int.MaxValue
         }
 

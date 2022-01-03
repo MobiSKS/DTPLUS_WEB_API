@@ -1,12 +1,6 @@
-﻿using Dapper;
-using HPCL.DataRepository.DBDapper;
+﻿using HPCL.DataRepository.DBDapper;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using HPCL.DataModel.Login;
 using System.Data.SqlClient;
 using HPCL.DataModel.Account;
 using Microsoft.Extensions.Logging;
@@ -23,35 +17,7 @@ namespace HPCL.DataRepository.Account
             _logger = logger;
         }
 
-        public bool GenerateToken(AccountModel accountObj)
-        {
-            bool IsResult = false;
-            try
-            {
-                using (var connection = _context.CreateSqlConnection())
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        connection.Open();
-                        cmd.Connection = connection;
-                        cmd.CommandText = "insert into tbl_api_entry(api_flag,useragent,Userip,userid) values('" + accountObj.MethodName + "','" + accountObj.Useragent
-                            + "','" + accountObj.Userip + "','" + accountObj.Userid + "')";
-                        cmd.CommandType = CommandType.Text;
-                        int i = cmd.ExecuteNonQuery();
-                        connection.Close();
-                        IsResult = true;
-                        _logger.LogInformation("GenerateToken");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                IsResult = false;
-            }
-            return IsResult;
-
-        }
+        
     }
     //using (var connectio1n = _context.CreateConnection())
     // {

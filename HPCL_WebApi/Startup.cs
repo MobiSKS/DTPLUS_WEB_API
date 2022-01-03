@@ -1,29 +1,21 @@
 using HPCL.DataRepository.DBDapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.HttpsPolicy;
-using HPCL.DataRepository.DataContext;
-using HPCL.DataRepository.Login;
 using System.Reflection;
 using System.IO;
-using HPCL.DataRepository.Wallet;
 using HPCL.Infrastructure.Swagger;
 using HPCL.DataRepository.Account;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ErrorHelper;
 using Newtonsoft.Json.Serialization;
+using HPCL.DataRepository.Settings;
+using HPCL.DataRepository.Officer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HPCL_WebApi
 {
@@ -53,21 +45,31 @@ namespace HPCL_WebApi
             //services.AddSingleton<_IDapperContext, DapperContext>();
 
             services.AddSingleton<DapperContext>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<IWalletRepository, WalletRepository>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
+            services.AddScoped<IOfficerRepository, OfficerRepository>();
+
+            services.Configure<ApiBehaviorOptions>(opt =>
+            {
+                opt.SuppressModelStateInvalidFilter = true;
+            });
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelAttribute));
+            });
             // services.AddControllers();
             services.AddControllers(config =>
             {
                 config.Filters.Add(typeof(LoggingFilterAttribute));
             })
+
              .AddNewtonsoftJson(options =>
              {
                  options.SerializerSettings.TraceWriter = new NLogTraceWriter();
-               //  options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 
              }); ;
-
+         
             //services.AddSwaggerGen();
             services.AddSwaggerGen(options =>
             {

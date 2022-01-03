@@ -11,8 +11,7 @@ namespace HPCL.Infrastructure.Extension
     {
         public static string GetHeader(this HttpRequest request, string key)
         {
-            StringValues value = string.Empty;
-            request.Headers.TryGetValue(key, out value);
+            request.Headers.TryGetValue(key, out StringValues value);
             return value.ToString ();
 
         }

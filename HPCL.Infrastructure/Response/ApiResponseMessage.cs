@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Web.Http.ModelBinding;
 
 namespace HPCL.Infrastructure.Response
 {
@@ -24,6 +24,10 @@ namespace HPCL.Infrastructure.Response
         [JsonProperty("Status_Code")]
         [DataMember]
         public int Status_Code { get; set; }
+
+        [JsonProperty("Internel_Status_Code")]
+        [DataMember]
+        public int Internel_Status_Code { get; set; }
         /// <summary>
         /// Get/Set property for accessing Status Message
         /// </summary>

@@ -6,16 +6,19 @@
 
   <ItemGroup>
     <Compile Remove="Account - Copy\**" />
+    <Compile Remove="bin\**" />
     <Compile Remove="EncryptRequest - Copy\**" />
     <Compile Remove="Merchant - Copy\**" />
     <Compile Remove="PmtGateway - Copy\**" />
     <Compile Remove="RBE - Copy\**" />
     <EmbeddedResource Remove="Account - Copy\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="EncryptRequest - Copy\**" />
     <EmbeddedResource Remove="Merchant - Copy\**" />
     <EmbeddedResource Remove="PmtGateway - Copy\**" />
     <EmbeddedResource Remove="RBE - Copy\**" />
     <None Remove="Account - Copy\**" />
+    <None Remove="bin\**" />
     <None Remove="EncryptRequest - Copy\**" />
     <None Remove="Merchant - Copy\**" />
     <None Remove="PmtGateway - Copy\**" />
@@ -34,14 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HPCL.DataModel\HPCL.DataModel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Account\" />
-    <Folder Include="EncryptRequest\" />
-    <Folder Include="Merchant\" />
-    <Folder Include="RBE\" />
-    <Folder Include="PmtGateway\" />
+    <ProjectReference Include="..\HPCL.Infrastructure\HPCL.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

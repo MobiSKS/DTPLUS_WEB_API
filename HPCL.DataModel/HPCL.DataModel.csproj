@@ -5,14 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Account\" />
-    <Folder Include="EncryptRequest\" />
-    <Folder Include="Merchant\" />
-    <Folder Include="RBE\" />
-    <Folder Include="PmtGateway\" />
+    <Compile Remove="EncryptRequest\**" />
+    <Compile Remove="Merchant\**" />
+    <Compile Remove="PmtGateway\**" />
+    <Compile Remove="RBE\**" />
+    <EmbeddedResource Remove="EncryptRequest\**" />
+    <EmbeddedResource Remove="Merchant\**" />
+    <EmbeddedResource Remove="PmtGateway\**" />
+    <EmbeddedResource Remove="RBE\**" />
+    <None Remove="EncryptRequest\**" />
+    <None Remove="Merchant\**" />
+    <None Remove="PmtGateway\**" />
+    <None Remove="RBE\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Account\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
   </ItemGroup>
 

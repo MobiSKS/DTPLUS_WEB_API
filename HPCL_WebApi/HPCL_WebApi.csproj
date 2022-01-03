@@ -54,5 +54,10 @@
     <ProjectReference Include="..\HPCL.Infrastructure\HPCL.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExtensionMethod\" />
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 
 </Project>
