@@ -70,7 +70,6 @@ namespace HPCL_WebApi.ExtensionMethod
             response.Success = false;
             response.Token = string.Empty;
             response.Model_State = controller.ModelState;
-            logger.LogInformation(MethodName + ":" + response.Message);
             logger.LogInformation(MethodName + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.BadRequest(response);
 
