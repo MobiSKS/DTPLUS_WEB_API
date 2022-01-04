@@ -24,7 +24,7 @@ namespace HPCL_WebApi.ExtensionMethod
             return controller.Ok(response);
         }
 
-        public static IActionResult OkFail(this ControllerBase controller, object input, object data, ILogger logger, string Message)
+        public static IActionResult FailCustom(this ControllerBase controller, object input, object data, ILogger logger, string Message)
         {
             string ResponseMessage = StatusInformation.Fail.ToString();
             int IntResponseMessage = (int)StatusInformation.Fail;

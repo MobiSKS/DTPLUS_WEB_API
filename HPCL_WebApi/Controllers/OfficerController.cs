@@ -49,7 +49,7 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.OkFail(ObjClass, result, _logger, result.Cast<OfficerInsertModelOutput>().ToList()[0].Reason);
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerInsertModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
