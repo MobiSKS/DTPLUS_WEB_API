@@ -56,7 +56,11 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
+<<<<<<< HEAD
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+=======
+        //[CustomAuthenticationFilter]
+>>>>>>> dd04b743d5e328e0c98defd6f513b0310b5b06a4
         [Route("get_officer_detail")]
 
         public async Task<IActionResult> GetOfficerDetail([FromBody] GetOfficerModelInput ObjClass)
