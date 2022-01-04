@@ -25,7 +25,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_officer")]
         public async Task<IActionResult> InsertOfficer([FromBody] OfficerInsertModelInput ObjClass)
         {
@@ -56,8 +56,9 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_officer_detail")]
+
         public async Task<IActionResult> GetOfficerDetail([FromBody] GetOfficerModelInput ObjClass)
         {
             if (ObjClass == null)

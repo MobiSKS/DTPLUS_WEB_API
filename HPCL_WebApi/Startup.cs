@@ -50,10 +50,12 @@ namespace HPCL_WebApi
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<IOfficerRepository, OfficerRepository>();
 
+            services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;
             });
+          
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(ValidateModelAttribute));

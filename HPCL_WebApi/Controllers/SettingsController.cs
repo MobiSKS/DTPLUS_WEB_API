@@ -23,7 +23,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_customer_type")]
         public async Task<IActionResult> GetCustomerType([FromBody] SettingGetCustomerTypeModelInput ObjClass)
         {
@@ -46,7 +46,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_customer_sub_type")]
         public async Task<IActionResult> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeModelInput ObjClass)
         {
@@ -69,7 +69,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_hq")]
         public async Task<IActionResult> GetHQ([FromBody] SettingGetHQModelInput ObjClass)
         {
@@ -95,7 +95,7 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_zone")]
         public async Task<IActionResult> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
         {
@@ -120,7 +120,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_region")]
         public async Task<IActionResult> GetRegion([FromBody] SettingGetRegionModelInput ObjClass)
         {
@@ -145,7 +145,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_sales_area")]
         public async Task<IActionResult> GetSalesarea([FromBody] SettingGetSalesareaModelInput ObjClass)
         {
@@ -170,7 +170,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_transaction_type")]
         public async Task<IActionResult> GetTransactionType([FromBody] SettingGetTransactionTypeModelInput ObjClass)
         {
@@ -195,7 +195,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_store_categories")]
         public async Task<IActionResult> GetStoreCategories([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
         {
@@ -220,7 +220,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_country")]
         public async Task<IActionResult> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
         {
@@ -245,7 +245,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_state")]
         public async Task<IActionResult> GetState([FromBody] SettingGetStateModelInput ObjClass)
         {
@@ -270,7 +270,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_sbu")]
         public async Task<IActionResult> GetSBU([FromBody] SettingGetSBUModelInput ObjClass)
         {
@@ -295,7 +295,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_role")]
         public async Task<IActionResult> GetRole([FromBody] SettingGetRoleModelInput ObjClass)
         {
@@ -320,7 +320,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_product")]
         public async Task<IActionResult> GetProduct([FromBody] SettingGetProductModelInput ObjClass)
         {
@@ -345,7 +345,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_entity_types")]
         public async Task<IActionResult> GetEntityTypes([FromBody] SettingGetEntityTypesModelInput ObjClass)
         {
@@ -370,7 +370,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_officer_type")]
         public async Task<IActionResult> GetOfficerType([FromBody] SettingGetOfficerTypeModelInput ObjClass)
         {
@@ -395,7 +395,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [CustomAuthenticationFilter]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_get_city")]
         public async Task<IActionResult> GetCity([FromBody] SettingGetCityModelInput ObjClass)
         {

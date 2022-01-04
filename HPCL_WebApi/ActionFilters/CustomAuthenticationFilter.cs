@@ -14,12 +14,22 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+using System.Text;
 
 namespace HPCL_WebApi.ActionFilters
 {
 
     public class CustomAuthenticationFilter : Attribute, IAuthorizationFilter
     {
+        IConfiguration _configuration;
+        string API_Key_Check ;
+        public CustomAuthenticationFilter(IConfiguration configuration)
+        {
+            API_Key_Check = configuration.GetSection("TokenSettings:API_Key").Value;
+            _configuration = configuration;
+        }
+
         public class Root
         {
             public string useragent;
@@ -78,30 +88,50 @@ namespace HPCL_WebApi.ActionFilters
 
             else
             {
+               // context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+                context.HttpContext.Request.EnableBuffering();
+                //StreamReader reader = new StreamReader(context.HttpContext.Request.Body);
 
-                StreamReader reader = new StreamReader(context.HttpContext.Request.Body);
-                var body = reader.ReadToEnd();
+                var bodyStr = "";
+                var req = context.HttpContext.Request;
+
+                // Allows using several time the stream in ASP.Net Core
+               // req.EnableRewind();
+
+                // Arguments: Stream, Encoding, detect encoding, buffer size 
+                // AND, the most important: keep stream opened
+                using (StreamReader reader= new StreamReader(req.Body, Encoding.UTF8, true, 1024, true))
+                {
+                    bodyStr = reader.ReadToEnd();
+                }
+
+                // Rewind, so the core is not lost when it looks the body for the request
+                req.Body.Position = 0;
+
+
+               // var body = reader.ReadToEnd();
                 var settings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
-                body = body.Replace("'", "''");
-                Root objObject = JsonConvert.DeserializeObject<Root>(body, settings);
+                bodyStr = bodyStr.Replace("'", "''");
+                Root objObject = JsonConvert.DeserializeObject<Root>(bodyStr, settings);
 
-                string API_Key_Check = string.Empty;
                 if (API_Key == API_Key_Check)
                 {
-                //    context.Principal = TokenManager.GetPrincipal(authorization, objObject.useragent, objObject.userip);
+                    string token = authorization["Bearer ".Length..].Trim();
+                    ClaimsPrincipal principal = new ClaimsPrincipal();
+                    principal = TokenManager.GetPrincipal(token, objObject.useragent, objObject.userip);
 
-                //    if (context.Principal == null)
-                //    {
+                    if (principal == null)
+                    {
 
-                //        context.Result = new JsonResult
-                //(
-                //new RouteValueDictionary(new AuthenticationFailureResult("Unauthorized Access", request, actionName).Execute()
-                //));
-                //    }
+                        context.Result = new JsonResult
+                (
+                new RouteValueDictionary(new AuthenticationFailureResult("Unauthorized Access", request, actionName).Execute()
+                ));
+                    }
                 }
                 else
                 {

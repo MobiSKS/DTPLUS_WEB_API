@@ -67,10 +67,10 @@ namespace HPCL_WebApi.ActionFilters
             //}
             // Do something before the action executes.
 
-            if (!filterContext.ModelState.IsValid)
-            {
-                filterContext.Result = new BadRequestObjectResult(filterContext.ModelState);
-            }
+            //if (!filterContext.ModelState.IsValid)
+            //{
+            //    filterContext.Result = new BadRequestObjectResult(filterContext.ModelState);
+            //}
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
