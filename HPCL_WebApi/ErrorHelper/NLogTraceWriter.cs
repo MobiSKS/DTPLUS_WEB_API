@@ -34,7 +34,7 @@ namespace HPCL_WebApi.ErrorHelper
 
         private LogLevel GetLogLevel(TraceLevel level)
         {
-            HttpContext context= new HttpContextAccessor().HttpContext;
+            //HttpContext context= new HttpContextAccessor().HttpContext;
             //if (context == null)
             //    return;
 
@@ -47,19 +47,28 @@ namespace HPCL_WebApi.ErrorHelper
             //if (work == null)
             //    return;
 
-            switch (level)
+            return level switch
             {
-                case TraceLevel.Error:
-                    return LogLevel.Error;
-                case TraceLevel.Warning:
-                    return LogLevel.Warn;
-                case TraceLevel.Info:
-                    return LogLevel.Info;
-                case TraceLevel.Off:
-                    return LogLevel.Off;
-                default:
-                    return LogLevel.Trace;
-            }
+                TraceLevel.Error => LogLevel.Error,
+                TraceLevel.Warning => LogLevel.Warn,
+                TraceLevel.Info => LogLevel.Info,
+                TraceLevel.Off => LogLevel.Off,
+                _ => LogLevel.Trace,
+            };
+
+            //switch (level)
+            //{
+            //    case TraceLevel.Error:
+            //        return LogLevel.Error;
+            //    case TraceLevel.Warning:
+            //        return LogLevel.Warn;
+            //    case TraceLevel.Info:
+            //        return LogLevel.Info;
+            //    case TraceLevel.Off:
+            //        return LogLevel.Off;
+            //    default:
+            //        return LogLevel.Trace;
+            //}
         }
     }
 }

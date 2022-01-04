@@ -16,6 +16,7 @@ using Newtonsoft.Json.Serialization;
 using HPCL.DataRepository.Settings;
 using HPCL.DataRepository.Officer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace HPCL_WebApi
 {
@@ -68,8 +69,19 @@ namespace HPCL_WebApi
                  options.SerializerSettings.TraceWriter = new NLogTraceWriter();
                  options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 
-             }); ;
-         
+             });
+
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
             //services.AddSwaggerGen();
             services.AddSwaggerGen(options =>
             {

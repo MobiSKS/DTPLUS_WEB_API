@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Remove="ActionFilters\GlobalExceptionAttribute.cs" />
     <Compile Remove="ActionFilters\LoggingFilterAttribute .cs" />
+    <Compile Remove="ActionFilters\LoggingFilterAttributeBase.cs" />
   </ItemGroup>
 
   <ItemGroup>

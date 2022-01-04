@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Mail;
 
 namespace HPCL.Infrastructure.CommonClass
 {
@@ -62,17 +63,14 @@ namespace HPCL.Infrastructure.CommonClass
 
         public static void PostSMSRequest(string Url, out string Result)
         {
-            string Ststus = string.Empty;
+            string Ststus;
             try
             {
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                {
-                    Ststus = reader.ReadToEnd();
-
-                }
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                Ststus = reader.ReadToEnd();
             }
             catch (Exception ex)
             {
@@ -84,7 +82,8 @@ namespace HPCL.Infrastructure.CommonClass
         public static bool IsPhoneNumber(string number)
         {
             //return Regex.Match(number, @"^(\+[6-9]{10})$").Success;
-            string CheckMobileNo = number.Substring(0, 1);
+            string CheckMobileNo = number[..1];
+            //string CheckMobileNo = number.Substring(0, 1);
             bool IsResult;
             if (CheckMobileNo.Contains('6') || CheckMobileNo.Contains('7') || CheckMobileNo.Contains('8') || CheckMobileNo.Contains('9'))
                 IsResult = true;
@@ -95,14 +94,15 @@ namespace HPCL.Infrastructure.CommonClass
 
         public static string RightString(string value, int length)
         {
-            return value.Substring(value.Length - length);
+            //return value.Substring(value.Length - length);
+            return value[^length..];
         }
 
         public string StrStoreCode
         {
             get
             {
-                return  _configuration.GetSection("TokenSettings:StoreCode").Value.ToString();
+                return _configuration.GetSection("TokenSettings:StoreCode").Value.ToString();
             }
         }
 
@@ -121,6 +121,40 @@ namespace HPCL.Infrastructure.CommonClass
             {
                 return _configuration.GetSection("TokenSettings:API_Key").Value.ToString();
             }
+        }
+
+        public static bool FunSendMail(string strEmailId, string strMailMessage, string strSubject)
+        {
+            try
+            {
+
+                MailMessage objMailMessage = new MailMessage();
+                try
+                {
+                    objMailMessage.To.Add(strEmailId);
+                    objMailMessage.From = new MailAddress("analytics@mloyal.com");
+                    objMailMessage.Subject = strSubject;
+                    objMailMessage.IsBodyHtml = true;
+                    objMailMessage.Body = strMailMessage;
+                    SmtpClient objSmtpClient = new SmtpClient
+                    {
+                        Host = "mail.mloyal.com",
+                        Credentials = new NetworkCredential("analytics@mloyal.com", "2o!7AnAlyt!c")
+                    };
+                    objSmtpClient.Send(objMailMessage);
+                }
+                catch 
+                {
+ 
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
     }

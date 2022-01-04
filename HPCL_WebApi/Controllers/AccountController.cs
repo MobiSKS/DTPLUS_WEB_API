@@ -31,10 +31,15 @@ namespace HPCL_WebApi.Controllers
         }
 
         private  bool Return_Key(IAccountRepository accountRepo,
-          out string UserMessage, int Header_Parameter_Value, out int Status_Code, string Useragent, string Userip, string Method_Name, string Userid)
+          out string UserMessage, int Header_Parameter_Value, out int Status_Code, string Useragent, string Userip, string Userid)
         {
+            if (accountRepo is null)
+            {
+                throw new ArgumentNullException(nameof(accountRepo));
+            }
+
             var request = Request;
-            var headers = request.Headers;
+            //var headers = request.Headers;
             bool IsResult = false;
             string Secret_Key = string.Empty;
             string StrMessage = string.Empty;
@@ -171,13 +176,13 @@ namespace HPCL_WebApi.Controllers
 
                 if (Useragent != "" && Userip != "" && Userid != "")
                 {
-                    AccountModel objAccountModel = new AccountModel
-                    {
-                        MethodName = Method_Name,
-                        Useragent = Useragent,
-                        Userid = Userid,
-                        Userip = Userip
-                    };
+                    //AccountModel objAccountModel = new AccountModel
+                    //{
+                    //    MethodName = Method_Name,
+                    //    Useragent = Useragent,
+                    //    Userid = Userid,
+                    //    Userip = Userip
+                    //};
                     IsResult = true;
                 }
                 else
@@ -195,11 +200,11 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        [Route("generatetoken")]
+        [Route("generate_token")]
         public IActionResult GenerateToken(GenerateTokenInput ObjClass)
         {
             //ReturnGenerateTokenStatusOutput TokenObject = new ReturnGenerateTokenStatusOutput();
-            string MethodName = "GENERATE_TOKEN";
+            //string MethodName = "GENERATE_TOKEN";
             try
             {
                 StatusInformation.API_Key_Is_Null.GetDisplayName();
@@ -209,18 +214,17 @@ namespace HPCL_WebApi.Controllers
                 string Secret_Key = string.Empty;
                 byte[] bytes = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70 };
                 string SecretKey = Convert.ToBase64String(bytes);
-                bool IsResult = this.Return_Key( _accountRepo, out string UserMessage, 0, out int IntStatusCode, ObjClass.Useragent, ObjClass.Userip, MethodName, ObjClass.Userid);
-
+                bool IsResult = this.Return_Key( _accountRepo, out string UserMessage, 0, out int IntStatusCode, ObjClass.Useragent, ObjClass.Userip, ObjClass.Userid);
                 if (IsResult == true)
                 {
                     TokenManager.Secret = SecretKey;
-                    return this.OkToken(_logger, ObjClass, ObjClass, MethodName);
+                    return this.OkToken(_logger, ObjClass, ObjClass);
 
                 }
                 else
                 {
                     TokenManager.Secret = SecretKey;
-                    return this.BadRequestToken(_logger, ObjClass, MethodName);
+                    return this.BadRequestToken(_logger, ObjClass);
                 }
             }
             catch (Exception ex)

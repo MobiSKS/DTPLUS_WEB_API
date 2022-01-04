@@ -95,7 +95,7 @@ namespace HPCL.DataModel.Officer
 
     }
 
-    public class OfficerInsertModelOutput : BaseClass
+    public class OfficerInsertModelOutput
     {
 
         [JsonProperty("Status")]
@@ -109,6 +109,10 @@ namespace HPCL.DataModel.Officer
         [JsonProperty("ReferenceId")]
         [DataMember]
         public string ReferenceId { get; set; }
+
+        [JsonProperty("Password")]
+        [DataMember]
+        public string Password { get; set; }
 
     }
 }

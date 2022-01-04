@@ -9,7 +9,9 @@ namespace HPCL_WebApi.ActionFilters
 {
     public class LoggingFilterAttribute : IActionFilter
     {
+#pragma warning disable IDE0052 // Remove unread private members
         private readonly ILogger<LoggingFilterAttribute> _logger;
+#pragma warning restore IDE0052 // Remove unread private members
         public LoggingFilterAttribute(ILogger<LoggingFilterAttribute> logger)
         {
             _logger = logger;

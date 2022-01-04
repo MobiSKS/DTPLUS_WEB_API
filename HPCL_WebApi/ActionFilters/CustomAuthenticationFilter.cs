@@ -7,12 +7,26 @@ using IAuthorizationFilter = Microsoft.AspNetCore.Mvc.Filters.IAuthorizationFilt
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using static HPCL.Infrastructure.CommonClass.StatusMessage;
+using HPCL.Infrastructure.TokenManager;
+using HPCL.Infrastructure.CommonClass;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace HPCL_WebApi.ActionFilters
 {
 
     public class CustomAuthenticationFilter : Attribute, IAuthorizationFilter
     {
+        public class Root
+        {
+            public string useragent;
+            public string userip;
+            public string userid;
+        }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             // string authString;
@@ -61,28 +75,44 @@ namespace HPCL_WebApi.ActionFilters
                   new RouteValueDictionary(new AuthenticationFailureResult("API Key is null.Please pass API Key", request, actionName).Execute()
                   ));
             }
-            //else
-            //{
-            //    string API_Key_Check = "3C25F265-F86D-419D-9A04-EA74A503C197"; //ObjVariable.StrAPI_Key;
-            //    if (API_Key == API_Key_Check)
-            //    {
-            //        context.Principal = TokenManager.GetPrincipal(authorization.Parameter, objObject.Useragent, objObject.Userip);
-            //        if (context.Principal == null)
-            //        {
-            //            context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("Unauthorized Access", request);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        context.ErrorResult = (IHttpActionResult)new AuthenticationFailureResult("API key is invalid", request);
-            //    }
-            //}
-            // }
 
-            context.Result = new JsonResult
-                 (
-                 new RouteValueDictionary(new AuthenticationFailureResult("API key is invalid", request, actionName).Execute()
-                 ));
+            else
+            {
+
+                StreamReader reader = new StreamReader(context.HttpContext.Request.Body);
+                var body = reader.ReadToEnd();
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
+                body = body.Replace("'", "''");
+                Root objObject = JsonConvert.DeserializeObject<Root>(body, settings);
+
+                string API_Key_Check = string.Empty;
+                if (API_Key == API_Key_Check)
+                {
+                //    context.Principal = TokenManager.GetPrincipal(authorization, objObject.useragent, objObject.userip);
+
+                //    if (context.Principal == null)
+                //    {
+
+                //        context.Result = new JsonResult
+                //(
+                //new RouteValueDictionary(new AuthenticationFailureResult("Unauthorized Access", request, actionName).Execute()
+                //));
+                //    }
+                }
+                else
+                {
+                    context.Result = new JsonResult
+                (
+                new RouteValueDictionary(new AuthenticationFailureResult("API key is invalid", request, actionName).Execute()
+                ));
+                }
+
+
+            }
         }
 
         public class AuthenticationFailureResult
@@ -107,6 +137,7 @@ namespace HPCL_WebApi.ActionFilters
                     Success = false,
                     Method_Name = MethodName,
                     Data = new { Message = ReasonPhrase },
+                    Internel_Status_Code = (int)StatusInformation.API_Key_Is_Secret_Key_Invalid,
                     Model_State = null
                 };
                 return (response);

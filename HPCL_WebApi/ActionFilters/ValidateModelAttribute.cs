@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using static HPCL.Infrastructure.CommonClass.StatusMessage;
 
 namespace HPCL_WebApi.ActionFilters
 {
@@ -26,10 +27,10 @@ namespace HPCL_WebApi.ActionFilters
             }
             base.OnActionExecuting(context);
         }
-        public class BadRequestFailureResult 
+        public class BadRequestFailureResult
         {
-            ActionExecutingContext _context;
-           
+            readonly ActionExecutingContext _context;
+
             public BadRequestFailureResult(ActionExecutingContext context)
             {
                 _context = context;
@@ -45,11 +46,12 @@ namespace HPCL_WebApi.ActionFilters
                 ApiResponseMessage response = new ApiResponseMessage
                 {
                     Status_Code = (int)HttpStatusCode.BadRequest,
-                    Message = "Error",
+                    Internel_Status_Code = (int)StatusInformation.Fail,
+                    Message = string.Join(" - ", allErrors.Select(e => e.ErrorMessage)),
                     Success = false,
                     Method_Name = actionName,
-                    Data = string.Join(" - ", allErrors.Select(e => e.ErrorMessage)),
-                    Model_State = null
+                    Data = null,
+                    Model_State = _context.ModelState,
                 };
                 return (response);
 
