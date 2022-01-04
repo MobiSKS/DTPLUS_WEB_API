@@ -5,7 +5,6 @@ using HPCL_WebApi.ExtensionMethod;
 using HPCL_WebApi.ActionFilters;
 using HPCL.DataRepository.Officer;
 using HPCL.DataModel.Officer;
-using System.Collections.Generic;
 using System.Linq;
 using HPCL.Infrastructure.CommonClass;
 
@@ -52,6 +51,29 @@ namespace HPCL_WebApi.Controllers
                     {
                         return this.OkFail(ObjClass, result, _logger, result.Cast<OfficerInsertModelOutput>().ToList()[0].Reason);
                     }
+                }
+            }
+        }
+
+        [HttpPost]
+        [CustomAuthenticationFilter]
+        [Route("get_officer_detail")]
+        public async Task<IActionResult> GetOfficerDetail([FromBody] GetOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.GetOfficerDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
                 }
             }
         }

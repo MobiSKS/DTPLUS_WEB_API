@@ -44,5 +44,16 @@ namespace HPCL.DataRepository.Officer
 
         }
 
+
+        public async Task<IEnumerable<GetOfficerModelOutput>> GetOfficerDetail([FromBody] GetOfficerModelInput ObjClass)
+        {
+            var procedureName = "UspGetOfficerDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("OfficerType", ObjClass.OfficerType, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Location", ObjClass.Location, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
