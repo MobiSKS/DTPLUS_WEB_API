@@ -40,8 +40,9 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Transaction Success")] Transaction_Success = 1030,
             [Display(Name = "Transaction Failed")] Transaction_Failed = 1031,
             [Display(Name = "Vechile No is already present.Please pass different vechile no")] Vechile_No = 1032,
-            [Display(Name = "Email Id is already exits.")] Email_Id_is_already_present = 1033,
-            [Display(Name = "Username or Emp Id is already exits.")] Username_or_Emp_Id_is_already_exits = 1034,
+            [Display(Name = "Email Id is already exits")] Email_Id_is_already_present = 1033,
+            [Display(Name = "Username or Emp Id is already exits")] Username_or_Emp_Id_is_already_exits = 1034,
+            [Display(Name = "Officer not exits")] Officer_not_exits = 1035,
             None = int.MaxValue
         }
 

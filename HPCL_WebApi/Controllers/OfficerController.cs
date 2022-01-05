@@ -79,6 +79,67 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_officer")]
+        public async Task<IActionResult> UpdateOfficer([FromBody] OfficerUpdateModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.UpdateOfficer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<OfficerUpdateModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerUpdateModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("delete_officer")]
+        public async Task<IActionResult> DeleteOfficer([FromBody] DeleteOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.DeleteOfficer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<DeleteOfficerModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<DeleteOfficerModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
     }
 
 }

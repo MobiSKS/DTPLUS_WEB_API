@@ -33,16 +33,11 @@ namespace HPCL_WebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // services.add
-            // services.AddEntityFramework()
-
+            //services.add
+            //services.AddEntityFramework()
             //Register dapper in scope
-            //
-
             //services.AddDbContext<HPCLAppContext>(options =>
             //options.UseSqlServer(Configuration.GetConnectionString("HPCLConnectionString")));
-
-
             //services.AddSingleton<_IDapperContext, DapperContext>();
 
             services.AddSingleton<DapperContext>();

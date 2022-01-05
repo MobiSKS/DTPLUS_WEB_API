@@ -1,8 +1,8 @@
-﻿using HPCL.Infrastructure.Response;
+﻿using HPCL.DataRepository.DBDapper;
+using HPCL.Infrastructure.Response;
 using HPCL.Infrastructure.TokenManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Extensions;
 using static HPCL.Infrastructure.CommonClass.StatusMessage;
 namespace HPCL_WebApi.ExtensionMethod
 {
@@ -20,29 +20,36 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(response.Method_Name + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.Ok(response);
         }
 
         public static IActionResult FailCustom(this ControllerBase controller, object input, object data, ILogger logger, string Message)
         {
-            string ResponseMessage = StatusInformation.Fail.ToString();
+            string ResponseMessage = StatusInformation.Fail.GetDisplayName();
             int IntResponseMessage = (int)StatusInformation.Fail;
-            if (Message == "Mobile No is already exits.")
+            if (Message == "Mobile No is already exits")
             {
-                ResponseMessage = StatusInformation.Mobile_Number_Card_Already_Exists.ToString();
+                ResponseMessage = StatusInformation.Mobile_Number_Card_Already_Exists.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Mobile_Number_Card_Already_Exists;
             }
-            if (Message == "Username or Emp Id is already exits.")
+            if (Message == "Username or Emp Id is already exits")
             {
-                ResponseMessage = StatusInformation.Username_or_Emp_Id_is_already_exits.ToString();
+                ResponseMessage = StatusInformation.Username_or_Emp_Id_is_already_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Username_or_Emp_Id_is_already_exits;
             }
-            if (Message == "Email Id is already exits.")
+            if (Message == "Email Id is already exits")
             {
-                ResponseMessage = StatusInformation.Email_Id_is_already_present.ToString();
+                ResponseMessage = StatusInformation.Email_Id_is_already_present.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Email_Id_is_already_present;
             }
+
+            if (Message == "Officer not exits")
+            {
+                ResponseMessage = StatusInformation.Officer_not_exits.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Officer_not_exits;
+            }
+
 
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ApiResponseMessage response = new ApiResponseMessage
@@ -54,7 +61,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(response.Method_Name + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.Ok(response);
         }
         public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
@@ -69,7 +76,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(controller.Request.Method + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(controller.Request.Method + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.BadRequest(response);
 
         }
@@ -85,7 +92,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(controller.Request.Method + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(controller.Request.Method + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.NotFound(response);
 
         }
@@ -103,7 +110,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip),
                 Model_State = controller.ModelState
             };
-            logger.LogInformation(response.Method_Name + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.Ok(response);
 
         }
@@ -120,7 +127,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Token = string.Empty,
                 Model_State = controller.ModelState
             };
-            logger.LogInformation(response.Method_Name + "JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.BadRequest(response);
 
         }
