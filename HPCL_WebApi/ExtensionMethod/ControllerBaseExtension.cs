@@ -11,16 +11,18 @@ namespace HPCL_WebApi.ExtensionMethod
         public static IActionResult OkCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = StatusInformation.Success.ToString();
             ApiResponseMessage response = new ApiResponseMessage
             {
-                Message = StatusInformation.Success.ToString(),
+                Message = MessageStr,
                 Success = true,
                 Internel_Status_Code = (int)StatusInformation.Success,
                 Status_Code = controller.Ok().StatusCode,
                 Data = data,
-                Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
+                Method_Name = MethodName
             };
-            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.Ok(response);
         }
 
@@ -76,6 +78,10 @@ namespace HPCL_WebApi.ExtensionMethod
 
 
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = ResponseMessage;
+
             ApiResponseMessage response = new ApiResponseMessage
             {
                 Message = ResponseMessage,
@@ -85,38 +91,44 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.Ok(response);
         }
         public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = StatusInformation.Request_JSON_Body_Is_Null.ToString();
+
             ApiResponseMessage response = new ApiResponseMessage
             {
-                Message = StatusInformation.Request_JSON_Body_Is_Null.ToString(),
+                Message = MessageStr,
                 Success = false,
                 Internel_Status_Code = (int)StatusInformation.Request_JSON_Body_Is_Null,
                 Status_Code = controller.BadRequest().StatusCode,
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(controller.Request.Method + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.BadRequest(response);
 
         }
         public static IActionResult NotFoundCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = StatusInformation.Fail.ToString();
             ApiResponseMessage response = new ApiResponseMessage
             {
-                Message = StatusInformation.Fail.ToString(),
+                Message = MessageStr,
                 Success = false,
                 Status_Code = controller.NotFound().StatusCode,
                 Internel_Status_Code = (int)StatusInformation.Fail,
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-            logger.LogInformation(controller.Request.Method + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.NotFound(response);
 
         }
@@ -141,9 +153,11 @@ namespace HPCL_WebApi.ExtensionMethod
         public static IActionResult BadRequestToken(this ControllerBase controller, ILogger logger, object input)
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = StatusInformation.Request_JSON_Body_Is_Null.ToString();
             ReturnGenerateTokenStatusOutput response = new ReturnGenerateTokenStatusOutput
             {
-                Message = StatusInformation.Request_JSON_Body_Is_Null.ToString(),
+                Message = MessageStr,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName,
                 Status_Code = controller.BadRequest().StatusCode,
                 Internel_Status_Code = (int)StatusInformation.Request_JSON_Body_Is_Null,
@@ -151,7 +165,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Token = string.Empty,
                 Model_State = controller.ModelState
             };
-            logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.BadRequest(response);
 
         }

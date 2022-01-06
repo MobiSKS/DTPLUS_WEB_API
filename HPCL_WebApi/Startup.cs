@@ -63,7 +63,7 @@ namespace HPCL_WebApi
 
              .AddNewtonsoftJson(options =>
              {
-                 options.SerializerSettings.TraceWriter = new NLogTraceWriter();
+                // options.SerializerSettings.TraceWriter = new NLogTraceWriter();
                  //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 
              });
