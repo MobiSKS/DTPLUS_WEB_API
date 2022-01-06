@@ -95,5 +95,31 @@ namespace HPCL.DataRepository.Officer
             return await connection.QueryAsync<CheckOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+
+        public async Task<IEnumerable<OfficerLocationMappingModelOutput>> InsertOfficerLocationMapping([FromBody] OfficerLocationMappingModelInput ObjClass)
+        {
+            var procedureName = "UspInsertOfficerLocationMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("OfficerId", ObjClass.OfficerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZO", ObjClass.ZO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RO", ObjClass.RO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.Createdby, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<OfficerLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<OfficerDeleteLocationMappingModelOutput>> DeleteOfficerLocationMapping([FromBody] OfficerDeleteLocationMappingModelInput ObjClass)
+        {
+            var procedureName = "UspInactiveOfficerLocationMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZO", ObjClass.ZO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RO", ObjClass.RO, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<OfficerDeleteLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

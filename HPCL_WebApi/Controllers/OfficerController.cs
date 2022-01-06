@@ -170,6 +170,69 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_officer_location_mapping")]
+        public async Task<IActionResult> InsertOfficerLocationMapping([FromBody] OfficerLocationMappingModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.InsertOfficerLocationMapping(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<OfficerLocationMappingModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerLocationMappingModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("delete_officer_location_mapping")]
+        public async Task<IActionResult> DeleteOfficerLocationMapping([FromBody] OfficerDeleteLocationMappingModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.DeleteOfficerLocationMapping(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<OfficerDeleteLocationMappingModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerDeleteLocationMappingModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
     }
 
 }
