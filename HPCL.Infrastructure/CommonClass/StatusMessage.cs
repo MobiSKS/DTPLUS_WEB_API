@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HPCL.Infrastructure.CommonClass
 {
     public class StatusMessage
-    { 
+    {
         public enum StatusInformation
         {
             [Display(Name = "Record Found")] Success = 1000,
@@ -43,6 +43,10 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Email Id is already exits")] Email_Id_is_already_present = 1033,
             [Display(Name = "Username or Emp Id is already exits")] Username_or_Emp_Id_is_already_exits = 1034,
             [Display(Name = "Officer not exits")] Officer_not_exits = 1035,
+            [Display(Name = "Location already mapped")] Location_already_mapped = 1036,
+            [Display(Name = "Location not exits")] Location_not_exits = 1037,
+            [Display(Name = "Username available")] Username_available = 1038,
+            [Display(Name = "Username exits")] Username_exits = 1039,
             None = int.MaxValue
         }
 

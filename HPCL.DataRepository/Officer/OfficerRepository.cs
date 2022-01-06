@@ -86,5 +86,14 @@ namespace HPCL.DataRepository.Officer
             return await connection.QueryAsync<DeleteOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CheckOfficerModelOutput>> ChkUserName([FromBody] CheckOfficerModelInput ObjClass)
+        {
+            var procedureName = "UspChkUserName";
+            var parameters = new DynamicParameters();
+            parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

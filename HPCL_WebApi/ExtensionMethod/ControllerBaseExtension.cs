@@ -50,6 +50,30 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Officer_not_exits;
             }
 
+            if (Message == "Location already mapped")
+            {
+                ResponseMessage = StatusInformation.Location_already_mapped.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Location_already_mapped;
+            }
+
+            if (Message == "Location not exits")
+            {
+                ResponseMessage = StatusInformation.Location_not_exits.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Location_not_exits;
+            }
+
+            if (Message == "Username available")
+            {
+                ResponseMessage = StatusInformation.Username_available.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Username_available;
+            }
+
+            if (Message == "Username exits")
+            {
+                ResponseMessage = StatusInformation.Username_exits.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Username_exits;
+            }
+
 
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             ApiResponseMessage response = new ApiResponseMessage
