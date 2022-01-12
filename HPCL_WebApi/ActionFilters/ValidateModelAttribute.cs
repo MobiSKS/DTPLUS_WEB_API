@@ -17,6 +17,7 @@ namespace HPCL_WebApi.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+           
 
             if (!context.ModelState.IsValid)
             {
@@ -54,6 +55,9 @@ namespace HPCL_WebApi.ActionFilters
                     Data = null,
                     Model_State = _context.ModelState,
                 };
+
+                var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+                logger.Error(string.Join(" - ", allErrors.Select(e => e.ErrorMessage)));
                 return (response);
 
             }

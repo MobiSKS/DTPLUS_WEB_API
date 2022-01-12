@@ -30,12 +30,7 @@ namespace HPCL_WebApi.ActionFilters
         //}
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //LogManager.Configuration = LoggingSetup.GetLoggingConfiguration(runtimeSettings);
-            Logger logger = LogManager.GetCurrentClassLogger();
-            //IConfiguration configuration
-            //Microsoft.Extensions.Configuration.Services.GetTraceWriter();
-            //Logger logger = LogManager.GetCurrentClassLogger();
-            //Logger Logger1 = LogManager.GetLogger("NLogTraceWriter");
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             var descriptor = filterContext.ActionDescriptor as ControllerActionDescriptor;
             var actionName = descriptor.ActionName;
             var controllerName = descriptor.ControllerName;
@@ -56,21 +51,11 @@ namespace HPCL_WebApi.ActionFilters
             //NLogTraceWriter.
             //GlobalConfiguration.Configuration.Services.Replace(typeof(ITraceWriter), new NLogger());
             //var trace = GlobalConfiguration.Configuration.Services.GetTraceWriter();
-            MappedDiagnosticsLogicalContext.Set("methodName", actionName);
-            //var methodName = MappedDiagnosticsLogicalContext.Get("methodName");
-            logger.Info("Controller : " + controllerName + Environment.NewLine + "Action : " + actionName, "JSON", filterContext.ActionArguments);
-            //string s=(filterContext.HttpContext.Request, "Controller : " + controllerName + Environment.NewLine + "Action : " + actionName, "JSON", filterContext.ActionArguments);
-            //filterContext.HttpContext .
-            //if (filterContext.ModelState.IsValid == false)
-            //{
-            //    filterContext.Response = MessageHelper.Message(filterContext.Request, HttpStatusCode.OK, false, (int)StatusInformation.Manadatory_Feild_Required, null, filterContext.ModelState);
-            //}
-            // Do something before the action executes.
 
-            //if (!filterContext.ModelState.IsValid)
-            //{
-            //    filterContext.Result = new BadRequestObjectResult(filterContext.ModelState);
-            //}
+            MappedDiagnosticsLogicalContext.Set("methodName", actionName);
+            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(filterContext.ActionArguments);
+            logger.Info("Controller : " + controllerName + Environment.NewLine + "Action : " + actionName+ "JSON Input"+ jsonInput.ToString ());
+          
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
