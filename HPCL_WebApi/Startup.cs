@@ -17,6 +17,7 @@ using HPCL.DataRepository.Settings;
 using HPCL.DataRepository.Officer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using HPCL_WebApi.ExceptionFilter;
 
 namespace HPCL_WebApi
 {
@@ -51,10 +52,17 @@ namespace HPCL_WebApi
                 opt.SuppressModelStateInvalidFilter = true;
             });
           
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(ValidateModelAttribute));
-            });
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(typeof(ValidateModelAttribute));
+            //});
+            services.AddMvc(
+                config =>
+                {
+                    config.Filters.Add(typeof(CustomExceptionFilter));
+                    config.Filters.Add(typeof(ValidateModelAttribute));
+                }
+            );//.AddFluentValidation();
             // services.AddControllers();
             services.AddControllers(config =>
             {
