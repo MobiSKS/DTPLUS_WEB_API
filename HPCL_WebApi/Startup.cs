@@ -23,6 +23,8 @@ namespace HPCL_WebApi
 {
     public class Startup
     {
+        private readonly string _policyName = "CorsPolicy";
+        private readonly string _anotherPolicy = "AnotherCorsPolicy";       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +35,21 @@ namespace HPCL_WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy(name: _policyName, builder =>
+                {
+                    builder.WithOrigins("https://localhost:5155")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+                opt.AddPolicy(name: _anotherPolicy, builder =>
+                {
+                    builder.WithOrigins("https://localhost:5021")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             //services.add
             //services.AddEntityFramework()
@@ -124,7 +141,7 @@ namespace HPCL_WebApi
             }
 
             app.UseRouting();
-
+            app.UseCors(_policyName);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
