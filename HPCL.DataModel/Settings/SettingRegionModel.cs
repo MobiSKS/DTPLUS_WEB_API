@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
 {
 
     public class SettingGetRegionModelInput : BaseClass
     {
-        [JsonProperty("ZoneID")]
+        [JsonPropertyName("ZoneID")]
         [DataMember]
         public int ZoneID { get; set; }
     }

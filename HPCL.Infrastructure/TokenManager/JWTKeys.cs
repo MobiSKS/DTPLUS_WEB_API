@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace HPCL.Infrastructure.TokenManager
 {
   public  class JWTKeys
     {
 
-        [JsonProperty("StoreCode")]
+        [JsonPropertyName("StoreCode")]
         public string StoreCode { get; set; }
 
-        [JsonProperty("SecretKey")]
+        [JsonPropertyName("SecretKey")]
         public string SecretKey { get; set; }
 
-        [JsonProperty("API_Key")]
+        [JsonPropertyName("API_Key")]
         public string API_Key { get; set; }
     }
 

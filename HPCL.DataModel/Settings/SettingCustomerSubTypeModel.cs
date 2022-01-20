@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
 {
 
     public class SettingGetCustomerSubTypeModelInput : BaseClass
     {
-        [JsonProperty("CustomerTypeId")]
+        [JsonPropertyName("CustomerTypeId")]
         [DataMember]
         public int CustomerTypeId { get; set; }
     }

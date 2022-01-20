@@ -1,81 +1,82 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Officer
 {
     public class OfficerUpdateModelInput : BaseClass
     {
         [Required]
-        [JsonProperty("FirstName")]
+        [JsonPropertyName("FirstName")]
         [DataMember]
         public string FirstName { get; set; }
 
-        [JsonProperty("LastName")]
+        [JsonPropertyName("LastName")]
         [DataMember]
         public string LastName { get; set; }
          
 
         [Required]
-        [JsonProperty("Address1")]
+        [JsonPropertyName("Address1")]
         [DataMember]
         public string Address1 { get; set; }
 
-        [JsonProperty("Address2")]
+        [JsonPropertyName("Address2")]
         [DataMember]
         public string Address2 { get; set; }
 
-        [JsonProperty("Address3")]
+        [JsonPropertyName("Address3")]
         [DataMember]
         public string Address3 { get; set; }
 
         [Required]
-        [JsonProperty("StateId")]
+        [JsonPropertyName("StateId")]
         [DataMember]
         public int StateId { get; set; }
 
         //[Required]
-        [JsonProperty("CityId")]
+        [JsonPropertyName("CityId")]
         [DataMember]
         public int CityId { get; set; }
 
         [Required]
-        [JsonProperty("DistrictId")]
+        [JsonPropertyName("DistrictId")]
         [DataMember]
         public int DistrictId { get; set; }
 
-        [JsonProperty("Pin")]
+        [JsonPropertyName("Pin")]
         [DataMember]
         public string Pin { get; set; }
 
         [Required]
         [StringLength(10, MinimumLength = 10)]
-        [JsonProperty("MobileNo")]
+        [JsonPropertyName("MobileNo")]
         [DataMember]
         public string MobileNo { get; set; }
 
-        [JsonProperty("PhoneNo")]
+        [JsonPropertyName("PhoneNo")]
         [DataMember]
         public string PhoneNo { get; set; }
 
         [Required]
-        [JsonProperty("EmailId")]
+        [JsonPropertyName("EmailId")]
         [DataMember]
         [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string EmailId { get; set; }
 
 
-        [JsonProperty("Fax")]
+        [JsonPropertyName("Fax")]
         [DataMember]
         public string Fax { get; set; }
 
         [Required]
-        [JsonProperty("ModifiedBy")]
+        [JsonPropertyName("ModifiedBy")]
         [DataMember]
         public int ModifiedBy { get; set; }
 
         [Required]
-        [JsonProperty("OfficerId")]
+        [JsonPropertyName("OfficerId")]
         [DataMember]
         public int OfficerId { get; set; }
 

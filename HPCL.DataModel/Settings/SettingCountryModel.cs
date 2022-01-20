@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
 {
@@ -10,11 +11,11 @@ namespace HPCL.DataModel.Settings
     }
     public class SettingGetCountryModelOutput
     {
-        [JsonProperty("CountryID")]
+        [JsonPropertyName("CountryID")]
         [DataMember]
         public int CountryID { get; set; }
 
-        [JsonProperty("CountryName")]
+        [JsonPropertyName("CountryName")]
         [DataMember]
         public string CountryName { get; set; }
     }

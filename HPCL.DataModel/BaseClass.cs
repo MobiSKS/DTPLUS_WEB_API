@@ -2,23 +2,24 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel
 {
     public abstract class BaseClass
     {
         [Required]
-        [JsonProperty("Userid")]
+        [JsonPropertyName("UserId")]
         [DataMember]
         public string Userid { get; set; }
 
         [Required]
-        [JsonProperty("Useragent")]
+        [JsonPropertyName("Useragent")]
         [DataMember]
         public string Useragent { get; set; }
 
         [Required]
-        [JsonProperty("Userip")]
+        [JsonPropertyName("Userip")]
         [DataMember]
         public string Userip { get; set; }
     }

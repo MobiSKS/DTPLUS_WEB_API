@@ -89,10 +89,11 @@ namespace HPCL_WebApi
              .AddNewtonsoftJson(options =>
              {
                 // options.SerializerSettings.TraceWriter = new NLogTraceWriter();
-                 //options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+              //   options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 
              });
 
+            services.AddControllers().AddNewtonsoftJson();
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;

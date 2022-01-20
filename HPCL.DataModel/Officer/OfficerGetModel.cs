@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Officer
 {
@@ -9,11 +10,11 @@ namespace HPCL.DataModel.Officer
     public class GetOfficerModelInput : BaseClass
     {
         [Required]
-        [JsonProperty("OfficerType")]
+        [JsonPropertyName("OfficerType")]
         [DataMember]
         public int OfficerType { get; set; }
 
-        [JsonProperty("Location")]
+        [JsonPropertyName("Location")]
         [DataMember]
         public int Location { get; set; }
     }

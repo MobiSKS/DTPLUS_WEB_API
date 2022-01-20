@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
 {
@@ -10,11 +11,11 @@ namespace HPCL.DataModel.Settings
     }
     public class SettingGetCityModelOutput
     {
-        [JsonProperty("CityId")]
+        [JsonPropertyName("CityId")]
         [DataMember]
         public int CityId { get; set; }
 
-        [JsonProperty("CityName")]
+        [JsonPropertyName("CityName")]
         [DataMember]
         public string CityName { get; set; }
     }

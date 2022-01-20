@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Officer
 {
@@ -8,12 +9,12 @@ namespace HPCL.DataModel.Officer
     public class DeleteOfficerModelInput : BaseClass
     {
         [Required]
-        [JsonProperty("OfficerId")]
+        [JsonPropertyName("OfficerId")]
         [DataMember]
         public int OfficerId { get; set; }
 
         [Required]
-        [JsonProperty("ModifiedBy")]
+        [JsonPropertyName("ModifiedBy")]
         [DataMember]
         public int ModifiedBy { get; set; }
     }

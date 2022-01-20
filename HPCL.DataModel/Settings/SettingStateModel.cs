@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
 {
 
     public class SettingGetStateModelInput : BaseClass
     {
-        [JsonProperty("CountryID")]
+        [JsonPropertyName("CountryID")]
         [DataMember]
         public int CountryID { get; set; }
     }

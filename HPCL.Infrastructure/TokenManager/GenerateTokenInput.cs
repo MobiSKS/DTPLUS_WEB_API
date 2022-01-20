@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace HPCL.Infrastructure.TokenManager
 {
@@ -10,15 +12,16 @@ namespace HPCL.Infrastructure.TokenManager
     {
 
         [Required]
-        [JsonProperty("Useragent")]
+        [JsonPropertyName("Useragent")]
+        [DataMember]
         public string Useragent { get; set; }
 
         [Required]
-        [JsonProperty("Userip")]
+        [JsonPropertyName("Userip")]
         public string Userip { get; set; }
 
         [Required]
-        [JsonProperty("Userid")]
+        [JsonPropertyName("Userid")]
         public string Userid { get; set; }
 
     }

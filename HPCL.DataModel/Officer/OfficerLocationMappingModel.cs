@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Officer
 {
@@ -8,26 +9,26 @@ namespace HPCL.DataModel.Officer
     {
          
         [Required]
-        [JsonProperty("OfficerId")]
+        [JsonPropertyName("OfficerId")]
         [DataMember]
         public int OfficerId { get; set; }
 
         [Required]
-        [JsonProperty("UserName")]
+        [JsonPropertyName("UserName")]
         [DataMember]
         public string UserName { get; set; }
 
-        [JsonProperty("ZO")]
+        [JsonPropertyName("ZO")]
         [DataMember]
         public int ZO { get; set; }
 
         
-        [JsonProperty("RO")]
+        [JsonPropertyName("RO")]
         [DataMember]
         public int RO { get; set; }
 
         [Required]
-        [JsonProperty("Createdby")]
+        [JsonPropertyName("Createdby")]
         [DataMember]
         public int Createdby { get; set; }
 
