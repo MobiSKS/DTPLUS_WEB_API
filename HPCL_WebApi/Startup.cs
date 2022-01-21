@@ -18,6 +18,7 @@ using HPCL.DataRepository.Officer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using HPCL_WebApi.ExceptionFilter;
+using HPCL.DataRepository.Customer;
 
 namespace HPCL_WebApi
 {
@@ -62,6 +63,7 @@ namespace HPCL_WebApi
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<IOfficerRepository, OfficerRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
