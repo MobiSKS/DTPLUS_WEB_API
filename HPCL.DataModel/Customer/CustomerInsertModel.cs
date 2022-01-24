@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.Customer
 {
     public class CustomerInsertModelInput : BaseClass
     {
@@ -350,11 +351,31 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public DateTime FeePaymentsChequeDate { get; set; }
 
-         
+        public List<CardDetail> ObjCardDetail { get; set; }
 
     }
 
-     
+    public class CardDetail
+    {
+        [JsonProperty("VehicleNumber")]
+        public string VehicleNumber { get; set; }
 
+        [JsonProperty("VehicleType")]
+        public string VehicleType { get; set; }
+
+        [JsonProperty("VehicleMake")]
+        public string VehicleMake { get; set; }
+
+        [JsonProperty("YearOfRegistration")]
+        public int YearOfRegistration { get; set; }
+    }
+
+    public class CustomerInsertModelOutput : BaseClassOutput
+    {
+
+        [JsonProperty("ReferenceId")]
+        [DataMember]
+        public string ReferenceId { get; set; }
+    }
 
 }

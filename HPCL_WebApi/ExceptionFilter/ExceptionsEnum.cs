@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HPCL_WebApi.ExceptionFilter
+﻿namespace HPCL_WebApi.ExceptionFilter
 {
     public enum ExceptionsEnum
     {

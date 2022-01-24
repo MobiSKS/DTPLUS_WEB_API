@@ -23,5 +23,6 @@ namespace HPCL.DataRepository.Settings
         public Task<IEnumerable<SettingGetEntityTypesModelOutput>> GetEntityTypes([FromBody] SettingGetEntityTypesModelInput ObjClass);
         public Task<IEnumerable<SettingGetOfficerTypeModelOutput>> GetOfficerType([FromBody] SettingGetOfficerTypeModelInput ObjClass);
         public Task<IEnumerable<SettingGetCityModelOutput>> GetCity([FromBody] SettingGetCityModelInput ObjClass);
+        public Task<IEnumerable<SettingGetDistrictModelOutput>> GetDistrict([FromBody] SettingGetDistrictModelInput ObjClass);
     }
 }
