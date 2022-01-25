@@ -159,8 +159,10 @@ namespace HPCL.DataRepository.Settings
         public async Task<IEnumerable<SettingGetDistrictModelOutput>> GetDistrict([FromBody] SettingGetDistrictModelInput ObjClass)
         {
             var procedureName = "UspGetDistrict";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateID", ObjClass.StateID, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
         }
 

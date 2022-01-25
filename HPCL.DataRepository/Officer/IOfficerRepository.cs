@@ -16,5 +16,7 @@ namespace HPCL.DataRepository.Officer
 
         public Task<IEnumerable<OfficerDeleteLocationMappingModelOutput>> DeleteOfficerLocationMapping([FromBody] OfficerDeleteLocationMappingModelInput ObjClass);
 
+        public Task<IEnumerable<GetOfficerModelOutput>> BindOfficer([FromBody] BindOfficerModelInput ObjClass);
+
     }
 }

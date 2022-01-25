@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Collections.Generic;
 using HPCL.DataModel.Customer;
 using HPCL.Infrastructure.CommonClass;
-using Microsoft.Extensions.Configuration;
+//using Microsoft.Extensions.Configuration;
 
 namespace HPCL.DataRepository.Customer
 {
@@ -14,7 +14,7 @@ namespace HPCL.DataRepository.Customer
     {
         private readonly DapperContext _context;
         //private readonly Variables ObjVariable;
-        public CustomerRepository(DapperContext context, IConfiguration configuration)
+        public CustomerRepository(DapperContext context) // , IConfiguration configuration
         {
             _context = context;
             //ObjVariable = new Variables(configuration);

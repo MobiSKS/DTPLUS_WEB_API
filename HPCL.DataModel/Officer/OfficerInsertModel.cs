@@ -107,6 +107,10 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string Password { get; set; }
 
+        [JsonProperty("OfficerID")]
+        [DataMember]
+        public int OfficerID { get; set; }
+
     }
 
    

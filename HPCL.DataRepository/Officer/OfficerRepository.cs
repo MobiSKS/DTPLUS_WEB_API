@@ -121,5 +121,14 @@ namespace HPCL.DataRepository.Officer
             return await connection.QueryAsync<OfficerDeleteLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetOfficerModelOutput>> BindOfficer([FromBody] BindOfficerModelInput ObjClass)
+        {
+            var procedureName = "UspBindOfficerDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("OfficerID", ObjClass.OfficerID, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

@@ -6,7 +6,9 @@ namespace HPCL.DataModel.Settings
 
     public class SettingGetDistrictModelInput : BaseClass
     {
-
+        [JsonPropertyName("StateID")]
+        [DataMember]
+        public int StateID { get; set; }
     }
     public class SettingGetDistrictModelOutput
     {

@@ -19,6 +19,15 @@ namespace HPCL.DataModel.Officer
         public int Location { get; set; }
     }
 
+    public class BindOfficerModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("OfficerID")]
+        [DataMember]
+        public int OfficerID { get; set; }
+ 
+    }
+
     public class GetOfficerModelOutput
     {
 
