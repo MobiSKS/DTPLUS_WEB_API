@@ -29,16 +29,19 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("Address2", ObjClass.Address2, DbType.String, ParameterDirection.Input);
             parameters.Add("Address3", ObjClass.Address3, DbType.String, ParameterDirection.Input);
             parameters.Add("StateId", ObjClass.StateId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CityId", ObjClass.CityId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CityName", ObjClass.CityName, DbType.String, ParameterDirection.Input);
             parameters.Add("DistrictId", ObjClass.DistrictId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             parameters.Add("PhoneNo", ObjClass.PhoneNo, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
-            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             parameters.Add("OfficerType", ObjClass.OfficerType, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -63,7 +66,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("Address2", ObjClass.Address2, DbType.String, ParameterDirection.Input);
             parameters.Add("Address3", ObjClass.Address3, DbType.String, ParameterDirection.Input);
             parameters.Add("StateId", ObjClass.StateId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CityId", ObjClass.CityId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CityName", ObjClass.CityName, DbType.String, ParameterDirection.Input);
             parameters.Add("DistrictId", ObjClass.DistrictId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
@@ -72,6 +75,9 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
             parameters.Add("OfficerId", ObjClass.OfficerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

@@ -6,15 +6,12 @@
 
   <ItemGroup>
     <Compile Remove="EncryptRequest\**" />
-    <Compile Remove="Merchant\**" />
     <Compile Remove="PmtGateway\**" />
     <Compile Remove="RBE\**" />
     <EmbeddedResource Remove="EncryptRequest\**" />
-    <EmbeddedResource Remove="Merchant\**" />
     <EmbeddedResource Remove="PmtGateway\**" />
     <EmbeddedResource Remove="RBE\**" />
     <None Remove="EncryptRequest\**" />
-    <None Remove="Merchant\**" />
     <None Remove="PmtGateway\**" />
     <None Remove="RBE\**" />
   </ItemGroup>

@@ -2,14 +2,14 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.Merchant
 {
 
-    public class SettingGetSBUModelInput : BaseClass
+    public class MerchantGetSBUModelInput : BaseClass
     {
 
     }
-    public class SettingGetSBUModelOutput
+    public class MerchantGetSBUModelOutput
     {
         [JsonProperty("SBUId")]
         [DataMember]

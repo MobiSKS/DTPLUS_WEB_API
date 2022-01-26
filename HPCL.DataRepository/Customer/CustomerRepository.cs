@@ -25,7 +25,6 @@ namespace HPCL.DataRepository.Customer
             var procedureName = "UspGetCustomerType";
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCustomerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
         }
 
         public async Task<IEnumerable<GetCustomerSubTypeModelOutput>> GetCustomerSubType([FromBody] GetCustomerSubTypeModelInput ObjClass)
@@ -35,6 +34,13 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCustomerSubTypeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetCustomerTBEntityNameModelOutput>> GetTBEntityName([FromBody] GetCustomerTBEntityNameModelInput ObjClass)
+        {
+            var procedureName = "UspGetTBEntityName";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCustomerTBEntityNameModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<CustomerInsertModelOutput>> InsertCustomer([FromBody] CustomerInsertModelInput ObjClass)
@@ -137,6 +143,8 @@ namespace HPCL.DataRepository.Customer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
 
       
     }

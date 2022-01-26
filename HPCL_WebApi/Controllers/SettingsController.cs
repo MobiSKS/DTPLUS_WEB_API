@@ -122,30 +122,7 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_merchant_type")]
-        public async Task<IActionResult> GetMerchantType([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetMerchantType(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-
-        }
+        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -197,30 +174,7 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_sbu")]
-        public async Task<IActionResult> GetSBU([FromBody] SettingGetSBUModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetSBU(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-
-        }
+        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -337,6 +291,31 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _settingRepo.GetDistrict(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity")]
+        public async Task<IActionResult> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetEntity(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);

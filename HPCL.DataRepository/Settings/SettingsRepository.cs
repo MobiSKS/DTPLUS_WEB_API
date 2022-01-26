@@ -55,13 +55,7 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-        public async Task<IEnumerable<SettingGetStoreCategoriesModelOutput>> GetMerchantType([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
-        {
-            var procedureName = "UspGetStoreCategories";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetStoreCategoriesModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
+       
 
         public async Task<IEnumerable<SettingGetCountryModelOutput>> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
         {
@@ -81,13 +75,7 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-        public async Task<IEnumerable<SettingGetSBUModelOutput>> GetSBU([FromBody] SettingGetSBUModelInput ObjClass)
-        {
-            var procedureName = "UspGetSBU";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetSBUModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
+       
 
         public async Task<IEnumerable<SettingGetRoleModelOutput>> GetRole([FromBody] SettingGetRoleModelInput ObjClass)
         {
@@ -133,7 +121,12 @@ namespace HPCL.DataRepository.Settings
             parameters.Add("StateID", ObjClass.StateID, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
+        }
+        public async Task<IEnumerable<SettingGetEntityModelOutput>> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
+        {
+            var procedureName = "UspGetEntity";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetEntityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
     }

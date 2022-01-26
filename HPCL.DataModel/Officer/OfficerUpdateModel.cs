@@ -36,9 +36,9 @@ namespace HPCL.DataModel.Officer
         public int StateId { get; set; }
 
         //[Required]
-        [JsonPropertyName("CityId")]
+        [JsonPropertyName("CityName")]
         [DataMember]
-        public int CityId { get; set; }
+        public string CityName { get; set; }
 
         [Required]
         [JsonPropertyName("DistrictId")]
