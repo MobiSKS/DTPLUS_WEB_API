@@ -24,78 +24,6 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_customer_type")]
-        public async Task<IActionResult> GetCustomerType([FromBody] SettingGetCustomerTypeModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetCustomerType(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_customer_sub_type")]
-        public async Task<IActionResult> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetCustomerSubType(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_hq")]
-        public async Task<IActionResult> GetHQ([FromBody] SettingGetHQModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetHQ(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-
-        }
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_zone")]
         public async Task<IActionResult> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
         {
@@ -196,8 +124,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_store_categories")]
-        public async Task<IActionResult> GetStoreCategories([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
+        [Route("get_merchant_type")]
+        public async Task<IActionResult> GetMerchantType([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -206,7 +134,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _settingRepo.GetStoreCategories(ObjClass);
+                var result = await _settingRepo.GetMerchantType(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass,null, _logger);
@@ -369,30 +297,7 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_officer_type")]
-        public async Task<IActionResult> GetOfficerType([FromBody] SettingGetOfficerTypeModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetOfficerType(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass,result, _logger);
-                }
-            }
-
-        }
+        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]

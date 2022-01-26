@@ -20,6 +20,23 @@ namespace HPCL.DataRepository.Customer
             //ObjVariable = new Variables(configuration);
         }
 
+        public async Task<IEnumerable<GetCustomerTypeModelOutput>> GetCustomerType([FromBody] GetCustomerTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerType";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCustomerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+
+        }
+
+        public async Task<IEnumerable<GetCustomerSubTypeModelOutput>> GetCustomerSubType([FromBody] GetCustomerSubTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerSubType";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCustomerSubTypeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<IEnumerable<CustomerInsertModelOutput>> InsertCustomer([FromBody] CustomerInsertModelInput ObjClass)
         {
             var dtDBR = new DataTable("UserDTNoofCards");
@@ -121,5 +138,6 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+      
     }
 }

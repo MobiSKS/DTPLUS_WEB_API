@@ -130,5 +130,12 @@ namespace HPCL.DataRepository.Officer
             return await connection.QueryAsync<GetOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetOfficerTypeModelOutput>> GetOfficerType([FromBody] GetOfficerTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetOfficerType";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetOfficerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

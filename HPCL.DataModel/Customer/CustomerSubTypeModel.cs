@@ -2,16 +2,16 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.Customer
 {
 
-    public class SettingGetCustomerSubTypeModelInput : BaseClass
+    public class GetCustomerSubTypeModelInput : BaseClass
     {
         [JsonPropertyName("CustomerTypeId")]
         [DataMember]
         public int CustomerTypeId { get; set; }
     }
-    public class SettingGetCustomerSubTypeModelOutput
+    public class GetCustomerSubTypeModelOutput
     {
         [JsonProperty("CustomerSubtypeId")]
         [DataMember]

@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.Officer
 {
 
-    public class SettingGetOfficerTypeModelInput : BaseClass
+    public class GetOfficerTypeModelInput : BaseClass
     {
     }
-    public class SettingGetOfficerTypeModelOutput
+    public class GetOfficerTypeModelOutput
     {
         [JsonProperty("OfficerTypeID")]
         [DataMember]

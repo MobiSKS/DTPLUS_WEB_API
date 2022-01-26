@@ -258,6 +258,32 @@ namespace HPCL_WebApi.Controllers
         }
 
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_officer_type")]
+        public async Task<IActionResult> GetOfficerType([FromBody] GetOfficerTypeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.GetOfficerType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
     }
 
 }

@@ -16,31 +16,7 @@ namespace HPCL.DataRepository.Settings
         {
             _context = context;
         }
-        public async Task<IEnumerable<SettingGetCustomerTypeModelOutput>> GetCustomerType([FromBody] SettingGetCustomerTypeModelInput ObjClass)
-        {
-            var procedureName = "UspGetCustomerType";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetCustomerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public async Task<IEnumerable<SettingGetCustomerSubTypeModelOutput>> GetCustomerSubType([FromBody] SettingGetCustomerSubTypeModelInput ObjClass)
-        {
-            var procedureName = "UspGetCustomerSubType";
-            var parameters = new DynamicParameters();
-            parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetCustomerSubTypeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<SettingGetHQModelOutput>> GetHQ([FromBody] SettingGetHQModelInput ObjClass)
-        {
-            var procedureName = "UspGetHQ";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetHQModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
-
+       
         public async Task<IEnumerable<SettingGetZoneModelOutput>> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
         {
             var procedureName = "UspGetZone";
@@ -79,7 +55,7 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-        public async Task<IEnumerable<SettingGetStoreCategoriesModelOutput>> GetStoreCategories([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
+        public async Task<IEnumerable<SettingGetStoreCategoriesModelOutput>> GetMerchantType([FromBody] SettingGetStoreCategoriesModelInput ObjClass)
         {
             var procedureName = "UspGetStoreCategories";
             using var connection = _context.CreateConnection();
@@ -140,13 +116,7 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-        public async Task<IEnumerable<SettingGetOfficerTypeModelOutput>> GetOfficerType([FromBody] SettingGetOfficerTypeModelInput ObjClass)
-        {
-            var procedureName = "UspGetOfficerType";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetOfficerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
+       
 
         public async Task<IEnumerable<SettingGetCityModelOutput>> GetCity([FromBody] SettingGetCityModelInput ObjClass)
         {

@@ -18,5 +18,7 @@ namespace HPCL.DataRepository.Officer
 
         public Task<IEnumerable<GetOfficerModelOutput>> BindOfficer([FromBody] BindOfficerModelInput ObjClass);
 
+        public Task<IEnumerable<GetOfficerTypeModelOutput>> GetOfficerType([FromBody] GetOfficerTypeModelInput ObjClass);
+
     }
 }
