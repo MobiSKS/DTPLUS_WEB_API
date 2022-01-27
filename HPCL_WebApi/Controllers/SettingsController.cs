@@ -228,8 +228,33 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_entity_types")]
-        public async Task<IActionResult> GetEntityTypes([FromBody] SettingGetEntityTypesModelInput ObjClass)
+        [Route("get_entity")]
+        public async Task<IActionResult> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetEntity(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_status_type")]
+        public async Task<IActionResult> GetEntityStatusType([FromBody] SettingGetEntityTypesModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -238,7 +263,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _settingRepo.GetEntityTypes(ObjClass);
+                var result = await _settingRepo.GetEntityStatusType(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass,null, _logger);
@@ -303,30 +328,11 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_entity")]
-        public async Task<IActionResult> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
-        {
+       
 
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetEntity(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass, result, _logger);
-                }
-            }
+        
 
-        }
+        
 
     }
 

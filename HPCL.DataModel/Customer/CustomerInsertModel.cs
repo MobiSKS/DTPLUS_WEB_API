@@ -214,7 +214,6 @@ namespace HPCL.DataModel.Customer
         public string KeyOfficialTitle { get; set; }
 
 
-
         [JsonPropertyName("KeyOfficialIndividualInitials")]
         [DataMember]
         public string KeyOfficialIndividualInitials { get; set; }
@@ -275,7 +274,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("KeyOfficialSecretQuestion")]
         [DataMember]
-        public string KeyOfficialSecretQuestion { get; set; }
+        public int KeyOfficialSecretQuestion { get; set; }
 
 
         [JsonPropertyName("KeyOfficialSecretAnswer")]
@@ -285,7 +284,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("KeyOfficialTypeOfFleet")]
         [DataMember]
-        public string KeyOfficialTypeOfFleet { get; set; }
+        public int KeyOfficialTypeOfFleet { get; set; }
 
         [JsonPropertyName("KeyOfficialCardAppliedFor")]
         [DataMember]
@@ -320,7 +319,6 @@ namespace HPCL.DataModel.Customer
         public Int16 FleetSizeNoOfVechileOwnedLCV { get; set; }
 
 
-
         [JsonPropertyName("FleetSizeNoOfVechileOwnedMUVSUV")]
         [DataMember]
         public Int16 FleetSizeNoOfVechileOwnedMUVSUV { get; set; }
@@ -336,11 +334,9 @@ namespace HPCL.DataModel.Customer
         public Int32 NoOfCards { get; set; }
 
 
-
         [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
         [DataMember]
         public Int16 FeePaymentsCollectFeeWaiver { get; set; }
-
 
 
         [JsonPropertyName("FeePaymentsChequeNo")]
@@ -379,6 +375,18 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("ReferenceId")]
         [DataMember]
         public string ReferenceId { get; set; }
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+        [JsonProperty("CustomerID")]
+        [DataMember]
+        public Int64 CustomerID { get; set; }
     }
 
 }

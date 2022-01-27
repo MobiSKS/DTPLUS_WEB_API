@@ -17,6 +17,10 @@ namespace HPCL.DataModel.Settings
         [DataMember]
         public int ZoneID { get; set; }
 
+        [JsonProperty("RegionID")]
+        [DataMember]
+        public int RegionID { get; set; }
+
         [JsonProperty("RegionName")]
         [DataMember]
         public string RegionName { get; set; }
@@ -25,4 +29,7 @@ namespace HPCL.DataModel.Settings
         [DataMember]
         public string RegionShortName { get; set; }
     }
+
+
+
 }

@@ -26,6 +26,61 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_officer_type")]
+        public async Task<IActionResult> GetOfficerType([FromBody] GetOfficerTypeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.GetOfficerType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_username")]
+        public async Task<IActionResult> ChkUserName([FromBody] CheckOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.ChkUserName(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<CheckOfficerModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<CheckOfficerModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_officer")]
         public async Task<IActionResult> InsertOfficer([FromBody] OfficerInsertModelInput ObjClass)
         {
@@ -57,8 +112,31 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_officer_detail")]
+        [Route("bind_officer")]
+        public async Task<IActionResult> BindOfficer([FromBody] BindOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.BindOfficer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_officer_detail")]
         public async Task<IActionResult> GetOfficerDetail([FromBody] GetOfficerModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -142,37 +220,6 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("check_username")]
-        public async Task<IActionResult> ChkUserName([FromBody] CheckOfficerModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _officerRepo.ChkUserName(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<CheckOfficerModelOutput>().ToList()[0].Status == 1)
-                    {
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger, result.Cast<CheckOfficerModelOutput>().ToList()[0].Reason);
-                    }
-                }
-            }
-        }
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_officer_location_mapping")]
         public async Task<IActionResult> InsertOfficerLocationMapping([FromBody] OfficerLocationMappingModelInput ObjClass)
         {
@@ -231,58 +278,6 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("bind_officer")]
-
-        public async Task<IActionResult> BindOfficer([FromBody] BindOfficerModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _officerRepo.BindOfficer(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass, result, _logger);
-                }
-            }
-        }
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_officer_type")]
-        public async Task<IActionResult> GetOfficerType([FromBody] GetOfficerTypeModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _officerRepo.GetOfficerType(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass, result, _logger);
-                }
-            }
-
-        }
-
 
     }
 

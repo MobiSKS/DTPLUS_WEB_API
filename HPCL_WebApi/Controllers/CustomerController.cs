@@ -92,7 +92,51 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_secret_question")]
+        public async Task<IActionResult> GetSecretQuestion([FromBody] GetCustomerSecretQuestionModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetSecretQuestion(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_type_of_fleet")]
+        public async Task<IActionResult> GetTypeOfFleet([FromBody] GetCustomerTypeOfFleetModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetTypeOfFleet(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]

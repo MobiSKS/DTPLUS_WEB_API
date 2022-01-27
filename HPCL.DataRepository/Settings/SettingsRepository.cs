@@ -4,7 +4,6 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Web.Http;
 using HPCL.DataModel.Settings;
-using HPCL.DataModel;
 using System.Collections.Generic;
 
 namespace HPCL.DataRepository.Settings
@@ -55,8 +54,6 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-       
-
         public async Task<IEnumerable<SettingGetCountryModelOutput>> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
         {
             var procedureName = "UspGetCountry";
@@ -93,8 +90,15 @@ namespace HPCL.DataRepository.Settings
 
         }
 
+        public async Task<IEnumerable<SettingGetEntityModelOutput>> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
+        {
+            var procedureName = "UspGetEntity";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetEntityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
 
-        public async Task<IEnumerable<SettingGetEntityTypesModelOutput>> GetEntityTypes([FromBody] SettingGetEntityTypesModelInput ObjClass)
+
+        public async Task<IEnumerable<SettingGetEntityTypesModelOutput>> GetEntityStatusType([FromBody] SettingGetEntityTypesModelInput ObjClass)
         {
             var procedureName = "UspGetEntityTypes";
             var parameters = new DynamicParameters();
@@ -103,7 +107,6 @@ namespace HPCL.DataRepository.Settings
             return await connection.QueryAsync<SettingGetEntityTypesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
         }
-
        
 
         public async Task<IEnumerable<SettingGetCityModelOutput>> GetCity([FromBody] SettingGetCityModelInput ObjClass)
@@ -122,12 +125,10 @@ namespace HPCL.DataRepository.Settings
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        public async Task<IEnumerable<SettingGetEntityModelOutput>> GetEntity([FromBody] SettingGetEntityModelInput ObjClass)
-        {
-            var procedureName = "UspGetEntity";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetEntityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-        }
+        
+       
+
+        
 
     }
 }

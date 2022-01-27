@@ -1,11 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
 namespace HPCL.DataModel.Customer
 {
 
     public class GetCustomerTypeModelInput : BaseClass
     {
-
+        [JsonPropertyName("CTFlag")]
+        [DataMember]
+        public int CTFlag { get; set; }
     }
     public class GetCustomerTypeModelOutput
     {

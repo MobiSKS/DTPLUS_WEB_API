@@ -23,6 +23,8 @@ namespace HPCL.DataRepository.Customer
         public async Task<IEnumerable<GetCustomerTypeModelOutput>> GetCustomerType([FromBody] GetCustomerTypeModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerType";
+            var parameters = new DynamicParameters();
+            parameters.Add("CTFlag", ObjClass.CTFlag, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCustomerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
@@ -43,6 +45,21 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<GetCustomerTBEntityNameModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetCustomerSecretQuestionModelOutput>> GetSecretQuestion([FromBody] GetCustomerSecretQuestionModelInput ObjClass)
+        {
+            var procedureName = "UspGetSecretQuestion";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCustomerSecretQuestionModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetCustomerTypeOfFleetModelOutput>> GetTypeOfFleet([FromBody] GetCustomerTypeOfFleetModelInput ObjClass)
+        {
+            var procedureName = "UspGetTypeOfFleet";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCustomerTypeOfFleetModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+
         public async Task<IEnumerable<CustomerInsertModelOutput>> InsertCustomer([FromBody] CustomerInsertModelInput ObjClass)
         {
             var dtDBR = new DataTable("UserDTNoofCards");
@@ -51,7 +68,7 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("VehicleMake", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
-            string ReferenceNo = Variables.FunGenerateStringUId();
+             
             var procedureName = "UspInsertCustomer";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerType", ObjClass.CustomerType, DbType.Int32, ParameterDirection.Input);
@@ -101,9 +118,9 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("KeyOfficialDOA", ObjClass.KeyOfficialDOA, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("KeyOfficialMobile", ObjClass.KeyOfficialMobile, DbType.String, ParameterDirection.Input);
             parameters.Add("KeyOfficialDOB", ObjClass.KeyOfficialDOB, DbType.DateTime, ParameterDirection.Input);
-            parameters.Add("KeyOfficialSecretQuestion", ObjClass.KeyOfficialSecretQuestion, DbType.String, ParameterDirection.Input);
+            parameters.Add("KeyOfficialSecretQuestion", ObjClass.KeyOfficialSecretQuestion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("KeyOfficialSecretAnswer", ObjClass.KeyOfficialSecretAnswer, DbType.String, ParameterDirection.Input);
-            parameters.Add("KeyOfficialTypeOfFleet", ObjClass.KeyOfficialTypeOfFleet, DbType.String, ParameterDirection.Input);
+            parameters.Add("KeyOfficialTypeOfFleet", ObjClass.KeyOfficialTypeOfFleet, DbType.Int32, ParameterDirection.Input);
             parameters.Add("KeyOfficialCardAppliedFor", ObjClass.KeyOfficialCardAppliedFor, DbType.String, ParameterDirection.Input);
             parameters.Add("KeyOfficialApproxMonthlySpendsonVechile1", ObjClass.KeyOfficialApproxMonthlySpendsonVechile1, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("KeyOfficialApproxMonthlySpendsonVechile2", ObjClass.KeyOfficialApproxMonthlySpendsonVechile2, DbType.Decimal, ParameterDirection.Input);
@@ -119,10 +136,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceNo", ReferenceNo, DbType.String, ParameterDirection.Input);
-
-
-
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
 
             if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             {
@@ -139,13 +153,9 @@ namespace HPCL.DataRepository.Customer
             }
 
             parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
-
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
-
-
       
     }
 }
