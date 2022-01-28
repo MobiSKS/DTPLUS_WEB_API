@@ -77,10 +77,9 @@ namespace HPCL_WebApi.ExtensionMethod
             }
 
 
-            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
-
-            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
-            string MessageStr = ResponseMessage;
+            //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            //string MessageStr = ResponseMessage;
 
             ApiResponseMessage response = new ApiResponseMessage
             {
@@ -96,9 +95,8 @@ namespace HPCL_WebApi.ExtensionMethod
         }
         public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
-            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
-
-            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             string MessageStr = StatusInformation.Request_JSON_Body_Is_Null.ToString();
 
             ApiResponseMessage response = new ApiResponseMessage

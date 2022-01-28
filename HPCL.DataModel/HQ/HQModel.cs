@@ -28,7 +28,7 @@ namespace HPCL.DataModel.HQ
         public string HQShortName { get; set; }
     }
 
-    public class InsertHQModelInput
+    public class InsertHQModelInput : BaseClass
     {
         [JsonPropertyName("HQCode")]
         [DataMember]
@@ -52,7 +52,7 @@ namespace HPCL.DataModel.HQ
 
     }
 
-    public class UpdateHQModelInput
+    public class UpdateHQModelInput : BaseClass
     {
         [JsonPropertyName("HQID")]
         [DataMember]
@@ -80,7 +80,7 @@ namespace HPCL.DataModel.HQ
 
     }
 
-    public class DeleteHQModelInput
+    public class DeleteHQModelInput : BaseClass
     {
         [JsonPropertyName("HQID")]
         [DataMember]

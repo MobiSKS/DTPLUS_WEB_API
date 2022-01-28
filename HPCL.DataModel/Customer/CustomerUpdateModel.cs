@@ -7,25 +7,15 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Customer
 {
-    public class CustomerInsertModelInput : BaseClass
+    public class CustomerUpdateModelInput : BaseClass
     {
-        //[JsonPropertyName("CustomerID")]
-        //[DataMember]
-        //public Int64 CustomerID { get; set; }
-
         [Required]
-        [JsonPropertyName("CustomerType")]
+        [JsonPropertyName("CustomerID")]
         [DataMember]
-        public Int32 CustomerType { get; set; }
-
-
-        [Required]
-        [JsonPropertyName("CustomerSubtype")]
-        [DataMember]
-        public Int32 CustomerSubtype { get; set; }
+        public Int64 CustomerID { get; set; }
+        
 
         [Required]
-
         [JsonPropertyName("ZonalOffice")]
         [DataMember]
         public Int32 ZonalOffice { get; set; }
@@ -48,9 +38,9 @@ namespace HPCL.DataModel.Customer
         public Int32 SalesArea { get; set; }
 
         [Required]
-        [JsonPropertyName("CreatedBy")]
+        [JsonPropertyName("ModifiedBy")]
         [DataMember]
-        public Int32 CreatedBy { get; set; }
+        public Int32 ModifiedBy { get; set; }
 
 
         [Required]
@@ -350,17 +340,14 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("ObjCardDetail")]
         [DataMember]
-        public List<CardDetail> ObjCardDetail { get; set; }
+        public List<UpdateCardDetail> ObjCardDetail { get; set; }
 
     }
 
-    public class CardDetail
+    public class UpdateCardDetail
     {
         [JsonPropertyName("CardIdentifier")]
         public string CardIdentifier { get; set; }
-
-        [JsonPropertyName("VechileNo")]
-        public string VechileNo { get; set; }
 
         [JsonPropertyName("VehicleType")]
         public string VehicleType { get; set; }
@@ -372,11 +359,12 @@ namespace HPCL.DataModel.Customer
         public int YearOfRegistration { get; set; }
 
 
-        
-        
+        [JsonPropertyName("VechileNo")]
+        public string VechileNo { get; set; }
+
     }
 
-    public class CustomerInsertModelOutput : BaseClassOutput
+    public class CustomerUpdateModelOutput : BaseClassOutput
     {
 
         [JsonProperty("ReferenceId")]
@@ -395,5 +383,4 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public Int64 CustomerID { get; set; }
     }
-
 }
