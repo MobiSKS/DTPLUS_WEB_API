@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace HPCL.DataRepository.RegionalOffice
 {
-    public class RegionalOfficeRepository: IRegionalOfficeRepository
+    public class RegionalOfficeRepository : IRegionalOfficeRepository
     {
         private readonly DapperContext _context;
         public RegionalOfficeRepository(DapperContext context)

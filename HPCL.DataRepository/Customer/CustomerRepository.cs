@@ -291,21 +291,19 @@ namespace HPCL.DataRepository.Customer
                 IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
                 var ext = ImageFileName.FileName.Substring(ImageFileName.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
-                if (!AllowedFileExtensions.Contains(extension))
+                if (AllowedFileExtensions.Contains(extension))
                 {
-
-                }
-                
-                //string webRootPath = _hostingEnvironment.WebRootPath;
-                string contentRootPath = _hostingEnvironment.ContentRootPath;
-                FileNamePath = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + ObjClass.FileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                    + "_" + ObjClass.KYCType + "_" + ImageFileName.FileName;
-                filePath = contentRootPath + FileNamePath;
+                    //string webRootPath = _hostingEnvironment.WebRootPath;
+                    string contentRootPath = _hostingEnvironment.ContentRootPath;
+                    FileNamePath = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + ObjClass.FileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                        + "_" + ObjClass.KYCType + "_" + ImageFileName.FileName;
+                    filePath = contentRootPath + FileNamePath;
 
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    ImageFileName.CopyTo(fileStream);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        ImageFileName.CopyTo(fileStream);
+                    }
                 }
             }
 

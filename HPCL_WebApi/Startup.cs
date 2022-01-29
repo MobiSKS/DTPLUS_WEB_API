@@ -11,8 +11,6 @@ using System.IO;
 using HPCL.Infrastructure.Swagger;
 using HPCL.DataRepository.Account;
 using HPCL_WebApi.ActionFilters;
-using HPCL_WebApi.ErrorHelper;
-using Newtonsoft.Json.Serialization;
 using HPCL.DataRepository.Settings;
 using HPCL.DataRepository.Officer;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +19,7 @@ using HPCL_WebApi.ExceptionFilter;
 using HPCL.DataRepository.Customer;
 using HPCL.DataRepository.HQ;
 using HPCL.DataRepository.Merchant;
+using HPCL.DataRepository.Card;
 
 namespace HPCL_WebApi
 {
@@ -68,7 +67,7 @@ namespace HPCL_WebApi
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IHQRepository, HQRepository>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
-
+            services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {

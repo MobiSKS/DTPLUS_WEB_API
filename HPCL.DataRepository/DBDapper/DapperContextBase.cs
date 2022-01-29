@@ -10,6 +10,8 @@ namespace HPCL.DataRepository.DBDapper
     public class DapperContextBase
     {
 
+
+
         public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             if (sp is null)

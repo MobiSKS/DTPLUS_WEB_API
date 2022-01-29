@@ -48,6 +48,7 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Username available")] Username_available = 1038,
             [Display(Name = "Username exits")] Username_exits = 1039,
             [Display(Name = "Customer not found")] Customer_not_found = 1040,
+            [Display(Name = "Card Not Found")] Card_Not_Found = 1041,
             None = int.MaxValue
         }
 

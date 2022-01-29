@@ -107,6 +107,11 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Customer_not_found;
             }
 
+            if (Message == "Card Not Found")
+            {
+                ResponseMessage = StatusInformation.Card_Not_Found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Card_Not_Found;
+            }
 
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
