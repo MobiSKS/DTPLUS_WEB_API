@@ -16,7 +16,7 @@ namespace HPCL.DataModel.Officer
         [Required]
         [JsonPropertyName("ModifiedBy")]
         [DataMember]
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
     }
 
     public class DeleteOfficerModelOutput : BaseClassOutput

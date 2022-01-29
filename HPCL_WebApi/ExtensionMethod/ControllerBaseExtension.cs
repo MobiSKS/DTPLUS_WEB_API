@@ -76,6 +76,37 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Username_exits;
             }
 
+            if (Message == "Customer Id is already registered")
+            {
+                ResponseMessage = StatusInformation.Customer_Id_Already_Exists.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Customer_Id_Already_Exists;
+            }
+
+            if (Message == "Please enter 10 digit mobile number")
+            {
+                ResponseMessage = StatusInformation.Enter_10_Digit_Mobile_Number.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Enter_10_Digit_Mobile_Number;
+            }
+
+
+            if (Message == "Please check - non numeric value")
+            {
+                ResponseMessage = StatusInformation.Non_Numeric_Value.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Non_Numeric_Value;
+            }
+
+            if (Message == "Invalid mobile number.Please pass valid mobile number")
+            {
+                ResponseMessage = StatusInformation.Mobile_Number_Start_With_6_7_8_9.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Mobile_Number_Start_With_6_7_8_9;
+            }
+
+            if (Message == "Customer not found")
+            {
+                ResponseMessage = StatusInformation.Customer_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Customer_not_found;
+            }
+
 
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;

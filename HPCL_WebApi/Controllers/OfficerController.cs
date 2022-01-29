@@ -212,7 +212,8 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, result.Cast<DeleteOfficerModelOutput>().ToList()[0].Reason);
+                        return this.FailCustom(ObjClass, result, _logger, 
+                            result.Cast<DeleteOfficerModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
@@ -242,7 +243,8 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerLocationMappingModelOutput>().ToList()[0].Reason);
+                        return this.FailCustom(ObjClass, result, _logger, 
+                            result.Cast<OfficerLocationMappingModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
@@ -273,7 +275,8 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, result.Cast<OfficerDeleteLocationMappingModelOutput>().ToList()[0].Reason);
+                        return this.FailCustom(ObjClass, result, _logger, 
+                            result.Cast<OfficerDeleteLocationMappingModelOutput>().ToList()[0].Reason);
                     }
                 }
             }

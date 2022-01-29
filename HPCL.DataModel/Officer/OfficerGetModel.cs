@@ -95,7 +95,7 @@ namespace HPCL.DataModel.Officer
 
         [JsonProperty("Createdby")]
         [DataMember]
-        public int Createdby { get; set; }
+        public string Createdby { get; set; }
 
         [JsonProperty("LocationId")]
         [DataMember]

@@ -44,7 +44,7 @@ namespace HPCL.DataModel.HQ
 
         [JsonPropertyName("CreatedBy")]
         [DataMember]
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 
     public class InsertHQModelOutput : BaseClassOutput
@@ -72,7 +72,7 @@ namespace HPCL.DataModel.HQ
 
         [JsonPropertyName("ModifiedBy")]
         [DataMember]
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
     }
 
     public class UpdateHQModelOutput : BaseClassOutput
@@ -86,7 +86,11 @@ namespace HPCL.DataModel.HQ
         [DataMember]
         public int HQID { get; set; }
 
-      
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
     }
 
     public class DeleteHQModelOutput : BaseClassOutput

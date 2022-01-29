@@ -6,6 +6,11 @@ using System.Web.Http;
 using System.Collections.Generic;
 using HPCL.DataModel.Customer;
 using HPCL.Infrastructure.CommonClass;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System;
+
 //using Microsoft.Extensions.Configuration;
 
 namespace HPCL.DataRepository.Customer
@@ -13,10 +18,13 @@ namespace HPCL.DataRepository.Customer
     public class CustomerRepository : ICustomerRepository
     {
         private readonly DapperContext _context;
+        private readonly IHostingEnvironment _hostingEnvironment;
+
         //private readonly Variables ObjVariable;
-        public CustomerRepository(DapperContext context) // , IConfiguration configuration
+        public CustomerRepository(DapperContext context, IHostingEnvironment hostingEnvironment) // , IConfiguration configuration
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
             //ObjVariable = new Variables(configuration);
         }
 
@@ -77,7 +85,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("SalesArea", ObjClass.SalesArea, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
             parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
@@ -167,7 +175,7 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("VehicleMake", typeof(string));
             dtDBR.Columns.Add("VehicleType", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
-            
+
 
             var procedureName = "UspUpdateCustomer";
             var parameters = new DynamicParameters();
@@ -176,7 +184,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("SalesArea", ObjClass.SalesArea, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
             parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
@@ -246,7 +254,7 @@ namespace HPCL.DataRepository.Customer
                     dr["VehicleMake"] = ObjCardDetails.VehicleMake;
                     dr["VehicleType"] = ObjCardDetails.VehicleType;
                     dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
-                    
+
                     dtDBR.Rows.Add(dr);
                     dtDBR.AcceptChanges();
                 }
@@ -269,6 +277,48 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerViewOnlineFormStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CustomerKYCModelOutput>> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass)
+        {
+            string FileNamePath = string.Empty;
+            string filePath = string.Empty;
+            var procedureName = "UspInsertCustomerKYC";
+            var parameters = new DynamicParameters();
+            var ImageFileName = ObjClass.ImageFileName;
+            if (ImageFileName.Length > 0)
+            {
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                var ext = ImageFileName.FileName.Substring(ImageFileName.FileName.LastIndexOf('.'));
+                var extension = ext.ToLower();
+                if (!AllowedFileExtensions.Contains(extension))
+                {
+
+                }
+                
+                //string webRootPath = _hostingEnvironment.WebRootPath;
+                string contentRootPath = _hostingEnvironment.ContentRootPath;
+                FileNamePath = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + ObjClass.FileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                    + "_" + ObjClass.KYCType + "_" + ImageFileName.FileName;
+                filePath = contentRootPath + FileNamePath;
+
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    ImageFileName.CopyTo(fileStream);
+                }
+            }
+
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("FileName", ObjClass.FileName, DbType.String, ParameterDirection.Input);
+            parameters.Add("FileNamePath", FileNamePath, DbType.String, ParameterDirection.Input);
+            parameters.Add("KYCType", ObjClass.KYCType, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerKYCModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+
+
         }
 
     }

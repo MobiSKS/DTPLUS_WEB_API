@@ -91,7 +91,7 @@ namespace HPCL.DataModel.Officer
         [Required]
         [JsonPropertyName("Createdby")]
         [DataMember]
-        public int Createdby { get; set; }
+        public string Createdby { get; set; }
 
     }
 

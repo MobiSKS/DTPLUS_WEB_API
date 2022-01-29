@@ -73,7 +73,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("CreatedBy")]
         [DataMember]
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         [JsonProperty("ModifiedDate")]
         [DataMember]
@@ -81,7 +81,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("ModifiedBy")]
         [DataMember]
-        public int ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
         [JsonProperty("StatusId")]
         [DataMember]

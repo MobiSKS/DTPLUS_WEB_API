@@ -4,6 +4,7 @@ using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
@@ -40,7 +41,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.Cast<InsertHQModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<InsertHQModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 
@@ -90,7 +99,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.Cast<UpdateHQModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateHQModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 
@@ -115,7 +132,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.Cast<DeleteHQModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<DeleteHQModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 

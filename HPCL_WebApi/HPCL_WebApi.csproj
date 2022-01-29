@@ -58,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CustomerKYCImage\" />
     <Folder Include="ExtensionMethod\" />
     <Folder Include="Logs\" />
   </ItemGroup>

@@ -36,7 +36,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("PhoneNo", ObjClass.PhoneNo, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
-            parameters.Add("Createdby", ObjClass.Createdby, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             parameters.Add("OfficerType", ObjClass.OfficerType, DbType.Int32, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
@@ -73,7 +73,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("PhoneNo", ObjClass.PhoneNo, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("OfficerId", ObjClass.OfficerId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
@@ -87,7 +87,7 @@ namespace HPCL.DataRepository.Officer
             var procedureName = "UspInactiveOfficer";
             var parameters = new DynamicParameters();
             parameters.Add("OfficerId", ObjClass.OfficerId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<DeleteOfficerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -110,7 +110,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
             parameters.Add("ZO", ObjClass.ZO, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RO", ObjClass.RO, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.Createdby, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -122,7 +122,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
             parameters.Add("ZO", ObjClass.ZO, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RO", ObjClass.RO, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerDeleteLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

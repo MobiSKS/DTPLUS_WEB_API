@@ -40,4 +40,8 @@
     <ProjectReference Include="..\HPCL.Infrastructure\HPCL.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CustomerKYCImage\" />
+  </ItemGroup>
+
 </Project>

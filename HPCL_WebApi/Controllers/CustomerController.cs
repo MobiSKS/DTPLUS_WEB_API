@@ -188,21 +188,21 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.Cast<CustomerInsertModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<CustomerUpdateModelOutput>().ToList()[0].Status == 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
                         return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerInsertModelOutput>().ToList()[0].Reason);
+                            result.Cast<CustomerUpdateModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("view_online_form_status")]
         public async Task<IActionResult> ViewOnlineFormStatus([FromBody] CustomerViewOnlineFormStatusModelInput ObjClass)
         {
@@ -212,25 +212,58 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _customerRepo.ViewOnlineFormStatus(ObjClass);
+                if (ObjClass == null)
+                {
+                    return this.BadRequestCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    var result = await _customerRepo.ViewOnlineFormStatus(ObjClass);
+                    if (result == null)
+                    {
+                        return this.NotFoundCustom(ObjClass, null, _logger);
+                    }
+                    else
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("upload_customer_kyc")]
+        public async Task<IActionResult> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.UploadCustomerKYC(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    if (result.Cast<CustomerInsertModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<CustomerKYCModelOutput>().ToList()[0].Status == 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
                         return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerInsertModelOutput>().ToList()[0].Reason);
+                            result.Cast<CustomerKYCModelOutput>().ToList()[0].Reason);
                     }
+                     
                 }
             }
         }
+
+
 
 
     }

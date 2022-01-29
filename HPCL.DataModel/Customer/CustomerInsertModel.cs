@@ -50,7 +50,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("CreatedBy")]
         [DataMember]
-        public Int32 CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
 
         [Required]
@@ -86,7 +86,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("IncomeTaxPan")]
         [DataMember]
-        [RegularExpression("^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$", ErrorMessage = "Invalid Pancard Number")]
+        //[RegularExpression("^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$", ErrorMessage = "Invalid Pancard Number")]
         public string IncomeTaxPan { get; set; }
 
 

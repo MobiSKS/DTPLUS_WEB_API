@@ -40,7 +40,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("ModifiedBy")]
         [DataMember]
-        public Int32 ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
 
 
         [Required]
