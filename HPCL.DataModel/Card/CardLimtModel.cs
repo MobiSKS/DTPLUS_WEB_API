@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 namespace HPCL.DataModel.Card
 {
-    public class CardLimtModelInput : BaseClass
+    public class GetCardLimtModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("Cardno")]
@@ -15,6 +15,21 @@ namespace HPCL.DataModel.Card
     }
 
     public class GetCardLimtModelOutput
+    {
+        [JsonProperty("GetCardLimtModel")]
+        public List<CardLimtModelOutput> GetCardLimtModel { get; set; }
+
+        [JsonProperty("CardReminingLimt")]
+        public List<CardReminingLimtModelOutput> CardReminingLimt { get; set; }
+
+        [JsonProperty("CardReminingCCMSLimt")]
+        public List<CardReminingCCMSLimtModelOutput> CardReminingCCMSLimt { get; set; }
+
+        [JsonProperty("CardServices")]
+        public List<CardServicesModelOutput> CardServices { get; set; }
+    }
+
+    public class CardLimtModelOutput
     {
         [Required]
         [JsonPropertyName("CustomerID")]
@@ -141,20 +156,7 @@ namespace HPCL.DataModel.Card
 
     }
 
-    public class CardLimtModelOutput
-    {
-        [JsonProperty("GetCardLimtModel")]
-        public List<GetCardLimtModelOutput> GetCardLimtModel { get; set; }
-
-        [JsonProperty("CardReminingLimt")]
-        public List<CardReminingLimtModelOutput> CardReminingLimt { get; set; }
-
-        [JsonProperty("CardReminingCCMSLimt")]
-        public List<CardReminingCCMSLimtModelOutput> CardReminingCCMSLimt { get; set; }
-
-        [JsonProperty("CardServices")]
-        public List<CardServicesModelOutput> CardServices { get; set; }
-    }
+   
 }
 
 

@@ -29,22 +29,18 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<ManageSearchCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<CardLimtModelOutput> GetCardLimitFeatures([FromBody] CardLimtModelInput ObjClass)
+        public async Task<GetCardLimtModelOutput> GetCardLimitFeatures([FromBody] GetCardLimtModelInput ObjClass)
         {
             var procedureName = "UspGetCardFeatures";
             var parameters = new DynamicParameters();
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var tblCardLimtModelOutput = await result.ReadAsync<GetCardLimtModelOutput>();
-            var tblCardReminingLimtModelOutput = await result.ReadAsync<CardReminingLimtModelOutput>();
-            var tblCardReminingCCMSLimtModelOutput = await result.ReadAsync<CardReminingCCMSLimtModelOutput>();
-            var tblCardServicesModelOutput = await result.ReadAsync<CardServicesModelOutput>();
-            var storedProcedureResult = new CardLimtModelOutput();
-            storedProcedureResult.GetCardLimtModel = (List<GetCardLimtModelOutput>)tblCardLimtModelOutput;
-            storedProcedureResult.CardReminingLimt = (List<CardReminingLimtModelOutput>)tblCardReminingLimtModelOutput;
-            storedProcedureResult.CardReminingCCMSLimt = (List<CardReminingCCMSLimtModelOutput>)tblCardReminingCCMSLimtModelOutput;
-            storedProcedureResult.CardServices = (List<CardServicesModelOutput>)tblCardServicesModelOutput;
+            var storedProcedureResult = new GetCardLimtModelOutput();
+            storedProcedureResult.GetCardLimtModel = (List<CardLimtModelOutput>)await result.ReadAsync<CardLimtModelOutput>(); ;
+            storedProcedureResult.CardReminingLimt = (List<CardReminingLimtModelOutput>)await result.ReadAsync<CardReminingLimtModelOutput>();
+            storedProcedureResult.CardReminingCCMSLimt = (List<CardReminingCCMSLimtModelOutput>)await result.ReadAsync<CardReminingCCMSLimtModelOutput>();
+            storedProcedureResult.CardServices = (List<CardServicesModelOutput>)await result.ReadAsync<CardServicesModelOutput>(); ;
             return storedProcedureResult;
         }
 
@@ -111,8 +107,7 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCCMSLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
-
+        
         public async Task<IEnumerable<GetCardLimitsModelOutput>> GetCardLimits([FromBody] GetCardLimitsModelInput ObjClass)
         {
             var procedureName = "UspGetCardLimits";
@@ -124,6 +119,65 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCardLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<UpdateCCMSLimitForAllCardsModelOutput>> UpdateCCMSLimitForAllCards([FromBody] UpdateCCMSLimitForAllCardsModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateCCMSLimitForAllCards";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Limitid", ObjClass.Limitid, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Limit", ObjClass.Limit, DbType.Double, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateCCMSLimitForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateCardLimitForAllCardsModelOutput>> UpdateCardLimitForAllCards([FromBody] UpdateCardLimitForAllCardsModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateCardLimitForAllCards";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Limitid", ObjClass.Limitid, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Limit", ObjClass.Limit, DbType.Double, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateCardLimitForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetLimitMasterModelOutput>> GetLimitMaster([FromBody] GetLimitMasterModelInput ObjClass)
+        {
+            var procedureName = "UspGetLimitMaster";
+            var parameters = new DynamicParameters();
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetLimitMasterModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<GetAllCardWithStatusModelOutput>> GetAllCardWithStatus([FromBody] GetAllCardWithStatusModelInput ObjClass)
+        {
+            var procedureName = "UspGetAllCardWithStatus";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetAllCardWithStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateCardStatusModelOutput>> UpdateCardStatus([FromBody] UpdateCardStatusModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateCardStatus";
+            var parameters = new DynamicParameters();
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateCardStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }

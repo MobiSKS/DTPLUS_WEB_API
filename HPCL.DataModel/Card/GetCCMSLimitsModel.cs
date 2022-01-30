@@ -3,10 +3,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-
 namespace HPCL.DataModel.Card
 {
-    public class ManageSearchCardsModelInput : BaseClass
+    public class GetCCMSLimitsModelInput : BaseClass
     {
         //[Required]
         [JsonPropertyName("Customerid")]
@@ -24,11 +23,6 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string Mobileno { get; set; }
 
-        //[Required]
-        [JsonPropertyName("Vehiclenumber")]
-        [DataMember]
-        public string Vehiclenumber { get; set; }
-
 
         //[Required]
         [JsonPropertyName("Statusflag")]
@@ -37,7 +31,7 @@ namespace HPCL.DataModel.Card
 
     }
 
-    public class ManageSearchCardsModelOutput
+    public class GetCCMSLimitsModelOutput
     {
         [JsonProperty("SrNumber")]
         [DataMember]
@@ -46,11 +40,6 @@ namespace HPCL.DataModel.Card
         [JsonProperty("CardNumber")]
         [DataMember]
         public string CardNumber { get; set; }
-
-
-        [JsonProperty("CustomerID")]
-        [DataMember]
-        public Int64 CustomerID { get; set; }
 
 
         [JsonProperty("VechileNo")]
@@ -83,38 +72,32 @@ namespace HPCL.DataModel.Card
         public Int32 YearOfRegistration { get; set; }
 
 
-        [JsonProperty("Manufacturer")]
-        [DataMember]
-        public string Manufacturer { get; set; }
-
-
         [JsonProperty("MobileNumber")]
         [DataMember]
         public string MobileNumber { get; set; }
-
-        [JsonProperty("VINNumber")]
-        [DataMember]
-        public string VINNumber { get; set; }
-
 
         [JsonProperty("VehicleMake")]
         [DataMember]
         public string VehicleMake { get; set; }
 
-        [JsonProperty("OwnershipType")]
-        [DataMember]
-        public string OwnershipType { get; set; }
 
-        [JsonProperty("FormNumber")]
+        [JsonProperty("OneTimeCCMSTransactionLimit")]
         [DataMember]
-        public string FormNumber { get; set; }
+        public float OneTimeCCMSTransactionLimit { get; set; }
 
-        [JsonProperty("CardCategory")]
+        [JsonProperty("DailyCCMSTransactionLimit")]
         [DataMember]
-        public string CardCategory { get; set; }
+        public float DailyCCMSTransactionLimit { get; set; }
 
-        [JsonProperty("CardIssueType")]
+        [JsonProperty("MonthlyCCMSTransactionLimit")]
         [DataMember]
-        public string CardIssueType { get; set; }
+        public float MonthlyCCMSTransactionLimit { get; set; }
+
+        [JsonProperty("YearlyCCMSTransactionLimit")]
+        [DataMember]
+        public float YearlyCCMSTransactionLimit { get; set; }
+
     }
+
+
 }
