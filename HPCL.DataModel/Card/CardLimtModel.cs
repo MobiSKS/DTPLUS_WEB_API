@@ -16,8 +16,11 @@ namespace HPCL.DataModel.Card
 
     public class GetCardLimtModelOutput
     {
+        [JsonProperty("GetCardsDetailsModelOutput")]
+        public List<GetCardsDetailsModelOutput> GetCardsDetails { get; set; }
+
         [JsonProperty("GetCardLimtModel")]
-        public List<CardLimtModelOutput> GetCardLimtModel { get; set; }
+        public List<CardLimtModelOutput> GetCardLimt { get; set; }
 
         [JsonProperty("CardReminingLimt")]
         public List<CardReminingLimtModelOutput> CardReminingLimt { get; set; }
@@ -31,63 +34,63 @@ namespace HPCL.DataModel.Card
 
     public class CardLimtModelOutput
     {
-        [Required]
-        [JsonPropertyName("CustomerID")]
+         
+        [JsonProperty("CustomerID")]
         [DataMember]
         public Int64 CustomerID { get; set; }
 
-        [Required]
-        [JsonPropertyName("CardBalance")]
+        //[Required]
+        [JsonProperty("CardBalance")]
         [DataMember]
         public float CardBalance { get; set; }
 
 
-        [Required]
-        [JsonPropertyName("CardStatus")]
+        //[Required]
+        [JsonProperty("CardStatus")]
         [DataMember]
         public string CardStatus { get; set; }
 
 
-        [Required]
-        [JsonPropertyName("OneTimeTransactionLimit")]
+        //[Required]
+        [JsonProperty("OneTimeTransactionLimit")]
         [DataMember]
         public float OneTimeTransactionLimit { get; set; }
 
 
-        [Required]
-        [JsonPropertyName("DailyTransactionLimit")]
+        //[Required]
+        [JsonProperty("DailyTransactionLimit")]
         [DataMember]
         public float DailyTransactionLimit { get; set; }
 
 
-        [Required]
-        [JsonPropertyName("MonthlyTransactionLimit")]
+        //[Required]
+        [JsonProperty("MonthlyTransactionLimit")]
         [DataMember]
         public float MonthlyTransactionLimit { get; set; }
 
-        [Required]
-        [JsonPropertyName("YearlyTransactionLimit")]
+        //[Required]
+        [JsonProperty("YearlyTransactionLimit")]
         [DataMember]
         public float YearlyTransactionLimit { get; set; }
 
-        [Required]
-        [JsonPropertyName("OneTimeCCMSTransactionLimit")]
+        //[Required]
+        [JsonProperty("OneTimeCCMSTransactionLimit")]
         [DataMember]
         public float OneTimeCCMSTransactionLimit { get; set; }
 
-        [Required]
-        [JsonPropertyName("DailyCCMSTransactionLimit")]
+        //[Required]
+        [JsonProperty("DailyCCMSTransactionLimit")]
         [DataMember]
         public float DailyCCMSTransactionLimit { get; set; }
 
-        [Required]
-        [JsonPropertyName("MonthlyCCMSTransactionLimit")]
+        //[Required]
+        [JsonProperty("MonthlyCCMSTransactionLimit")]
         [DataMember]
         public float MonthlyCCMSTransactionLimit { get; set; }
 
 
-        [Required]
-        [JsonPropertyName("YearlyCCMSTransactionLimit")]
+        //[Required]
+        [JsonProperty("YearlyCCMSTransactionLimit")]
         [DataMember]
         public float YearlyCCMSTransactionLimit { get; set; }
 
@@ -99,18 +102,18 @@ namespace HPCL.DataModel.Card
     public class CardReminingLimtModelOutput
     {
 
-        [Required]
-        [JsonPropertyName("RemCardDaily")]
+        //[Required]
+        [JsonProperty("RemCardDaily")]
         [DataMember]
         public float RemCardDaily { get; set; }
 
-        [Required]
-        [JsonPropertyName("RemCardMonthly")]
+        //[Required]
+        [JsonProperty("RemCardMonthly")]
         [DataMember]
         public float RemCardMonthly { get; set; }
 
-        [Required]
-        [JsonPropertyName("RemCardYearly")]
+        //[Required]
+        [JsonProperty("RemCardYearly")]
         [DataMember]
         public float RemCardYearly { get; set; }
 
@@ -119,18 +122,18 @@ namespace HPCL.DataModel.Card
     public class CardReminingCCMSLimtModelOutput
     {
 
-        [Required]
-        [JsonPropertyName("RemCCMSDaily")]
+        //[Required]
+        [JsonProperty("RemCCMSDaily")]
         [DataMember]
         public float RemCCMSDaily { get; set; }
 
-        [Required]
-        [JsonPropertyName("RemCCMSMonthly")]
+        //[Required]
+        [JsonProperty("RemCCMSMonthly")]
         [DataMember]
         public float RemCCMSMonthly { get; set; }
 
-        [Required]
-        [JsonPropertyName("RemCCMSYearly")]
+        //[Required]
+        [JsonProperty("RemCCMSYearly")]
         [DataMember]
         public float RemCCMSYearly { get; set; }
 
@@ -139,24 +142,126 @@ namespace HPCL.DataModel.Card
     public class CardServicesModelOutput
     {
 
-        [Required]
-        [JsonPropertyName("ServiceID")]
+        //[Required]
+        [JsonProperty("ServiceID")]
         [DataMember]
         public int ServiceID { get; set; }
 
-        [Required]
-        [JsonPropertyName("ServiceName")]
+        //[Required]
+        [JsonProperty("ServiceName")]
         [DataMember]
         public string ServiceName { get; set; }
 
-        [Required]
-        [JsonPropertyName("SelectedServices")]
+        //[Required]
+        [JsonProperty("SelectedServices")]
         [DataMember]
         public int SelectedServices { get; set; }
 
     }
 
-   
+
+    public class GetCardsDetailsModelOutput
+    {
+        [JsonProperty("SrNumber")]
+        [DataMember]
+        public int SrNumber { get; set; }
+
+        [JsonProperty("CardNumber")]
+        [DataMember]
+        public string CardNumber { get; set; }
+
+
+        [JsonProperty("CustomerID")]
+        [DataMember]
+        public Int64 CustomerID { get; set; }
+
+        [JsonProperty("UserID")]
+        [DataMember]
+        public string UserID { get; set; }
+
+        [JsonProperty("RequestDate")]
+        [DataMember]
+        public string RequestDate { get; set; }
+
+
+        [JsonProperty("OwnedorAttachedId")]
+        [DataMember]
+        public Int32 OwnedorAttachedId { get; set; }
+
+
+        [JsonProperty("OwnedorAttached")]
+        [DataMember]
+        public string OwnedorAttached { get; set; }
+
+
+        [JsonProperty("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
+
+
+        [JsonProperty("VehicleType")]
+        [DataMember]
+        public string VehicleType { get; set; }
+
+
+        [JsonProperty("IssueDate")]
+        [DataMember]
+        public DateTime IssueDate { get; set; }
+
+
+        [JsonProperty("ExpiryDate")]
+        [DataMember]
+        public DateTime ExpiryDate { get; set; }
+
+
+        [JsonProperty("Status")]
+        [DataMember]
+        public string Status { get; set; }
+
+
+        [JsonProperty("YearOfRegistration")]
+        [DataMember]
+        public Int32 YearOfRegistration { get; set; }
+
+
+        [JsonProperty("Manufacturer")]
+        [DataMember]
+        public string Manufacturer { get; set; }
+
+
+        [JsonProperty("MobileNumber")]
+        [DataMember]
+        public string MobileNumber { get; set; }
+
+        [JsonProperty("VINNumber")]
+        [DataMember]
+        public string VINNumber { get; set; }
+
+
+        [JsonProperty("VehicleMake")]
+        [DataMember]
+        public string VehicleMake { get; set; }
+
+        [JsonProperty("OwnershipType")]
+        [DataMember]
+        public string OwnershipType { get; set; }
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public string FormNumber { get; set; }
+
+        [JsonProperty("CardCategory")]
+        [DataMember]
+        public string CardCategory { get; set; }
+
+        [JsonProperty("CardIssueType")]
+        [DataMember]
+        public string CardIssueType { get; set; }
+
+        [JsonProperty("CardIdentifier")]
+        [DataMember]
+        public string CardIdentifier { get; set; }
+    }
 }
 
 

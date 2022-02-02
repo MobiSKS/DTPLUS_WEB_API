@@ -113,6 +113,43 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Card_Not_Found;
             }
 
+            if (Message == "Vechile No is already present.Please pass different vechile no")
+            {
+                ResponseMessage = StatusInformation.Vechile_No.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Vechile_No;
+            }
+
+            if (Message == "Invalid Approval Status")
+            {
+                ResponseMessage = StatusInformation.Invalid_Approval_Status.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Invalid_Approval_Status;
+            }
+
+            if (Message == "Invalid Status Found")
+            {
+                ResponseMessage = StatusInformation.Invalid_Status_Found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Invalid_Status_Found;
+            }
+
+            if (Message == "You can create only one or two terminal at the time of merchant creation")
+            {
+                ResponseMessage = StatusInformation.Terminal_Creation.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Terminal_Creation;
+            }
+
+
+            if (Message == "ErpCode is already registered")
+            {
+                ResponseMessage = StatusInformation.ErpCode_already_registered.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.ErpCode_already_registered;
+            }
+
+            if (Message == "MerchantId is already registered")
+            {
+                ResponseMessage = StatusInformation.Merchant_already_registered.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Merchant_already_registered;
+            }
+
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             //string MessageStr = ResponseMessage;

@@ -49,6 +49,11 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Username exits")] Username_exits = 1039,
             [Display(Name = "Customer not found")] Customer_not_found = 1040,
             [Display(Name = "Card Not Found")] Card_Not_Found = 1041,
+            [Display(Name = "Invalid Approval Status")] Invalid_Approval_Status = 1042,
+            [Display(Name = "Invalid Status Found")] Invalid_Status_Found = 1043,
+            [Display(Name = "You can create only one or two terminal at the time of merchant creation")] Terminal_Creation = 1044,
+            [Display(Name = "ErpCode is already registered")] ErpCode_already_registered = 1044,
+            [Display(Name = "Merchant is already registered")] Merchant_already_registered = 1045,
             None = int.MaxValue
         }
 

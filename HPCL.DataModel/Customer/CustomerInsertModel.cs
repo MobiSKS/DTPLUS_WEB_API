@@ -45,7 +45,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("SalesArea")]
         [DataMember]
-        public Int32 SalesArea { get; set; }
+        public string SalesArea { get; set; }
 
         [Required]
         [JsonPropertyName("CreatedBy")]
@@ -110,9 +110,9 @@ namespace HPCL.DataModel.Customer
         public string CommunicationLocation { get; set; }
 
         [Required]
-        [JsonPropertyName("CommunicationCityId")]
+        [JsonPropertyName("CommunicationCityName")]
         [DataMember]
-        public Int32 CommunicationCityId { get; set; }
+        public string CommunicationCityName { get; set; }
 
         [Required]
         [JsonPropertyName("CommunicationPincode")]
@@ -176,9 +176,9 @@ namespace HPCL.DataModel.Customer
 
 
         [Required]
-        [JsonPropertyName("PermanentCityId")]
+        [JsonPropertyName("PermanentCityName")]
         [DataMember]
-        public Int32 PermanentCityId { get; set; }
+        public string PermanentCityName { get; set; }
 
 
         [Required]

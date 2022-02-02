@@ -20,6 +20,8 @@ using HPCL.DataRepository.Customer;
 using HPCL.DataRepository.HQ;
 using HPCL.DataRepository.Merchant;
 using HPCL.DataRepository.Card;
+using HPCL.DataRepository.RegionalOffice;
+using HPCL.DataRepository.ZonalOffice;
 
 namespace HPCL_WebApi
 {
@@ -51,6 +53,13 @@ namespace HPCL_WebApi
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
+
+                opt.AddPolicy(name: _anotherPolicy, builder =>
+                {
+                    builder.WithOrigins("http://180.179.222.161/dtpwebapi")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
             });
 
             //services.add
@@ -68,6 +77,9 @@ namespace HPCL_WebApi
             services.AddScoped<IHQRepository, HQRepository>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
             services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped<IRegionalOfficeRepository, RegionalOfficeRepository>();
+            services.AddScoped<IZonalOfficeRepository, ZonalOfficeRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {

@@ -29,7 +29,7 @@ namespace HPCL.Infrastructure.TokenManager
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(300),
                 Issuer = Userip,
-                Audience = Userip,
+                Audience = Useragent,
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -55,7 +55,7 @@ namespace HPCL.Infrastructure.TokenManager
                     ValidateIssuerSigningKey = true,
                     ValidateAudience = true,
                     ValidIssuer = Userip,
-                    ValidAudience = Userip,
+                    ValidAudience = Useragent,
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
 

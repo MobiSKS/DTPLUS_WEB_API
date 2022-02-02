@@ -16,6 +16,7 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerUpdateModelOutput>> UpdateCustomer([FromBody] CustomerUpdateModelInput ObjClass);
         public Task<IEnumerable<CustomerViewOnlineFormStatusModelOutput>> ViewOnlineFormStatus([FromBody] CustomerViewOnlineFormStatusModelInput ObjClass);
         public Task<IEnumerable<CustomerKYCModelOutput>> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass);
+        public Task<IEnumerable<CustomerApprovalModelOutput>> UpdateCustomerApprovalStatus([FromBody] CustomerApprovalModelInput ObjClass);
     }
 
 }

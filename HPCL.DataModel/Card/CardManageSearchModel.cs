@@ -33,7 +33,7 @@ namespace HPCL.DataModel.Card
         //[Required]
         [JsonPropertyName("Statusflag")]
         [DataMember]
-        public string Statusflag { get; set; }
+        public int Statusflag { get; set; }
 
     }
 
@@ -52,11 +52,29 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public Int64 CustomerID { get; set; }
 
+        [JsonProperty("UserID")]
+        [DataMember]
+        public string UserID { get; set; }
+
+        [JsonProperty("RequestDate")]
+        [DataMember]
+        public string RequestDate { get; set; }
+
+
+        [JsonProperty("OwnedorAttachedId")]
+        [DataMember]
+        public Int32 OwnedorAttachedId { get; set; }
+
+
+        [JsonProperty("OwnedorAttached")]
+        [DataMember]
+        public string OwnedorAttached { get; set; }
+
 
         [JsonProperty("VechileNo")]
         [DataMember]
         public string VechileNo { get; set; }
-
+       
 
         [JsonProperty("VehicleType")]
         [DataMember]
@@ -116,5 +134,9 @@ namespace HPCL.DataModel.Card
         [JsonProperty("CardIssueType")]
         [DataMember]
         public string CardIssueType { get; set; }
+
+        [JsonProperty("CardIdentifier")]
+        [DataMember]
+        public string CardIdentifier { get; set; }
     }
 }
