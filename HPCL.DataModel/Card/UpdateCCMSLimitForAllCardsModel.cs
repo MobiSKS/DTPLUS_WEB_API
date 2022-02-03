@@ -15,19 +15,14 @@ namespace HPCL.DataModel.Card
         public string CustomerID { get; set; }
 
         [Required]
-        [JsonPropertyName("Statusflag")]
+        [JsonPropertyName("Limittype")]
         [DataMember]
-        public int Statusflag { get; set; }
+        public int Limittype { get; set; }
 
         [Required]
-        [JsonPropertyName("Limitid")]
+        [JsonPropertyName("Amount")]
         [DataMember]
-        public int Limitid { get; set; }
-
-        [Required]
-        [JsonPropertyName("Limit")]
-        [DataMember]
-        public float Limit { get; set; }
+        public float Amount { get; set; }
 
         [Required]
         [JsonPropertyName("ModifiedBy")]

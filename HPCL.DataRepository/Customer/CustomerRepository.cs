@@ -350,5 +350,20 @@ namespace HPCL.DataRepository.Customer
         }
 
 
+        public async Task<IEnumerable<CustomerFeewaiverApprovalModelOutput>> ApproveRejectFeewaiver([FromBody] CustomerFeewaiverApprovalModelInput ObjClass)
+        {
+            var procedureName = "UspApproveRejectFeewaiver";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
+            parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerFeewaiverApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

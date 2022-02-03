@@ -39,8 +39,8 @@ namespace HPCL.DataRepository.Card
             var storedProcedureResult = new GetCardLimtModelOutput();
             storedProcedureResult.GetCardsDetails = (List<GetCardsDetailsModelOutput>)await result.ReadAsync<GetCardsDetailsModelOutput>(); ;
             storedProcedureResult.GetCardLimt = (List<CardLimtModelOutput>)await result.ReadAsync<CardLimtModelOutput>(); ;
-            storedProcedureResult.CardReminingLimt = (List<CardReminingLimtModelOutput>)await result.ReadAsync<CardReminingLimtModelOutput>();
-            storedProcedureResult.CardReminingCCMSLimt = (List<CardReminingCCMSLimtModelOutput>)await result.ReadAsync<CardReminingCCMSLimtModelOutput>();
+            //storedProcedureResult.CardReminingLimt = (List<CardReminingLimtModelOutput>)await result.ReadAsync<CardReminingLimtModelOutput>();
+            //storedProcedureResult.CardReminingCCMSLimt = (List<CardReminingCCMSLimtModelOutput>)await result.ReadAsync<CardReminingCCMSLimtModelOutput>();
             storedProcedureResult.CardServices = (List<CardServicesModelOutput>)await result.ReadAsync<CardServicesModelOutput>(); ;
             return storedProcedureResult;
         }
@@ -74,10 +74,10 @@ namespace HPCL.DataRepository.Card
             var procedureName = "UspUpdateCardLimits";
             var parameters = new DynamicParameters();
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
-            parameters.Add("Onetime", ObjClass.Onetime, DbType.Double, ParameterDirection.Input);
-            parameters.Add("Daily", ObjClass.Daily, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Monthly", ObjClass.Monthly, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Yearly", ObjClass.Yearly, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Cashpurse", ObjClass.Cashpurse, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Saletxn", ObjClass.Saletxn, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Dailysale", ObjClass.Dailysale, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Monthlysale", ObjClass.Monthlysale, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateCardLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -88,10 +88,8 @@ namespace HPCL.DataRepository.Card
             var procedureName = "UspUpdateCCMSLimits";
             var parameters = new DynamicParameters();
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
-            parameters.Add("Onetime", ObjClass.Onetime, DbType.Double, ParameterDirection.Input);
-            parameters.Add("Daily", ObjClass.Daily, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Monthly", ObjClass.Monthly, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Yearly", ObjClass.Yearly, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Limittype", ObjClass.Limittype, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Amount", ObjClass.Amount, DbType.Double, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateCCMSLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -127,9 +125,8 @@ namespace HPCL.DataRepository.Card
             var procedureName = "UspUpdateCCMSLimitForAllCards";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
-            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Limitid", ObjClass.Limitid, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Limit", ObjClass.Limit, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Limittype", ObjClass.Limittype, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Amount", ObjClass.Amount, DbType.Double, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateCCMSLimitForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -140,9 +137,10 @@ namespace HPCL.DataRepository.Card
             var procedureName = "UspUpdateCardLimitForAllCards";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
-            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Limitid", ObjClass.Limitid, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("Limit", ObjClass.Limit, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Cashpurse", ObjClass.Cashpurse, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Saletxn", ObjClass.Saletxn, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Dailysale", ObjClass.Dailysale, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Monthlysale", ObjClass.Monthlysale, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateCardLimitForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);

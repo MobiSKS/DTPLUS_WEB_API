@@ -14,19 +14,25 @@ namespace HPCL.DataModel.Card
         public string CustomerID { get; set; }
 
         [Required]
-        [JsonPropertyName("Statusflag")]
+        [JsonPropertyName("Cashpurse")]
         [DataMember]
-        public int Statusflag { get; set; }
+        public float Cashpurse { get; set; }
 
         [Required]
-        [JsonPropertyName("Limitid")]
+        [JsonPropertyName("Saletxn")]
         [DataMember]
-        public int Limitid { get; set; }
+        public int Saletxn { get; set; }
 
         [Required]
-        [JsonPropertyName("Limit")]
+        [JsonPropertyName("Dailysale")]
         [DataMember]
-        public float Limit { get; set; }
+        public int Dailysale { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("Monthlysale")]
+        [DataMember]
+        public int Monthlysale { get; set; }
 
         [Required]
         [JsonPropertyName("ModifiedBy")]

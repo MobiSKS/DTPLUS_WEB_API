@@ -14,25 +14,25 @@ namespace HPCL.DataModel.Card
         public string Cardno { get; set; }
 
         [Required]
-        [JsonPropertyName("Onetime")]
+        [JsonPropertyName("Cashpurse")]
         [DataMember]
-        public float Onetime { get; set; }
+        public float Cashpurse { get; set; }
 
         [Required]
-        [JsonPropertyName("Daily")]
+        [JsonPropertyName("Saletxn")]
         [DataMember]
-        public int Daily { get; set; }
+        public int Saletxn { get; set; }
 
         [Required]
-        [JsonPropertyName("Monthly")]
+        [JsonPropertyName("Dailysale")]
         [DataMember]
-        public int Monthly { get; set; }
+        public int Dailysale { get; set; }
 
 
         [Required]
-        [JsonPropertyName("Yearly")]
+        [JsonPropertyName("Monthlysale")]
         [DataMember]
-        public int Yearly { get; set; }
+        public int Monthlysale { get; set; }
 
 
         [Required]

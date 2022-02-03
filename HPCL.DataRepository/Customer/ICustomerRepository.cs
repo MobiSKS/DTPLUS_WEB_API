@@ -20,6 +20,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerGetByCustomerIdModelOutput>> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetVehicleTypeModelOutput>> GetVehicleType([FromBody] CustomerGetVehicleTypeModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerFeewaiverApprovalModelOutput>> ApproveRejectFeewaiver([FromBody] CustomerFeewaiverApprovalModelInput ObjClass);
     }
 
 }

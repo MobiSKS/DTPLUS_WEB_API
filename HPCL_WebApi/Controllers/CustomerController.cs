@@ -344,6 +344,38 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_fee_waiver")]
+        public async Task<IActionResult> ApproveRejectFeewaiver([FromBody] CustomerFeewaiverApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.ApproveRejectFeewaiver(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<CustomerFeewaiverApprovalModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<CustomerFeewaiverApprovalModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
     }
 
 }

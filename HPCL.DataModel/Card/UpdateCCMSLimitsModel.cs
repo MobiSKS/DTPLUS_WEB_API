@@ -15,26 +15,14 @@ namespace HPCL.DataModel.Card
         public string Cardno { get; set; }
 
         [Required]
-        [JsonPropertyName("Onetime")]
+        [JsonPropertyName("Limittype")]
         [DataMember]
-        public float Onetime { get; set; }
+        public int Limittype { get; set; }
 
         [Required]
-        [JsonPropertyName("Daily")]
+        [JsonPropertyName("Amount")]
         [DataMember]
-        public int Daily { get; set; }
-
-        [Required]
-        [JsonPropertyName("Monthly")]
-        [DataMember]
-        public int Monthly { get; set; }
-
-
-        [Required]
-        [JsonPropertyName("Yearly")]
-        [DataMember]
-        public int Yearly { get; set; }
-
+        public float Amount { get; set; }
 
         [Required]
         [JsonPropertyName("ModifiedBy")]

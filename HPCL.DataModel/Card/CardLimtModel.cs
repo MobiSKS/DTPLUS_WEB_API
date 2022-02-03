@@ -22,11 +22,11 @@ namespace HPCL.DataModel.Card
         [JsonProperty("GetCardLimtModel")]
         public List<CardLimtModelOutput> GetCardLimt { get; set; }
 
-        [JsonProperty("CardReminingLimt")]
-        public List<CardReminingLimtModelOutput> CardReminingLimt { get; set; }
+        //[JsonProperty("CardReminingLimt")]
+        //public List<CardReminingLimtModelOutput> CardReminingLimt { get; set; }
 
-        [JsonProperty("CardReminingCCMSLimt")]
-        public List<CardReminingCCMSLimtModelOutput> CardReminingCCMSLimt { get; set; }
+        //[JsonProperty("CardReminingCCMSLimt")]
+        //public List<CardReminingCCMSLimtModelOutput> CardReminingCCMSLimt { get; set; }
 
         [JsonProperty("CardServices")]
         public List<CardServicesModelOutput> CardServices { get; set; }
@@ -52,92 +52,103 @@ namespace HPCL.DataModel.Card
 
 
         //[Required]
-        [JsonProperty("OneTimeTransactionLimit")]
+        [JsonProperty("SaleTranscationLimit")]
         [DataMember]
-        public float OneTimeTransactionLimit { get; set; }
+        public float SaleTranscationLimit { get; set; }
 
 
         //[Required]
-        [JsonProperty("DailyTransactionLimit")]
+        [JsonProperty("DailySaleLimit")]
         [DataMember]
-        public float DailyTransactionLimit { get; set; }
+        public float DailySaleLimit { get; set; }
 
 
         //[Required]
-        [JsonProperty("MonthlyTransactionLimit")]
+        [JsonProperty("DailyCreditLimit")]
         [DataMember]
-        public float MonthlyTransactionLimit { get; set; }
+        public float DailyCreditLimit { get; set; }
 
         //[Required]
-        [JsonProperty("YearlyTransactionLimit")]
+        [JsonProperty("CashPurseLimit")]
         [DataMember]
-        public float YearlyTransactionLimit { get; set; }
+        public float CashPurseLimit { get; set; }
 
         //[Required]
-        [JsonProperty("OneTimeCCMSTransactionLimit")]
+        [JsonProperty("MonthlySaleLimit")]
         [DataMember]
-        public float OneTimeCCMSTransactionLimit { get; set; }
+        public float MonthlySaleLimit { get; set; }
 
         //[Required]
-        [JsonProperty("DailyCCMSTransactionLimit")]
+        [JsonProperty("MonthlySaleBalance")]
         [DataMember]
-        public float DailyCCMSTransactionLimit { get; set; }
+        public float MonthlySaleBalance { get; set; }
 
         //[Required]
-        [JsonProperty("MonthlyCCMSTransactionLimit")]
+        [JsonProperty("CCMSReloadSale")]
         [DataMember]
-        public float MonthlyCCMSTransactionLimit { get; set; }
+        public float CCMSReloadSale { get; set; }
 
 
         //[Required]
-        [JsonProperty("YearlyCCMSTransactionLimit")]
+        [JsonProperty("CCMSReloadSaleLimit")]
         [DataMember]
-        public float YearlyCCMSTransactionLimit { get; set; }
+        public string CCMSReloadSaleLimit { get; set; }
 
 
-
-       
-    }
-
-    public class CardReminingLimtModelOutput
-    {
-
-        //[Required]
-        [JsonProperty("RemCardDaily")]
+        [JsonProperty("CCMSReloadSaleLimitValue")]
         [DataMember]
-        public float RemCardDaily { get; set; }
+        public float CCMSReloadSaleLimitValue { get; set; }
 
-        //[Required]
-        [JsonProperty("RemCardMonthly")]
+        [JsonProperty("ExpiryDate")]
         [DataMember]
-        public float RemCardMonthly { get; set; }
+        public DateTime ExpiryDate { get; set; }
 
-        //[Required]
-        [JsonProperty("RemCardYearly")]
+        [JsonProperty("AllowCreditTranscation")]
         [DataMember]
-        public float RemCardYearly { get; set; }
+        public string AllowCreditTranscation { get; set; }
+
 
     }
 
-    public class CardReminingCCMSLimtModelOutput
-    {
+    //public class CardReminingLimtModelOutput
+    //{
 
-        //[Required]
-        [JsonProperty("RemCCMSDaily")]
-        [DataMember]
-        public float RemCCMSDaily { get; set; }
+    //    //[Required]
+    //    [JsonProperty("RemCardDaily")]
+    //    [DataMember]
+    //    public float RemCardDaily { get; set; }
 
-        //[Required]
-        [JsonProperty("RemCCMSMonthly")]
-        [DataMember]
-        public float RemCCMSMonthly { get; set; }
+    //    //[Required]
+    //    [JsonProperty("RemCardMonthly")]
+    //    [DataMember]
+    //    public float RemCardMonthly { get; set; }
 
-        //[Required]
-        [JsonProperty("RemCCMSYearly")]
-        [DataMember]
-        public float RemCCMSYearly { get; set; }
+    //    //[Required]
+    //    [JsonProperty("RemCardYearly")]
+    //    [DataMember]
+    //    public float RemCardYearly { get; set; }
 
-    }
+    //}
+
+    //public class CardReminingCCMSLimtModelOutput
+    //{
+
+    //    //[Required]
+    //    [JsonProperty("RemCCMSDaily")]
+    //    [DataMember]
+    //    public float RemCCMSDaily { get; set; }
+
+    //    //[Required]
+    //    [JsonProperty("RemCCMSMonthly")]
+    //    [DataMember]
+    //    public float RemCCMSMonthly { get; set; }
+
+    //    //[Required]
+    //    [JsonProperty("RemCCMSYearly")]
+    //    [DataMember]
+    //    public float RemCCMSYearly { get; set; }
+
+    //}
 
     public class CardServicesModelOutput
     {
