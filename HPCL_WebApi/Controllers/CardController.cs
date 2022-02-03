@@ -291,8 +291,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_limit_master")]
-        public async Task<IActionResult> GetLimitMaster([FromBody] GetLimitMasterModelInput ObjClass)
+        [Route("get_ccms_limit_master")]
+        public async Task<IActionResult> GetCCMSLimitMaster([FromBody] GetLimitMasterModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -300,7 +300,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _cardRepo.GetLimitMaster(ObjClass);
+                var result = await _cardRepo.GetCCMSLimitMaster(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);

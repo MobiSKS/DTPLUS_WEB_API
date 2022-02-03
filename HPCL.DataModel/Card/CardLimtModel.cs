@@ -37,7 +37,7 @@ namespace HPCL.DataModel.Card
          
         [JsonProperty("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         //[Required]
         [JsonProperty("CardBalance")]
@@ -173,7 +173,7 @@ namespace HPCL.DataModel.Card
 
         [JsonProperty("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [JsonProperty("UserID")]
         [DataMember]

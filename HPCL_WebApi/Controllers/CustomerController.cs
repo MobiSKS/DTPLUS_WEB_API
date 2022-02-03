@@ -202,7 +202,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("view_online_form_status")]
         public async Task<IActionResult> ViewOnlineFormStatus([FromBody] CustomerViewOnlineFormStatusModelInput ObjClass)
         {
@@ -266,8 +266,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("update_customer_approval_status")]
-        public async Task<IActionResult> UpdateCustomerApprovalStatus([FromBody] CustomerApprovalModelInput ObjClass)
+        [Route("approve_reject_customer")]
+        public async Task<IActionResult> ApproveRejectCustomer([FromBody] CustomerApprovalModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -275,7 +275,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _customerRepo.UpdateCustomerApprovalStatus(ObjClass);
+                var result = await _customerRepo.ApproveRejectCustomer(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
@@ -296,7 +296,53 @@ namespace HPCL_WebApi.Controllers
         }
 
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_customer_by_customer_id")]
+        public async Task<IActionResult> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetCustomerByCustomerId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
+         
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_vehicle_type")]
+        public async Task<IActionResult> GetVehicleType([FromBody] CustomerGetVehicleTypeModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetVehicleType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
     }
 

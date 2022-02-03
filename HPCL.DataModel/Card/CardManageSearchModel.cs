@@ -50,7 +50,7 @@ namespace HPCL.DataModel.Card
 
         [JsonProperty("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [JsonProperty("UserID")]
         [DataMember]

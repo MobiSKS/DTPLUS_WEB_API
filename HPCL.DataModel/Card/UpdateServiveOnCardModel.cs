@@ -11,7 +11,7 @@ namespace HPCL.DataModel.Card
         [Required]
         [JsonPropertyName("Customerid")]
         [DataMember]
-        public Int64 Customerid { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         [JsonPropertyName("Cardno")]
@@ -21,7 +21,7 @@ namespace HPCL.DataModel.Card
         [Required]
         [JsonPropertyName("Serviceid")]
         [DataMember]
-        public string Serviceid { get; set; }
+        public Int32 Serviceid { get; set; }
 
         [Required]
         [JsonPropertyName("Flag")]

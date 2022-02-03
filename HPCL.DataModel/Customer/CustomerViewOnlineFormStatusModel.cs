@@ -23,7 +23,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [JsonPropertyName("FromDate")]
         [DataMember]
@@ -61,7 +61,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [JsonProperty("CustomerName")]
         [DataMember]

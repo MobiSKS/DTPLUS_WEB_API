@@ -1,31 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Customer
+namespace HPCL.DataModel.Merchant
 {
-    
-
-    public class CustomerApprovalModelInput : BaseClass
+    public class MerchantApprovalRejectModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("CustomerID")]
+        [JsonPropertyName("MerchantId")]
         [DataMember]
-        public string CustomerID { get; set; }
+        public string MerchantId { get; set; }
+
 
         [Required]
         [JsonPropertyName("Comments")]
         [DataMember]
         public string Comments { get; set; }
 
-        
-
         [Required]
-        [JsonPropertyName("Approvalstatus")]
+        [JsonPropertyName("ApprovalType")]
         [DataMember]
-        public string Approvalstatus { get; set; }
+        public string ApprovalType { get; set; }
 
         [Required]
         [JsonPropertyName("ApprovedBy")]
@@ -33,8 +31,8 @@ namespace HPCL.DataModel.Customer
         public string ApprovedBy { get; set; }
     }
 
-    public class CustomerApprovalModelOutput : BaseClassOutput
+    public class MerchantApprovalRejectModelOutput : BaseClassOutput
     {
-
+        
     }
 }

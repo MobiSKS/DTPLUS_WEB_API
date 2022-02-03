@@ -98,7 +98,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_merchant")]
         public async Task<IActionResult> InsertMerchant([FromBody] MerchantInsertModelInput ObjClass)
         {
@@ -164,5 +164,68 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_merchant")]
+        public async Task<IActionResult> ApproveRejectMerchant([FromBody] MerchantApprovalRejectModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.ApproveRejectMerchant(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_merchant_by_merchant_Id")]
+        public async Task<IActionResult> GetMerchantbyMerchantId([FromBody] MerchantGetByMerchantIdModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetMerchantbyMerchantId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+
     }
 }

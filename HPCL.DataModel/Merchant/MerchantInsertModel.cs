@@ -10,7 +10,7 @@ namespace HPCL.DataModel.Merchant
         [Required]
         [JsonPropertyName("ErpCode")]
         [DataMember]
-        public Int64 ErpCode { get; set; }
+        public string ErpCode { get; set; }
 
         [Required]
         [JsonPropertyName("RetailOutletName")]

@@ -74,7 +74,7 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("CardIdentifier", typeof(string));
             dtDBR.Columns.Add("VechileNo", typeof(string));
             dtDBR.Columns.Add("VehicleMake", typeof(string));
-            dtDBR.Columns.Add("VehicleType", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(int));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
             var procedureName = "UspInsertCustomer";
@@ -173,13 +173,12 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("CardIdentifier", typeof(string));
             dtDBR.Columns.Add("VechileNo", typeof(string));
             dtDBR.Columns.Add("VehicleMake", typeof(string));
-            dtDBR.Columns.Add("VehicleType", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(int));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
-
 
             var procedureName = "UspUpdateCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("ZonalOffice", ObjClass.ZonalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
@@ -274,7 +273,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("StatusId", ObjClass.StatusId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
             parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
@@ -318,17 +317,38 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerKYCModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<CustomerApprovalModelOutput>> UpdateCustomerApprovalStatus([FromBody] CustomerApprovalModelInput ObjClass)
+        public async Task<IEnumerable<CustomerApprovalModelOutput>> ApproveRejectCustomer([FromBody] CustomerApprovalModelInput ObjClass)
         {
             var procedureName = "UspUserApproveCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
             parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.String, ParameterDirection.Input);
             parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<CustomerGetByCustomerIdModelOutput>> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerDetailByCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetByCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CustomerGetVehicleTypeModelOutput>> GetVehicleType([FromBody] CustomerGetVehicleTypeModelInput ObjClass)
+        {
+            var procedureName = "UspVehicleType";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetVehicleTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }

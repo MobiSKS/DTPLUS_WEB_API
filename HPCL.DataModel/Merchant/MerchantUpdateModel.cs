@@ -11,7 +11,7 @@ namespace HPCL.DataModel.Merchant
         [Required]
         [JsonPropertyName("MerchantId")]
         [DataMember]
-        public Int64 MerchantId { get; set; }
+        public string MerchantId { get; set; }
 
         [Required]
         [JsonPropertyName("RetailOutletName")]
@@ -257,6 +257,5 @@ namespace HPCL.DataModel.Merchant
         [JsonProperty("ReferenceId")]
         [DataMember]
         public string ReferenceId { get; set; }
-
     }
 }

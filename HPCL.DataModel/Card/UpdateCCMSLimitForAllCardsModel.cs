@@ -12,7 +12,7 @@ namespace HPCL.DataModel.Card
         [Required]
         [JsonPropertyName("Customerid")]
         [DataMember]
-        public Int64 Customerid { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         [JsonPropertyName("Statusflag")]

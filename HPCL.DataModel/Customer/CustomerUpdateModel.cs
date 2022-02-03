@@ -12,7 +12,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
         
 
         [Required]
@@ -350,7 +350,7 @@ namespace HPCL.DataModel.Customer
         public string CardIdentifier { get; set; }
 
         [JsonPropertyName("VehicleType")]
-        public string VehicleType { get; set; }
+        public int VehicleType { get; set; }
 
         [JsonPropertyName("VehicleMake")]
         public string VehicleMake { get; set; }
@@ -381,6 +381,6 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("CustomerID")]
         [DataMember]
-        public Int64 CustomerID { get; set; }
+        public string CustomerID { get; set; }
     }
 }
