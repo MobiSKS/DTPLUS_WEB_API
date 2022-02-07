@@ -12,7 +12,126 @@ namespace HPCL.DataModel.Customer
         public string CustomerID { get; set; }
     }
 
-    public class CustomerGetByCustomerIdModelOutput
+    public class CustomerDetailsModelInput : BaseClass
+    {
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonPropertyName("CustomerTypeId")]
+        [DataMember]
+        public string CustomerTypeId { get; set; }
+
+        [JsonPropertyName("CustomerSubtypeId")]
+        [DataMember]
+        public string CustomerSubtypeId { get; set; }
+
+        [JsonPropertyName("ZonalOfficeID")]
+        [DataMember]
+        public string ZonalOfficeID { get; set; }
+
+        [JsonPropertyName("RegionalOfficeID")]
+        [DataMember]
+        public string RegionalOfficeID { get; set; }
+
+        [JsonPropertyName("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+        [JsonPropertyName("FromDate")]
+        [DataMember]
+        public string FromDate { get; set; }
+
+        [JsonPropertyName("ToDate")]
+        [DataMember]
+        public string ToDate { get; set; }
+
+        [JsonPropertyName("NameOnCard")]
+        [DataMember]
+        public string NameOnCard { get; set; }
+
+        [JsonPropertyName("TypeOfBusinessEntity")]
+        [DataMember]
+        public string TypeOfBusinessEntity { get; set; }
+
+        [JsonPropertyName("CommunicationStateId")]
+        [DataMember]
+        public string CommunicationStateId { get; set; }
+
+        [JsonPropertyName("CommunicationDistrictId")]
+        [DataMember]
+        public string CommunicationDistrictId { get; set; }
+
+        [JsonPropertyName("PermanentStateId")]
+        [DataMember]
+        public string PermanentStateId { get; set; }
+
+        [JsonPropertyName("PermanentDistrictId")]
+        [DataMember]
+        public string PermanentDistrictId { get; set; }
+
+        [JsonPropertyName("Email")]
+        [DataMember]
+        public string Email { get; set; }
+
+        [JsonPropertyName("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+
+        [JsonPropertyName("TypeOfFleetId")]
+        [DataMember]
+        public string TypeOfFleetId { get; set; }
+
+        [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
+        [DataMember]
+        public string FeePaymentsCollectFeeWaiver { get; set; }
+
+        [JsonPropertyName("ReferenceId")]
+        [DataMember]
+        public string ReferenceId { get; set; }
+
+        [JsonPropertyName("FormNumber")]
+        [DataMember]
+        public string FormNumber { get; set; }
+
+        [JsonPropertyName("CustomerReferenceNo")]
+        [DataMember]
+        public string CustomerReferenceNo { get; set; }
+
+        [JsonPropertyName("CustomerStatusId")]
+        [DataMember]
+        public string CustomerStatusId { get; set; }
+
+        [JsonPropertyName("ApprovedBy")]
+        [DataMember]
+        public string ApprovedBy { get; set; }
+
+        [JsonPropertyName("ApprovedonFromDate")]
+        [DataMember]
+        public string ApprovedonFromDate { get; set; }
+
+        [JsonPropertyName("ApprovedonToDate")]
+        [DataMember]
+        public string ApprovedonToDate { get; set; }
+
+        [JsonPropertyName("CustomerStatusFeewaiverID")]
+        [DataMember]
+        public string CustomerStatusFeewaiverID { get; set; }
+
+        [JsonPropertyName("FeewaiverApprovedBy")]
+        [DataMember]
+        public string FeewaiverApprovedBy { get; set; }
+
+        [JsonPropertyName("FeewaiverApprovedOnFromDate")]
+        [DataMember]
+        public string FeewaiverApprovedOnFromDate { get; set; }
+
+        [JsonPropertyName("FeewaiverApprovedOnToDate")]
+        [DataMember]
+        public string FeewaiverApprovedOnToDate { get; set; }
+    }
+
+    public class CustomerDetailsModelOutput
     {
         [JsonProperty("CustomerID")]
         [DataMember]
@@ -455,5 +574,25 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("ApprovedBy")]
         [DataMember]
         public string ApprovedBy { get; set; }
+
+        [JsonProperty("CustomerStatusFeewaiverID")]
+        [DataMember]
+        public Int32 CustomerStatusFeewaiverID { get; set; }
+
+        [JsonProperty("CustomerStatusFeewaiverName")]
+        [DataMember]
+        public string CustomerStatusFeewaiverName { get; set; }
+
+        [JsonProperty("FeewaiverComments")]
+        [DataMember]
+        public string FeewaiverComments { get; set; }
+
+        [JsonProperty("FeewaiverApprovedOn")]
+        [DataMember]
+        public DateTime FeewaiverApprovedOn { get; set; }
+
+        [JsonProperty("FeewaiverApprovedBy")]
+        [DataMember]
+        public string FeewaiverApprovedBy { get; set; }
     }
 }

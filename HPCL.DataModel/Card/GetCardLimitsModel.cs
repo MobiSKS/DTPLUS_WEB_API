@@ -28,7 +28,7 @@ namespace HPCL.DataModel.Card
         //[Required]
         [JsonPropertyName("Statusflag")]
         [DataMember]
-        public string Statusflag { get; set; }
+        public Int32 Statusflag { get; set; }
 
     }
     public class GetCardLimitsModelOutput
@@ -81,22 +81,90 @@ namespace HPCL.DataModel.Card
         public string VehicleMake { get; set; }
 
 
-        [JsonProperty("OneTimeCCMSTransactionLimit")]
+        [JsonProperty("CashPurseLimit")]
         [DataMember]
-        public float OneTimeCCMSTransactionLimit { get; set; }
+        public float CashPurseLimit { get; set; }
 
-        [JsonProperty("DailyCCMSTransactionLimit")]
+        [JsonProperty("SaleTxnLimit")]
         [DataMember]
-        public float DailyCCMSTransactionLimit { get; set; }
+        public float SaleTxnLimit { get; set; }
 
-        [JsonProperty("MonthlyCCMSTransactionLimit")]
+        [JsonProperty("DailySaleLimit")]
         [DataMember]
-        public float MonthlyCCMSTransactionLimit { get; set; }
+        public float DailySaleLimit { get; set; }
 
-        [JsonProperty("YearlyCCMSTransactionLimit")]
+        [JsonProperty("MonthlySaleLimit")]
         [DataMember]
-        public float YearlyCCMSTransactionLimit { get; set; }
+        public float MonthlySaleLimit { get; set; }
 
     }
+
+
+    public class ViewCardLimitsModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("Customerid")]
+        [DataMember]
+        public string Customerid { get; set; }
+         
+    }
+
+    public class ViewCardLimitsModelOutput
+    {
+        [JsonProperty("SrNumber")]
+        [DataMember]
+        public int SrNumber { get; set; }
+
+        [JsonProperty("CardNumber")]
+        [DataMember]
+        public string CardNumber { get; set; }
+
+
+        [JsonProperty("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
+
+
+        [JsonProperty("MobileNumber")]
+        [DataMember]
+        public string MobileNumber { get; set; }
+
+
+        [JsonProperty("DailySaleLimit")]
+        [DataMember]
+        public float DailySaleLimit { get; set; }
+
+
+        [JsonProperty("DailySaleBal")]
+        [DataMember]
+        public float DailySaleBal { get; set; }
+
+
+        [JsonProperty("MonthlySaleLimit")]
+        [DataMember]
+        public float MonthlySaleLimit { get; set; }
+
+
+        [JsonProperty("MonthlySaleBal")]
+        [DataMember]
+        public float MonthlySaleBal { get; set; }
+
+
+        [JsonProperty("CCMSLimit")]
+        [DataMember]
+        public float CCMSLimit { get; set; }
+
+        [JsonProperty("LimitType")]
+        [DataMember]
+        public string LimitType { get; set; }
+
+
+        [JsonProperty("AvailableCCMSLimit")]
+        [DataMember]
+        public float AvailableCCMSLimit { get; set; }
+
+
+    }
+
 
 }

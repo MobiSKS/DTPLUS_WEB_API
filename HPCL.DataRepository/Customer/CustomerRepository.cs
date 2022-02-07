@@ -333,13 +333,13 @@ namespace HPCL.DataRepository.Customer
         }
 
 
-        public async Task<IEnumerable<CustomerGetByCustomerIdModelOutput>> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        public async Task<IEnumerable<CustomerDetailsModelOutput>> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerDetailByCustomerId";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<CustomerGetByCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<CustomerGetVehicleTypeModelOutput>> GetVehicleType([FromBody] CustomerGetVehicleTypeModelInput ObjClass)
@@ -363,6 +363,17 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerFeewaiverApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<CustomerDetailsModelOutput>> GetCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

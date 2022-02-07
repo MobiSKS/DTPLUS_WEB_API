@@ -177,6 +177,14 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<UpdateCardStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<ViewCardLimitsModelOutput>> ViewCardLimits([FromBody] ViewCardLimitsModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerAllCardAllLimits";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ViewCardLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
 
     }
 }

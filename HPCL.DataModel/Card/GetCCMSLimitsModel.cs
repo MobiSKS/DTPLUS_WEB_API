@@ -27,7 +27,7 @@ namespace HPCL.DataModel.Card
         //[Required]
         [JsonPropertyName("Statusflag")]
         [DataMember]
-        public string Statusflag { get; set; }
+        public Int32 Statusflag { get; set; }
 
     }
 
@@ -81,23 +81,16 @@ namespace HPCL.DataModel.Card
         public string VehicleMake { get; set; }
 
 
-        [JsonProperty("OneTimeCCMSTransactionLimit")]
+        [JsonProperty("CCMSLimitOption")]
         [DataMember]
-        public float OneTimeCCMSTransactionLimit { get; set; }
+        public Int32 CCMSLimitOption { get; set; }
 
-        [JsonProperty("DailyCCMSTransactionLimit")]
+        [JsonProperty("Description")]
         [DataMember]
-        public float DailyCCMSTransactionLimit { get; set; }
+        public string Description { get; set; }
 
-        [JsonProperty("MonthlyCCMSTransactionLimit")]
+        [JsonProperty("CCMSReloadSaleLimitValue")]
         [DataMember]
-        public float MonthlyCCMSTransactionLimit { get; set; }
-
-        [JsonProperty("YearlyCCMSTransactionLimit")]
-        [DataMember]
-        public float YearlyCCMSTransactionLimit { get; set; }
-
+        public float CCMSReloadSaleLimitValue { get; set; }
     }
-
-
 }
