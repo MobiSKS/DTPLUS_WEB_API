@@ -1,10 +1,10 @@
 ﻿using Dapper;
+using HPCL.DataModel.Settings;
 using HPCL.DataRepository.DBDapper;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Web.Http;
-using HPCL.DataModel.Settings;
-using System.Collections.Generic;
 
 namespace HPCL.DataRepository.Settings
 {
@@ -15,7 +15,7 @@ namespace HPCL.DataRepository.Settings
         {
             _context = context;
         }
-       
+
         public async Task<IEnumerable<SettingGetZoneModelOutput>> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
         {
             var procedureName = "UspGetZone";
@@ -72,7 +72,7 @@ namespace HPCL.DataRepository.Settings
 
         }
 
-       
+
 
         public async Task<IEnumerable<SettingGetRoleModelOutput>> GetRole([FromBody] SettingGetRoleModelInput ObjClass)
         {
@@ -107,7 +107,7 @@ namespace HPCL.DataRepository.Settings
             return await connection.QueryAsync<SettingGetEntityTypesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
         }
-       
+
 
         public async Task<IEnumerable<SettingGetCityModelOutput>> GetCity([FromBody] SettingGetCityModelInput ObjClass)
         {
@@ -125,10 +125,10 @@ namespace HPCL.DataRepository.Settings
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        
-       
 
-        
+
+
+
 
     }
 }

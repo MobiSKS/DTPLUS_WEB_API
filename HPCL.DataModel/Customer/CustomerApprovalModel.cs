@@ -9,9 +9,9 @@ namespace HPCL.DataModel.Customer
     public class CustomerApprovalModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("CustomerID")]
+        [JsonPropertyName("CustomerReferenceNo")]
         [DataMember]
-        public string CustomerID { get; set; }
+        public string CustomerReferenceNo { get; set; }
 
         [Required]
         [JsonPropertyName("Comments")]

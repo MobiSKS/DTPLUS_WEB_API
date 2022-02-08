@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using HPCL.DataModel.Settings;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using HPCL.DataModel.Settings;
 
 namespace HPCL.DataRepository.Settings
 {
     public interface ISettingsRepository
     {
-      
+
         public Task<IEnumerable<SettingGetZoneModelOutput>> GetZone([FromBody] SettingGetZoneModelInput ObjClass);
         public Task<IEnumerable<SettingGetRegionModelOutput>> GetRegion([FromBody] SettingGetRegionModelInput ObjClass);
         public Task<IEnumerable<SettingGetSalesareaModelOutput>> GetSalesarea([FromBody] SettingGetSalesareaModelInput ObjClass);

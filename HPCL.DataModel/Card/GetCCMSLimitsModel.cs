@@ -92,5 +92,53 @@ namespace HPCL.DataModel.Card
         [JsonProperty("CCMSReloadSaleLimitValue")]
         [DataMember]
         public float CCMSReloadSaleLimitValue { get; set; }
+
+        [JsonProperty("ActualCCMSBalance")]
+        [DataMember]
+        public float ActualCCMSBalance { get; set; }
+
+
+        [JsonProperty("UnallocatedCCMSBalance")]
+        [DataMember]
+        public float UnallocatedCCMSBalance { get; set; }
+
+    }
+
+
+    public class GetCCMSLimitsForAllCardsModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("Customerid")]
+        [DataMember]
+        public string Customerid { get; set; }
+
+        //[Required]
+        [JsonPropertyName("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+
+
+        [JsonPropertyName("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+
+
+        [JsonPropertyName("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
+
+    }
+
+    public class GetCCMSLimitsForAllCardsModelOutput
+    {
+        [JsonProperty("ActualCCMSBalance")]
+        [DataMember]
+        public float ActualCCMSBalance { get; set; }
+
+
+        [JsonProperty("UnallocatedCCMSBalance")]
+        [DataMember]
+        public float UnallocatedCCMSBalance { get; set; }
+
     }
 }

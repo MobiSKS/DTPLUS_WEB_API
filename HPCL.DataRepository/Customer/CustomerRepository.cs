@@ -1,15 +1,14 @@
 ﻿using Dapper;
-using HPCL.DataRepository.DBDapper;
-using System.Data;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Collections.Generic;
 using HPCL.DataModel.Customer;
+using HPCL.DataRepository.DBDapper;
 using HPCL.Infrastructure.CommonClass;
-using System.IO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 //using Microsoft.Extensions.Configuration;
 
@@ -77,7 +76,8 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("VehicleType", typeof(int));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
-            var procedureName = "UspInsertCustomer";
+            //var procedureName = "UspInsertCustomer";
+            var procedureName = "UspInsertRawCustomer";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerType", ObjClass.CustomerType, DbType.Int32, ParameterDirection.Input);
             parameters.Add("CustomerSubtype", ObjClass.CustomerSubtype, DbType.Int32, ParameterDirection.Input);
@@ -137,32 +137,33 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FleetSizeNoOfVechileOwnedLCV", ObjClass.FleetSizeNoOfVechileOwnedLCV, DbType.Int16, ParameterDirection.Input);
             parameters.Add("FleetSizeNoOfVechileOwnedMUVSUV", ObjClass.FleetSizeNoOfVechileOwnedMUVSUV, DbType.Int16, ParameterDirection.Input);
             parameters.Add("FleetSizeNoOfVechileOwnedCarJeep", ObjClass.FleetSizeNoOfVechileOwnedCarJeep, DbType.Int16, ParameterDirection.Input);
-            parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
-            parameters.Add("FeePaymentsChequeNo", ObjClass.FeePaymentsChequeNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("FeePaymentsChequeDate", ObjClass.FeePaymentsChequeDate, DbType.DateTime, ParameterDirection.Input);
+            //parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
+            //parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
+            //parameters.Add("FeePaymentsChequeNo", ObjClass.FeePaymentsChequeNo, DbType.String, ParameterDirection.Input);
+            //parameters.Add("FeePaymentsChequeDate", ObjClass.FeePaymentsChequeDate, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("TierOfCustomer", ObjClass.TierOfCustomer, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("TypeOfCustomer", ObjClass.TypeOfCustomer, DbType.Int32, ParameterDirection.Input);
 
-            if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
-            {
-                foreach (CardDetail ObjCardDetails in ObjClass.ObjCardDetail)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
-                    dr["VechileNo"] = ObjCardDetails.VechileNo;
-                    dr["VehicleMake"] = ObjCardDetails.VehicleMake;
-                    dr["VehicleType"] = ObjCardDetails.VehicleType;
-                    dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+            //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
+            //{
+            //    foreach (CardDetail ObjCardDetails in ObjClass.ObjCardDetail)
+            //    {
+            //        DataRow dr = dtDBR.NewRow();
+            //        dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
+            //        dr["VechileNo"] = ObjCardDetails.VechileNo;
+            //        dr["VehicleMake"] = ObjCardDetails.VehicleMake;
+            //        dr["VehicleType"] = ObjCardDetails.VehicleType;
+            //        dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
 
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
-
-            parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
+            //        dtDBR.Rows.Add(dr);
+            //        dtDBR.AcceptChanges();
+            //    }
+            //}
+            //parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -242,7 +243,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            
+
 
             if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             {
@@ -321,7 +322,7 @@ namespace HPCL.DataRepository.Customer
         {
             var procedureName = "UspUserApproveCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
             parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
             parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.String, ParameterDirection.Input);
             parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);

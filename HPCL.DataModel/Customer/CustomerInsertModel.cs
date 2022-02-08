@@ -329,52 +329,58 @@ namespace HPCL.DataModel.Customer
         public Int16 FleetSizeNoOfVechileOwnedCarJeep { get; set; }
 
 
-        [JsonPropertyName("NoOfCards")]
+        //[JsonPropertyName("NoOfCards")]
+        //[DataMember]
+        //public Int32 NoOfCards { get; set; }
+
+
+        //[JsonPropertyName("FeePaymentsCollectFeeWaiver")]
+        //[DataMember]
+        //public Int16 FeePaymentsCollectFeeWaiver { get; set; }
+
+
+        //[JsonPropertyName("FeePaymentsChequeNo")]
+        //[DataMember]
+        //public string FeePaymentsChequeNo { get; set; }
+
+
+        //[JsonPropertyName("FeePaymentsChequeDate")]
+        //[DataMember]
+        //public DateTime FeePaymentsChequeDate { get; set; }
+
+        //[JsonPropertyName("ObjCardDetail")]
+        //[DataMember]
+        //public List<CardDetail> ObjCardDetail { get; set; }
+
+
+        [JsonPropertyName("TierOfCustomer")]
         [DataMember]
-        public Int32 NoOfCards { get; set; }
+        public Int32 TierOfCustomer { get; set; }
 
 
-        [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
+        [JsonPropertyName("TypeOfCustomer")]
         [DataMember]
-        public Int16 FeePaymentsCollectFeeWaiver { get; set; }
-
-
-        [JsonPropertyName("FeePaymentsChequeNo")]
-        [DataMember]
-        public string FeePaymentsChequeNo { get; set; }
-
-
-        [JsonPropertyName("FeePaymentsChequeDate")]
-        [DataMember]
-        public DateTime FeePaymentsChequeDate { get; set; }
-
-        [JsonPropertyName("ObjCardDetail")]
-        [DataMember]
-        public List<CardDetail> ObjCardDetail { get; set; }
-
+        public Int32 TypeOfCustomer { get; set; }
     }
 
-    public class CardDetail
-    {
-        [JsonPropertyName("CardIdentifier")]
-        public string CardIdentifier { get; set; }
+    //public class CardDetail
+    //{
+    //    [JsonPropertyName("CardIdentifier")]
+    //    public string CardIdentifier { get; set; }
 
-        [JsonPropertyName("VechileNo")]
-        public string VechileNo { get; set; }
+    //    [JsonPropertyName("VechileNo")]
+    //    public string VechileNo { get; set; }
 
-        [JsonPropertyName("VehicleType")]
-        public int VehicleType { get; set; }
+    //    [JsonPropertyName("VehicleType")]
+    //    public int VehicleType { get; set; }
 
-        [JsonPropertyName("VehicleMake")]
-        public string VehicleMake { get; set; }
+    //    [JsonPropertyName("VehicleMake")]
+    //    public string VehicleMake { get; set; }
 
-        [JsonPropertyName("YearOfRegistration")]
-        public int YearOfRegistration { get; set; }
-
-
+    //    [JsonPropertyName("YearOfRegistration")]
+    //    public int YearOfRegistration { get; set; }
         
-        
-    }
+    //}
 
     public class CustomerInsertModelOutput : BaseClassOutput
     {
@@ -391,9 +397,9 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public Int64 CustomerReferenceNo { get; set; }
 
-        [JsonProperty("CustomerID")]
-        [DataMember]
-        public string CustomerID { get; set; }
+        //[JsonProperty("CustomerID")]
+        //[DataMember]
+        //public string CustomerID { get; set; }
     }
 
 }

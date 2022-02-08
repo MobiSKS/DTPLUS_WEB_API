@@ -1,8 +1,4 @@
 ﻿using HPCL.DataRepository.DBDapper;
-using System;
-using System.Data;
-using System.Data.SqlClient;
-using HPCL.DataModel.Account;
 using Microsoft.Extensions.Logging;
 
 namespace HPCL.DataRepository.Account
@@ -17,7 +13,7 @@ namespace HPCL.DataRepository.Account
             _logger = logger;
         }
 
-        
+
     }
     //using (var connectio1n = _context.CreateConnection())
     // {

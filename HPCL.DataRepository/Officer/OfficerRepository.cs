@@ -1,11 +1,11 @@
 ﻿using Dapper;
+using HPCL.DataModel.Officer;
 using HPCL.DataRepository.DBDapper;
+using HPCL.Infrastructure.CommonClass;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Collections.Generic;
-using HPCL.DataModel.Officer;
-using HPCL.Infrastructure.CommonClass;
 
 namespace HPCL.DataRepository.Officer
 {
@@ -81,7 +81,7 @@ namespace HPCL.DataRepository.Officer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        
+
         public async Task<IEnumerable<DeleteOfficerModelOutput>> DeleteOfficer([FromBody] DeleteOfficerModelInput ObjClass)
         {
             var procedureName = "UspInactiveOfficer";

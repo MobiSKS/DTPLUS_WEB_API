@@ -2,10 +2,8 @@
 using HPCL.DataModel.Merchant;
 using HPCL.DataRepository.DBDapper;
 using HPCL.Infrastructure.CommonClass;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 

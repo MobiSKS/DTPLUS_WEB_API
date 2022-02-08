@@ -1,9 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HPCL.DataModel;
+﻿using HPCL.DataModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace HPCL.DataRepository.DataContext
 {

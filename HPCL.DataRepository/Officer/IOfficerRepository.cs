@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using HPCL.DataModel.Officer;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using HPCL.DataModel.Officer;
 
 namespace HPCL.DataRepository.Officer
 {
