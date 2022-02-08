@@ -141,7 +141,7 @@ namespace HPCL.DataRepository.Customer
             //parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
             //parameters.Add("FeePaymentsChequeNo", ObjClass.FeePaymentsChequeNo, DbType.String, ParameterDirection.Input);
             //parameters.Add("FeePaymentsChequeDate", ObjClass.FeePaymentsChequeDate, DbType.DateTime, ParameterDirection.Input);
-            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
@@ -283,38 +283,101 @@ namespace HPCL.DataRepository.Customer
 
         public async Task<IEnumerable<CustomerKYCModelOutput>> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass)
         {
-            string FileNamePath = string.Empty;
-            string filePath = string.Empty;
-            var procedureName = "UspInsertCustomerKYC";
-            var parameters = new DynamicParameters();
-            var ImageFileName = ObjClass.ImageFileName;
-            if (ImageFileName.Length > 0)
+            string FileNamePathIdProofFront = string.Empty;
+            var ImageFileNameIdProofFront = ObjClass.IdProofFront;
+            if (ImageFileNameIdProofFront.Length > 0)
             {
                 IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
-                var ext = ImageFileName.FileName.Substring(ImageFileName.FileName.LastIndexOf('.'));
+                var ext = ImageFileNameIdProofFront.FileName.Substring(ImageFileNameIdProofFront.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
                 {
-                    //string webRootPath = _hostingEnvironment.WebRootPath;
+
                     string contentRootPath = _hostingEnvironment.ContentRootPath;
-                    FileNamePath = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + ObjClass.FileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                        + "_" + ObjClass.KYCType + "_" + ImageFileName.FileName;
-                    filePath = contentRootPath + FileNamePath;
-
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        ImageFileName.CopyTo(fileStream);
-                    }
+                    FileNamePathIdProofFront = "/CustomerKYCImage/" + ObjClass.CustomerReferenceNo + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                        + "_" + ObjClass.IdProofType + "_" + ImageFileNameIdProofFront.FileName;
+                    string filePathIdProofFront = contentRootPath + FileNamePathIdProofFront;
+                    var fileStream = new FileStream(filePathIdProofFront, FileMode.Create);
+                    ImageFileNameIdProofFront.CopyTo(fileStream);
                 }
             }
 
-            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("FileName", ObjClass.FileName, DbType.String, ParameterDirection.Input);
-            parameters.Add("FileNamePath", FileNamePath, DbType.String, ParameterDirection.Input);
-            parameters.Add("KYCType", ObjClass.KYCType, DbType.String, ParameterDirection.Input);
+
+            string FileNamePathIdProofBack = string.Empty;
+            var ImageFileNameIdProofBack = ObjClass.IdProofBack;
+            if (ImageFileNameIdProofBack.Length > 0)
+            {
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                var ext = ImageFileNameIdProofBack.FileName.Substring(ImageFileNameIdProofBack.FileName.LastIndexOf('.'));
+                var extension = ext.ToLower();
+                if (AllowedFileExtensions.Contains(extension))
+                {
+
+                    string contentRootPath = _hostingEnvironment.ContentRootPath;
+                    FileNamePathIdProofBack = "/CustomerKYCImage/" + ObjClass.CustomerReferenceNo + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                        + "_" + ObjClass.IdProofType + "_" + ImageFileNameIdProofBack.FileName;
+                    string filePathIdProofBack = contentRootPath + FileNamePathIdProofBack;
+                    var fileStream = new FileStream(filePathIdProofBack, FileMode.Create);
+                    ImageFileNameIdProofBack.CopyTo(fileStream);
+                }
+            }
+
+            string FileNamePathAddressProofFront = string.Empty;
+            var ImageFileNameAddressProofFront = ObjClass.AddressProofFront;
+            if (ImageFileNameAddressProofFront.Length > 0)
+            {
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
+                var extension = ext.ToLower();
+                if (AllowedFileExtensions.Contains(extension))
+                {
+
+                    string contentRootPath = _hostingEnvironment.ContentRootPath;
+                    FileNamePathAddressProofFront = "/CustomerKYCImage/" + ObjClass.CustomerReferenceNo + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                        + "_" + ObjClass.IdProofType + "_" + ImageFileNameAddressProofFront.FileName;
+                    string filePathAddressProofFront = contentRootPath + FileNamePathAddressProofFront;
+                    var fileStream = new FileStream(filePathAddressProofFront, FileMode.Create);
+                    ImageFileNameAddressProofFront.CopyTo(fileStream);
+                }
+            }
+
+
+            string FileNamePathAddressProofBack = string.Empty;
+            var ImageFileNameAddressProofBack = ObjClass.AddressProofBack;
+            if (ImageFileNameAddressProofBack.Length > 0)
+            {
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                var ext = ImageFileNameAddressProofBack.FileName.Substring(ImageFileNameAddressProofBack.FileName.LastIndexOf('.'));
+                var extension = ext.ToLower();
+                if (AllowedFileExtensions.Contains(extension))
+                {
+
+                    string contentRootPath = _hostingEnvironment.ContentRootPath;
+                    FileNamePathAddressProofBack = "/CustomerKYCImage/" + ObjClass.CustomerReferenceNo + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                        + "_" + ObjClass.IdProofType + "_" + ImageFileNameAddressProofBack.FileName;
+                    string filePathAddressProofBack = contentRootPath + FileNamePathAddressProofBack;
+                    var fileStream = new FileStream(filePathAddressProofBack, FileMode.Create);
+                    ImageFileNameAddressProofBack.CopyTo(fileStream);
+                }
+            }
+
+
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("IdProofType", ObjClass.IdProofType, DbType.String, ParameterDirection.Input);
+            parameters.Add("IdProofDocumentNo", ObjClass.IdProofDocumentNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("IdProofFront", FileNamePathIdProofFront, DbType.String, ParameterDirection.Input);
+            parameters.Add("IdProofBack", FileNamePathIdProofBack, DbType.String, ParameterDirection.Input);
+            parameters.Add("AddressProofType", ObjClass.AddressProofType, DbType.String, ParameterDirection.Input);
+            parameters.Add("AddressProofDocumentNo", ObjClass.AddressProofDocumentNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("AddressProofFront", FileNamePathAddressProofFront, DbType.String, ParameterDirection.Input);
+            parameters.Add("AddressProofBack", FileNamePathAddressProofBack, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceNo", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
+
+            var procedureName = "UspInsertCustomerKYC";
             return await connection.QueryAsync<CustomerKYCModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 

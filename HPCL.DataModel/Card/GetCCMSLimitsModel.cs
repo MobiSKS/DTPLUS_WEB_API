@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
@@ -25,13 +26,34 @@ namespace HPCL.DataModel.Card
 
 
         //[Required]
-        [JsonPropertyName("Statusflag")]
+        [JsonPropertyName("VechileNo")]
         [DataMember]
-        public Int32 Statusflag { get; set; }
+        public string VechileNo { get; set; }
 
     }
 
     public class GetCCMSLimitsModelOutput
+    {
+
+        [JsonProperty("CCMSBalanceDetail")]
+        public List<GetCCMSLimitsForAllCardsModelOutput> CCMSBalanceDetail { get; set; }
+
+        [JsonProperty("CCMSBasicDetail")]
+        public List<CCMSLimitsModelOutput> CCMSBasicDetail { get; set; }
+
+
+        //[JsonProperty("ActualCCMSBalance")]
+        //[DataMember]
+        //public float ActualCCMSBalance { get; set; }
+
+
+        //[JsonProperty("UnallocatedCCMSBalance")]
+        //[DataMember]
+        //public float UnallocatedCCMSBalance { get; set; }
+
+    }
+
+    public class CCMSLimitsModelOutput
     {
         [JsonProperty("SrNumber")]
         [DataMember]
@@ -92,19 +114,7 @@ namespace HPCL.DataModel.Card
         [JsonProperty("CCMSReloadSaleLimitValue")]
         [DataMember]
         public float CCMSReloadSaleLimitValue { get; set; }
-
-        [JsonProperty("ActualCCMSBalance")]
-        [DataMember]
-        public float ActualCCMSBalance { get; set; }
-
-
-        [JsonProperty("UnallocatedCCMSBalance")]
-        [DataMember]
-        public float UnallocatedCCMSBalance { get; set; }
-
     }
-
-
     public class GetCCMSLimitsForAllCardsModelInput : BaseClass
     {
         [Required]
@@ -112,21 +122,9 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string Customerid { get; set; }
 
-        //[Required]
-        [JsonPropertyName("CardNo")]
+        [JsonPropertyName("Statusflag")]
         [DataMember]
-        public string CardNo { get; set; }
-
-
-        [JsonPropertyName("MobileNo")]
-        [DataMember]
-        public string MobileNo { get; set; }
-
-
-        [JsonPropertyName("VechileNo")]
-        [DataMember]
-        public string VechileNo { get; set; }
-
+        public Int32 Statusflag { get; set; }
     }
 
     public class GetCCMSLimitsForAllCardsModelOutput

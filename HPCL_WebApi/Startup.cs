@@ -22,6 +22,7 @@ using HPCL.DataRepository.Merchant;
 using HPCL.DataRepository.Card;
 using HPCL.DataRepository.RegionalOffice;
 using HPCL.DataRepository.ZonalOffice;
+using HPCL.DataRepository.Transaction;
 
 namespace HPCL_WebApi
 {
@@ -80,6 +81,7 @@ namespace HPCL_WebApi
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<IRegionalOfficeRepository, RegionalOfficeRepository>();
             services.AddScoped<IZonalOfficeRepository, ZonalOfficeRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {

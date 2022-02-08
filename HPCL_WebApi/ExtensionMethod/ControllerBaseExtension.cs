@@ -149,6 +149,110 @@ namespace HPCL_WebApi.ExtensionMethod
                 ResponseMessage = StatusInformation.Merchant_already_registered.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Merchant_already_registered;
             }
+            ////
+            if (Message == "Failed due to one time transcation limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_one_time_Transcation_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_one_time_Transcation_limit;
+            }
+
+            if (Message == "Failed due to day transcation limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_day_transcation_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_day_transcation_limit;
+            }
+
+            if (Message == "Failed due to monthly transcation limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_monthly_transcation_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_monthly_transcation_limit;
+            }
+
+
+            if (Message == "Failed due to transcation error")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_transcation_error.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_transcation_error;
+            }
+
+
+            if (Message == "Failed due to insufficient balance in card")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_insufficient_balance_in_card.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_insufficient_balance_in_card;
+            }
+
+
+            if (Message == "Failed due to one time CCCMS limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_one_time_CCCMS_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_one_time_CCCMS_limit;
+            }
+
+            if (Message == "Failed due to daily CCCMS limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_daily_CCCMS_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_daily_CCCMS_limit;
+            }
+
+            if (Message == "Failed due to monthly CCCMS limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_monthly_CCCMS_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_monthly_CCCMS_limit;
+            }
+
+            if (Message == "Failed due to yearly CCCMS limit")
+            {
+                ResponseMessage = StatusInformation.Failed_due_to_yearly_CCCMS_limit.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Failed_due_to_yearly_CCCMS_limit;
+            }
+
+
+            if (Message == "Invalid sale type")
+            {
+                ResponseMessage = StatusInformation.Invalid_sale_type.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Invalid_sale_type;
+            }
+
+
+            if (Message == "Customer is not active")
+            {
+                ResponseMessage = StatusInformation.Customer_is_not_active.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Customer_is_not_active;
+            }
+
+
+            if (Message == "Service is not active at this card")
+            {
+                ResponseMessage = StatusInformation.Service_is_not_active_at_this_card.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Service_is_not_active_at_this_card;
+            }
+
+
+            if (Message == "Service is not active at this merchant")
+            {
+                ResponseMessage = StatusInformation.Service_is_not_active_at_this_merchant.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Service_is_not_active_at_this_merchant;
+            }
+
+
+            if (Message == "Card is not active")
+            {
+                ResponseMessage = StatusInformation.Card_is_not_active.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Card_is_not_active;
+            }
+
+            if (Message == "Terminal is not active")
+            {
+                ResponseMessage = StatusInformation.Terminal_is_not_active.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Terminal_is_not_active;
+            }
+
+            if (Message == "Merchant is not active")
+            {
+                ResponseMessage = StatusInformation.Merchant_is_not_active.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Merchant_is_not_active;
+            }
 
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;

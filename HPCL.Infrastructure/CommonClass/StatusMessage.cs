@@ -54,6 +54,23 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "You can create only one or two terminal at the time of merchant creation")] Terminal_Creation = 1044,
             [Display(Name = "ErpCode is already registered")] ErpCode_already_registered = 1045,
             [Display(Name = "Merchant is already registered")] Merchant_already_registered = 1046,
+
+            [Display(Name = "Failed due to one time transcation limit")] Failed_due_to_one_time_Transcation_limit = 1047,
+            [Display(Name = "Failed due to day transcation limit")] Failed_due_to_day_transcation_limit = 1048,
+            [Display(Name = "Failed due to monthly transcation limit")] Failed_due_to_monthly_transcation_limit = 1049,
+            [Display(Name = "Failed due to transcation error")] Failed_due_to_transcation_error = 1050,
+            [Display(Name = "Failed due to insufficient balance in card")] Failed_due_to_insufficient_balance_in_card = 1051,
+            [Display(Name = "Failed due to one time CCCMS limit")] Failed_due_to_one_time_CCCMS_limit = 1052,
+            [Display(Name = "Failed due to daily CCCMS limit")] Failed_due_to_daily_CCCMS_limit = 1053,
+            [Display(Name = "Failed due to monthly CCCMS limit")] Failed_due_to_monthly_CCCMS_limit = 1055,
+            [Display(Name = "Failed due to yearly CCCMS limit")] Failed_due_to_yearly_CCCMS_limit = 1056,
+            [Display(Name = "Invalid sale type")] Invalid_sale_type = 1057,
+            [Display(Name = "Customer is not active")] Customer_is_not_active = 1058,
+            [Display(Name = "Service is not active at this card")] Service_is_not_active_at_this_card = 1059,
+            [Display(Name = "Service is not active at this merchant")] Service_is_not_active_at_this_merchant = 1060,
+            [Display(Name = "Card is not active")] Card_is_not_active = 1061,
+            [Display(Name = "Terminal is not active")] Terminal_is_not_active = 1062,
+            [Display(Name = "Merchant is not active")] Merchant_is_not_active = 1063,
             None = int.MaxValue
         }
 

@@ -8,26 +8,58 @@ namespace HPCL.DataModel.Customer
 {
     public class CustomerKYCModelInput : BaseClass
     {
-        [Required]
-        [JsonPropertyName("FormNumber")]
-        [DataMember]
-        public Int64 FormNumber { get; set; }
+
 
         [Required]
-        [JsonPropertyName("FileName")]
+        [JsonPropertyName("CustomerReferenceNo")]
         [DataMember]
-        public string FileName { get; set; }
+        public Int64 CustomerReferenceNo { get; set; }
 
         [Required]
-        [JsonPropertyName("ImageFileName")]
+        [JsonPropertyName("IdProofType")]
         [DataMember]
-        //public string FileNamePath { get; set; }
-        public IFormFile ImageFileName { get; set; }
+        public string IdProofType { get; set; }
+
 
         [Required]
-        [JsonPropertyName("KYCType")]
+        [JsonPropertyName("IdProofDocumentNo")]
         [DataMember]
-        public string KYCType { get; set; }
+        public string IdProofDocumentNo { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("IdProofFront")]
+        [DataMember]
+        public IFormFile IdProofFront { get; set; }
+
+        [Required]
+        [JsonPropertyName("IdProofBack")]
+        [DataMember]
+        public IFormFile IdProofBack { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("AddressProofType")]
+        [DataMember]
+        public string AddressProofType { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("AddressProofDocumentNo")]
+        [DataMember]
+        public string AddressProofDocumentNo { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("AddressProofFront")]
+        [DataMember]
+        public IFormFile AddressProofFront { get; set; }
+
+        [Required]
+        [JsonPropertyName("AddressProofBack")]
+        [DataMember]
+        public IFormFile AddressProofBack { get; set; }
+
 
         [Required]
         [JsonPropertyName("CreatedBy")]

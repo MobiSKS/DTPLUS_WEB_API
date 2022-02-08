@@ -116,6 +116,7 @@ namespace HPCL.DataRepository.Card
             dtDBR.Columns.Add("Cardno", typeof(string));
             dtDBR.Columns.Add("Limittype", typeof(int));
             dtDBR.Columns.Add("Amount", typeof(float));
+            dtDBR.Columns.Add("MobileNo", typeof(string));
 
 
             var procedureName = "UspUpdateCCMSLimits";
@@ -135,6 +136,7 @@ namespace HPCL.DataRepository.Card
                 dr["Cardno"] = ObjCardLimits.Cardno;
                 dr["Limittype"] = ObjCardLimits.Limittype;
                 dr["Amount"] = ObjCardLimits.Amount;
+                dr["MobileNo"] = ObjCardLimits.MobileNo;
                 dtDBR.Rows.Add(dr);
                 dtDBR.AcceptChanges();
             }
@@ -144,16 +146,21 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<UpdateCCMSLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<GetCCMSLimitsModelOutput>> GetCCMSLimits([FromBody] GetCCMSLimitsModelInput ObjClass)
+        public async Task<GetCCMSLimitsModelOutput> GetCCMSLimits([FromBody] GetCCMSLimitsModelInput ObjClass)
         {
             var procedureName = "UspGetCCMSLimits";
             var parameters = new DynamicParameters();
             parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
             parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
-            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("VechileNo", ObjClass.VechileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<GetCCMSLimitsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+            var storedProcedureResult = new GetCCMSLimitsModelOutput();
+            storedProcedureResult.CCMSBalanceDetail = (List<GetCCMSLimitsForAllCardsModelOutput>)await result.ReadAsync<GetCCMSLimitsForAllCardsModelOutput>(); ;
+            storedProcedureResult.CCMSBasicDetail = (List<CCMSLimitsModelOutput>)await result.ReadAsync<CCMSLimitsModelOutput>(); ;
+            return storedProcedureResult;
         }
 
         public async Task<IEnumerable<GetCardLimitsModelOutput>> GetCardLimits([FromBody] GetCardLimitsModelInput ObjClass)
@@ -241,9 +248,7 @@ namespace HPCL.DataRepository.Card
             var procedureName = "UspGetCCMSLimitsForAllCards";
             var parameters = new DynamicParameters();
             parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("VechileNo", ObjClass.VechileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCCMSLimitsForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

@@ -43,16 +43,21 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string Cardno { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("Limittype")]
         [DataMember]
         public int Limittype { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("Amount")]
         [DataMember]
         public float Amount { get; set; }
- 
+
+        //[Required]
+        [JsonPropertyName("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+
     }
 
     public class UpdateCCMSLimitsModelOutput : BaseClassOutput
