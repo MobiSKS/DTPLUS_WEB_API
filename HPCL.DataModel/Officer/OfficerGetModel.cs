@@ -97,10 +97,9 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string Createdby { get; set; }
 
-        [JsonProperty("LocationId")]
-        [DataMember]
-        public int LocationId { get; set; }
-
+        //[JsonProperty("LocationId")]
+        //[DataMember]
+        //public int LocationId { get; set; }
        
 
         [JsonProperty("StateId")]
@@ -129,9 +128,32 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string CityName { get; set; }
 
+    }
 
+    public class GetOfficerLocationMappingModelOutput
+    {
+
+        [JsonProperty("OfficerId")]
+        [DataMember]
+        public int OfficerId { get; set; }
+
+        [JsonProperty("ZOId")]
+        [DataMember]
+        public int ZOId { get; set; }
+
+        [JsonProperty("ZOName")]
+        [DataMember]
+        public string ZOName { get; set; }
+
+
+        [JsonProperty("ROId")]
+        [DataMember]
+        public int ROId { get; set; }
+
+        [JsonProperty("ROName")]
+        [DataMember]
+        public string ROName { get; set; }
 
     }
 
- 
 }

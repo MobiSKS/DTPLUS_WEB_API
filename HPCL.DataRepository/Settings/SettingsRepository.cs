@@ -127,7 +127,13 @@ namespace HPCL.DataRepository.Settings
         }
 
 
+        public async Task<IEnumerable<SettingGetProofTypeModelOutput>> GetProofType([FromBody] SettingGetProofTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetProofTypes";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetProofTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
 
+        }
 
 
     }

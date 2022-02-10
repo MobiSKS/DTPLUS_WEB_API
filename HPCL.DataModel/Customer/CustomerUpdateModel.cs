@@ -329,14 +329,14 @@ namespace HPCL.DataModel.Customer
         public Int16 FeePaymentsCollectFeeWaiver { get; set; }
 
 
-        [JsonPropertyName("FeePaymentsChequeNo")]
+        [JsonPropertyName("FeePaymentNo")]
         [DataMember]
-        public string FeePaymentsChequeNo { get; set; }
+        public string FeePaymentNo { get; set; }
 
 
-        [JsonPropertyName("FeePaymentsChequeDate")]
+        [JsonPropertyName("FeePaymentDate")]
         [DataMember]
-        public DateTime FeePaymentsChequeDate { get; set; }
+        public DateTime FeePaymentDate { get; set; }
 
         [JsonPropertyName("ObjCardDetail")]
         [DataMember]

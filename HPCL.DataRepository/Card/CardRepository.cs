@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using HPCL.DataModel.Card;
 using HPCL.DataRepository.DBDapper;
+using HPCL.Infrastructure.CommonClass;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -252,6 +253,81 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCCMSLimitsForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<AddCardModelOutput>> AddCard([FromBody] AddCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("UserDTNoofCards");
+            dtDBR.Columns.Add("CardIdentifier", typeof(string));
+            dtDBR.Columns.Add("VechileNo", typeof(string));
+            dtDBR.Columns.Add("VehicleMake", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(int));
+            dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+
+            var procedureName = "UspAddCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
+            parameters.Add("FeePaymentNo", ObjClass.FeePaymentNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeePaymentDate", ObjClass.FeePaymentDate, DbType.DateTime, ParameterDirection.Input);
+
+            if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
+            {
+                foreach (CardDetail ObjCardDetails in ObjClass.ObjCardDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
+                    dr["VechileNo"] = ObjCardDetails.VechileNo;
+                    dr["VehicleMake"] = ObjCardDetails.VehicleMake;
+                    dr["VehicleType"] = ObjCardDetails.VehicleType;
+                    dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+            parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardPreference", ObjClass.CardPreference, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AddCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<UpdateMobileandFastagNoInCardModelOutput>> UpdateMobileandFastagNoInCard([FromBody] UpdateMobileandFastagNoInCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeUpdateMobileInCard");
+            dtDBR.Columns.Add("Cardno", typeof(string));
+            dtDBR.Columns.Add("Mobileno", typeof(string));
+            dtDBR.Columns.Add("FastagNo", typeof(string));
+
+            var procedureName = "UspUpdateMobileandFastagNoInCard";
+            var parameters = new DynamicParameters();
+
+            if (ObjClass.ObjUpdateMobileandFastagNoInCard != null)
+            {
+                foreach (UpdateMobileandFastagNoInCard ObjCardDetails in ObjClass.ObjUpdateMobileandFastagNoInCard)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["Cardno"] = ObjCardDetails.Cardno;
+                    dr["Mobileno"] = ObjCardDetails.Mobileno;
+                    dr["FastagNo"] = ObjCardDetails.FastagNo;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            parameters.Add("UpdateMobileInCard", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateMobileandFastagNoInCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+       
 
     }
 }

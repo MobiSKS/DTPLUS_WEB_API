@@ -79,7 +79,7 @@ namespace HPCL.DataModel.Merchant
 
 
 
-        [Required]
+        //[Required]
         [JsonPropertyName("GSTNumber")]
         [DataMember]
         public string GSTNumber { get; set; }
@@ -196,12 +196,12 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string Mics { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("CommunicationAddress1")]
         [DataMember]
         public string CommunicationAddress1 { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("CommunicationAddress2")]
         [DataMember]
         public string CommunicationAddress2 { get; set; }
@@ -221,12 +221,12 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CommunicationCity { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("CommunicationStateId")]
         [DataMember]
         public Int32 CommunicationStateId { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("CommunicationDistrictId")]
         [DataMember]
         public Int32 CommunicationDistrictId { get; set; }

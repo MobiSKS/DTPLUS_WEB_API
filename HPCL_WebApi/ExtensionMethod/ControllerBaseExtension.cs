@@ -215,6 +215,12 @@ namespace HPCL_WebApi.ExtensionMethod
             }
 
 
+            if (Message == "Officer is not active")
+            {
+                ResponseMessage = StatusInformation.Officer_is_not_active.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Officer_is_not_active;
+            }
+
             if (Message == "Customer is not active")
             {
                 ResponseMessage = StatusInformation.Customer_is_not_active.GetDisplayName().ToString();
@@ -252,6 +258,18 @@ namespace HPCL_WebApi.ExtensionMethod
             {
                 ResponseMessage = StatusInformation.Merchant_is_not_active.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Merchant_is_not_active;
+            }
+
+            if (Message == "Details no found")
+            {
+                ResponseMessage = StatusInformation.Details_no_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Details_no_found;
+            }
+
+            if (Message == "RBE ID or RBE Name does not exist")
+            {
+                ResponseMessage = StatusInformation.RBE_ID_or_RBE_Name_does_not_exist.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.RBE_ID_or_RBE_Name_does_not_exist;
             }
 
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);

@@ -98,7 +98,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_merchant")]
         public async Task<IActionResult> InsertMerchant([FromBody] MerchantInsertModelInput ObjClass)
         {

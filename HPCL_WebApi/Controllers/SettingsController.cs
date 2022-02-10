@@ -328,11 +328,34 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-       
 
-        
 
-        
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_proof_type")]
+        public async Task<IActionResult> GetProofType([FromBody] SettingGetProofTypeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetProofType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
 
     }
 

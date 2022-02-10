@@ -138,5 +138,17 @@ namespace HPCL.DataModel.Card
         [JsonProperty("CardIdentifier")]
         [DataMember]
         public string CardIdentifier { get; set; }
+
+        [JsonProperty("LimitTypeId")]
+        [DataMember]
+        public Int32 LimitTypeId { get; set; }
+
+        [JsonProperty("LimitTypeName")]
+        [DataMember]
+        public string LimitTypeName { get; set; }
+
+        [JsonProperty("CCMSReloadSaleLimitValue")]
+        [DataMember]
+        public float CCMSReloadSaleLimitValue { get; set; }
     }
 }

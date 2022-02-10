@@ -189,4 +189,104 @@ namespace HPCL.DataModel.Transaction
     {
 
     }
+
+
+    public class TransactionBalanceTransferModelInput : BaseClass
+    {
+        [JsonPropertyName("Merchantid")]
+        [DataMember]
+        public string Merchantid { get; set; }
+
+        [JsonPropertyName("Terminalid")]
+        [DataMember]
+        public string Terminalid { get; set; }
+
+        [JsonPropertyName("Fromaccount")]
+        [DataMember]
+        public string Fromaccount { get; set; }
+
+        [JsonPropertyName("Toaccount")]
+        [DataMember]
+        public string Toaccount { get; set; }
+
+
+        [JsonPropertyName("Transid")]
+        [DataMember]
+        public string Transid { get; set; }
+
+        [JsonPropertyName("Transdate")]
+        [DataMember]
+        public DateTime Transdate { get; set; }
+
+
+        [JsonPropertyName("Amount")]
+        [DataMember]
+        public float Amount { get; set; }
+
+
+
+        [JsonPropertyName("Type")]
+        [DataMember]
+        public string Type { get; set; }
+
+
+        [JsonPropertyName("Mobileno")]
+        [DataMember]
+        public string Mobileno { get; set; }
+
+
+        [JsonPropertyName("OTP")]
+        [DataMember]
+        public string OTP { get; set; }
+
+
+        [JsonPropertyName("Pin")]
+        [DataMember]
+        public string Pin { get; set; }
+
+
+        [JsonPropertyName("Source")]
+        [DataMember]
+        public string Source { get; set; }
+
+        [JsonPropertyName("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+    }
+    public class TransactionBalanceTransferModelOutput : BaseClassOutput
+    {
+
+    }
+
+    public class TransactionGenerateOTPModelInput : BaseClass
+    {
+        [JsonPropertyName("Merchantid")]
+        [DataMember]
+        public string Merchantid { get; set; }
+
+        [JsonPropertyName("Terminalid")]
+        [DataMember]
+        public string Terminalid { get; set; }
+
+
+        [JsonPropertyName("Mobileno")]
+        [DataMember]
+        public string Mobileno { get; set; }
+
+
+        [JsonPropertyName("OTPtype")]
+        [DataMember]
+        public int OTPtype { get; set; }
+
+
+        [JsonPropertyName("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+    }
+    public class TransactionGenerateOTPModelOutput : BaseClassOutput
+    {
+
+    }
 }

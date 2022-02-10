@@ -62,6 +62,7 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Failed due to insufficient balance in card")] Failed_due_to_insufficient_balance_in_card = 1051,
             [Display(Name = "Failed due to one time CCCMS limit")] Failed_due_to_one_time_CCCMS_limit = 1052,
             [Display(Name = "Failed due to daily CCCMS limit")] Failed_due_to_daily_CCCMS_limit = 1053,
+            [Display(Name = "RBE ID or RBE Name does not exist")] RBE_ID_or_RBE_Name_does_not_exist = 1054,
             [Display(Name = "Failed due to monthly CCCMS limit")] Failed_due_to_monthly_CCCMS_limit = 1055,
             [Display(Name = "Failed due to yearly CCCMS limit")] Failed_due_to_yearly_CCCMS_limit = 1056,
             [Display(Name = "Invalid sale type")] Invalid_sale_type = 1057,
@@ -71,6 +72,9 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Card is not active")] Card_is_not_active = 1061,
             [Display(Name = "Terminal is not active")] Terminal_is_not_active = 1062,
             [Display(Name = "Merchant is not active")] Merchant_is_not_active = 1063,
+            [Display(Name = "Details no found")] Details_no_found = 1064,
+            [Display(Name = "Officer is not active")] Officer_is_not_active = 1065,
+
             None = int.MaxValue
         }
 

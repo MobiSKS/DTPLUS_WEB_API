@@ -130,7 +130,7 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public Int32 CommunicationDistrictId { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("CommunicationPhoneNo")]
         [DataMember]
         public string CommunicationPhoneNo { get; set; }
@@ -361,6 +361,10 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("TypeOfCustomer")]
         [DataMember]
         public Int32 TypeOfCustomer { get; set; }
+
+        [JsonPropertyName("RBEId")]
+        [DataMember]
+        public Int32 RBEId { get; set; }
     }
 
     //public class CardDetail

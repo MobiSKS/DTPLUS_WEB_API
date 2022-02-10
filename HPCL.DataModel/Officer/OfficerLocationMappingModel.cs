@@ -27,6 +27,10 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public int RO { get; set; }
 
+        //[JsonPropertyName("HQ")]
+        //[DataMember]
+        //public int HQ { get; set; }
+
         [Required]
         [JsonPropertyName("Createdby")]
         [DataMember]

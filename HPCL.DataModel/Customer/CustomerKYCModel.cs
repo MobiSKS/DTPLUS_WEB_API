@@ -18,7 +18,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("IdProofType")]
         [DataMember]
-        public string IdProofType { get; set; }
+        public int IdProofType { get; set; }
 
 
         [Required]
@@ -41,7 +41,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("AddressProofType")]
         [DataMember]
-        public string AddressProofType { get; set; }
+        public int AddressProofType { get; set; }
 
 
         [Required]

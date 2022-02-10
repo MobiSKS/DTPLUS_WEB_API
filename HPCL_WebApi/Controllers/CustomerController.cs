@@ -295,32 +295,6 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_customer_by_customer_id")]
-        public async Task<IActionResult> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.GetCustomerByCustomerId(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    return this.OkCustom(ObjClass, result, _logger);
-                }
-            }
-        }
-
-         
-
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_vehicle_type")]
@@ -376,6 +350,131 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_name_and_form_number_by_reference_no")]
+        public async Task<IActionResult> GetNameandFormNumberbyReferenceNo([FromBody] CustomerGetCustomerReferenceNoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetNameandFormNumberbyReferenceNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_customer_by_customer_id")]
+        public async Task<IActionResult> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetCustomerByCustomerId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_customer_detail")]
+        public async Task<IActionResult> GetCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetCustomerDetails(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        //[HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[Route("get_raw_customer_detail")]
+        //public async Task<IActionResult> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        //{
+        //    if (ObjClass == null)
+        //    {
+        //        return this.BadRequestCustom(ObjClass, null, _logger);
+        //    }
+        //    else
+        //    {
+        //        var result = await _customerRepo.GetRawCustomerDetails(ObjClass);
+        //        if (result == null)
+        //        {
+        //            return this.NotFoundCustom(ObjClass, null, _logger);
+        //        }
+        //        else
+        //        {
+        //            return this.OkCustom(ObjClass, result, _logger);
+        //        }
+        //    }
+        //}
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_rbe_id")]
+        public async Task<IActionResult> GetRBEId([FromBody] RBEGetModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetRBEId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RBEGetModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RBEGetModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
     }
 
 }

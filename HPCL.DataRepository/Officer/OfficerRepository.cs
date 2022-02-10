@@ -110,6 +110,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
             parameters.Add("ZO", ObjClass.ZO, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RO", ObjClass.RO, DbType.Int32, ParameterDirection.Input);
+            //parameters.Add("HQ", ObjClass.HQ, DbType.Int32, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<OfficerLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -142,6 +143,15 @@ namespace HPCL.DataRepository.Officer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetOfficerTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
 
+        }
+
+        public async Task<IEnumerable<GetOfficerLocationMappingModelOutput>> GetOfficerLocationMapping([FromBody] BindOfficerModelInput ObjClass)
+        {
+            var procedureName = "UspGetOfficerLocationMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("OfficerID", ObjClass.OfficerID, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetOfficerLocationMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }
