@@ -45,7 +45,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("SalesArea")]
         [DataMember]
-        public string SalesArea { get; set; }
+        public Int32 SalesArea { get; set; }
 
         [Required]
         [JsonPropertyName("CreatedBy")]

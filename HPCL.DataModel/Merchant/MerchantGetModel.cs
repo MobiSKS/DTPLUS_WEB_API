@@ -271,6 +271,11 @@ namespace HPCL.DataModel.Merchant
         public string CommunicationCity { get; set; }
 
 
+        [JsonProperty("CommunicationStateId")]
+        [DataMember]
+        public Int32 CommunicationStateId { get; set; }
+
+
         [JsonProperty("CommunicationStateName")]
         [DataMember]
         public string CommunicationStateName { get; set; }

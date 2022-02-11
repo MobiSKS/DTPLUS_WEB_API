@@ -73,7 +73,7 @@ namespace HPCL.DataRepository.Customer
             dtDBR.Columns.Add("CardIdentifier", typeof(string));
             dtDBR.Columns.Add("VechileNo", typeof(string));
             dtDBR.Columns.Add("VehicleMake", typeof(string));
-            dtDBR.Columns.Add("VehicleType", typeof(int));
+            dtDBR.Columns.Add("VehicleType", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
             //var procedureName = "UspInsertCustomer";
@@ -84,7 +84,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("ZonalOffice", ObjClass.ZonalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
-            parameters.Add("SalesArea", ObjClass.SalesArea, DbType.String, ParameterDirection.Input);
+            parameters.Add("SalesArea", ObjClass.SalesArea, DbType.Int32, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
@@ -172,20 +172,21 @@ namespace HPCL.DataRepository.Customer
 
         public async Task<IEnumerable<CustomerUpdateModelOutput>> UpdateCustomer([FromBody] CustomerUpdateModelInput ObjClass)
         {
-            var dtDBR = new DataTable("UserDTNoofCards");
-            dtDBR.Columns.Add("CardIdentifier", typeof(string));
-            dtDBR.Columns.Add("VechileNo", typeof(string));
-            dtDBR.Columns.Add("VehicleMake", typeof(string));
-            dtDBR.Columns.Add("VehicleType", typeof(int));
-            dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+            //var dtDBR = new DataTable("UserDTNoofCards");
+            //dtDBR.Columns.Add("CardIdentifier", typeof(string));
+            //dtDBR.Columns.Add("VechileNo", typeof(string));
+            //dtDBR.Columns.Add("VehicleMake", typeof(string));
+            //dtDBR.Columns.Add("VehicleType", typeof(int));
+            //dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
-            var procedureName = "UspUpdateCustomer";
+            //var procedureName = "UspUpdateCustomer";
+            var procedureName = "UspUpdateRawCustomer";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("ZonalOffice", ObjClass.ZonalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
-            parameters.Add("SalesArea", ObjClass.SalesArea, DbType.String, ParameterDirection.Input);
+            parameters.Add("SalesArea", ObjClass.SalesArea, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
             parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
@@ -238,32 +239,32 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FleetSizeNoOfVechileOwnedLCV", ObjClass.FleetSizeNoOfVechileOwnedLCV, DbType.Int16, ParameterDirection.Input);
             parameters.Add("FleetSizeNoOfVechileOwnedMUVSUV", ObjClass.FleetSizeNoOfVechileOwnedMUVSUV, DbType.Int16, ParameterDirection.Input);
             parameters.Add("FleetSizeNoOfVechileOwnedCarJeep", ObjClass.FleetSizeNoOfVechileOwnedCarJeep, DbType.Int16, ParameterDirection.Input);
-            parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
-            parameters.Add("FeePaymentNo", ObjClass.FeePaymentNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("FeePaymentDate", ObjClass.FeePaymentDate, DbType.DateTime, ParameterDirection.Input);
+            //parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
+            //parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
+            //parameters.Add("FeePaymentNo", ObjClass.FeePaymentNo, DbType.String, ParameterDirection.Input);
+            //parameters.Add("FeePaymentDate", ObjClass.FeePaymentDate, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
 
 
-            if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
-            {
-                foreach (UpdateCardDetail ObjCardDetails in ObjClass.ObjCardDetail)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
-                    dr["VechileNo"] = ObjCardDetails.VechileNo;
-                    dr["VehicleMake"] = ObjCardDetails.VehicleMake;
-                    dr["VehicleType"] = ObjCardDetails.VehicleType;
-                    dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+            //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
+            //{
+            //    foreach (UpdateCardDetail ObjCardDetails in ObjClass.ObjCardDetail)
+            //    {
+            //        DataRow dr = dtDBR.NewRow();
+            //        dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
+            //        dr["VechileNo"] = ObjCardDetails.VechileNo;
+            //        dr["VehicleMake"] = ObjCardDetails.VehicleMake;
+            //        dr["VehicleType"] = ObjCardDetails.VehicleType;
+            //        dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
 
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
+            //        dtDBR.Rows.Add(dr);
+            //        dtDBR.AcceptChanges();
+            //    }
+            //}
 
-            parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
+            //parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -289,7 +290,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameIdProofFront = ObjClass.IdProofFront;
             if (ImageFileNameIdProofFront.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
                 var ext = ImageFileNameIdProofFront.FileName.Substring(ImageFileNameIdProofFront.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -309,7 +310,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameIdProofBack = ObjClass.IdProofBack;
             if (ImageFileNameIdProofBack.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
                 var ext = ImageFileNameIdProofBack.FileName.Substring(ImageFileNameIdProofBack.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -328,7 +329,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameAddressProofFront = ObjClass.AddressProofFront;
             if (ImageFileNameAddressProofFront.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
                 var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -348,7 +349,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameAddressProofBack = ObjClass.AddressProofBack;
             if (ImageFileNameAddressProofBack.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
                 var ext = ImageFileNameAddressProofBack.FileName.Substring(ImageFileNameAddressProofBack.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -525,6 +526,18 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("RBEId", ObjClass.RBEId, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RBEGetModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<BindPendingCustomerModelOutput>> BindPendingCustomer([FromBody] BindPendingCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspBindPendingCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

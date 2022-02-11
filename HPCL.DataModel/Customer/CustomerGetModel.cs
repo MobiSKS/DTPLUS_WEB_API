@@ -184,6 +184,9 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public DateTime DateOfApplication { get; set; }
 
+        [JsonProperty("SalesareaID")]
+        [DataMember]
+        public Int32 SalesareaID { get; set; }
 
         [JsonProperty("SalesArea")]
         [DataMember]
@@ -594,5 +597,96 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("FeewaiverApprovedBy")]
         [DataMember]
         public string FeewaiverApprovedBy { get; set; }
+    }
+
+    public class BindPendingCustomerModelInput : BaseClass
+    {
+        
+        [JsonPropertyName("StateId")]
+        [DataMember]
+        public int StateId { get; set; }
+ 
+        [JsonPropertyName("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+       
+
+        [JsonPropertyName("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+         
+    }
+
+    public class BindPendingCustomerModelOutput
+    {
+          
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+
+        [JsonProperty("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+
+        [JsonProperty("CustomerAddress")]
+        [DataMember]
+        public string CustomerAddress { get; set; }
+
+
+        [JsonProperty("PhoneNo")]
+        [DataMember]
+        public string PhoneNo { get; set; }
+
+
+        [JsonProperty("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+
+
+        [JsonProperty("TotalCards")]
+        [DataMember]
+        public Int32 TotalCards { get; set; }
+
+
+        [JsonProperty("CreatedRoleId")]
+        [DataMember]
+        public Int32 CreatedRoleId { get; set; }
+
+
+        [JsonProperty("CreatedRoleName")]
+        [DataMember]
+        public string CreatedRoleName { get; set; }
+
+
+        [JsonProperty("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+
+        [JsonProperty("CreatedDate")]
+        [DataMember]
+        public string CreatedDate { get; set; }
+
+
+        [JsonProperty("StatusId")]
+        [DataMember]
+        public Int32 StatusId { get; set; }
+
+
+
+        [JsonProperty("StatusName")]
+        [DataMember]
+        public string StatusName { get; set; }
+
+         
     }
 }

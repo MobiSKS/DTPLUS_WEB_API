@@ -57,7 +57,7 @@ namespace HPCL.DataModel.Card
         public string VechileNo { get; set; }
 
         [JsonPropertyName("VehicleType")]
-        public int VehicleType { get; set; }
+        public string VehicleType { get; set; }
 
         [JsonPropertyName("VehicleMake")]
         public string VehicleMake { get; set; }

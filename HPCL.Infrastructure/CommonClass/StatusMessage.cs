@@ -74,7 +74,7 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Merchant is not active")] Merchant_is_not_active = 1063,
             [Display(Name = "Details no found")] Details_no_found = 1064,
             [Display(Name = "Officer is not active")] Officer_is_not_active = 1065,
-
+            [Display(Name = "Customer Reference no not found")] Customer_Reference_no_not_found = 1066,
             None = int.MaxValue
         }
 

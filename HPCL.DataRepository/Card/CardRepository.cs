@@ -261,7 +261,7 @@ namespace HPCL.DataRepository.Card
             dtDBR.Columns.Add("CardIdentifier", typeof(string));
             dtDBR.Columns.Add("VechileNo", typeof(string));
             dtDBR.Columns.Add("VehicleMake", typeof(string));
-            dtDBR.Columns.Add("VehicleType", typeof(int));
+            dtDBR.Columns.Add("VehicleType", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
 
             var procedureName = "UspAddCard";

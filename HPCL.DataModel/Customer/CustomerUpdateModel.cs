@@ -35,7 +35,7 @@ namespace HPCL.DataModel.Customer
         [Required]
         [JsonPropertyName("SalesArea")]
         [DataMember]
-        public string SalesArea { get; set; }
+        public Int32 SalesArea { get; set; }
 
         [Required]
         [JsonPropertyName("ModifiedBy")]
@@ -319,50 +319,50 @@ namespace HPCL.DataModel.Customer
         public Int16 FleetSizeNoOfVechileOwnedCarJeep { get; set; }
 
 
-        [JsonPropertyName("NoOfCards")]
-        [DataMember]
-        public Int32 NoOfCards { get; set; }
+        //[JsonPropertyName("NoOfCards")]
+        //[DataMember]
+        //public Int32 NoOfCards { get; set; }
 
 
-        [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
-        [DataMember]
-        public Int16 FeePaymentsCollectFeeWaiver { get; set; }
+        //[JsonPropertyName("FeePaymentsCollectFeeWaiver")]
+        //[DataMember]
+        //public Int16 FeePaymentsCollectFeeWaiver { get; set; }
 
 
-        [JsonPropertyName("FeePaymentNo")]
-        [DataMember]
-        public string FeePaymentNo { get; set; }
+        //[JsonPropertyName("FeePaymentNo")]
+        //[DataMember]
+        //public string FeePaymentNo { get; set; }
 
 
-        [JsonPropertyName("FeePaymentDate")]
-        [DataMember]
-        public DateTime FeePaymentDate { get; set; }
+        //[JsonPropertyName("FeePaymentDate")]
+        //[DataMember]
+        //public DateTime FeePaymentDate { get; set; }
 
-        [JsonPropertyName("ObjCardDetail")]
-        [DataMember]
-        public List<UpdateCardDetail> ObjCardDetail { get; set; }
-
-    }
-
-    public class UpdateCardDetail
-    {
-        [JsonPropertyName("CardIdentifier")]
-        public string CardIdentifier { get; set; }
-
-        [JsonPropertyName("VehicleType")]
-        public int VehicleType { get; set; }
-
-        [JsonPropertyName("VehicleMake")]
-        public string VehicleMake { get; set; }
-
-        [JsonPropertyName("YearOfRegistration")]
-        public int YearOfRegistration { get; set; }
-
-
-        [JsonPropertyName("VechileNo")]
-        public string VechileNo { get; set; }
+        //[JsonPropertyName("ObjCardDetail")]
+        //[DataMember]
+        //public List<UpdateCardDetail> ObjCardDetail { get; set; }
 
     }
+
+    //public class UpdateCardDetail
+    //{
+    //    [JsonPropertyName("CardIdentifier")]
+    //    public string CardIdentifier { get; set; }
+
+    //    [JsonPropertyName("VehicleType")]
+    //    public int VehicleType { get; set; }
+
+    //    [JsonPropertyName("VehicleMake")]
+    //    public string VehicleMake { get; set; }
+
+    //    [JsonPropertyName("YearOfRegistration")]
+    //    public int YearOfRegistration { get; set; }
+
+
+    //    [JsonPropertyName("VechileNo")]
+    //    public string VechileNo { get; set; }
+
+    //}
 
     public class CustomerUpdateModelOutput : BaseClassOutput
     {

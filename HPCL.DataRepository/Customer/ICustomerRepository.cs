@@ -30,6 +30,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerDetailsModelOutput>> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass);
 
         public Task<IEnumerable<RBEGetModelOutput>> GetRBEId([FromBody] RBEGetModelInput ObjClass);
+
+        public Task<IEnumerable<BindPendingCustomerModelOutput>> BindPendingCustomer([FromBody] BindPendingCustomerModelInput ObjClass);
     }
 
 }

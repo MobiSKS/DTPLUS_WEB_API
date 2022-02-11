@@ -272,6 +272,12 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.RBE_ID_or_RBE_Name_does_not_exist;
             }
 
+            if (Message == "Customer Reference no not found")
+            {
+                ResponseMessage = StatusInformation.Customer_Reference_no_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Customer_Reference_no_not_found;
+            }
+
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             //string MessageStr = ResponseMessage;

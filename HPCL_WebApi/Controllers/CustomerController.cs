@@ -232,7 +232,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("upload_customer_kyc")]
         public async Task<IActionResult> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass)
         {
@@ -422,28 +422,28 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-        //[HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
-        //[Route("get_raw_customer_detail")]
-        //public async Task<IActionResult> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
-        //{
-        //    if (ObjClass == null)
-        //    {
-        //        return this.BadRequestCustom(ObjClass, null, _logger);
-        //    }
-        //    else
-        //    {
-        //        var result = await _customerRepo.GetRawCustomerDetails(ObjClass);
-        //        if (result == null)
-        //        {
-        //            return this.NotFoundCustom(ObjClass, null, _logger);
-        //        }
-        //        else
-        //        {
-        //            return this.OkCustom(ObjClass, result, _logger);
-        //        }
-        //    }
-        //}
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_raw_customer_detail")]
+        public async Task<IActionResult> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetRawCustomerDetails(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -472,6 +472,29 @@ namespace HPCL_WebApi.Controllers
                         return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<RBEGetModelOutput>().ToList()[0].Reason);
                     }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_pending_customer")]
+        public async Task<IActionResult> BindPendingCustomer([FromBody] BindPendingCustomerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.BindPendingCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
                 }
             }
         }
