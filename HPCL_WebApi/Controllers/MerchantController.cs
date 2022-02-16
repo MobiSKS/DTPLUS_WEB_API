@@ -1,5 +1,6 @@
 ﻿using HPCL.DataModel.Merchant;
 using HPCL.DataRepository.Merchant;
+using HPCL.Infrastructure.CommonClass;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
@@ -126,7 +127,7 @@ namespace HPCL_WebApi.Controllers
                             result.Cast<MerchantInsertModelOutput>().ToList()[0].Reason);
                     }
 
-                     
+
                 }
             }
 
@@ -187,6 +188,14 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].Status == 1)
                     {
+                        if (result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].SendStatus == 4)
+                        {
+                            string EmailSubject = "<p>Hi <b>" + result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].DealerName
+   + "<b></br> User Name : " + result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].UserName
+   + " </br> Password : " + result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].Password + " </p>";
+                            Variables.FunSendMail(result.Cast<MerchantApprovalRejectModelOutput>().ToList()[0].EmailId, EmailSubject, "Merchant/Dealer Details");
+                        }
+
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
@@ -225,6 +234,56 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_merchant_by_erp_code")]
+        public async Task<IActionResult> GetMerchantbyERPCode([FromBody] MerchantGetByErpCodeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetMerchantbyERPCode(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_merchant_approval_list")]
+        public async Task<IActionResult> GetMerchantApproval([FromBody] MerchantGetMerchantApprovalModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetMerchantApproval(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
 
 
     }

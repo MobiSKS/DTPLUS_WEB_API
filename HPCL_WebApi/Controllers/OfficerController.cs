@@ -99,7 +99,13 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<OfficerInsertModelOutput>().ToList()[0].Status == 1)
                     {
-                        Variables.FunSendMail(ObjClass.EmailId, "Your Password is: " + result.Cast<OfficerInsertModelOutput>().ToList()[0].Password + "", "Password Details");
+                        if (ObjClass.OfficerType != 4)
+                        {
+                            string EmailSubject = "<p>Hi <b>" + ObjClass.FirstName + " " + ObjClass.LastName + "<b></br> User Name : "
+                                + ObjClass.UserName + " </br> Password : "+ result.Cast<OfficerInsertModelOutput>().ToList()[0].Password + " </p>";
+
+                            Variables.FunSendMail(ObjClass.EmailId, EmailSubject, "Officer Details");
+                        }
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
@@ -212,7 +218,7 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, 
+                        return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<DeleteOfficerModelOutput>().ToList()[0].Reason);
                     }
                 }
@@ -243,7 +249,7 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, 
+                        return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<OfficerLocationMappingModelOutput>().ToList()[0].Reason);
                     }
                 }
@@ -275,7 +281,7 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, 
+                        return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<OfficerDeleteLocationMappingModelOutput>().ToList()[0].Reason);
                     }
                 }
@@ -302,6 +308,126 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_rbe_officer")]
+        public async Task<IActionResult> BindOfficerbyRBEId([FromBody] BindRBEOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.BindOfficerbyRBEId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_rbe_officer")]
+        public async Task<IActionResult> UpdateRBEOfficer([FromBody] RBEOfficerUpdateModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.UpdateRBEOfficer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<OfficerUpdateModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<OfficerUpdateModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
+
+        [HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("upload_officer_kyc")]
+        public async Task<IActionResult> UploadOfficerKYC([Microsoft.AspNetCore.Mvc.FromForm] OfficerKYCModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.UploadOfficerKYC(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<OfficerKYCModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<OfficerKYCModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_rbe_mobile_no")]
+        public async Task<IActionResult> CheckRBEMobileNo([FromBody] GetRBEMobilenoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.CheckRBEMobileNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<GetRBEMobilenoModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<GetRBEMobilenoModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
         }

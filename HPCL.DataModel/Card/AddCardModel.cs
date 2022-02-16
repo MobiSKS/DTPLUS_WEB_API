@@ -19,7 +19,7 @@ namespace HPCL.DataModel.Card
 
         [JsonPropertyName("RBEId")]
         [DataMember]
-        public Int32 RBEId { get; set; }
+        public string RBEId { get; set; }
 
         [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
         [DataMember]
@@ -68,6 +68,33 @@ namespace HPCL.DataModel.Card
     }
 
     public class AddCardModelOutput : BaseClassOutput
+    {
+
+    }
+
+    public class ApproveRejectCardModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("CustomerReferenceNo")]
+        [DataMember]
+        public string CustomerReferenceNo { get; set; }
+
+        [Required]
+        [JsonPropertyName("Comments")]
+        [DataMember]
+        public string Comments { get; set; }
+
+        [Required]
+        [JsonPropertyName("Approvalstatus")]
+        [DataMember]
+        public Int32 Approvalstatus { get; set; }
+
+        [Required]
+        [JsonPropertyName("ApprovedBy")]
+        [DataMember]
+        public string ApprovedBy { get; set; }
+    }
+    public class ApproveRejectCardModelOutput : BaseClassOutput
     {
 
     }

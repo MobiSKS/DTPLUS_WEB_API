@@ -19,4 +19,6 @@ namespace HPCL.DataModel.Settings
         [DataMember]
         public string TransactionType { get; set; }
     }
+
+   
 }

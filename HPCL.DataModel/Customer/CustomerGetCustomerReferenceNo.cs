@@ -37,4 +37,37 @@ namespace HPCL.DataModel.Customer
         public Int64 FormNumber { get; set; }
 
     }
+
+
+    public class SendOTPConsentModelInput : BaseClass
+    {
+        [JsonPropertyName("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+    }
+
+    public class SendOTPConsentModelOutput :BaseClassOutput
+    {
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public string OTP { get; set; }
+    }
+
+
+    public class ValidateOTPConsentModelInput : BaseClass
+    {
+        [JsonPropertyName("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+        [JsonPropertyName("OTP")]
+        [DataMember]
+        public string OTP { get; set; }
+    }
+
+    public class ValidateOTPConsentModelOutput : BaseClassOutput
+    {
+
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -131,7 +132,23 @@ namespace HPCL.DataModel.Customer
         public string FeewaiverApprovedOnToDate { get; set; }
     }
 
+    public class CustomerDetailsbyFormNumberModelInput : BaseClass
+    {
+        [JsonPropertyName("FormNumber")]
+        [DataMember]
+        public string FormNumber { get; set; }
+    }
+
     public class CustomerDetailsModelOutput
+    {
+        [JsonProperty("GetCustomerDetails")]
+        public List<GetCustomerDetailsModelOutput> GetCustomerDetails { get; set; }
+
+        [JsonProperty("CustomerKYCDetails")]
+        public List<CustomerKYCDetailsModelOutput> CustomerKYCDetails { get; set; }
+    }
+
+    public class GetCustomerDetailsModelOutput
     {
         [JsonProperty("CustomerID")]
         [DataMember]
@@ -597,25 +614,117 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("FeewaiverApprovedBy")]
         [DataMember]
         public string FeewaiverApprovedBy { get; set; }
-    }
 
+
+        [JsonProperty("TierOfCustomerId")]
+        [DataMember]
+        public Int32 TierOfCustomerId { get; set; }
+
+        [JsonProperty("TypeOfCustomerName")]
+        [DataMember]
+        public string TypeOfCustomerName { get; set; }
+
+
+        [JsonProperty("TypeOfCustomerId")]
+        [DataMember]
+        public Int32 TypeOfCustomerId { get; set; }
+
+        [JsonProperty("TierOfCustomerName")]
+        [DataMember]
+        public string TierOfCustomerName { get; set; }
+
+    }
+    public class CustomerKYCDetailsModelOutput
+    {
+
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+
+        [JsonProperty("IdProofTypeId")]
+        [DataMember]
+        public Int32 IdProofTypeId { get; set; }
+
+
+        [JsonProperty("IdProofTypeName")]
+        [DataMember]
+        public string IdProofTypeName { get; set; }
+
+
+        [JsonProperty("IdProofDocumentNo")]
+        [DataMember]
+        public string IdProofDocumentNo { get; set; }
+
+
+        [JsonProperty("IdProofFront")]
+        [DataMember]
+        public string IdProofFront { get; set; }
+
+
+        [JsonProperty("IdProofBack")]
+        [DataMember]
+        public string IdProofBack { get; set; }
+
+
+        [JsonProperty("AddressProofTypeId")]
+        [DataMember]
+        public Int32 AddressProofTypeId { get; set; }
+
+
+        [JsonProperty("AddressProofTypeName")]
+        [DataMember]
+        public string AddressProofTypeName { get; set; }
+
+
+        [JsonProperty("AddressProofDocumentNo")]
+        [DataMember]
+        public string AddressProofDocumentNo { get; set; }
+
+
+        [JsonProperty("AddressProofFront")]
+        [DataMember]
+        public string AddressProofFront { get; set; }
+
+
+        [JsonProperty("AddressProofBack")]
+        [DataMember]
+        public string AddressProofBack { get; set; }
+
+
+    }
     public class BindPendingCustomerModelInput : BaseClass
     {
         
         [JsonPropertyName("StateId")]
         [DataMember]
-        public int StateId { get; set; }
+        public string StateId { get; set; }
  
         [JsonPropertyName("FormNumber")]
         [DataMember]
-        public Int64 FormNumber { get; set; }
+        public string FormNumber { get; set; }
        
 
         [JsonPropertyName("CustomerName")]
         [DataMember]
         public string CustomerName { get; set; }
 
-         
+        [JsonPropertyName("Createdon")]
+        [DataMember]
+        public string Createdon { get; set; }
+
+
+        [JsonPropertyName("Createdby")]
+        [DataMember]
+        public string Createdby { get; set; }
+
+
     }
 
     public class BindPendingCustomerModelOutput
@@ -687,6 +796,13 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string StatusName { get; set; }
 
-         
+
+        [JsonProperty("KYCStatus")]
+        [DataMember]
+        public string KYCStatus { get; set; }
+
+
     }
+
+    
 }

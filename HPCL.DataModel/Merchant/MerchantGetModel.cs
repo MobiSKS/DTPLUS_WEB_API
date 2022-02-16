@@ -364,4 +364,106 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string ApprovedBy { get; set; }
     }
+
+
+    public class MerchantGetByErpCodeModelInput : BaseClass
+    {
+        [JsonPropertyName("ErpCode")]
+        [DataMember]
+        public string ErpCode { get; set; }
+    }
+
+    public class MerchantGetMerchantApprovalModelInput : BaseClass
+    {
+        [JsonPropertyName("Category")]
+        [DataMember]
+        public string Category { get; set; }
+
+        [JsonPropertyName("FromDate")]
+        [DataMember]
+        public string FromDate { get; set; }
+
+        [JsonPropertyName("ToDate")]
+        [DataMember]
+        public string ToDate { get; set; }
+    }
+
+    public class MerchantGetMerchantApprovalModelOutput
+    {
+        [JsonProperty("MerchantId")]
+        [DataMember]
+        public string MerchantId { get; set; }
+
+
+        [JsonProperty("ErpCode")]
+        [DataMember]
+        public string ErpCode { get; set; }
+
+
+        [JsonProperty("ZonalOfficeId")]
+        [DataMember]
+        public Int32 ZonalOfficeId { get; set; }
+
+
+        [JsonProperty("ZonalOfficeName")]
+        [DataMember]
+        public string ZonalOfficeName { get; set; }
+
+
+
+        [JsonProperty("RegionalOfficeId")]
+        [DataMember]
+        public Int32 RegionalOfficeId { get; set; }
+
+
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
+
+
+        [JsonProperty("City")]
+        [DataMember]
+        public string City { get; set; }
+
+
+        [JsonProperty("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+
+        [JsonProperty("CreatedTime")]
+        [DataMember]
+        public string CreatedTime { get; set; }
+
+
+        [JsonProperty("VerifiedBy")]
+        [DataMember]
+        public string VerifiedBy { get; set; }
+
+
+        [JsonProperty("VerifiedDate")]
+        [DataMember]
+        public string VerifiedDate { get; set; }
+
+        [JsonProperty("Comments")]
+        [DataMember]
+        public string Comments { get; set; }
+
+
+        [JsonProperty("MerchantTypeId")]
+        [DataMember]
+        public Int32 MerchantTypeId { get; set; }
+
+
+        [JsonProperty("MerchantTypeName")]
+        [DataMember]
+        public string MerchantTypeName { get; set; }
+
+
+        [JsonProperty("RetailOutletName")]
+        [DataMember]
+        public string RetailOutletName { get; set; }
+
+    }
 }

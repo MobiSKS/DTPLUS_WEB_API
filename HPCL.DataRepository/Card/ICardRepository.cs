@@ -24,5 +24,11 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<GetCCMSLimitsForAllCardsModelOutput>> GetCCMSLimitsForAllCards([FromBody] GetCCMSLimitsForAllCardsModelInput ObjClass);
         public Task<IEnumerable<AddCardModelOutput>> AddCard([FromBody] AddCardModelInput ObjClass);
         public Task<IEnumerable<UpdateMobileandFastagNoInCardModelOutput>> UpdateMobileandFastagNoInCard([FromBody] UpdateMobileandFastagNoInCardModelInput ObjClass);
+
+        public Task<IEnumerable<BindPendingCustomerforCardModelOutput>> BindPendingCustomerForCardApproval([FromBody] BindPendingCustomerforCardModelInput ObjClass);
+
+        public Task<IEnumerable<GetCardDetailForCardApprovalModelOutput>> GetCardDetailForCardApproval([FromBody] GetCardDetailForCardApprovalModelInput ObjClass);
+
+        public Task<IEnumerable<ApproveRejectCardModelOutput>> ApproveRejectCard([FromBody] ApproveRejectCardModelInput ObjClass);
     }
 }

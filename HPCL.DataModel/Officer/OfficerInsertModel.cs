@@ -93,6 +93,11 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string Createdby { get; set; }
 
+       
+        [JsonPropertyName("Password")]
+        [DataMember]
+        public string Password { get; set; }
+
     }
 
     public class OfficerInsertModelOutput : BaseClassOutput

@@ -6,6 +6,7 @@ using HPCL_WebApi.ActionFilters;
 using HPCL.DataModel.Customer;
 using System.Linq;
 using HPCL.DataRepository.Customer;
+using HPCL.Infrastructure.CommonClass;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -158,6 +159,7 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<CustomerInsertModelOutput>().ToList()[0].Status == 1)
                     {
+
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
@@ -284,6 +286,17 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<CustomerApprovalModelOutput>().ToList()[0].Status == 1)
                     {
+                        if (result.Cast<CustomerApprovalModelOutput>().ToList()[0].SendStatus == 4)
+                        {
+                            string EmailSubject = "<p>Hi <b>" + result.Cast<CustomerApprovalModelOutput>().ToList()[0].FirstName + " " 
+                                + result.Cast<CustomerApprovalModelOutput>().ToList()[0].LastName + "<b></br> User Name : "
+                                + result.Cast<CustomerApprovalModelOutput>().ToList()[0].UserName + " </br> Password : " 
+                                + result.Cast<CustomerApprovalModelOutput>().ToList()[0].Password + " </p>";
+
+                            Variables.FunSendMail(result.Cast<CustomerApprovalModelOutput>().ToList()[0].EmailId, EmailSubject, "Officer Details");
+                        }
+
+
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
@@ -350,6 +363,29 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_approve_fee_waiver_detail")]
+        public async Task<IActionResult> GetApproveFeeWaiverDetail([FromBody] GetApproveFeeWaiverDetailModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetApproveFeeWaiverDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -488,6 +524,76 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _customerRepo.BindPendingCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("send_otp_consent")]
+        public async Task<IActionResult> SendOTPConsent([FromBody] SendOTPConsentModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.SendOTPConsent(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("validate_otp_consent")]
+        public async Task<IActionResult> ValidateOTPConsent([FromBody] ValidateOTPConsentModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.ValidateOTPConsent(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_customer_detail_by_form_number")]
+        public async Task<IActionResult> GetPendingCustomerDetailbyFormNumber([FromBody] CustomerDetailsbyFormNumberModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetPendingCustomerDetailbyFormNumber(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);

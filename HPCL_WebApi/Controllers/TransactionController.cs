@@ -170,6 +170,7 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].Status == 1)
                     {
+
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else

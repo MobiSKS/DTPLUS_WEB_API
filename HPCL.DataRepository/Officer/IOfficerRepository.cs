@@ -22,5 +22,12 @@ namespace HPCL.DataRepository.Officer
 
         public Task<IEnumerable<GetOfficerLocationMappingModelOutput>> GetOfficerLocationMapping([FromBody] BindOfficerModelInput ObjClass);
 
+        public Task<IEnumerable<BindRBEOfficerModelOutput>> BindOfficerbyRBEId([FromBody] BindRBEOfficerModelInput ObjClass);
+
+        public Task<IEnumerable<OfficerUpdateModelOutput>> UpdateRBEOfficer([FromBody] RBEOfficerUpdateModelInput ObjClass);
+
+        public Task<IEnumerable<OfficerKYCModelOutput>> UploadOfficerKYC([Microsoft.AspNetCore.Mvc.FromForm] OfficerKYCModelInput ObjClass);
+
+        public Task<IEnumerable<GetRBEMobilenoModelOutput>> CheckRBEMobileNo([FromBody] GetRBEMobilenoModelInput ObjClass);
     }
 }

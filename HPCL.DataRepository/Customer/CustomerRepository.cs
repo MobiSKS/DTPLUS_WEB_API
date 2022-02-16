@@ -147,7 +147,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             parameters.Add("TierOfCustomer", ObjClass.TierOfCustomer, DbType.Int32, ParameterDirection.Input);
             parameters.Add("TypeOfCustomer", ObjClass.TypeOfCustomer, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("RBEId", ObjClass.RBEId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
 
             //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             //{
@@ -390,7 +390,7 @@ namespace HPCL.DataRepository.Customer
             var parameters = new DynamicParameters();
             parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
             parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
-            parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
@@ -411,9 +411,9 @@ namespace HPCL.DataRepository.Customer
         {
             var procedureName = "UspApproveRejectFeewaiver";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
             parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
-            parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("Approvalstatus", ObjClass.Approvalstatus, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
@@ -422,8 +422,21 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerFeewaiverApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<GetApproveFeeWaiverDetailModelOutput> GetApproveFeeWaiverDetail([FromBody] GetApproveFeeWaiverDetailModelInput ObjClass)
+        {
+            var procedureName = "UspGetApproveFeeWaiverDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new GetApproveFeeWaiverDetailModelOutput();
+            storedProcedureResult.GetApproveFeeWaiverBasicDetail = (List<GetApproveFeeWaiverBasicDetailModelOutput>)await result.ReadAsync<GetApproveFeeWaiverBasicDetailModelOutput>();
+            storedProcedureResult.GetApproveFeeWaiverCardDetail = (List<GetApproveFeeWaiverCardDetailModelOutput>)await result.ReadAsync<GetApproveFeeWaiverCardDetailModelOutput>();
+            return storedProcedureResult;
 
-       
+            //return await connection.QueryAsync<GetApproveFeeWaiverDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
         public async Task<IEnumerable<CustomerGetCustomerReferenceNoModelOutput>> GetNameandFormNumberbyReferenceNo([FromBody] CustomerGetCustomerReferenceNoModelInput ObjClass)
         {
@@ -435,16 +448,21 @@ namespace HPCL.DataRepository.Customer
         }
 
 
-        public async Task<IEnumerable<CustomerDetailsModelOutput>> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        public async Task<CustomerDetailsModelOutput> GetCustomerByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerDetailByCustomerId";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerDetailsModelOutput();
+            storedProcedureResult.GetCustomerDetails = (List<GetCustomerDetailsModelOutput>)await result.ReadAsync<GetCustomerDetailsModelOutput>();
+            storedProcedureResult.CustomerKYCDetails = (List<CustomerKYCDetailsModelOutput>)await result.ReadAsync<CustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+            //return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<CustomerDetailsModelOutput>> GetCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        public async Task<CustomerDetailsModelOutput> GetCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerDetail";
             var parameters = new DynamicParameters();
@@ -478,11 +496,16 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FeewaiverApprovedOnFromDate", ObjClass.FeewaiverApprovedOnFromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("FeewaiverApprovedOnToDate", ObjClass.FeewaiverApprovedOnToDate, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerDetailsModelOutput();
+            storedProcedureResult.GetCustomerDetails = (List<GetCustomerDetailsModelOutput>)await result.ReadAsync<GetCustomerDetailsModelOutput>();
+            storedProcedureResult.CustomerKYCDetails = (List<CustomerKYCDetailsModelOutput>)await result.ReadAsync<CustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
         }
 
 
-        public async Task<IEnumerable<CustomerDetailsModelOutput>> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
+        public async Task<CustomerDetailsModelOutput> GetRawCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
         {
             var procedureName = "UspGetRawCustomerDetail";
             var parameters = new DynamicParameters();
@@ -516,14 +539,19 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FeewaiverApprovedOnFromDate", ObjClass.FeewaiverApprovedOnFromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("FeewaiverApprovedOnToDate", ObjClass.FeewaiverApprovedOnToDate, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerDetailsModelOutput();
+            storedProcedureResult.GetCustomerDetails = (List<GetCustomerDetailsModelOutput>)await result.ReadAsync<GetCustomerDetailsModelOutput>();
+            storedProcedureResult.CustomerKYCDetails = (List<CustomerKYCDetailsModelOutput>)await result.ReadAsync<CustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
         }
 
         public async Task<IEnumerable<RBEGetModelOutput>> GetRBEId([FromBody] RBEGetModelInput ObjClass)
         {
             var procedureName = "UspGetValidRBE";
             var parameters = new DynamicParameters();
-            parameters.Add("RBEId", ObjClass.RBEId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RBEGetModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -533,12 +561,46 @@ namespace HPCL.DataRepository.Customer
         {
             var procedureName = "UspBindPendingCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("StateId", ObjClass.StateId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdon", ObjClass.Createdon, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+
+        public async Task<IEnumerable<SendOTPConsentModelOutput>> SendOTPConsent([FromBody] SendOTPConsentModelInput ObjClass)
+        {
+            var procedureName = "UspSendOTPConsent";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SendOTPConsentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ValidateOTPConsentModelOutput>> ValidateOTPConsent([FromBody] ValidateOTPConsentModelInput ObjClass)
+        {
+            var procedureName = "UspValidateOTPConsent";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateOTPConsentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<CustomerDetailsModelOutput> GetPendingCustomerDetailbyFormNumber([FromBody] CustomerDetailsbyFormNumberModelInput ObjClass)
+        {
+            var procedureName = "UspGetPendingCustomerDetailbyFormNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerDetailsModelOutput();
+            storedProcedureResult.GetCustomerDetails = (List<GetCustomerDetailsModelOutput>)await result.ReadAsync<GetCustomerDetailsModelOutput>();
+            storedProcedureResult.CustomerKYCDetails = (List<CustomerKYCDetailsModelOutput>)await result.ReadAsync<CustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+        }
     }
 }

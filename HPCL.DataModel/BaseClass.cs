@@ -22,6 +22,9 @@ namespace HPCL.DataModel
         [JsonPropertyName("Userip")]
         [DataMember]
         public string Userip { get; set; }
+
+
+       
     }
 
     public abstract class BaseClassOutput

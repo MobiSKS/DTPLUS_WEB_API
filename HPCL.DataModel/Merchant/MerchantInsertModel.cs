@@ -31,7 +31,7 @@ namespace HPCL.DataModel.Merchant
         //[Required]
         [JsonPropertyName("MappedMerchantId")]
         [DataMember]
-        public Int64 MappedMerchantId { get; set; }
+        public string MappedMerchantId { get; set; }
 
         [Required]
         [JsonPropertyName("DealerMobileNo")]

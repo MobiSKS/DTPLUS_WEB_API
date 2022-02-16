@@ -151,4 +151,174 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public float CCMSReloadSaleLimitValue { get; set; }
     }
+
+    public class BindPendingCustomerforCardModelInput : BaseClass
+    {
+
+        [JsonPropertyName("StateId")]
+        [DataMember]
+        public string StateId { get; set; }
+
+        [JsonPropertyName("FormNumber")]
+        [DataMember]
+        public string FormNumber { get; set; }
+
+
+        [JsonPropertyName("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+        [JsonPropertyName("Createdon")]
+        [DataMember]
+        public string Createdon { get; set; }
+
+
+        [JsonPropertyName("Createdby")]
+        [DataMember]
+        public string Createdby { get; set; }
+
+
+    }
+
+    public class BindPendingCustomerforCardModelOutput
+    {
+
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+
+        [JsonProperty("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+
+        [JsonProperty("CustomerAddress")]
+        [DataMember]
+        public string CustomerAddress { get; set; }
+
+
+        [JsonProperty("PhoneNo")]
+        [DataMember]
+        public string PhoneNo { get; set; }
+
+
+        [JsonProperty("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+
+
+        [JsonProperty("TotalCards")]
+        [DataMember]
+        public Int32 TotalCards { get; set; }
+
+
+        [JsonProperty("CreatedRoleId")]
+        [DataMember]
+        public Int32 CreatedRoleId { get; set; }
+
+
+        [JsonProperty("CreatedRoleName")]
+        [DataMember]
+        public string CreatedRoleName { get; set; }
+
+
+        [JsonProperty("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+
+
+        [JsonProperty("CreatedDate")]
+        [DataMember]
+        public string CreatedDate { get; set; }
+
+
+        [JsonProperty("StatusId")]
+        [DataMember]
+        public Int32 StatusId { get; set; }
+
+
+
+        [JsonProperty("StatusName")]
+        [DataMember]
+        public string StatusName { get; set; }
+
+
+        [JsonProperty("KYCStatus")]
+        [DataMember]
+        public string KYCStatus { get; set; }
+
+
+    }
+
+
+    public class GetCardDetailForCardApprovalModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+    }
+
+    public class GetCardDetailForCardApprovalModelOutput
+    {
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public Int64 CustomerReferenceNo { get; set; }
+
+        [JsonProperty("CardPreference")]
+        [DataMember]
+        public string CardPreference { get; set; }
+
+
+        [JsonProperty("FeePaymentsCollectFeeWaiverId")]
+        [DataMember]
+        public Int16 FeePaymentsCollectFeeWaiverId { get; set; }
+
+
+        [JsonProperty("FeePaymentsCollectorFeeWaiver")]
+        [DataMember]
+        public string FeePaymentsCollectorFeeWaiver { get; set; }
+
+
+        [JsonProperty("FeePaymentNo")]
+        [DataMember]
+        public string FeePaymentNo { get; set; }
+
+
+        [JsonProperty("FeePaymentDate")]
+        [DataMember]
+        public DateTime FeePaymentDate { get; set; }
+
+
+        [JsonProperty("CardIdentifier")]
+        [DataMember]
+        public string CardIdentifier { get; set; }
+
+
+        [JsonProperty("VehicleType")]
+        [DataMember]
+        public string VehicleType { get; set; }
+
+
+        [JsonProperty("VehicleMake")]
+        [DataMember]
+        public string VehicleMake { get; set; }
+
+
+        [JsonProperty("YearOfRegistration")]
+        [DataMember]
+        public Int32 YearOfRegistration { get; set; }
+
+        [JsonProperty("VechileOwnerName")]
+        [DataMember]
+        public string VechileOwnerName { get; set; }
+
+    }
 }

@@ -51,7 +51,6 @@ namespace HPCL.DataRepository.Settings
             var procedureName = "UspGetTransactionType";
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetTransactionTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
         }
 
         public async Task<IEnumerable<SettingGetCountryModelOutput>> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
@@ -135,6 +134,13 @@ namespace HPCL.DataRepository.Settings
 
         }
 
+
+        public async Task<IEnumerable<SettingGetTierModelOutput>> GetTier([FromBody] SettingGetTierModelInput ObjClass)
+        {
+            var procedureName = "UspGetTier";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetTierModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
 
     }
 }

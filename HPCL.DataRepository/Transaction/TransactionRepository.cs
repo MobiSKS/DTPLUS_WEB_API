@@ -24,17 +24,18 @@ namespace HPCL.DataRepository.Transaction
             parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
             parameters.Add("Batchid", ObjClass.Batchid, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("Amount", ObjClass.Amount, DbType.Double, ParameterDirection.Input);
-            parameters.Add("Type", ObjClass.Type, DbType.String, ParameterDirection.Input);
-            parameters.Add("Transid", ObjClass.Transid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Transdate", ObjClass.Transdate, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("Invoiceamount", ObjClass.Invoiceamount, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Transtype", ObjClass.Transtype, DbType.String, ParameterDirection.Input);
+            parameters.Add("Invoiceid", ObjClass.Invoiceid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Invoicedate", ObjClass.Invoicedate, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
             parameters.Add("Productid", ObjClass.Productid, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Odometerreading", ObjClass.Odometerreading, DbType.String, ParameterDirection.Input);
             parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
             parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
-            parameters.Add("Source", ObjClass.Source, DbType.String, ParameterDirection.Input);
+            parameters.Add("Sourceid", ObjClass.Sourceid, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Formfactor", ObjClass.Formfactor, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<TransactionSalebyTerminalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

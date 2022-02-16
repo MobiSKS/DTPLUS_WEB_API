@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -26,22 +27,22 @@ namespace HPCL.DataModel.Transaction
         [DataMember]
         public Int64 Batchid { get; set; }
 
-        [JsonPropertyName("Amount")]
+        [JsonPropertyName("Invoiceamount")]
         [DataMember]
-        public float Amount { get; set; }
+        public float Invoiceamount { get; set; }
 
-        [JsonPropertyName("Type")]
+        [JsonPropertyName("Transtype")]
         [DataMember]
-        public string Type { get; set; }
+        public string Transtype { get; set; }
 
 
-        [JsonPropertyName("Transid")]
+        [JsonPropertyName("Invoiceid")]
         [DataMember]
-        public string Transid { get; set; }
+        public string Invoiceid { get; set; }
 
-        [JsonPropertyName("Transdate")]
+        [JsonPropertyName("Invoicedate")]
         [DataMember]
-        public DateTime Transdate { get; set; }
+        public DateTime Invoicedate { get; set; }
 
 
         [JsonPropertyName("Mobileno")]
@@ -68,13 +69,17 @@ namespace HPCL.DataModel.Transaction
         public string Pin { get; set; }
 
 
-        [JsonPropertyName("Source")]
+        [JsonPropertyName("Sourceid")]
         [DataMember]
-        public string Source { get; set; }
+        public string Sourceid { get; set; }
 
         [JsonPropertyName("CreatedBy")]
         [DataMember]
         public string CreatedBy { get; set; }
+
+        [JsonPropertyName("Formfactor")]
+        [DataMember]
+        public int Formfactor { get; set; }
     }
     public class TransactionSalebyTerminalModelOutput :BaseClassOutput
     {
@@ -287,6 +292,8 @@ namespace HPCL.DataModel.Transaction
     }
     public class TransactionGenerateOTPModelOutput : BaseClassOutput
     {
-
+        [JsonProperty("OTP")]
+        [DataMember]
+        public string OTP { get; set; }
     }
 }

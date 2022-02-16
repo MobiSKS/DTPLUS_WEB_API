@@ -46,7 +46,7 @@ namespace HPCL.DataRepository.Merchant
             parameters.Add("RetailOutletName", ObjClass.RetailOutletName, DbType.String, ParameterDirection.Input);
             parameters.Add("MerchantTypeId", ObjClass.MerchantTypeId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DealerName", ObjClass.DealerName, DbType.String, ParameterDirection.Input);
-            parameters.Add("MappedMerchantId", ObjClass.MappedMerchantId, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("MappedMerchantId", ObjClass.MappedMerchantId, DbType.String, ParameterDirection.Input);
             parameters.Add("DealerMobileNo", ObjClass.DealerMobileNo, DbType.String, ParameterDirection.Input);
             parameters.Add("OutletCategoryId", ObjClass.OutletCategoryId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("HighwayNo1", ObjClass.HighwayNo1, DbType.String, ParameterDirection.Input);
@@ -101,7 +101,7 @@ namespace HPCL.DataRepository.Merchant
         {
             var procedureName = "UspUpdateMerchant";
             var parameters = new DynamicParameters();
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ErpCode", ObjClass.ErpCode, DbType.String, ParameterDirection.Input);
             parameters.Add("RetailOutletName", ObjClass.RetailOutletName, DbType.String, ParameterDirection.Input);
             parameters.Add("MerchantTypeId", ObjClass.MerchantTypeId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DealerName", ObjClass.DealerName, DbType.String, ParameterDirection.Input);
@@ -155,11 +155,30 @@ namespace HPCL.DataRepository.Merchant
 
         public async Task<IEnumerable<MerchantApprovalRejectModelOutput>> ApproveRejectMerchant([FromBody] MerchantApprovalRejectModelInput ObjClass)
         {
+            var dtDBR = new DataTable("TypeUpdateMerchant");
+            dtDBR.Columns.Add("ErpCode", typeof(string));
+            dtDBR.Columns.Add("Comments", typeof(string));
+
             var procedureName = "UspApproveRejectMerchant";
             var parameters = new DynamicParameters();
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
-            parameters.Add("ApprovalType", ObjClass.ApprovalType, DbType.String, ParameterDirection.Input);
+            //parameters.Add("ErpCode", ObjClass.ErpCode, DbType.String, ParameterDirection.Input);
+            //parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
+
+            if (ObjClass.ObjApprovalRejectDetail != null)
+            {
+                foreach (ApprovalRejectModelInput ObjCardDetails in ObjClass.ObjApprovalRejectDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["ErpCode"] = ObjCardDetails.ErpCode;
+                    dr["Comments"] = ObjCardDetails.Comments;
+
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            parameters.Add("UpdateMerchant", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("StatusId", ObjClass.StatusId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
@@ -175,6 +194,26 @@ namespace HPCL.DataRepository.Merchant
             parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantGetByMerchantIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantGetByMerchantIdModelOutput>> GetMerchantbyERPCode([FromBody] MerchantGetByErpCodeModelInput ObjClass)
+        {
+            var procedureName = "UspGetMerchantbyErpCode";
+            var parameters = new DynamicParameters();
+            parameters.Add("ErpCode", ObjClass.ErpCode, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetByMerchantIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantGetMerchantApprovalModelOutput>> GetMerchantApproval([FromBody] MerchantGetMerchantApprovalModelInput ObjClass)
+        {
+            var procedureName = "UspGetMerchantApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("Category", ObjClass.Category, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetMerchantApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

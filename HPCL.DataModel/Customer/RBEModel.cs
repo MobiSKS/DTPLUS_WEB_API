@@ -9,17 +9,19 @@ namespace HPCL.DataModel.Customer
     {
         [JsonPropertyName("RBEId")]
         [DataMember]
-        public Int32 RBEId { get; set; }
+        public string RBEId { get; set; }
     }
 
     public class RBEGetModelOutput :BaseClassOutput
     {
         [JsonProperty("RBEId")]
         [DataMember]
-        public Int32 RBEId { get; set; }
+        public string RBEId { get; set; }
 
         [JsonProperty("RBEName")]
         [DataMember]
         public string RBEName { get; set; }
     }
+
+  
 }

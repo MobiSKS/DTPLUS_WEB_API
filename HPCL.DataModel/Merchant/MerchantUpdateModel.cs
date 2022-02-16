@@ -9,9 +9,9 @@ namespace HPCL.DataModel.Merchant
     public class MerchantUpdateModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("MerchantId")]
+        [JsonPropertyName("ErpCode")]
         [DataMember]
-        public string MerchantId { get; set; }
+        public string ErpCode { get; set; }
 
         [Required]
         [JsonPropertyName("RetailOutletName")]
