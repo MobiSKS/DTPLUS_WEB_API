@@ -365,6 +365,10 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("RBEId")]
         [DataMember]
         public string RBEId { get; set; }
+
+        [JsonPropertyName("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
     }
 
     //public class CardDetail

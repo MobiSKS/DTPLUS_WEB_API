@@ -433,6 +433,90 @@ namespace HPCL_WebApi.Controllers
         }
 
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_rbe_detail")]
+        public async Task<IActionResult> BindRBEDetail([FromBody] GetOfficerCreationApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.BindRBEDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_rbe_detail_by_user_name")]
+        public async Task<IActionResult> GetRBEDetailbyUserName([FromBody] GetRBEDetailbyUserNameModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.GetRBEDetailbyUserName(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_rbe")]
+        public async Task<IActionResult> ApproveRejectRBE([FromBody] RBEApprovalRejectModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.ApproveRejectRBE(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                       // string EmailSubject = "<p>Hi <b>" + ObjClass.FirstName + " " + ObjClass.LastName + "<b></br> User Name : "
+                            //   + ObjClass.UserName + " </br> Password : " + result.Cast<OfficerInsertModelOutput>().ToList()[0].Password + " </p>";
+
+                       // Variables.FunSendMail(ObjClass.EmailId, EmailSubject, "Officer Details");
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
     }
 
 }

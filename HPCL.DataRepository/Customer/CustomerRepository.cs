@@ -27,6 +27,39 @@ namespace HPCL.DataRepository.Customer
             //ObjVariable = new Variables(configuration);
         }
 
+        public async Task<IEnumerable<GetFormNumberModelOutput>> GetFormNumber([FromBody] GetFormNumberModelInput ObjClass)
+        {
+            var procedureName = "UspGetFormNumber";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetFormNumberModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CheckFormNumberModelOutput>> CheckFormNumber([FromBody] CheckFormNumberModelInput ObjClass)
+        {
+            var procedureName = "UspCheckFormNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckFormNumberModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CheckMobileNumberModelOutput>> CheckMobileNumber([FromBody] CheckMobileNumberModelInput ObjClass)
+        {
+            var procedureName = "UspCheckMobileNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckMobileNumberModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CheckEmailIdModelOutput>> CheckEmailId([FromBody] CheckEmailIdModelInput ObjClass)
+        {
+            var procedureName = "UspCheckEmailId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckEmailIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
         public async Task<IEnumerable<GetCustomerTypeModelOutput>> GetCustomerType([FromBody] GetCustomerTypeModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerType";
@@ -35,6 +68,8 @@ namespace HPCL.DataRepository.Customer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCustomerTypeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
 
         public async Task<IEnumerable<GetCustomerSubTypeModelOutput>> GetCustomerSubType([FromBody] GetCustomerSubTypeModelInput ObjClass)
         {
@@ -148,6 +183,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("TierOfCustomer", ObjClass.TierOfCustomer, DbType.Int32, ParameterDirection.Input);
             parameters.Add("TypeOfCustomer", ObjClass.TypeOfCustomer, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
 
             //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             //{
@@ -378,6 +414,8 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceNo", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
 
             var procedureName = "UspInsertCustomerKYC";
@@ -571,6 +609,19 @@ namespace HPCL.DataRepository.Customer
         }
 
 
+        public async Task<IEnumerable<BindPendingCustomerModelOutput>> BindUnverfiedCustomer([FromBody] BindPendingCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspBindUnverfiedCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdon", ObjClass.Createdon, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<IEnumerable<SendOTPConsentModelOutput>> SendOTPConsent([FromBody] SendOTPConsentModelInput ObjClass)
         {
             var procedureName = "UspSendOTPConsent";
@@ -602,5 +653,7 @@ namespace HPCL.DataRepository.Customer
             storedProcedureResult.CustomerKYCDetails = (List<CustomerKYCDetailsModelOutput>)await result.ReadAsync<CustomerKYCDetailsModelOutput>();
             return storedProcedureResult;
         }
+
+
     }
 }

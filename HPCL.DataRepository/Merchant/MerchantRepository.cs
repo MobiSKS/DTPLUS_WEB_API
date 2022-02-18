@@ -215,5 +215,15 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantGetMerchantApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<RejectedMerchantModelOutput>> GetRejectedMerchant([FromBody] RejectedMerchantModelInput ObjClass)
+        {
+            var procedureName = "UspGetRejectedMerchant";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RejectedMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

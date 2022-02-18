@@ -17,6 +17,11 @@ namespace HPCL.DataModel.Login
 
     public class GetLoginModelOutput : BaseClassOutput
     {
+        [JsonProperty("LoginType")]
+        [DataMember]
+        public string LoginType { get; set; }
+
+
         [JsonProperty("UserId")]
         [DataMember]
         public string UserId { get; set; }

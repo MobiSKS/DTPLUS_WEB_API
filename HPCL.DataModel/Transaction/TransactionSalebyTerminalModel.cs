@@ -289,9 +289,12 @@ namespace HPCL.DataModel.Transaction
         [DataMember]
         public string CreatedBy { get; set; }
 
+         
+
     }
     public class TransactionGenerateOTPModelOutput : BaseClassOutput
     {
+        
         [JsonProperty("OTP")]
         [DataMember]
         public string OTP { get; set; }

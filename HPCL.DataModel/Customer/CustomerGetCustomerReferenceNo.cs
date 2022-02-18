@@ -36,6 +36,14 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public Int64 FormNumber { get; set; }
 
+        [JsonProperty("CustomerTypeId")]
+        [DataMember]
+        public int CustomerTypeId { get; set; }
+
+        [JsonProperty("CustomerTypeName")]
+        [DataMember]
+        public string CustomerTypeName { get; set; }
+
     }
 
 

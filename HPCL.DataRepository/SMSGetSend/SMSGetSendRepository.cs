@@ -27,9 +27,24 @@ namespace HPCL.DataRepository.SMSGetSend
         {
             var procedureName = "UspGetSMSConfiguration";
             var parameters = new DynamicParameters();
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("CTID", ObjClass.CTID, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SMSSendOutputModel>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<InsertSMSTextEntryOutputModel>> InsertSMSTextEntry([FromBody] InsertSMSTextEntryInputModel ObjClass)
+        {
+            var procedureName = "UspInsertSMSTextEntry";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("HeaderTemplate", ObjClass.HeaderTemplate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CTID", ObjClass.CTID, DbType.String, ParameterDirection.Input);
+            parameters.Add("SMSText", ObjClass.SMSText, DbType.String, ParameterDirection.Input);
+            parameters.Add("SMSStatus", ObjClass.SMSStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("SMSStatusDesc", ObjClass.SMSStatusDesc, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<InsertSMSTextEntryOutputModel>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

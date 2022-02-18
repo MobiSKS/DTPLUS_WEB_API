@@ -294,7 +294,7 @@ namespace HPCL.DataModel.Card
 
         [JsonProperty("FeePaymentDate")]
         [DataMember]
-        public DateTime FeePaymentDate { get; set; }
+        public string FeePaymentDate { get; set; }
 
 
         [JsonProperty("CardIdentifier")]
@@ -319,6 +319,18 @@ namespace HPCL.DataModel.Card
         [JsonProperty("VechileOwnerName")]
         [DataMember]
         public string VechileOwnerName { get; set; }
+
+        [JsonProperty("RBEId")]
+        [DataMember]
+        public string RBEId { get; set; }
+
+        [JsonProperty("RbeName")]
+        [DataMember]
+        public string RbeName { get; set; }
+
+        [JsonProperty("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
 
     }
 }

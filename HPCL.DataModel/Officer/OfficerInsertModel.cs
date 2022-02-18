@@ -34,12 +34,12 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public int LocationId { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("Address1")]
         [DataMember]
         public string Address1 { get; set; }
 
-        [JsonPropertyName("Address2")]
+        //[JsonPropertyName("Address2")]
         [DataMember]
         public string Address2 { get; set; }
 
@@ -47,7 +47,7 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string Address3 { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("StateId")]
         [DataMember]
         public int StateId { get; set; }
@@ -57,7 +57,7 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string CityName { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("DistrictId")]
         [DataMember]
         public int DistrictId { get; set; }
@@ -67,7 +67,7 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string Pin { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(10, MinimumLength = 10)]
         [JsonPropertyName("MobileNo")]
         [DataMember]
@@ -77,7 +77,7 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string PhoneNo { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("EmailId")]
         [DataMember]
         [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]

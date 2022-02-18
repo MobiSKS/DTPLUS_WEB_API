@@ -94,5 +94,9 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("KYCStatus")]
         [DataMember]
         public string KYCStatus { get; set; }
+
+        [JsonProperty("CreatedRoleName")]
+        [DataMember]
+        public string CreatedRoleName { get; set; }
     }
 }

@@ -292,6 +292,9 @@ namespace HPCL.DataRepository.Card
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("CardPreference", ObjClass.CardPreference, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<AddCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -123,6 +125,14 @@ namespace HPCL.Infrastructure.CommonClass
             }
         }
 
+        public string StrAPI_HPCLConnectionString
+        {
+            get
+            {
+                return _configuration.GetSection("ConnectionStrings:HPCLConnectionString").Value.ToString();
+            }
+        }
+
         public static bool FunSendMail(string strEmailId, string strMailMessage, string strSubject)
         {
             try
@@ -143,9 +153,9 @@ namespace HPCL.Infrastructure.CommonClass
                     };
                     objSmtpClient.Send(objMailMessage);
                 }
-                catch 
+                catch
                 {
- 
+
                 }
 
                 return true;
@@ -157,5 +167,82 @@ namespace HPCL.Infrastructure.CommonClass
 
         }
 
+        public static bool SendSMS(string CTID, string MobileNo, string OTP, string CreatedBy)
+        {
+            string SQLGetSMS = "UspGetSMSConfiguration @CTID='" + CTID + "'";
+            DataTable dtSMS = new DataTable();
+
+            string SQLConnection = "server=180.179.222.161,21443;database=Dtplusnew;uid=datadesk_login;password=M0b1DataDeskDB6@82o;";
+            SqlConnection conn = new SqlConnection(SQLConnection);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(SQLGetSMS, conn)
+            {
+                CommandTimeout = 0,
+                CommandType = CommandType.Text
+            };
+
+            SqlDataAdapter Adp = new SqlDataAdapter(cmd);
+            Adp.Fill(dtSMS);
+            conn.Close();
+
+            if (dtSMS.Rows.Count > 0)
+            {
+                string SMSStatus = string.Empty;
+                string SenderId = dtSMS.Rows[0]["SenderId"].ToString();
+                string SMSAPIURL = dtSMS.Rows[0]["SMSAPIURL"].ToString();
+                string SMSText = dtSMS.Rows[0]["SMSText"].ToString();
+                string HeaderTemplate = dtSMS.Rows[0]["HeaderTemplate"].ToString();
+                SMSText = SMSText.Replace("[OTP]", OTP);
+                string URL = SMSAPIURL.Replace("[senderid]", SenderId).Replace("[mob]", MobileNo).Replace("[msg]", System.Web.HttpUtility.UrlEncode(SMSText));
+                string getmobileno = RightString(MobileNo, 10);
+                bool checkNo = IsPhoneNumber(getmobileno);
+                if (checkNo == true)
+                {
+                    string SMSOutput;
+                    PostSMSRequest(URL, out SMSOutput);
+                    if ((SMSOutput.ToUpper().Contains("ACCEPTED")) || (SMSOutput.ToUpper().Contains("TRUE")) || (SMSOutput.ToUpper().Contains("SUCCESS"))
+                     || (SMSOutput.ToUpper().Contains("DELIVER")) || (SMSOutput.ToUpper().Contains("SENT")))
+                        SMSStatus = "Sent.";
+                    else
+                        SMSStatus = "Failed.";
+
+                    string SqlInsert = "UspInsertSMSTextEntry @MobileNo='" + MobileNo + "',@HeaderTemplate='" + HeaderTemplate + "',@CTID='" + CTID
+                        + "',@SMSText='" + SMSText + "',@SMSStatus='" + SMSStatus + "',@SMSStatusDesc='" + SMSOutput + "',@CreatedBy='" + CreatedBy + "'";
+
+                    conn = new SqlConnection(SQLConnection);
+                    conn.Open();
+                    cmd = new SqlCommand(SqlInsert, conn)
+                    {
+                        CommandTimeout = 0,
+                        CommandType = CommandType.Text
+                    };
+                    DataTable dtSMSSend = new DataTable();
+                    Adp = new SqlDataAdapter(cmd);
+                    Adp.Fill(dtSMSSend);
+                    conn.Close();
+                    if (dtSMSSend.Rows.Count > 0)
+                    {
+                        string Status = dtSMSSend.Rows[0]["Status"].ToString();
+                        if (Status == "0")
+                            return false;
+                        else
+                            return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

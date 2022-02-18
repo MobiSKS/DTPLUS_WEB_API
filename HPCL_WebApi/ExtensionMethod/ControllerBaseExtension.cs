@@ -278,6 +278,12 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Customer_Reference_no_not_found;
             }
 
+            if (Message == "Form Number is already exits")
+            {
+                ResponseMessage = StatusInformation.Form_Number_is_already_exits.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Form_Number_is_already_exits;
+            }
+
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             //string MessageStr = ResponseMessage;

@@ -466,4 +466,7 @@ namespace HPCL.DataModel.Merchant
         public string RetailOutletName { get; set; }
 
     }
+
+
+   
 }

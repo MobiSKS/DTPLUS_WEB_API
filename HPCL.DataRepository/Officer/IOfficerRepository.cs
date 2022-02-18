@@ -29,5 +29,11 @@ namespace HPCL.DataRepository.Officer
         public Task<IEnumerable<OfficerKYCModelOutput>> UploadOfficerKYC([Microsoft.AspNetCore.Mvc.FromForm] OfficerKYCModelInput ObjClass);
 
         public Task<IEnumerable<GetRBEMobilenoModelOutput>> CheckRBEMobileNo([FromBody] GetRBEMobilenoModelInput ObjClass);
+
+        public Task<IEnumerable<GetOfficerCreationApprovalModelOutput>> BindRBEDetail([FromBody] GetOfficerCreationApprovalModelInput ObjClass);
+
+        public Task<IEnumerable<GetRBEDetailbyUserNameModelOutput>> GetRBEDetailbyUserName([FromBody] GetRBEDetailbyUserNameModelInput ObjClass);
+
+        public Task<IEnumerable<RBEApprovalRejectApprovalModelOutput>> ApproveRejectRBE([FromBody] RBEApprovalRejectModelInput ObjClass);
     }
 }
