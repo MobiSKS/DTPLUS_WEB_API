@@ -64,7 +64,7 @@ namespace HPCL.DataModel.Login
 
         [JsonProperty("RegionalOfficeID")]
         [DataMember]
-        public int RegionalOfficeID { get; set; }
+        public string RegionalOfficeID { get; set; }
 
 
         [JsonProperty("RegionalOfficeName")]
@@ -73,7 +73,7 @@ namespace HPCL.DataModel.Login
 
         [JsonProperty("ZonalOfficeID")]
         [DataMember]
-        public int ZonalOfficeID { get; set; }
+        public string ZonalOfficeID { get; set; }
 
 
         [JsonProperty("ZonalOfficeName")]

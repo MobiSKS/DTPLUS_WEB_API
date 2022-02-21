@@ -290,4 +290,67 @@ namespace HPCL.DataModel.Officer
 
 
     }
+
+    public class GetOfficerDetailModelInput : BaseClass
+    {
+        [JsonPropertyName("ZO")]
+        [DataMember]
+        public string ZO { get; set; }
+
+        [JsonPropertyName("RO")]
+        [DataMember]
+        public string RO { get; set; }
+
+        [JsonPropertyName("StateId")]
+        [DataMember]
+        public string StateId { get; set; }
+
+        [JsonPropertyName("DistrictId")]
+        [DataMember]
+        public string DistrictId { get; set; }
+
+    }
+
+    public class GetOfficerDetailModelOutput
+    {
+        [JsonProperty("ZonalOfficeName")]
+        [DataMember]
+        public string ZonalOfficeName { get; set; }
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
+
+
+        [JsonProperty("StateName")]
+        [DataMember]
+        public string StateName { get; set; }
+
+
+        [JsonProperty("DistrictName")]
+        [DataMember]
+        public string DistrictName { get; set; }
+
+
+        [JsonProperty("MarketingOfficerName")]
+        [DataMember]
+        public string MarketingOfficerName { get; set; }
+
+
+        [JsonProperty("MarketingOfficerEmail")]
+        [DataMember]
+        public string MarketingOfficerEmail { get; set; }
+
+
+        [JsonProperty("ZonalOfficerName")]
+        [DataMember]
+        public string ZonalOfficerName { get; set; }
+
+
+        [JsonProperty("ZonalOfficerEmail")]
+        [DataMember]
+        public string ZonalOfficerEmail { get; set; }
+
+
+    }
 }

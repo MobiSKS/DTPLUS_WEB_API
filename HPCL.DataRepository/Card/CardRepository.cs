@@ -295,6 +295,7 @@ namespace HPCL.DataRepository.Card
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofVechileforAllCards", ObjClass.NoofVechileforAllCards, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<AddCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -365,6 +366,19 @@ namespace HPCL.DataRepository.Card
             parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetCardDetailForCardApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<CardSearchMappingDetailModelOutput>> SearchCardMappingDetail([FromBody] CardSearchMappingDetailModelInput ObjClass)
+        {
+            var procedureName = "UspGetMappingDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Vehiclenumber", ObjClass.Vehiclenumber, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CardSearchMappingDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
 

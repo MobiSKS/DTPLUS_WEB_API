@@ -46,6 +46,10 @@ namespace HPCL.DataModel.Card
         [JsonPropertyName("CardPreference")]
         [DataMember]
         public string CardPreference { get; set; }
+
+        [JsonPropertyName("NoofVechileforAllCards")]
+        [DataMember]
+        public Int32 NoofVechileforAllCards { get; set; }
     }
 
     public class CardDetail

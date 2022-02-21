@@ -354,5 +354,19 @@ namespace HPCL.DataRepository.Officer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RBEApprovalRejectApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<GetOfficerDetailModelOutput>> GetOfficerDetailByLocation([FromBody] GetOfficerDetailModelInput ObjClass)
+        {
+            var procedureName = "UspGetOfficerDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZO", ObjClass.ZO, DbType.String, ParameterDirection.Input);
+            parameters.Add("RO", ObjClass.RO, DbType.String, ParameterDirection.Input);
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("DistrictId", ObjClass.DistrictId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetOfficerDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

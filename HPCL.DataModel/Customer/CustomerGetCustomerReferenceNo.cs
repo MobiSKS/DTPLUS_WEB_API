@@ -44,6 +44,19 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string CustomerTypeName { get; set; }
 
+        [JsonProperty("NoOfCards")]
+        [DataMember]
+        public int NoOfCards { get; set; }
+
+        [JsonProperty("PaymentType")]
+        [DataMember]
+        public string PaymentType { get; set; }
+
+        [JsonProperty("PaymentReceivedDate")]
+        [DataMember]
+        public string PaymentReceivedDate { get; set; }
+
+
     }
 
 

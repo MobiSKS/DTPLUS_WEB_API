@@ -546,5 +546,30 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("search_card_mapping_detail")]
+        public async Task<IActionResult> SearchCardMappingDetail([FromBody] CardSearchMappingDetailModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.SearchCardMappingDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }
