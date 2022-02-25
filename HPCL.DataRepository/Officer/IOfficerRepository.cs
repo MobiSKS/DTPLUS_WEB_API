@@ -38,5 +38,7 @@ namespace HPCL.DataRepository.Officer
 
         public  Task<IEnumerable<GetOfficerDetailModelOutput>> GetOfficerDetailByLocation([FromBody] GetOfficerDetailModelInput ObjClass);
 
+        public Task<IEnumerable<InsertRBEOfficerModelOutput>> InsertRBEOfficer([FromBody] InsertRBEOfficerModelInput ObjClass);
+
     }
 }

@@ -24,14 +24,14 @@ namespace HPCL.DataModel
         public string Userip { get; set; }
 
 
-        [JsonPropertyName("ZonalId")]
-        [DataMember]
-        public string ZonalId { get; set; }
+        //[JsonPropertyName("ZonalId")]
+        //[DataMember]
+        //public string ZonalId { get; set; }
 
 
-        [JsonPropertyName("RegionalId")]
-        [DataMember]
-        public string RegionalId { get; set; }
+        //[JsonPropertyName("RegionalId")]
+        //[DataMember]
+        //public string RegionalId { get; set; }
 
     }
 

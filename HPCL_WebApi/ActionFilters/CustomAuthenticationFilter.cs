@@ -122,7 +122,7 @@ namespace HPCL_WebApi.ActionFilters
                 {
                     string token = authorization["Bearer ".Length..].Trim();
                     ClaimsPrincipal principal = new ClaimsPrincipal();
-                    principal = TokenManager.GetPrincipal(token, objObject.useragent, objObject.userip);
+                    principal = TokenManager.GetPrincipal(token, objObject.useragent, objObject.userip, objObject.userid);
 
                     if (principal == null)
                     {

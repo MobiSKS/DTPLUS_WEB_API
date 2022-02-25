@@ -136,7 +136,7 @@ namespace HPCL.DataModel.Customer
     {
         [JsonPropertyName("FormNumber")]
         [DataMember]
-        public string FormNumber { get; set; }
+        public Int64 FormNumber { get; set; }
     }
 
     public class CustomerDetailsModelOutput
@@ -804,5 +804,7 @@ namespace HPCL.DataModel.Customer
 
     }
 
+
     
+
 }

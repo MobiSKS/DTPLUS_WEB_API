@@ -19,7 +19,6 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("Comments")]
         [DataMember]
         public string Comments { get; set; }
-
         
 
         [Required]

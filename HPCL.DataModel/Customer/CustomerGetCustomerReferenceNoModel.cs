@@ -57,6 +57,21 @@ namespace HPCL.DataModel.Customer
         public string PaymentReceivedDate { get; set; }
 
 
+        [JsonProperty("ReceivedAmount")]
+        [DataMember]
+        public float ReceivedAmount { get; set; }
+
+
+        [JsonProperty("RBEId")]
+        [DataMember]
+        public string RBEId { get; set; }
+
+
+        [JsonProperty("RBEName")]
+        [DataMember]
+        public string RBEName { get; set; }
+
+
     }
 
 

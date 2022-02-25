@@ -335,6 +335,36 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_rbe_officer")]
+        public async Task<IActionResult> InsertRBEOfficer([FromBody] InsertRBEOfficerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _officerRepo.InsertRBEOfficer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<InsertRBEOfficerModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<InsertRBEOfficerModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -540,6 +570,9 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+
+        
 
 
     }

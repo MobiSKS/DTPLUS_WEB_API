@@ -50,13 +50,13 @@ namespace HPCL.DataRepository.Transaction
             parameters.Add("Batchid", ObjClass.Batchid, DbType.Int64, ParameterDirection.Input);
             parameters.Add("Amount", ObjClass.Amount, DbType.Double, ParameterDirection.Input);
             parameters.Add("Type", ObjClass.Type, DbType.String, ParameterDirection.Input);
-            parameters.Add("Transid", ObjClass.Transid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Transid", ObjClass.Transid, DbType.Int32, ParameterDirection.Input);
             parameters.Add("Transdate", ObjClass.Transdate, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("Chequeno", ObjClass.Chequeno, DbType.String, ParameterDirection.Input);
             parameters.Add("MICR", ObjClass.MICR, DbType.String, ParameterDirection.Input);
             parameters.Add("MUtrno", ObjClass.MUtrno, DbType.String, ParameterDirection.Input);
             parameters.Add("Paymentmode", ObjClass.Paymentmode, DbType.String, ParameterDirection.Input);
-            parameters.Add("Currency", ObjClass.Currency, DbType.String, ParameterDirection.Input);
+            //parameters.Add("Currency", ObjClass.Currency, DbType.String, ParameterDirection.Input);
             parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
             parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
             parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);

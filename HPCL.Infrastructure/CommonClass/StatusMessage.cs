@@ -76,6 +76,11 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Officer is not active")] Officer_is_not_active = 1065,
             [Display(Name = "Customer Reference no not found")] Customer_Reference_no_not_found = 1066,
             [Display(Name = "Form Number is already exits")] Form_Number_is_already_exits = 1067,
+            [Display(Name = "Pancard is already exits")] Pancard_is_already_present = 1068,
+            [Display(Name = "Mobile No is already present.Please pass different Mobile no")] Mobile_No_is_already_present_Please_pass_different_Mobileno = 1069,
+            [Display(Name = "Card No is already present.Please pass different Card no")] Card_No_is_already_present_Please_pass_different_Cardno = 1070,
+            [Display(Name = "No any card is available for mapping")] No_any_card_is_available_for_mapping = 1071,
+            [Display(Name = "Please try again")] Please_try_again = 1072,
             None = int.MaxValue
         }
 

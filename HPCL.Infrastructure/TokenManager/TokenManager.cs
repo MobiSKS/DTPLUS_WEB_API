@@ -38,7 +38,7 @@ namespace HPCL.Infrastructure.TokenManager
             JwtSecurityToken token = handler.CreateJwtSecurityToken(descriptor);
             return handler.WriteToken(token);
         }
-        public static ClaimsPrincipal GetPrincipal(string token, string Useragent, string Userip)
+        public static ClaimsPrincipal GetPrincipal(string token, string Useragent, string Userip, string UserId)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace HPCL.Infrastructure.TokenManager
                 byte[] key = Convert.FromBase64String(Secret);
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {
-                    NameClaimType = Useragent,
+                    NameClaimType = UserId,
                     RequireExpirationTime = true,
                     ValidateIssuer = true,
                     ValidateIssuerSigningKey = true,
@@ -70,9 +70,9 @@ namespace HPCL.Infrastructure.TokenManager
                 return null;
             }
         }
-        public static string ValidateToken(string token, string Useragent, string Userip)
+        public static string ValidateToken(string token, string Useragent, string Userip, string UserId)
         {
-            ClaimsPrincipal principal = GetPrincipal(token, Useragent, Userip);
+            ClaimsPrincipal principal = GetPrincipal(token, Useragent, Userip, UserId);
             if (principal == null)
                 return null;
             ClaimsIdentity identity;
@@ -89,6 +89,6 @@ namespace HPCL.Infrastructure.TokenManager
             return username;
         }
 
-      
+
     }
 }

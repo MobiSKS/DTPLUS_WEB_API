@@ -116,7 +116,7 @@ namespace HPCL.DataModel.Transaction
 
         [JsonPropertyName("Transid")]
         [DataMember]
-        public string Transid { get; set; }
+        public Int32 Transid { get; set; }
 
         [JsonPropertyName("Transdate")]
         [DataMember]
@@ -143,9 +143,9 @@ namespace HPCL.DataModel.Transaction
         public string Paymentmode { get; set; }
 
 
-        [JsonPropertyName("Currency")]
-        [DataMember]
-        public string Currency { get; set; }
+        //[JsonPropertyName("Currency")]
+        //[DataMember]
+        //public string Currency { get; set; }
 
 
         [JsonPropertyName("Mobileno")]

@@ -284,6 +284,36 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Form_Number_is_already_exits;
             }
 
+            if (Message == "Pancard is already exits")
+            {
+                ResponseMessage = StatusInformation.Pancard_is_already_present.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Pancard_is_already_present;
+            }
+
+            if (Message == "Mobile No is already present.Please pass different Mobile no")
+            {
+                ResponseMessage = StatusInformation.Mobile_No_is_already_present_Please_pass_different_Mobileno.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Mobile_No_is_already_present_Please_pass_different_Mobileno;
+            }
+
+            if (Message == "Card No is already present.Please pass different Card no")
+            {
+                ResponseMessage = StatusInformation.Card_No_is_already_present_Please_pass_different_Cardno.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Card_No_is_already_present_Please_pass_different_Cardno;
+            }
+
+            if (Message == "No any card is available for mapping")
+            {
+                ResponseMessage = StatusInformation.No_any_card_is_available_for_mapping.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.No_any_card_is_available_for_mapping;
+            }
+
+            if (Message == "Please try again")
+            {
+                ResponseMessage = StatusInformation.Please_try_again.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Please_try_again;
+            }
+
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             //string MessageStr = ResponseMessage;

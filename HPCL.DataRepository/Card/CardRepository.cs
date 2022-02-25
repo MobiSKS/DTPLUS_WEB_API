@@ -382,5 +382,16 @@ namespace HPCL.DataRepository.Card
         }
 
 
+        public async Task<IEnumerable<GetCCMSLimitsForAllCardsModelOutput>> OTCCardRequestEntry([FromBody] GetCCMSLimitsForAllCardsModelInput ObjClass)
+        {
+            var procedureName = "UspGetCCMSLimitsForAllCards";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Statusflag", ObjClass.Statusflag, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCCMSLimitsForAllCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
     }
 }

@@ -187,7 +187,6 @@ namespace HPCL.Infrastructure.CommonClass
 
             if (dtSMS.Rows.Count > 0)
             {
-                string SMSStatus = string.Empty;
                 string SenderId = dtSMS.Rows[0]["SenderId"].ToString();
                 string SMSAPIURL = dtSMS.Rows[0]["SMSAPIURL"].ToString();
                 string SMSText = dtSMS.Rows[0]["SMSText"].ToString();
@@ -200,6 +199,7 @@ namespace HPCL.Infrastructure.CommonClass
                 {
                     string SMSOutput;
                     PostSMSRequest(URL, out SMSOutput);
+                    string SMSStatus;
                     if ((SMSOutput.ToUpper().Contains("ACCEPTED")) || (SMSOutput.ToUpper().Contains("TRUE")) || (SMSOutput.ToUpper().Contains("SUCCESS"))
                      || (SMSOutput.ToUpper().Contains("DELIVER")) || (SMSOutput.ToUpper().Contains("SENT")))
                         SMSStatus = "Sent.";
