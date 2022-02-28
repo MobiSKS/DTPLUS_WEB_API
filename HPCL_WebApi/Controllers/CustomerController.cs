@@ -164,7 +164,7 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, 
+                        return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<CustomerInsertModelOutput>().ToList()[0].Reason);
                     }
                 }
@@ -260,7 +260,7 @@ namespace HPCL_WebApi.Controllers
                         return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<CustomerKYCModelOutput>().ToList()[0].Reason);
                     }
-                     
+
                 }
             }
         }
@@ -288,10 +288,14 @@ namespace HPCL_WebApi.Controllers
                     {
                         if (result.Cast<CustomerApprovalModelOutput>().ToList()[0].SendStatus == 4)
                         {
-                            string EmailSubject = "<p>Hi <b>" + result.Cast<CustomerApprovalModelOutput>().ToList()[0].FirstName + " " 
+                            string EmailSubject = "<p>Hi <b>" + result.Cast<CustomerApprovalModelOutput>().ToList()[0].FirstName + " "
                                 + result.Cast<CustomerApprovalModelOutput>().ToList()[0].LastName + "<b></br> User Name : "
-                                + result.Cast<CustomerApprovalModelOutput>().ToList()[0].UserName + " </br> Password : " 
+                                + result.Cast<CustomerApprovalModelOutput>().ToList()[0].CustomerID + " </br> Password : "
                                 + result.Cast<CustomerApprovalModelOutput>().ToList()[0].Password + " </p>";
+
+                            Variables.SendSMS(2, "1007862494411670929", result.Cast<CustomerApprovalModelOutput>().ToList()[0].CommunicationMobileNo,
+                                 ObjClass.ApprovedBy, result.Cast<CustomerApprovalModelOutput>().ToList()[0].CustomerID,
+                                 result.Cast<CustomerApprovalModelOutput>().ToList()[0].ControlCardNo);
 
                             Variables.FunSendMail(result.Cast<CustomerApprovalModelOutput>().ToList()[0].EmailId, EmailSubject, "Customer Details");
                         }

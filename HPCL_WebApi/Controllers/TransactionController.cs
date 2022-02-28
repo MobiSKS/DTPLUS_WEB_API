@@ -174,9 +174,8 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].Status == 1)
                     {
-
-                        Variables.SendSMS("1007241399399538955", ObjClass.Mobileno, result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].OTP,
-                            ObjClass.CreatedBy);
+                        
+                        Variables.SendSMS(1,"1007241399399538955", ObjClass.Mobileno,ObjClass.CreatedBy, result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].OTP);
 
                         return this.OkCustom(ObjClass, result, _logger);
 
@@ -237,6 +236,70 @@ namespace HPCL_WebApi.Controllers
                     {
                         return this.FailCustom(ObjClass, result, _logger,
                             result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("card_fee_payment")]
+        public async Task<IActionResult> CardFeePayment([FromBody] TransactionCardFeePaymentModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _transRepo.CardFeePayment(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<TransactionCardFeePaymentModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<TransactionCardFeePaymentModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_transcations_for_batch_settlement")]
+        public async Task<IActionResult> CheckTranscationsForBatchSettlement([FromBody] TranscationsCheckForBatchSettlementModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _transRepo.CheckTranscationsForBatchSettlement(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<TranscationsCheckForBatchSettlementModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<TranscationsCheckForBatchSettlementModelOutput>().ToList()[0].Reason);
                     }
                 }
             }

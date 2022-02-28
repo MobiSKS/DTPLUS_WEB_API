@@ -48,7 +48,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string HighwayNo1 { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("HighwayNo2")]
         [DataMember]
         public string HighwayNo2 { get; set; }
@@ -188,7 +188,8 @@ namespace HPCL.DataModel.Merchant
         [Required]
         [JsonPropertyName("EmailId")]
         [DataMember]
-        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        //[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$
         public string EmailId { get; set; }
 
         //[Required]

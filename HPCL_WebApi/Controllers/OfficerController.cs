@@ -531,10 +531,11 @@ namespace HPCL_WebApi.Controllers
                     if (result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].Status == 1)
                     {
 
-                       // string EmailSubject = "<p>Hi <b>" + ObjClass.FirstName + " " + ObjClass.LastName + "<b></br> User Name : "
-                            //   + ObjClass.UserName + " </br> Password : " + result.Cast<OfficerInsertModelOutput>().ToList()[0].Password + " </p>";
+                        string EmailSubject = "<p>Hi <b>" + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].FirstName + " " 
+                            + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].LastName + "<b></br> User Name : "
+                               + ObjClass.UserName + " </br> Password : " + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].RBEOTP + " </p>";
 
-                       // Variables.FunSendMail(ObjClass.EmailId, EmailSubject, "Officer Details");
+                        Variables.FunSendMail(result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].EmailId, EmailSubject, "RBE Details");
 
                         return this.OkCustom(ObjClass, result, _logger);
                     }

@@ -46,7 +46,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string HighwayNo1 { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("HighwayNo2")]
         [DataMember]
         public string HighwayNo2 { get; set; }

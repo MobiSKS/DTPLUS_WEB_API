@@ -94,6 +94,10 @@ namespace HPCL.DataModel.Merchant
         [JsonProperty("DistrictName")]
         [DataMember]
         public string DistrictName { get; set; }
+
+        [JsonProperty("TerminalIssuanceType")]
+        [DataMember]
+        public string TerminalIssuanceType { get; set; }
     }
     public class TerminalDetailOutput
     {

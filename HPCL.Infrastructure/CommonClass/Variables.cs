@@ -167,8 +167,11 @@ namespace HPCL.Infrastructure.CommonClass
 
         }
 
-        public static bool SendSMS(string CTID, string MobileNo, string OTP, string CreatedBy)
+        public static bool SendSMS(int SMSType, string CTID, string MobileNo, string CreatedBy, params string[] ButtonText)
         {
+            // SMSType : 1 for OTP
+            // SMSType : 2 for CustomerId and ControlCardNo
+
             string SQLGetSMS = "UspGetSMSConfiguration @CTID='" + CTID + "'";
             DataTable dtSMS = new DataTable();
 
@@ -191,7 +194,14 @@ namespace HPCL.Infrastructure.CommonClass
                 string SMSAPIURL = dtSMS.Rows[0]["SMSAPIURL"].ToString();
                 string SMSText = dtSMS.Rows[0]["SMSText"].ToString();
                 string HeaderTemplate = dtSMS.Rows[0]["HeaderTemplate"].ToString();
-                SMSText = SMSText.Replace("[OTP]", OTP);
+
+                if (SMSType == 1)
+                    SMSText = SMSText.Replace("[OTP]", ButtonText[0]);
+
+                if (SMSType == 2)
+
+                    SMSText = SMSText.Replace("[CustId]", ButtonText[0]).Replace("[CntlCrNo]", ButtonText[1]);
+
                 string URL = SMSAPIURL.Replace("[senderid]", SenderId).Replace("[mob]", MobileNo).Replace("[msg]", System.Web.HttpUtility.UrlEncode(SMSText));
                 string getmobileno = RightString(MobileNo, 10);
                 bool checkNo = IsPhoneNumber(getmobileno);

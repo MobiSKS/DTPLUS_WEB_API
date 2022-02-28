@@ -366,6 +366,89 @@ namespace HPCL.DataRepository.Merchant
 
         }
 
+        public async Task<IEnumerable<MerchantInsertAddonTerminalModelOutput>> InsertTerminalInstallationRequest([FromBody] MerchantInsertAddonTerminalModelInput ObjClass)
+        {
+            var procedureName = "UspInsertAddonTerminal";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalTypeRequested ", ObjClass.TerminalTypeRequested, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalIssuanceType", ObjClass.TerminalIssuanceType, DbType.String, ParameterDirection.Input);
+            parameters.Add("Justification", ObjClass.Justification, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertAddonTerminalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+        }
+
+        public async Task<IEnumerable<MerchantSearchForTerminalInstallationRequestCloseModelOutput>> SearchForTerminalInstallationRequestClose([FromBody] MerchantSearchForTerminalInstallationRequestCloseModelInput ObjClass)
+        {
+            var procedureName = "UspSearchForTerminalInstallationRequestClose";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantSearchForTerminalInstallationRequestCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+        }
+
+        public async Task<IEnumerable<GetMerchantTypeModelOutput>> GetReasonList([FromBody] MerchantGetReasonListModelInput ObjClass)
+        {
+            var procedureName = "UspGetReasonList";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetMerchantTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantUpdateTerminalInstallationRequestCloseModelOutput>> UpdateTerminalInstallationRequestClose([FromBody] MerchantUpdateTerminalInstallationRequestCloseModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalId", typeof(string));
+          
+
+            if (ObjClass.ObjMerchantTerminalInstallationRequestCloseDetail != null)
+            {
+                foreach (MerchantTerminalInstallationRequestCloseModelInput ObjDetail in ObjClass.ObjMerchantTerminalInstallationRequestCloseDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalId"] = ObjDetail.TerminalId;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateTerminalInstallationRequestClose";
+            var parameters = new DynamicParameters();
+            parameters.Add("StatusId", ObjClass.StatusId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ReasonId", ObjClass.ReasonId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantUpdateTerminalInstallationRequestCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantViewTerminalInstallationRequestStatusCloseModelOutput>> ViewTerminalInstallationRequestStatus([FromBody] MerchantViewTerminalInstallationRequestStatusCloseInput ObjClass)
+        {
+            var procedureName = "UspViewTerminalInstallationRequestStatus";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewTerminalInstallationRequestStatusCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+        }
 
     }
 }

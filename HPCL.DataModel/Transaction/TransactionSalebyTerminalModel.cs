@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Transaction
 {
-   
+
 
     public class TransactionSalebyTerminalModelInput : BaseClass
     {
@@ -105,22 +103,22 @@ namespace HPCL.DataModel.Transaction
         [DataMember]
         public Int64 Batchid { get; set; }
 
-        [JsonPropertyName("Amount")]
+        [JsonPropertyName("Invoiceamount")]
         [DataMember]
-        public float Amount { get; set; }
+        public float Invoiceamount { get; set; }
 
-        [JsonPropertyName("Type")]
+        [JsonPropertyName("Transtype")]
         [DataMember]
-        public string Type { get; set; }
+        public string Transtype { get; set; }
 
 
-        [JsonPropertyName("Transid")]
+        [JsonPropertyName("Invoiceid")]
         [DataMember]
-        public Int32 Transid { get; set; }
+        public Int32 Invoiceid { get; set; }
 
-        [JsonPropertyName("Transdate")]
+        [JsonPropertyName("Invoicedate")]
         [DataMember]
-        public DateTime Transdate { get; set; }
+        public DateTime Invoicedate { get; set; }
 
 
         [JsonPropertyName("Chequeno")]
@@ -162,13 +160,21 @@ namespace HPCL.DataModel.Transaction
         public string Pin { get; set; }
 
 
-        [JsonPropertyName("Source")]
+        [JsonPropertyName("Sourceid")]
         [DataMember]
-        public string Source { get; set; }
+        public Int32 Sourceid { get; set; }
+
+        [JsonPropertyName("Formfactor")]
+        [DataMember]
+        public Int32 Formfactor { get; set; }
 
         [JsonPropertyName("CreatedBy")]
         [DataMember]
         public string CreatedBy { get; set; }
+
+        [JsonPropertyName("CCN")]
+        [DataMember]
+        public string CCN { get; set; }
     }
     public class RechargeCCMSAccountModelOutput : BaseClassOutput
     {

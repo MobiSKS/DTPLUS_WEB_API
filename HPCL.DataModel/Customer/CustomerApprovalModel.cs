@@ -61,6 +61,18 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("SendStatus")]
         [DataMember]
         public int SendStatus { get; set; }
+
+        [JsonProperty("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonProperty("ControlCardNo")]
+        [DataMember]
+        public string ControlCardNo { get; set; }
+
+        [JsonProperty("CommunicationMobileNo")]
+        [DataMember]
+        public string CommunicationMobileNo { get; set; }
     }
 
 

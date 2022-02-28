@@ -35,6 +35,24 @@ namespace HPCL.DataModel.Officer
 
     public class RBEApprovalRejectApprovalModelOutput : BaseClassOutput
     {
+        [Required]
+        [JsonProperty("FirstName")]
+        [DataMember]
+        public string FirstName { get; set; }
 
+        [Required]
+        [JsonProperty("LastName")]
+        [DataMember]
+        public string LastName { get; set; }
+
+        [Required]
+        [JsonProperty("EmailId")]
+        [DataMember]
+        public string EmailId { get; set; }
+
+        [Required]
+        [JsonProperty("RBEOTP")]
+        [DataMember]
+        public string RBEOTP { get; set; }
     }
 }
