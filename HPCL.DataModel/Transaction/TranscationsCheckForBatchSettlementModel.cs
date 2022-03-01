@@ -28,6 +28,12 @@ namespace HPCL.DataModel.Transaction
         [JsonPropertyName("ObjTranscationsForBatchSettlement")]
         [DataMember]
         public List<TranscationsForBatchSettlement> ObjTranscationsForBatchSettlement { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
     }
 
     public class TranscationsForBatchSettlement

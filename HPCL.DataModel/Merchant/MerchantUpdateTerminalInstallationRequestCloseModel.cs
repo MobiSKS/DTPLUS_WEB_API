@@ -8,13 +8,17 @@ namespace HPCL.DataModel.Merchant
     public class MerchantUpdateTerminalInstallationRequestCloseModelInput : BaseClass
     {
 
-        [JsonPropertyName("StatusId")]
-        [DataMember]
-        public Int32 StatusId { get; set; }
+        //[JsonPropertyName("StatusId")]
+        //[DataMember]
+        //public Int32 StatusId { get; set; }
 
-        [JsonPropertyName("ReasonId")]
+        [JsonPropertyName("ReasonName")]
         [DataMember]
-        public Int32 ReasonId { get; set; }
+        public string ReasonName { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
 
         [JsonPropertyName("ObjMerchantTerminalInstallationRequestCloseDetail")]
         [DataMember]

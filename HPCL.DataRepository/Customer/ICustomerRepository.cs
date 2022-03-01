@@ -63,6 +63,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerCardRequestEntryModelOutput>> InsertDriverCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass);
 
         public Task<IEnumerable<CustomerAddCustomerCardMerchantMappingModelOutput>> AddCustomerCardMerchantMapping([FromBody] CustomerAddCustomerCardMerchantMappingModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerInsertTatkalCustomerModelOutput>> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass);
     }
 
 }

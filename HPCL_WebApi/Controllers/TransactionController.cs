@@ -92,36 +92,36 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_batch_no")]
-        public async Task<IActionResult> GetBatchno([FromBody] GetBatchnoModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _transRepo.GetBatchno(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<GetBatchnoModelOutput>().ToList()[0].Status == 1)
-                    {
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<GetBatchnoModelOutput>().ToList()[0].Reason);
-                    }
-                }
-            }
-        }
+        //[HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[Route("get_batch_no")]
+        //public async Task<IActionResult> GetBatchno([FromBody] GetBatchnoModelInput ObjClass)
+        //{
+        //    if (ObjClass == null)
+        //    {
+        //        return this.BadRequestCustom(ObjClass, null, _logger);
+        //    }
+        //    else
+        //    {
+        //        var result = await _transRepo.GetBatchno(ObjClass);
+        //        if (result == null)
+        //        {
+        //            return this.NotFoundCustom(ObjClass, null, _logger);
+        //        }
+        //        else
+        //        {
+        //            if (result.Cast<GetBatchnoModelOutput>().ToList()[0].Status == 1)
+        //            {
+        //                return this.OkCustom(ObjClass, result, _logger);
+        //            }
+        //            else
+        //            {
+        //                return this.FailCustom(ObjClass, result, _logger,
+        //                    result.Cast<GetBatchnoModelOutput>().ToList()[0].Reason);
+        //            }
+        //        }
+        //    }
+        //}
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -304,5 +304,37 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+         
+        //[HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[Route("batch_settlement")]
+        //public async Task<IActionResult> BatchSettlement([FromBody] TransactionBatchSettlementModelInput ObjClass)
+        //{
+        //    if (ObjClass == null)
+        //    {
+        //        return this.BadRequestCustom(ObjClass, null, _logger);
+        //    }
+        //    else
+        //    {
+        //        var result = await _transRepo.BatchSettlement(ObjClass);
+        //        if (result == null)
+        //        {
+        //            return this.NotFoundCustom(ObjClass, null, _logger);
+        //        }
+        //        else
+        //        {
+        //            if (result.Cast<TransactionBatchSettlementModelOutput>().ToList()[0].Status == 1)
+        //            {
+        //                return this.OkCustom(ObjClass, result, _logger);
+        //            }
+        //            else
+        //            {
+        //                return this.FailCustom(ObjClass, result, _logger,
+        //                    result.Cast<TransactionBatchSettlementModelOutput>().ToList()[0].Reason);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

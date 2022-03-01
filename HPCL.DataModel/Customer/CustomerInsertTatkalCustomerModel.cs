@@ -1,15 +1,39 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Merchant
+namespace HPCL.DataModel.Customer
 {
-    public class MerchantInsertOTCCustomerModelInput : BaseClass
+    public class CustomerInsertTatkalCustomerModelInput : BaseClass
     {
         
+        [Required]
+        [JsonPropertyName("ZonalOffice")]
+        [DataMember]
+        public Int32 ZonalOffice { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("RegionalOffice")]
+        [DataMember]
+        public Int32 RegionalOffice { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("DateOfApplication")]
+        [DataMember]
+        public DateTime DateOfApplication { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("SignedOn")]
+        [DataMember]
+        public DateTime SignedOn { get; set; }
+
+      
+
         [Required]
         [JsonPropertyName("CreatedBy")]
         [DataMember]
@@ -17,22 +41,24 @@ namespace HPCL.DataModel.Merchant
 
 
         [Required]
-        [JsonPropertyName("IndividualOrgName")]
-        [DataMember]
-        public string IndividualOrgName { get; set; }
-
-        [Required]
         [JsonPropertyName("IndividualOrgNameTitle")]
         [DataMember]
         public string IndividualOrgNameTitle { get; set; }
 
-     
+
+        [Required]
+        [JsonPropertyName("IndividualOrgName")]
+        [DataMember]
+        public string IndividualOrgName { get; set; }
+
+
         [Required]
         [JsonPropertyName("NameOnCard")]
         [DataMember]
         public string NameOnCard { get; set; }
 
 
+       
         [Required]
         [JsonPropertyName("IncomeTaxPan")]
         [DataMember]
@@ -45,22 +71,8 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CommunicationAddress1 { get; set; }
 
-        [Required]
-        [JsonPropertyName("CommunicationAddress2")]
-        [DataMember]
-        public string CommunicationAddress2 { get; set; }
-
        
-
-        [Required]
-        [JsonPropertyName("CommunicationCityName")]
-        [DataMember]
-        public string CommunicationCityName { get; set; }
-
-        [Required]
-        [JsonPropertyName("CommunicationPincode")]
-        [DataMember]
-        public string CommunicationPincode { get; set; }
+       
 
         [Required]
         [JsonPropertyName("CommunicationStateId")]
@@ -68,7 +80,7 @@ namespace HPCL.DataModel.Merchant
         public Int32 CommunicationStateId { get; set; }
 
 
-        [Required]
+         
         [JsonPropertyName("CommunicationDistrictId")]
         [DataMember]
         public Int32 CommunicationDistrictId { get; set; }
@@ -78,11 +90,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CommunicationPhoneNo { get; set; }
 
-
-        [JsonPropertyName("CommunicationFax")]
-        [DataMember]
-        public string CommunicationFax { get; set; }
-
+ 
 
         [Required]
         [JsonPropertyName("CommunicationMobileNo")]
@@ -90,53 +98,30 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CommunicationMobileNo { get; set; }
 
-
+        [Required]
         [JsonPropertyName("CommunicationEmailid")]
         [DataMember]
-        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string CommunicationEmailid { get; set; }
 
-          
+
+        [Required]
+        [JsonPropertyName("KeyOfficialSecretQuestion")]
+        [DataMember]
+        public int KeyOfficialSecretQuestion { get; set; }
+
+        [Required]
+        [JsonPropertyName("KeyOfficialSecretAnswer")]
+        [DataMember]
+        public string KeyOfficialSecretAnswer { get; set; }
+
+        [Required]
         [JsonPropertyName("FormNumber")]
         [DataMember]
         public Int64 FormNumber { get; set; }
-
-
-        [JsonPropertyName("MerchantId")]
-        [DataMember]
-        public string MerchantId { get; set; }
-
-        [JsonPropertyName("CopyofDriverLicense")]
-        [DataMember]
-        public string CopyofDriverLicense { get; set; }
-
-        [JsonPropertyName("CopyofVehicleRegistrationCertificate")]
-        [DataMember]
-        public string CopyofVehicleRegistrationCertificate { get; set; }
-
-        [JsonPropertyName("ObjOTCCardEntryDetail")]
-        [DataMember]
-        public List<OTCCardEntryDetail> ObjOTCCardEntryDetail { get; set; }
     }
 
-    public class OTCCardEntryDetail
-    {
-        
-
-        [JsonPropertyName("VechileNo")]
-        public string VechileNo { get; set; }
-
-        [JsonPropertyName("CardNo")]
-        public string CardNo { get; set; }
-
-        [JsonPropertyName("MobileNo")]
-        public string MobileNo { get; set; }
-
-      
-
-    }
-
-    public class MerchantInsertOTCCustomerModelOutput : BaseClassOutput
+    public class CustomerInsertTatkalCustomerModelOutput : BaseClassOutput
     {
         [JsonProperty("ReferenceId")]
         [DataMember]

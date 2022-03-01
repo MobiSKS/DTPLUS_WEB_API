@@ -705,6 +705,359 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_terminal_de_installation_request")]
+        public async Task<IActionResult> GetTerminalDeinstallationRequest([FromBody] MerchantGetTerminalDeinstallationRequestModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetTerminalDeinstallationRequest(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_terminal_de_instal_request")]
+        public async Task<IActionResult> UpdateTerminalDeInstalRequest([FromBody] MerchantUpdateTerminalDeInstalRequestModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.UpdateTerminalDeInstalRequest(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantUpdateTerminalDeInstalRequestModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantUpdateTerminalDeInstalRequestModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("verify_merchant_by_merchant_id")]
+        public async Task<IActionResult> VerifyMerchantByMerchantId([FromBody] VerifyMerchantByMerchantIdModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.VerifyMerchantByMerchantId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<VerifyMerchantByMerchantIdModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<VerifyMerchantByMerchantIdModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("verify_merchant_by_merchant_id_and_regional_id")]
+        public async Task<IActionResult> VerifyMerchantByMerchantIdandRegionalId([FromBody] VerifyMerchantByMerchantIdandRegionalIdModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.VerifyMerchantByMerchantIdandRegionalId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<VerifyMerchantByMerchantIdandRegionalIdModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<VerifyMerchantByMerchantIdandRegionalIdModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_all_un_allocated_cards_for_otc_card")]
+        public async Task<IActionResult> GetAllUnAllocatedCardsForOTCCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetAllUnAllocatedCardsForOTCCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_all_un_allocated_cards_for_driver_card")]
+        public async Task<IActionResult> GetAllUnAllocatedCardsForDriverCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetAllUnAllocatedCardsForDriverCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_all_un_allocated_cards_for_tatkal_card")]
+        public async Task<IActionResult> GetAllUnAllocatedCardsForTatkalCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetAllUnAllocatedCardsForTatkalCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    return this.OkCustom(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("allocated_otc_card_to_merchant")]
+        public async Task<IActionResult> AllocatedOTCCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.AllocatedOTCCardToMerchant(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("allocated_driver_card_to_merchant")]
+        public async Task<IActionResult> AllocatedDriverCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.AllocatedDriverCardToMerchant(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("allocated_tatkal_card_to_merchant")]
+        public async Task<IActionResult> AllocatedTatkalCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.AllocatedTatkalCardToMerchant(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantAllocatedCardsToMerchantModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_driver_card_customer")]
+        public async Task<IActionResult> InsertDriverCardCustomer([FromBody] MerchantInsertDriverCardCustomerModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.InsertDriverCardCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantInsertDriverCardCustomerModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        string EmailSubject = "<p>Hi <b>" + ObjClass.IndividualOrgName + "</br> User Name : "
+                                + result.Cast<MerchantInsertDriverCardCustomerModelOutput>().ToList()[0].CustomerID + " </br> Password : "
+                                + result.Cast<MerchantInsertDriverCardCustomerModelOutput>().ToList()[0].Password + " </p>";
+
+                        Variables.FunSendMail(ObjClass.CommunicationEmailid, EmailSubject, "Driver Card Customer Details");
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantInsertDriverCardCustomerModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+
+        }
 
     }
 }

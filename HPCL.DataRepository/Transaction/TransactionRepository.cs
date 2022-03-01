@@ -161,8 +161,22 @@ namespace HPCL.DataRepository.Transaction
             parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
             parameters.Add("Batchid", ObjClass.Batchid, DbType.Int64, ParameterDirection.Input);
             parameters.Add("TypeCheckTranscationsForBatchSettlement", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<TranscationsCheckForBatchSettlementModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<TransactionBatchSettlementModelOutput>> BatchSettlement([FromBody] TransactionBatchSettlementModelInput ObjClass)
+        {
+            var procedureName = "UspBatchSettlement";
+            var parameters = new DynamicParameters();
+            parameters.Add("Merchantid", ObjClass.Merchantid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Batchid", ObjClass.Batchid, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransactionBatchSettlementModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

@@ -802,5 +802,38 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerAddCustomerCardMerchantMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CustomerInsertTatkalCustomerModelOutput>> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass)
+        {
+           
+            var procedureName = "UspInsertTatkalCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerType", 922, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerSubtype", 924, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ZonalOffice", ObjClass.ZonalOffice, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("SignedOn", ObjClass.SignedOn, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
+            parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
+            parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
+            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationPhoneNo", ObjClass.CommunicationPhoneNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
+            parameters.Add("KeyOfficialSecretQuestion", ObjClass.KeyOfficialSecretQuestion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("KeyOfficialSecretAnswer", ObjClass.KeyOfficialSecretAnswer, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerInsertTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

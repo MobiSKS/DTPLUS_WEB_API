@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,9 +8,13 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Merchant
 {
-    public class MerchantInsertOTCCustomerModelInput : BaseClass
+   
+    public class MerchantInsertDriverCardCustomerModelInput : BaseClass
     {
-        
+
+        [JsonPropertyName("CardNo")]
+        public string CardNo { get; set; }
+
         [Required]
         [JsonPropertyName("CreatedBy")]
         [DataMember]
@@ -26,14 +31,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string IndividualOrgNameTitle { get; set; }
 
-     
-        [Required]
-        [JsonPropertyName("NameOnCard")]
-        [DataMember]
-        public string NameOnCard { get; set; }
-
-
-        [Required]
+        //[Required]
         [JsonPropertyName("IncomeTaxPan")]
         [DataMember]
         //[RegularExpression("^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$", ErrorMessage = "Invalid Pancard Number")]
@@ -45,12 +43,6 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CommunicationAddress1 { get; set; }
 
-        [Required]
-        [JsonPropertyName("CommunicationAddress2")]
-        [DataMember]
-        public string CommunicationAddress2 { get; set; }
-
-       
 
         [Required]
         [JsonPropertyName("CommunicationCityName")]
@@ -67,21 +59,9 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public Int32 CommunicationStateId { get; set; }
 
-
-        [Required]
-        [JsonPropertyName("CommunicationDistrictId")]
-        [DataMember]
-        public Int32 CommunicationDistrictId { get; set; }
-
-        //[Required]
         [JsonPropertyName("CommunicationPhoneNo")]
         [DataMember]
         public string CommunicationPhoneNo { get; set; }
-
-
-        [JsonPropertyName("CommunicationFax")]
-        [DataMember]
-        public string CommunicationFax { get; set; }
 
 
         [Required]
@@ -93,10 +73,10 @@ namespace HPCL.DataModel.Merchant
 
         [JsonPropertyName("CommunicationEmailid")]
         [DataMember]
-        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string CommunicationEmailid { get; set; }
 
-          
+
         [JsonPropertyName("FormNumber")]
         [DataMember]
         public Int64 FormNumber { get; set; }
@@ -106,37 +86,54 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string MerchantId { get; set; }
 
-        [JsonPropertyName("CopyofDriverLicense")]
-        [DataMember]
-        public string CopyofDriverLicense { get; set; }
 
-        [JsonPropertyName("CopyofVehicleRegistrationCertificate")]
+        [JsonPropertyName("AddressProofType")]
         [DataMember]
-        public string CopyofVehicleRegistrationCertificate { get; set; }
+        public string AddressProofType { get; set; }
 
-        [JsonPropertyName("ObjOTCCardEntryDetail")]
+
+        [JsonPropertyName("AddressProofDocumentNo")]
         [DataMember]
-        public List<OTCCardEntryDetail> ObjOTCCardEntryDetail { get; set; }
-    }
+        public string AddressProofDocumentNo { get; set; }
 
-    public class OTCCardEntryDetail
-    {
+        [Required]
+        [JsonPropertyName("DrivingLicence")]
+        [DataMember]
+        public string DrivingLicence { get; set; }
+
+        [Required]
+        [JsonPropertyName("DTPCustomerStatus")]
+        [DataMember]
+        public Int32 DTPCustomerStatus { get; set; }
+ 
+        [JsonPropertyName("ExistingCustomerId")]
+        [DataMember]
+        public string ExistingCustomerId { get; set; }
+
+        [Required]
+        [JsonPropertyName("BeneficiaryName")]
+        [DataMember]
+        public string BeneficiaryName { get; set; }
+
+        [Required]
+        [JsonPropertyName("RelationwithBeneficiary")]
+        [DataMember]
+        public string RelationwithBeneficiary { get; set; }
+
+
+        [Required]
+        [JsonPropertyName("BeneficiaryMobile")]
+        [DataMember]
+        public string BeneficiaryMobile { get; set; }
+
         
-
-        [JsonPropertyName("VechileNo")]
-        public string VechileNo { get; set; }
-
-        [JsonPropertyName("CardNo")]
-        public string CardNo { get; set; }
-
-        [JsonPropertyName("MobileNo")]
-        public string MobileNo { get; set; }
-
-      
+        [JsonPropertyName("AddressProof")]
+        [DataMember]
+        public IFormFile AddressProof { get; set; }
 
     }
 
-    public class MerchantInsertOTCCustomerModelOutput : BaseClassOutput
+    public class MerchantInsertDriverCardCustomerModelOutput : BaseClassOutput
     {
         [JsonProperty("ReferenceId")]
         [DataMember]

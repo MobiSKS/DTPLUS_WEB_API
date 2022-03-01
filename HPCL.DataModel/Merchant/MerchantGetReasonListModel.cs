@@ -10,12 +10,12 @@ namespace HPCL.DataModel.Merchant
     }
     public class MerchantGetReasonListModelOutput
     {
-        [JsonProperty("MerchantTypeCode")]
+        [JsonProperty("ReasonId")]
         [DataMember]
-        public int MerchantTypeCode { get; set; }
+        public int ReasonId { get; set; }
 
-        [JsonProperty("MerchantTypeName")]
+        [JsonProperty("ReasonName")]
         [DataMember]
-        public string MerchantTypeName { get; set; }
+        public string ReasonName { get; set; }
     }
 }

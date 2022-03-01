@@ -9,6 +9,7 @@ namespace HPCL.DataModel.Merchant
 {
     public class MerchantCheckAvailityCardInput : BaseClass
     {
+        [Required]
         [JsonPropertyName("CardNo")]
         [DataMember]
         public string CardNo { get; set; }
@@ -28,10 +29,15 @@ namespace HPCL.DataModel.Merchant
 
     public class MerchantGetAvailityCardInput : BaseClass
     {
-
+        [Required]
         [JsonPropertyName("RegionalId")]
         [DataMember]
-        public Int32 RegionalId { get; set; }
+        public Int32 RegionalOfficeId { get; set; }
+
+        //[Required]
+        [JsonPropertyName("MerchantId")]
+        [DataMember]
+        public string MerchantId { get; set; }
     }
 
     public class MerchantGetAvailityCardOutput
