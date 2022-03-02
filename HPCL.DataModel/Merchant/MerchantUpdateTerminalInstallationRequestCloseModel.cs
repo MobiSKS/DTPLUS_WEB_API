@@ -12,9 +12,9 @@ namespace HPCL.DataModel.Merchant
         //[DataMember]
         //public Int32 StatusId { get; set; }
 
-        [JsonPropertyName("ReasonName")]
+        [JsonPropertyName("ReasonId")]
         [DataMember]
-        public string ReasonName { get; set; }
+        public string ReasonId { get; set; }
 
         [JsonPropertyName("ModifiedBy")]
         [DataMember]

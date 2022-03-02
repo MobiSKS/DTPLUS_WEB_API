@@ -68,9 +68,18 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string TerminalType { get; set; }
 
+
         [JsonProperty("Status")]
         [DataMember]
         public string Status { get; set; }
+
+        //[JsonProperty("DeploymentStatus")]
+        //[DataMember]
+        //public string DeploymentStatus { get; set; }
+
+        //[JsonProperty("TerminalStatus")]
+        //[DataMember]
+        //public string TerminalStatus { get; set; }
 
     }
 }
