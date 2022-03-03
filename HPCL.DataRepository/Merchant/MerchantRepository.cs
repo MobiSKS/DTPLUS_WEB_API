@@ -404,7 +404,6 @@ namespace HPCL.DataRepository.Merchant
             parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantSearchForTerminalInstallationRequestCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
         }
 
         public async Task<IEnumerable<MerchantGetReasonListModelOutput>> GetReasonList([FromBody] MerchantGetReasonListModelInput ObjClass)
@@ -722,6 +721,324 @@ namespace HPCL.DataRepository.Merchant
 
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantInsertDriverCardCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantGetTerminalDeInstallationRequestCloseModelOutput>> GetTerminalDeInstallationRequestClose([FromBody] MerchantGetTerminalDeInstallationRequestCloseModelInput ObjClass)
+        {
+            var procedureName = "UspGetTerminalDeInstallationRequestClose";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetTerminalDeInstallationRequestCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantTerminalDeInstalUpdateRequestCloseModelOutput>> TerminalDeInstalUpdateRequestClose([FromBody] MerchantTerminalDeInstalUpdateRequestCloseModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalID", typeof(string));
+
+
+            if (ObjClass.ObjMerchantTerminalMapInput != null)
+            {
+                foreach (MerchantTerminalMapInput ObjDetail in ObjClass.ObjMerchantTerminalMapInput)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalID"] = ObjDetail.TerminalID;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspTerminalDeInstalUpdateRequestClose";
+            var parameters = new DynamicParameters();
+            parameters.Add("Status", ObjClass.Status, DbType.String, ParameterDirection.Input);
+            parameters.Add("Comments", ObjClass.Comments, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalDeInstReqClose", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantTerminalDeInstalUpdateRequestCloseModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantGetTerminalInstallationRequestApprovalModelOutput>> GetTerminalInstallationRequestApproval([FromBody] MerchantGetTerminalInstallationRequestApprovalModelInput ObjClass)
+        {
+            var procedureName = "UspGetTerminalInstallationRequestApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("Category", ObjClass.Category, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetTerminalInstallationRequestApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantUpdateTerminalInstallationRequestApprovalModelOutput>> InsertTerminalInstallationRequestApproval([FromBody] MerchantUpdateTerminalInstallationRequestApprovalModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalID", typeof(string));
+
+
+            if (ObjClass.ObjMerchantTerminalInsertInput != null)
+            {
+                foreach (MerchantTerminalInsertInput ObjDetail in ObjClass.ObjMerchantTerminalInsertInput)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalID"] = ObjDetail.TerminalID;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateTerminalInstallationRequestApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalDeInstReqClose", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantUpdateTerminalInstallationRequestApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedOTCCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
+        {
+            var procedureName = "UspViewRequestedMyCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedTatkalCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
+        {
+            var procedureName = "UspViewRequestedMyCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedDriverCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
+        {
+            var procedureName = "UspViewRequestedMyCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseOTCCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
+        {
+            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseTatkalCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
+        {
+            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseDriverCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
+        {
+            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewOTCCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
+        {
+            var procedureName = "UspViewCardMerchantAllocation";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
+            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
+            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
+            return storedProcedureResult;
+
+        }
+
+        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewTatkalCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
+        {
+            var procedureName = "UspViewCardMerchantAllocation";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
+            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
+            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewDriverCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
+        {
+            var procedureName = "UspViewCardMerchantAllocation";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
+            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
+            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
+            return storedProcedureResult;
+        }
+
+
+        public async Task<IEnumerable<MerchantGetTerminalDeInstallationRequestApprovalModelOutput>> GetTerminalDeInstallationRequestApproval([FromBody] MerchantGetTerminalDeInstallationRequestApprovalModelInput ObjClass)
+        {
+            var procedureName = "UspGetTerminalDeInstallationRequestApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetTerminalDeInstallationRequestApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantInsertTerminalDeInstallationRequestApprovalModelOutput>> InsertTerminalDeInstallationRequestApproval([FromBody] MerchantInsertTerminalDeInstallationRequestApprovalModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalID", typeof(string));
+
+
+            if (ObjClass.ObjTerminalDeInstallationInsertInput != null)
+            {
+                foreach (MerchantTerminalDeInstallationInsertInput ObjDetail in ObjClass.ObjTerminalDeInstallationInsertInput)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalID"] = ObjDetail.TerminalID;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateTerminalDeInstallationRequestApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertTerminalDeInstallationRequestApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantGetTerminalDeInstallationRequestAuthorizationModelOutput>> GetTerminalDeInstallationRequestAuthorization([FromBody] MerchantGetTerminalDeInstallationRequestAuthorizationModelInput ObjClass)
+        {
+            var procedureName = "UspGetTerminalDeInstallationRequestAuthorization";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetTerminalDeInstallationRequestAuthorizationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantInsertTerminalDeInstallationRequestAuthorizationModelOutput>> InsertTerminalDeInstallationRequestAuthorization([FromBody] MerchantInsertTerminalDeInstallationRequestAuthorizationModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalID", typeof(string));
+
+
+            if (ObjClass.ObjTerminalDeInstallationAuthorizationInput != null)
+            {
+                foreach (MerchantTerminalDeInstallationAuthorizationInsertInput ObjDetail in ObjClass.ObjTerminalDeInstallationAuthorizationInput)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalID"] = ObjDetail.TerminalID;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateTerminalDeInstallationRequestAuthorization";
+            var parameters = new DynamicParameters();
+            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertTerminalDeInstallationRequestAuthorizationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantViewTerminalDeInstallationRequestStatusModelOutput>> ViewTerminalDeInstallationRequestStatus([FromBody] MerchantViewTerminalDeInstallationRequestStatusModelInput ObjClass)
+        {
+            var procedureName = "UspViewTerminalDeInstallationRequestStatus";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewTerminalDeInstallationRequestStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

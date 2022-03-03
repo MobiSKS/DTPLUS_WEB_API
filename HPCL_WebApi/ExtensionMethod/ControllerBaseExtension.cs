@@ -314,6 +314,30 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Please_try_again;
             }
 
+            if (Message == "Not found")
+            {
+                ResponseMessage = StatusInformation.Not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Not_found;
+            }
+
+            if (Message == "Trans Type Mismatched")
+            {
+                ResponseMessage = StatusInformation.Trans_Type_Mismatched.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Trans_Type_Mismatched;
+            }
+
+            if (Message == "Batch Already Settled")
+            {
+                ResponseMessage = StatusInformation.Batch_Already_Settled.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Batch_Already_Settled;
+            }
+
+            if (Message == "Transaction Mismatched")
+            {
+                ResponseMessage = StatusInformation.Transaction_Mismatched.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Transaction_Mismatched;
+            }
+
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             //string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             //string MessageStr = ResponseMessage;

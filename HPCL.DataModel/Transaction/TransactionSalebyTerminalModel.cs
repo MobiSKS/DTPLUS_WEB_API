@@ -212,33 +212,36 @@ namespace HPCL.DataModel.Transaction
         [DataMember]
         public string Terminalid { get; set; }
 
-        [JsonPropertyName("Fromaccount")]
+        [JsonPropertyName("CCN")]
         [DataMember]
-        public string Fromaccount { get; set; }
+        public string CCN { get; set; }
 
-        [JsonPropertyName("Toaccount")]
+        [JsonPropertyName("Cardno")]
         [DataMember]
-        public string Toaccount { get; set; }
+        public string Cardno { get; set; }
 
-
-        [JsonPropertyName("Transid")]
+        [JsonPropertyName("Batchid")]
         [DataMember]
-        public string Transid { get; set; }
+        public Int64 Batchid { get; set; }
 
-        [JsonPropertyName("Transdate")]
+        [JsonPropertyName("Invoiceid")]
         [DataMember]
-        public DateTime Transdate { get; set; }
+        public string Invoiceid { get; set; }
 
-
-        [JsonPropertyName("Amount")]
+        [JsonPropertyName("Invoicedate")]
         [DataMember]
-        public float Amount { get; set; }
+        public DateTime Invoicedate { get; set; }
 
 
-
-        [JsonPropertyName("Type")]
+        [JsonPropertyName("Invoiceamount")]
         [DataMember]
-        public string Type { get; set; }
+        public float Invoiceamount { get; set; }
+
+
+
+        [JsonPropertyName("Transtype")]
+        [DataMember]
+        public string Transtype { get; set; }
 
 
         [JsonPropertyName("Mobileno")]
@@ -256,9 +259,13 @@ namespace HPCL.DataModel.Transaction
         public string Pin { get; set; }
 
 
-        [JsonPropertyName("Source")]
+        [JsonPropertyName("Sourceid")]
         [DataMember]
-        public string Source { get; set; }
+        public Int32 Sourceid { get; set; }
+
+        [JsonPropertyName("Formfactor")]
+        [DataMember]
+        public Int32 Formfactor { get; set; }
 
         [JsonPropertyName("CreatedBy")]
         [DataMember]

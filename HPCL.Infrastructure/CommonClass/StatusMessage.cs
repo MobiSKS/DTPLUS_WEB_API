@@ -81,6 +81,10 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Card No is already present.Please pass different Card no")] Card_No_is_already_present_Please_pass_different_Cardno = 1070,
             [Display(Name = "No any card is available for mapping")] No_any_card_is_available_for_mapping = 1071,
             [Display(Name = "Please try again")] Please_try_again = 1072,
+            [Display(Name = "Not found")] Not_found = 1073,
+            [Display(Name = "Trans Type Mismatched")] Trans_Type_Mismatched = 1074,
+            [Display(Name = "Batch Already Settled")] Batch_Already_Settled = 1075,
+            [Display(Name = "Transaction Mismatched")] Transaction_Mismatched = 1076,
             None = int.MaxValue
         }
 

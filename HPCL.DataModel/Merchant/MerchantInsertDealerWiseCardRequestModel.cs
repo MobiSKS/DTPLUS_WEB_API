@@ -4,14 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Customer
+namespace HPCL.DataModel.Merchant
 {
-    public class CustomerCardRequestEntryModelInput : BaseClass
+    
+
+    public class MerchantInsertDealerWiseCardRequestModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("RegionalId")]
+        [JsonPropertyName("MerchantId")]
         [DataMember]
-        public Int32 RegionalId { get; set; }
+        public string MerchantId { get; set; }
 
         [Required]
         [JsonPropertyName("NoofCards")]
@@ -23,9 +25,8 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string CreatedBy { get; set; }
     }
-    public class CustomerCardRequestEntryModelOutput : BaseClassOutput
+    public class MerchantInsertDealerWiseCardRequestModelOutput : BaseClassOutput
     {
-        
-    }
 
+    }
 }

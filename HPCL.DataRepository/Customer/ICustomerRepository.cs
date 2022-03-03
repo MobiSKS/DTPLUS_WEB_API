@@ -65,6 +65,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerAddCustomerCardMerchantMappingModelOutput>> AddCustomerCardMerchantMapping([FromBody] CustomerAddCustomerCardMerchantMappingModelInput ObjClass);
 
         public Task<IEnumerable<CustomerInsertTatkalCustomerModelOutput>> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass);
+
+        public  Task<IEnumerable<CustomerGetMappingUserCardstoMerchantsModelOutput>> GetMappingUserCardstoMerchants([FromBody] CustomerGetMappingUserCardstoMerchantsModelInput ObjClass);
     }
 
 }

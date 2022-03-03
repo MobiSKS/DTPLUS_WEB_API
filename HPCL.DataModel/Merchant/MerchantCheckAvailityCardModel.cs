@@ -30,7 +30,7 @@ namespace HPCL.DataModel.Merchant
     public class MerchantGetAvailityCardInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("RegionalId")]
+        [JsonPropertyName("RegionalOfficeId")]
         [DataMember]
         public Int32 RegionalOfficeId { get; set; }
 

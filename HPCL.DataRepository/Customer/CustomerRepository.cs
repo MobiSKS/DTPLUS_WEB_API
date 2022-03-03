@@ -780,13 +780,14 @@ namespace HPCL.DataRepository.Customer
             var dtDBR = new DataTable("TypeCardMerchantMap");
             dtDBR.Columns.Add("CardNo", typeof(string));
             dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("CustomerID", typeof(string));
 
             foreach (CardMerchantMapModelInput ObjCardLimits in ObjClass.ObjCardMerchantMap)
             {
                 DataRow dr = dtDBR.NewRow();
                 dr["CardNo"] = ObjCardLimits.CardNo;
                 dr["MerchantId"] = ObjCardLimits.MerchantId;
-
+                dr["CustomerID"] = ObjCardLimits.CustomerID;
                 dtDBR.Rows.Add(dr);
                 dtDBR.AcceptChanges();
             }
@@ -794,7 +795,7 @@ namespace HPCL.DataRepository.Customer
             var procedureName = "UspAddCustomerCardMerchantMapping";
             var parameters = new DynamicParameters();
 
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            //parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("Status", ObjClass.Status, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateMapCardMerchant", dtDBR, DbType.Object, ParameterDirection.Input);
@@ -834,6 +835,19 @@ namespace HPCL.DataRepository.Customer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerInsertTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<CustomerGetMappingUserCardstoMerchantsModelOutput>> GetMappingUserCardstoMerchants([FromBody] CustomerGetMappingUserCardstoMerchantsModelInput ObjClass)
+        {
+            var procedureName = "UspGetMappingUserCardstoMerchants";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantID", ObjClass.MerchantID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetMappingUserCardstoMerchantsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }

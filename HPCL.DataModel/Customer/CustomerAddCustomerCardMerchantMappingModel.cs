@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -8,14 +6,11 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Customer
 {
-     
+
 
     public class CustomerAddCustomerCardMerchantMappingModelInput : BaseClass
     {
-        [Required]
-        [JsonPropertyName("CustomerID")]
-        [DataMember]
-        public string CustomerID { get; set; }
+       
 
         [Required]
         [JsonPropertyName("Status")]
@@ -44,11 +39,19 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("MerchantId")]
         [DataMember]
         public string MerchantId { get; set; }
- 
+
+
+        [Required]
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
 
     }
     public class CustomerAddCustomerCardMerchantMappingModelOutput : BaseClassOutput
     {
-         
+        [JsonProperty("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
     }
 }
