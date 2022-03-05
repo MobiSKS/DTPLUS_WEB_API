@@ -13,6 +13,8 @@ namespace HPCL.DataModel.Customer
         public Int64 CustomerReferenceNo { get; set; }
     }
 
+  
+
     public class CustomerGetCustomerReferenceNoModelOutput
     {
         [JsonProperty("Title")]
@@ -82,7 +84,7 @@ namespace HPCL.DataModel.Customer
         public Int64 CustomerReferenceNo { get; set; }
     }
 
-    public class SendOTPConsentModelOutput :BaseClassOutput
+    public class SendOTPConsentModelOutput : BaseClassOutput
     {
 
         [JsonProperty("CustomerReferenceNo")]

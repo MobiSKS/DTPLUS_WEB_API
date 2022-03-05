@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using HPCL_WebApi.ExtensionMethod;
 using HPCL_WebApi.ActionFilters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -41,7 +43,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetZoneModelOutput> item = result.Cast<SettingGetZoneModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -66,7 +72,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetRegionModelOutput> item = result.Cast<SettingGetRegionModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -91,7 +101,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetSalesareaModelOutput> item = result.Cast<SettingGetSalesareaModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -116,7 +130,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetTransactionTypeModelOutput> item = result.Cast<SettingGetTransactionTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -143,7 +161,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetCountryModelOutput> item = result.Cast<SettingGetCountryModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -168,7 +190,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetStateModelOutput> item = result.Cast<SettingGetStateModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -195,7 +221,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetRoleModelOutput> item = result.Cast<SettingGetRoleModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -220,7 +250,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetProductModelOutput> item = result.Cast<SettingGetProductModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -245,7 +279,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetEntityModelOutput> item = result.Cast<SettingGetEntityModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -270,7 +308,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetEntityTypesModelOutput> item = result.Cast<SettingGetEntityTypesModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -297,7 +339,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass,result, _logger);
+                    List<SettingGetCityModelOutput> item = result.Cast<SettingGetCityModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -322,7 +368,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetDistrictModelOutput> item = result.Cast<SettingGetDistrictModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -349,7 +399,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetProofTypeModelOutput> item = result.Cast<SettingGetProofTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -374,7 +428,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SettingGetTierModelOutput> item = result.Cast<SettingGetTierModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 

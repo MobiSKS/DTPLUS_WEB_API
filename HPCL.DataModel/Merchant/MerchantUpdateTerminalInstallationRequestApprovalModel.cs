@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 namespace HPCL.DataModel.Merchant
 {
+    
     public class MerchantUpdateTerminalInstallationRequestApprovalModelInput : BaseClass
     {
         [Required]

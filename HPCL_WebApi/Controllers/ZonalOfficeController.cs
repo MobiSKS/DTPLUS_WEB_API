@@ -4,6 +4,8 @@ using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
@@ -40,7 +42,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetZonalOfficeModelOutput> item = result.Cast<GetZonalOfficeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 

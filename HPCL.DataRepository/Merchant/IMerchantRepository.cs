@@ -112,5 +112,9 @@ namespace HPCL.DataRepository.Merchant
         public Task<IEnumerable<MerchantInsertTerminalDeInstallationRequestAuthorizationModelOutput>> InsertTerminalDeInstallationRequestAuthorization([FromBody] MerchantInsertTerminalDeInstallationRequestAuthorizationModelInput ObjClass);
 
         public Task<IEnumerable<MerchantViewTerminalDeInstallationRequestStatusModelOutput>> ViewTerminalDeInstallationRequestStatus([FromBody] MerchantViewTerminalDeInstallationRequestStatusModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetProblematicDeinstalledToDeinstalledModelOutput>> GetProblematicDeinstalledToDeinstalled([FromBody] MerchantGetProblematicDeinstalledToDeinstalledModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>> InsertProblematicDeinstalledToDeinstalled([FromBody] MerchantInsertProblematicDeinstalledToDeinstalledModelInput ObjClass);
     }
 }

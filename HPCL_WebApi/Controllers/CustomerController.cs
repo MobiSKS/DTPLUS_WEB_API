@@ -7,6 +7,7 @@ using HPCL.DataModel.Customer;
 using System.Linq;
 using HPCL.DataRepository.Customer;
 using HPCL.Infrastructure.CommonClass;
+using System.Collections.Generic;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -42,7 +43,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCustomerTypeModelOutput> item = result.Cast<GetCustomerTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -65,7 +70,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCustomerSubTypeModelOutput> item = result.Cast<GetCustomerSubTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -88,7 +97,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCustomerTBEntityNameModelOutput> item = result.Cast<GetCustomerTBEntityNameModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -111,7 +124,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCustomerSecretQuestionModelOutput> item = result.Cast<GetCustomerSecretQuestionModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -134,7 +151,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCustomerTypeOfFleetModelOutput> item = result.Cast<GetCustomerTypeOfFleetModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -227,7 +248,11 @@ namespace HPCL_WebApi.Controllers
                     }
                     else
                     {
-                        return this.OkCustom(ObjClass, result, _logger);
+                        List<CustomerViewOnlineFormStatusModelOutput> item = result.Cast<CustomerViewOnlineFormStatusModelOutput>().ToList();
+                        if (item.Count > 0)
+                            return this.OkCustom(ObjClass, result, _logger);
+                        else
+                            return this.Fail(ObjClass, result, _logger);
                     }
                 }
             }
@@ -330,7 +355,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CustomerGetVehicleTypeModelOutput> item = result.Cast<CustomerGetVehicleTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -386,7 +415,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetApproveFeeWaiverBasicDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -409,7 +441,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CustomerGetCustomerReferenceNoModelOutput> item = result.Cast<CustomerGetCustomerReferenceNoModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -434,7 +470,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -457,7 +496,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -480,7 +522,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -534,7 +579,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<BindPendingCustomerModelOutput> item = result.Cast<BindPendingCustomerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -557,7 +606,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<BindPendingCustomerModelOutput> item = result.Cast<BindPendingCustomerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -581,7 +634,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<SendOTPConsentModelOutput> item = result.Cast<SendOTPConsentModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -604,7 +661,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<ValidateOTPConsentModelOutput> item = result.Cast<ValidateOTPConsentModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -628,7 +689,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -651,7 +715,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -674,7 +741,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetFormNumberModelOutput> item = result.Cast<GetFormNumberModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -697,7 +768,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CheckFormNumberModelOutput> item = result.Cast<CheckFormNumberModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -784,7 +859,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetControlCardNumberModelOutput> item = result.Cast<GetControlCardNumberModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -841,7 +920,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CustomerGetMerchantForCardMappingModelOutput> item = result.Cast<CustomerGetMerchantForCardMappingModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -865,7 +948,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CustomerGetCardListFromCustomerIdModelOutput> item = result.Cast<CustomerGetCardListFromCustomerIdModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -888,7 +975,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.GetCustomerDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -1083,11 +1173,126 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CustomerGetMappingUserCardstoMerchantsModelOutput> item = result.Cast<CustomerGetMappingUserCardstoMerchantsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
 
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_customer_name_by_customer_id")]
+        public async Task<IActionResult> GetCustomerNameByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetCustomerNameByCustomerId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerGetCustomerNameModelOutput> item = result.Cast<CustomerGetCustomerNameModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_otc_card_allocation_activation")]
+        public async Task<IActionResult> GetOTCCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetOTCCardAllocationActivation(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_driver_card_allocation_activation")]
+        public async Task<IActionResult> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetDriverCardAllocationActivation(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_tatkal_card_allocation_activation")]
+        public async Task<IActionResult> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetTatkalCardAllocationActivation(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 
 }

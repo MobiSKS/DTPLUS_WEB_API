@@ -5,6 +5,7 @@ using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,7 +43,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<ManageSearchCardsModelOutput> item = result.Cast<ManageSearchCardsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -66,7 +71,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+
+                    if (result.GetCardsDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -245,7 +254,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.CCMSBasicDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -268,7 +280,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCardLimitsModelOutput> item = result.Cast<GetCardLimitsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -291,7 +307,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCCMSLimitsForAllCardsModelOutput> item = result.Cast<GetCCMSLimitsForAllCardsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -314,7 +334,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<UpdateCCMSLimitForAllCardsModelOutput> item = result.Cast<UpdateCCMSLimitForAllCardsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -339,7 +363,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<UpdateCardLimitForAllCardsModelOutput> item = result.Cast<UpdateCardLimitForAllCardsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -362,7 +390,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetLimitMasterModelOutput> item = result.Cast<GetLimitMasterModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -385,7 +417,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetAllCardWithStatusModelOutput> item = result.Cast<GetAllCardWithStatusModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -408,7 +444,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<UpdateCardStatusModelOutput> item = result.Cast<UpdateCardStatusModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -431,7 +471,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<ViewCardLimitsModelOutput> item = result.Cast<ViewCardLimitsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -487,7 +531,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<BindPendingCustomerforCardModelOutput> item = result.Cast<BindPendingCustomerforCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -510,7 +558,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetCardDetailForCardApprovalModelOutput> item = result.Cast<GetCardDetailForCardApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -567,7 +619,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<CardSearchMappingDetailModelOutput> item = result.Cast<CardSearchMappingDetailModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }

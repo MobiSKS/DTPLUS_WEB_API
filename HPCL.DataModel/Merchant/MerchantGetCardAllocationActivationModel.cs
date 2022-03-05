@@ -5,8 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Merchant
 {
-    
-    public class MerchantViewTerminalDeInstallationRequestStatusModelInput : BaseClass
+     
+
+    public class MerchantGetCardAllocationActivationModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("FromDate")]
@@ -18,15 +19,6 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string ToDate { get; set; }
 
-        [JsonPropertyName("MerchantId")]
-        [DataMember]
-        public string MerchantId { get; set; }
-
-
-        [JsonPropertyName("TerminalId")]
-        [DataMember]
-        public string TerminalId { get; set; }
-
 
         [JsonPropertyName("ZonalOfficeId")]
         [DataMember]
@@ -35,9 +27,13 @@ namespace HPCL.DataModel.Merchant
         [JsonPropertyName("RegionalOfficeId")]
         [DataMember]
         public string RegionalOfficeId { get; set; }
+
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
     }
 
-    public class MerchantViewTerminalDeInstallationRequestStatusModelOutput
+    public class MerchantGetCardAllocationActivationModelOutput
     {
 
         [JsonProperty("MerchantId")]
@@ -59,14 +55,14 @@ namespace HPCL.DataModel.Merchant
         public string RequestedBy { get; set; }
 
 
-        [JsonProperty("ModifiedBy")]
+        [JsonProperty("AuthorizedBy")]
         [DataMember]
-        public string ModifiedBy { get; set; }
+        public string AuthorizedBy { get; set; }
 
 
-        [JsonProperty("ModifiedDate")]
+        [JsonProperty("AuthorizedDate")]
         [DataMember]
-        public string ModifiedDate { get; set; }
+        public string AuthorizedDate { get; set; }
 
 
         [JsonProperty("StatusName")]
@@ -74,11 +70,14 @@ namespace HPCL.DataModel.Merchant
         public string StatusName { get; set; }
 
 
-        [JsonProperty("Remarks")]
+        [JsonProperty("ZonalOfficeName")]
         [DataMember]
-        public string Remarks { get; set; }
+        public string ZonalOfficeName { get; set; }
 
-         
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
 
     }
 }

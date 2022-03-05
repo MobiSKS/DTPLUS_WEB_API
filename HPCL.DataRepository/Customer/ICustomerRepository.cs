@@ -10,7 +10,7 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<GetFormNumberModelOutput>> GetFormNumber([FromBody] GetFormNumberModelInput ObjClass);
         public Task<IEnumerable<CheckFormNumberModelOutput>> CheckFormNumber([FromBody] CheckFormNumberModelInput ObjClass);
         public Task<IEnumerable<CheckMobileNumberModelOutput>> CheckMobileNumber([FromBody] CheckMobileNumberModelInput ObjClass);
-        public  Task<IEnumerable<CheckEmailIdModelOutput>> CheckEmailId([FromBody] CheckEmailIdModelInput ObjClass);
+        public Task<IEnumerable<CheckEmailIdModelOutput>> CheckEmailId([FromBody] CheckEmailIdModelInput ObjClass);
         public Task<IEnumerable<GetCustomerTypeModelOutput>> GetCustomerType([FromBody] GetCustomerTypeModelInput ObjClass);
         public Task<IEnumerable<GetCustomerSubTypeModelOutput>> GetCustomerSubType([FromBody] GetCustomerSubTypeModelInput ObjClass);
         public Task<IEnumerable<GetCustomerTBEntityNameModelOutput>> GetTBEntityName([FromBody] GetCustomerTBEntityNameModelInput ObjClass);
@@ -21,7 +21,7 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerViewOnlineFormStatusModelOutput>> ViewOnlineFormStatus([FromBody] CustomerViewOnlineFormStatusModelInput ObjClass);
         public Task<IEnumerable<CustomerKYCModelOutput>> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] CustomerKYCModelInput ObjClass);
         public Task<IEnumerable<CustomerApprovalModelOutput>> ApproveRejectCustomer([FromBody] CustomerApprovalModelInput ObjClass);
-        
+
         public Task<IEnumerable<CustomerGetVehicleTypeModelOutput>> GetVehicleType([FromBody] CustomerGetVehicleTypeModelInput ObjClass);
         public Task<IEnumerable<CustomerFeewaiverApprovalModelOutput>> ApproveRejectFeewaiver([FromBody] CustomerFeewaiverApprovalModelInput ObjClass);
 
@@ -66,7 +66,15 @@ namespace HPCL.DataRepository.Customer
 
         public Task<IEnumerable<CustomerInsertTatkalCustomerModelOutput>> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass);
 
-        public  Task<IEnumerable<CustomerGetMappingUserCardstoMerchantsModelOutput>> GetMappingUserCardstoMerchants([FromBody] CustomerGetMappingUserCardstoMerchantsModelInput ObjClass);
+        public Task<IEnumerable<CustomerGetMappingUserCardstoMerchantsModelOutput>> GetMappingUserCardstoMerchants([FromBody] CustomerGetMappingUserCardstoMerchantsModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerGetCustomerNameModelOutput>> GetCustomerNameByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetOTCCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
     }
 
 }

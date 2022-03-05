@@ -668,20 +668,23 @@ namespace HPCL.DataRepository.Merchant
 
             string FileNamePathAddressProof = string.Empty;
             var ImageFileNameAddressProofFront = ObjClass.AddressProof;
-            if (ImageFileNameAddressProofFront.Length > 0)
+            if (ImageFileNameAddressProofFront != null)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
-                var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
-                var extension = ext.ToLower();
-                if (AllowedFileExtensions.Contains(extension))
+                if (ImageFileNameAddressProofFront.Length > 0)
                 {
+                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                    var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
+                    var extension = ext.ToLower();
+                    if (AllowedFileExtensions.Contains(extension))
+                    {
 
-                    string contentRootPath = _hostingEnvironment.ContentRootPath;
-                    FileNamePathAddressProof = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                        + "_" + ObjClass.AddressProofType + "_" + ImageFileNameAddressProofFront.FileName;
-                    string filePathAddressProofFront = contentRootPath + FileNamePathAddressProof;
-                    var fileStream = new FileStream(filePathAddressProofFront, FileMode.Create);
-                    ImageFileNameAddressProofFront.CopyTo(fileStream);
+                        string contentRootPath = _hostingEnvironment.ContentRootPath;
+                        FileNamePathAddressProof = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
+                            + "_" + ObjClass.AddressProofType + "_" + ImageFileNameAddressProofFront.FileName;
+                        string filePathAddressProofFront = contentRootPath + FileNamePathAddressProof;
+                        var fileStream = new FileStream(filePathAddressProofFront, FileMode.Create);
+                        ImageFileNameAddressProofFront.CopyTo(fileStream);
+                    }
                 }
             }
 
@@ -802,10 +805,10 @@ namespace HPCL.DataRepository.Merchant
 
             var procedureName = "UspUpdateTerminalInstallationRequestApproval";
             var parameters = new DynamicParameters();
-            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
             parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("UpdateTerminalDeInstReqClose", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantUpdateTerminalInstallationRequestApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -973,7 +976,7 @@ namespace HPCL.DataRepository.Merchant
 
             var procedureName = "UspUpdateTerminalDeInstallationRequestApproval";
             var parameters = new DynamicParameters();
-            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
             parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
@@ -1018,7 +1021,7 @@ namespace HPCL.DataRepository.Merchant
 
             var procedureName = "UspUpdateTerminalDeInstallationRequestAuthorization";
             var parameters = new DynamicParameters();
-            parameters.Add("Remark", ObjClass.@Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
             parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
@@ -1039,6 +1042,50 @@ namespace HPCL.DataRepository.Merchant
             parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantViewTerminalDeInstallationRequestStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantGetProblematicDeinstalledToDeinstalledModelOutput>> GetProblematicDeinstalledToDeinstalled([FromBody] MerchantGetProblematicDeinstalledToDeinstalledModelInput ObjClass)
+        {
+            var procedureName = "UspGetProblematicDeinstalledToDeinstalled";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetProblematicDeinstalledToDeinstalledModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>> InsertProblematicDeinstalledToDeinstalled([FromBody] MerchantInsertProblematicDeinstalledToDeinstalledModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("TypeMerchantTerminalMap");
+            dtDBR.Columns.Add("MerchantId", typeof(string));
+            dtDBR.Columns.Add("TerminalId", typeof(string));
+
+
+            if (ObjClass.ObjTerminalProblematicDeinstalledToDeinstalled != null)
+            {
+                foreach (TerminalProblematicDeinstalledToDeinstalled ObjDetail in ObjClass.ObjTerminalProblematicDeinstalledToDeinstalled)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["MerchantId"] = ObjDetail.MerchantId;
+                    dr["TerminalId"] = ObjDetail.TerminalId;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateProblematicDeinstalledToDeinstalled";
+            var parameters = new DynamicParameters();
+            parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

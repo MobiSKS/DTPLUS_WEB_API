@@ -5,6 +5,7 @@ using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,7 +43,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetMerchantTypeModelOutput> item = result.Cast<GetMerchantTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -67,7 +72,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetMerchantOutletCategoryModelOutput> item = result.Cast<GetMerchantOutletCategoryModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -92,7 +101,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetSBUModelOutput> item = result.Cast<MerchantGetSBUModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -228,7 +241,12 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetByMerchantIdModelOutput> item = result.Cast<MerchantGetByMerchantIdModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+
                 }
             }
 
@@ -254,7 +272,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetByMerchantIdModelOutput> item = result.Cast<MerchantGetByMerchantIdModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -279,7 +301,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetMerchantApprovalModelOutput> item = result.Cast<MerchantGetMerchantApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -305,7 +331,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<RejectedMerchantModelOutput> item = result.Cast<RejectedMerchantModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -331,7 +361,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantSearchMerchantForCardCreationModelOutput> item = result.Cast<MerchantSearchMerchantForCardCreationModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -398,7 +432,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantCheckAvailityCardOutput> item = result.Cast<MerchantCheckAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -423,7 +461,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantCheckAvailityCardOutput> item = result.Cast<MerchantCheckAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -448,7 +490,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantCheckAvailityCardOutput> item = result.Cast<MerchantCheckAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -474,7 +520,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetAvailityCardOutput> item = result.Cast<MerchantGetAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -499,7 +549,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetAvailityCardOutput> item = result.Cast<MerchantGetAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -524,7 +578,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetAvailityCardOutput> item = result.Cast<MerchantGetAvailityCardOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -550,12 +608,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjMerchantDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
-        }
 
+        }
 
 
         [HttpPost]
@@ -613,7 +674,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantSearchForTerminalInstallationRequestCloseModelOutput> item = result.Cast<MerchantSearchForTerminalInstallationRequestCloseModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -638,7 +703,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetReasonListModelOutput> item = result.Cast<MerchantGetReasonListModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -699,7 +768,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantViewTerminalInstallationRequestStatusCloseModelOutput> item = result.Cast<MerchantViewTerminalInstallationRequestStatusCloseModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -724,7 +797,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjMerchantDeinstallationDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -855,7 +931,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjNoOfUnAllocatedCard.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -880,7 +959,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjNoOfUnAllocatedCard.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -906,7 +988,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjNoOfUnAllocatedCard.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1020,9 +1105,9 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_driver_card_customer")]
-        public async Task<IActionResult> InsertDriverCardCustomer([FromBody] MerchantInsertDriverCardCustomerModelInput ObjClass)
+        public async Task<IActionResult> InsertDriverCardCustomer([FromForm] MerchantInsertDriverCardCustomerModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -1079,7 +1164,12 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetTerminalDeInstallationRequestCloseModelOutput> item = result.Cast<MerchantGetTerminalDeInstallationRequestCloseModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+
                 }
             }
 
@@ -1141,7 +1231,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetTerminalInstallationRequestApprovalModelOutput> item = result.Cast<MerchantGetTerminalInstallationRequestApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1150,6 +1244,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_terminal_installation_request_approval")]
+
         public async Task<IActionResult> InsertTerminalInstallationRequestApproval([FromBody] MerchantUpdateTerminalInstallationRequestApprovalModelInput ObjClass)
         {
 
@@ -1166,14 +1261,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.Cast<MerchantTerminalDeInstalUpdateRequestCloseModelOutput>().ToList()[0].Status == 1)
+
+                    if (result.Cast<MerchantUpdateTerminalInstallationRequestApprovalModelOutput>().ToList()[0].Status == 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
                         return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<MerchantTerminalDeInstalUpdateRequestCloseModelOutput>().ToList()[0].Reason);
+                            result.Cast<MerchantUpdateTerminalInstallationRequestApprovalModelOutput>().ToList()[0].Reason);
                     }
 
 
@@ -1202,7 +1298,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantViewRequestedCardModelOutput> item = result.Cast<MerchantViewRequestedCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1228,7 +1328,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantViewRequestedCardModelOutput> item = result.Cast<MerchantViewRequestedCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1254,7 +1358,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantViewRequestedCardModelOutput> item = result.Cast<MerchantViewRequestedCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1386,7 +1494,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+
+                    if (result.ObjMerchantViewCardDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1411,7 +1523,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjMerchantViewCardDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1437,7 +1552,10 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    if (result.ObjMerchantViewCardDetail.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1463,7 +1581,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetTerminalDeInstallationRequestApprovalModelOutput> item = result.Cast<MerchantGetTerminalDeInstallationRequestApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1491,7 +1613,11 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<MerchantInsertTerminalDeInstallationRequestApprovalModelOutput>().ToList()[0].Status == 1)
                     {
-                        return this.OkCustom(ObjClass, result, _logger);
+                        List<MerchantInsertTerminalDeInstallationRequestApprovalModelOutput> item = result.Cast<MerchantInsertTerminalDeInstallationRequestApprovalModelOutput>().ToList();
+                        if (item.Count > 0)
+                            return this.OkCustom(ObjClass, result, _logger);
+                        else
+                            return this.Fail(ObjClass, result, _logger);
                     }
                     else
                     {
@@ -1525,7 +1651,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantGetTerminalDeInstallationRequestAuthorizationModelOutput> item = result.Cast<MerchantGetTerminalDeInstallationRequestAuthorizationModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -1587,7 +1717,77 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<MerchantViewTerminalDeInstallationRequestStatusModelOutput> item = result.Cast<MerchantViewTerminalDeInstallationRequestStatusModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_problematic_de_installed_to_deinstalled")]
+        public async Task<IActionResult> GetProblematicDeinstalledToDeinstalled([FromBody] MerchantGetProblematicDeinstalledToDeinstalledModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetProblematicDeinstalledToDeinstalled(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<MerchantGetProblematicDeinstalledToDeinstalledModelOutput> item = result.Cast<MerchantGetProblematicDeinstalledToDeinstalledModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_problematic_de_installed_to_deinstalled")]
+        public async Task<IActionResult> InsertProblematicDeinstalledToDeinstalled([FromBody] MerchantInsertProblematicDeinstalledToDeinstalledModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.InsertProblematicDeinstalledToDeinstalled(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>().ToList()[0].Reason);
+                    }
+
+
                 }
             }
 

@@ -509,6 +509,15 @@ namespace HPCL.DataRepository.Customer
             //return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CustomerGetCustomerNameModelOutput>> GetCustomerNameByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerNameByCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCustomerNameModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<CustomerDetailsModelOutput> GetCustomerDetails([FromBody] CustomerDetailsModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerDetail";
@@ -846,6 +855,49 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerGetMappingUserCardstoMerchantsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetOTCCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardAllocationActivation";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardAllocationActivation";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardAllocationActivation";
+            var parameters = new DynamicParameters();
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeId", ObjClass.ZonalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
 

@@ -1,14 +1,10 @@
-﻿using HPCL.DataModel.SMSGetSend;
-using HPCL.DataModel.Transaction;
-using HPCL.DataRepository.SMSGetSend;
+﻿using HPCL.DataModel.Transaction;
 using HPCL.DataRepository.Transaction;
 using HPCL.Infrastructure.CommonClass;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

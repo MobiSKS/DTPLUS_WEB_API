@@ -10,9 +10,10 @@ namespace HPCL_WebApi.ExtensionMethod
     {
         public static IActionResult OkCustom(this ControllerBase controller, object input, object data, ILogger logger)
         {
-            var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
             string MessageStr = StatusInformation.Success.ToString();
+
             ApiResponseMessage response = new ApiResponseMessage
             {
                 Message = MessageStr,
@@ -22,7 +23,26 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = MethodName
             };
-           // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            return controller.Ok(response);
+        }
+
+        public static IActionResult Fail(this ControllerBase controller, object input, object data, ILogger logger)
+        {
+            //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
+            string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
+            string MessageStr = StatusInformation.Fail.GetDisplayName().ToString();
+
+            ApiResponseMessage response = new ApiResponseMessage
+            {
+                Message = MessageStr,
+                Success = false,
+                Internel_Status_Code = (int)StatusInformation.Fail,
+                Status_Code = controller.Ok().StatusCode,
+                Data = data,
+                Method_Name = MethodName
+            };
+            // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.Ok(response);
         }
 
@@ -351,7 +371,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-          //  logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            //  logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.Ok(response);
         }
         public static IActionResult BadRequestCustom(this ControllerBase controller, object input, object data, ILogger logger)
@@ -369,7 +389,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-           // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.BadRequest(response);
 
         }
@@ -387,7 +407,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Data = data,
                 Method_Name = controller.ControllerContext.ActionDescriptor.ActionName
             };
-           // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.NotFound(response);
 
         }
@@ -405,7 +425,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Token = TokenManager.GenerateToken(ObjClass.Useragent, ObjClass.Userip),
                 Model_State = controller.ModelState
             };
-           // logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
+            // logger.LogInformation(response.Method_Name + " :: JSON INPUT " + jsonInput.ToString() + ":" + response.Message);
             return controller.Ok(response);
 
         }
@@ -424,7 +444,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 Token = string.Empty,
                 Model_State = controller.ModelState
             };
-           // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
+            // logger.LogInformation(MethodName + " :: JSON INPUT " + jsonInput.ToString() + ":" + MessageStr);
             return controller.BadRequest(response);
 
         }

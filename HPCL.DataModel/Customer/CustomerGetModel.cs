@@ -13,6 +13,13 @@ namespace HPCL.DataModel.Customer
         public string CustomerID { get; set; }
     }
 
+    public class CustomerGetCustomerNameModelOutput
+    {
+        [JsonProperty("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+    }
+
     public class CustomerDetailsModelInput : BaseClass
     {
         [JsonPropertyName("CustomerID")]

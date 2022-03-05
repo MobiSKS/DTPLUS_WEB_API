@@ -7,6 +7,7 @@ using HPCL.DataRepository.Officer;
 using HPCL.DataModel.Officer;
 using System.Linq;
 using HPCL.Infrastructure.CommonClass;
+using System.Collections.Generic;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -43,7 +44,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerTypeModelOutput> item = result.Cast<GetOfficerTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 
@@ -134,7 +139,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerModelOutput> item = result.Cast<GetOfficerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -158,7 +167,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerModelOutput> item = result.Cast<GetOfficerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -307,7 +320,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerLocationMappingModelOutput> item = result.Cast<GetOfficerLocationMappingModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -330,7 +347,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<BindRBEOfficerModelOutput> item = result.Cast<BindRBEOfficerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -401,7 +422,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("upload_officer_kyc")]
-        public async Task<IActionResult> UploadOfficerKYC([Microsoft.AspNetCore.Mvc.FromForm] OfficerKYCModelInput ObjClass)
+        public async Task<IActionResult> UploadOfficerKYC([FromForm] OfficerKYCModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -481,7 +502,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerCreationApprovalModelOutput> item = result.Cast<GetOfficerCreationApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -504,7 +529,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetRBEDetailbyUserNameModelOutput> item = result.Cast<GetRBEDetailbyUserNameModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }
@@ -567,7 +596,11 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    return this.OkCustom(ObjClass, result, _logger);
+                    List<GetOfficerDetailModelOutput> item = result.Cast<GetOfficerDetailModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
         }

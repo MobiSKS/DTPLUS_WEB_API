@@ -5,8 +5,8 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Merchant
 {
-    
-    public class MerchantViewTerminalDeInstallationRequestStatusModelInput : BaseClass
+     
+    public class MerchantGetProblematicDeinstalledToDeinstalledModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("FromDate")]
@@ -37,7 +37,7 @@ namespace HPCL.DataModel.Merchant
         public string RegionalOfficeId { get; set; }
     }
 
-    public class MerchantViewTerminalDeInstallationRequestStatusModelOutput
+    public class MerchantGetProblematicDeinstalledToDeinstalledModelOutput
     {
 
         [JsonProperty("MerchantId")]
@@ -59,14 +59,14 @@ namespace HPCL.DataModel.Merchant
         public string RequestedBy { get; set; }
 
 
-        [JsonProperty("ModifiedBy")]
+        [JsonProperty("AuthorizedBy")]
         [DataMember]
-        public string ModifiedBy { get; set; }
+        public string AuthorizedBy { get; set; }
 
 
-        [JsonProperty("ModifiedDate")]
+        [JsonProperty("AuthorizedDate")]
         [DataMember]
-        public string ModifiedDate { get; set; }
+        public string AuthorizedDate { get; set; }
 
 
         [JsonProperty("StatusName")]
@@ -74,11 +74,14 @@ namespace HPCL.DataModel.Merchant
         public string StatusName { get; set; }
 
 
-        [JsonProperty("Remarks")]
+        [JsonProperty("ZonalOfficeName")]
         [DataMember]
-        public string Remarks { get; set; }
+        public string ZonalOfficeName { get; set; }
 
-         
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
 
     }
 }

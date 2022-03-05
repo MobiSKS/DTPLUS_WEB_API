@@ -8,7 +8,7 @@ namespace HPCL.Infrastructure.CommonClass
         public enum StatusInformation
         {
             [Display(Name = "Record Found")] Success = 1000,
-            [Display(Name = "Record Not Found")] Fail = 1001,
+            [Display(Name = "No Record Found")] Fail = 1001,
             [Display(Name = "API Key and Secret Key is null.Please Pass API Key and Secret Key")] API_Key_Secret_Key_Is_Null = 1002,
             [Display(Name = "API Key is Null.Please Pass API Key")] API_Key_Is_Null = 1003,
             [Display(Name = "Secret Key is Null.Please pass Secret Key")] Secret_Key_Is_Null = 1004,
