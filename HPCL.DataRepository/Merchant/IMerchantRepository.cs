@@ -116,5 +116,19 @@ namespace HPCL.DataRepository.Merchant
         public Task<IEnumerable<MerchantGetProblematicDeinstalledToDeinstalledModelOutput>> GetProblematicDeinstalledToDeinstalled([FromBody] MerchantGetProblematicDeinstalledToDeinstalledModelInput ObjClass);
 
         public Task<IEnumerable<MerchantInsertProblematicDeinstalledToDeinstalledModelOutput>> InsertProblematicDeinstalledToDeinstalled([FromBody] MerchantInsertProblematicDeinstalledToDeinstalledModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetManageTerminalDetailsModelOutput>> GetManageTerminalDetails([FromBody] MerchantGetManageTerminalDetailsModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantSearchMerchantModelOutput>> SearchMerchant([FromBody] MerchantSearchMerchantModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantSearchTerminalModelOutput>> SearchTerminal([FromBody] MerchantSearchTerminalModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetMerchantStatusModelOutput>> GetMerchantStatus([FromBody] MerchantGetMerchantStatusModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetTerminalTypeModelOutput>> GetTerminalType([FromBody] MerchantGetTerminalTypeModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetCustomerBalanceInfoModelOutput>> GetCustomerBalanceInfo([FromBody] MerchantGetCustomerBalanceInfoModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantGetCustomerCardWiseBalancesModelOutput>> GetCustomerCardWiseBalances([FromBody] MerchantGetCustomerCardWiseBalancesModelInput ObjClass);
     }
 }

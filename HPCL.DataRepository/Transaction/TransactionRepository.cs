@@ -180,6 +180,22 @@ namespace HPCL.DataRepository.Transaction
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<TransactionBatchSettlementModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+        
+        public async Task<TransactionGetRegistrationProcessModelOutput> GetRegistrationParameters([FromBody] TransactionGetRegistrationProcessModelInput ObjClass)
+        {
+            var procedureName = "UspGetRegistrationProcess";
+            var parameters = new DynamicParameters();
+            parameters.Add("IACId", ObjClass.IACId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new TransactionGetRegistrationProcessModelOutput();
+            storedProcedureResult.ObjGetRegistrationProcessMerchant = (List<TransactionGetRegistrationProcessMerchantModelOutput>)await result.ReadAsync<TransactionGetRegistrationProcessMerchantModelOutput>();
+            storedProcedureResult.ObjGetRegistrationProcessTrans = (List<TransactionGetRegistrationProcessTransModelOutput>)await result.ReadAsync<TransactionGetRegistrationProcessTransModelOutput>();
+            storedProcedureResult.ObjBanks = (List<TransactionBanksModelOutput>)await result.ReadAsync<TransactionBanksModelOutput>();
+            storedProcedureResult.ObjFormFactors = (List<TransactionFormFactorsModelOutput>)await result.ReadAsync<TransactionFormFactorsModelOutput>();
+            return storedProcedureResult;
+        }
+
 
     }
 }

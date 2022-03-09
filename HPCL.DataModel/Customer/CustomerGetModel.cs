@@ -20,6 +20,47 @@ namespace HPCL.DataModel.Customer
         public string CustomerName { get; set; }
     }
 
+
+    public class CustomerGetCustomerDetailsForSearchModelOutput
+    {
+        [JsonProperty("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonProperty("NameOnCard")]
+        [DataMember]
+        public string NameOnCard { get; set; }
+
+        [JsonProperty("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
+
+        [JsonProperty("FormNumber")]
+        [DataMember]
+        public Int64 FormNumber { get; set; }
+
+        [JsonProperty("FormReceiptDate")]
+        [DataMember]
+        public string FormReceiptDate { get; set; }
+
+        [JsonProperty("Status")]
+        [DataMember]
+        public string Status { get; set; }
+
+        [JsonProperty("CustomerTypeName")]
+        [DataMember]
+        public string CustomerTypeName { get; set; }
+
+        [JsonProperty("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+    }
+
+
     public class CustomerDetailsModelInput : BaseClass
     {
         [JsonPropertyName("CustomerID")]

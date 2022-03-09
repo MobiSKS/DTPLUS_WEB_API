@@ -84,6 +84,10 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("FirstTransactionDate")]
         [DataMember]
         public string FirstTransactionDate { get; set; }
+
+        [JsonProperty("IsDTPCustomer")]
+        [DataMember]
+        public string IsDTPCustomer { get; set; }
     }
 
 }

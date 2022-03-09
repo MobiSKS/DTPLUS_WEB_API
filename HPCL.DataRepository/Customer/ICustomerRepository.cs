@@ -75,6 +75,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerGetCustomerDetailsForSearchModelOutput>> GetCustomerDetailsForSearch([FromBody] CustomerGetByCustomerIdModelInput ObjClass);
     }
 
 }

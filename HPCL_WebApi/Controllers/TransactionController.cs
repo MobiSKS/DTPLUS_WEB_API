@@ -5,6 +5,7 @@ using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -170,8 +171,8 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].Status == 1)
                     {
-                        
-                        Variables.SendSMS(1,"1007241399399538955", ObjClass.Mobileno,ObjClass.CreatedBy, result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].OTP);
+
+                        Variables.SendSMS(1, "1007241399399538955", ObjClass.Mobileno, ObjClass.CreatedBy, result.Cast<TransactionGenerateOTPModelOutput>().ToList()[0].OTP);
 
                         return this.OkCustom(ObjClass, result, _logger);
 
@@ -301,7 +302,32 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-         
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_registration_parameters")]
+        public async Task<IActionResult> GetRegistrationParameters([FromBody] TransactionGetRegistrationProcessModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _transRepo.GetRegistrationParameters(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.ObjGetRegistrationProcessMerchant.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
         //[HttpPost]
         //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         //[Route("batch_settlement")]

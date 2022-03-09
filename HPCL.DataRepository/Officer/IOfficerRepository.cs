@@ -40,5 +40,11 @@ namespace HPCL.DataRepository.Officer
 
         public Task<IEnumerable<InsertRBEOfficerModelOutput>> InsertRBEOfficer([FromBody] InsertRBEOfficerModelInput ObjClass);
 
+        public Task<IEnumerable<OfficerALDealerEnrollmentModelOutput>> InsertALDealerEnrollment([FromBody] OfficerALDealerEnrollmentModelInput ObjClass);
+
+        public Task<IEnumerable<OfficerUpdateALDealerEnrollmentModelOutput>> UpdateALDealerEnrollment([FromBody] OfficerUpdateALDealerEnrollmentModelInput ObjClass);
+
+        public Task<IEnumerable<OfficerGetDealerNameModelOutput>> GetALDealerDetail([FromBody] OfficerGetDealerNameModelInput ObjClass);
+
     }
 }

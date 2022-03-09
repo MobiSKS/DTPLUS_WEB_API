@@ -75,6 +75,13 @@ namespace HPCL.DataModel.Merchant
         [JsonProperty("Status")]
         [DataMember]
         public string Status { get; set; }
+
+
+        [JsonProperty("RetailOutletName")]
+        [DataMember]
+        public string RetailOutletName { get; set; }
+
+        
     }
 
     public class MerchantViewCardMerchantAllocationModelOutput
