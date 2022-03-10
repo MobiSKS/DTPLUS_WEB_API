@@ -2,16 +2,16 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Merchant
+namespace HPCL.DataModel.Customer
 {
-    public class MerchantGetCustomerBalanceInfoModelInput : BaseClass
+    public class CustomerGetCustomerBalanceInfoModelInput : BaseClass
     {
         [JsonPropertyName("CustomerID")]
         [DataMember]
         public string CustomerID { get; set; }
     }
 
-    public class MerchantGetCustomerBalanceInfoModelOutput
+    public class CustomerGetCustomerBalanceInfoModelOutput
     {
         [JsonProperty("CustomerID")]
         [DataMember]

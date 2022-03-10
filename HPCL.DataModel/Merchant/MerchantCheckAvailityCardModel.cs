@@ -47,4 +47,21 @@ namespace HPCL.DataModel.Merchant
         public string CardNo { get; set; }
     }
 
+
+    public class MerchantGetAvailityALOTCCardCardInput : BaseClass
+    {
+       
+        [Required]
+        [JsonPropertyName("DealerCode")]
+        [DataMember]
+        public string DealerCode { get; set; }
+    }
+
+    public class MerchantGetAvailityALOTCCardCardOutput
+    {
+        [JsonProperty("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+    }
+
 }

@@ -7,7 +7,7 @@ namespace HPCL.DataModel.Officer
 {
     public class OfficerGetDealerNameModelInput : BaseClass
     {
-       
+
         [JsonPropertyName("DealerCode")]
         [DataMember]
         public string DealerCode { get; set; }
@@ -19,7 +19,7 @@ namespace HPCL.DataModel.Officer
 
     public class OfficerGetDealerNameModelOutput
     {
-         
+
         [JsonProperty("DealerCode")]
         [DataMember]
         public string DealerCode { get; set; }
@@ -88,5 +88,21 @@ namespace HPCL.DataModel.Officer
         [JsonProperty("EmailId")]
         [DataMember]
         public string EmailId { get; set; }
+    }
+
+
+    public class OfficerCheckDealerCodeModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("DealerCode")]
+        [DataMember]
+        public string DealerCode { get; set; }
+
+        
+    }
+
+    public class OfficerCheckDealerCodeModelOutput : BaseClassOutput
+    {
+
     }
 }

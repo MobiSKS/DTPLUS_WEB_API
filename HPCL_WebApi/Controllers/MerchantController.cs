@@ -1940,10 +1940,11 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+        
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_customer_balance_info")]
-        public async Task<IActionResult> GetCustomerBalanceInfo([FromBody] MerchantGetCustomerBalanceInfoModelInput ObjClass)
+        [Route("insert_al_customer")]
+        public async Task<IActionResult> InsertALCustomer([FromBody] MerchantInsertALCustomerModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -1952,18 +1953,29 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _merchant.GetCustomerBalanceInfo(ObjClass);
+                var result = await _merchant.InsertALCustomer(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<MerchantGetCustomerBalanceInfoModelOutput> item = result.Cast<MerchantGetCustomerBalanceInfoModelOutput>().ToList();
-                    if (item.Count > 0)
+                    if (result.Cast<MerchantInsertALCustomerModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        string EmailSubject = "<p>Hi <b>" + ObjClass.IndividualOrgName + "</br> User Name : "
+                                + result.Cast<MerchantInsertALCustomerModelOutput>().ToList()[0].CustomerID + " </br> Password : "
+                                + result.Cast<MerchantInsertALCustomerModelOutput>().ToList()[0].Password + " </p>";
+
+                        Variables.FunSendMail(ObjClass.CommunicationEmailid, EmailSubject, "AL OTC Customer Details");
+
                         return this.OkCustom(ObjClass, result, _logger);
+                    }
                     else
-                        return this.Fail(ObjClass, result, _logger);
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantInsertALCustomerModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 
@@ -1972,8 +1984,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_customer_card_wise_balances")]
-        public async Task<IActionResult> GetCustomerCardWiseBalances([FromBody] MerchantGetCustomerCardWiseBalancesModelInput ObjClass)
+        [Route("insert_dealer_wise_al_otc_card_request")]
+        public async Task<IActionResult> InsertDealerWiseALOTCCardRequest([FromBody] MerchantInsertDealerWiseALOTCCardRequestModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -1982,14 +1994,50 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _merchant.GetCustomerCardWiseBalances(ObjClass);
+                var result = await _merchant.InsertDealerWiseALOTCCardRequest(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<MerchantGetCustomerCardWiseBalancesModelOutput> item = result.Cast<MerchantGetCustomerCardWiseBalancesModelOutput>().ToList();
+                    if (result.Cast<MerchantInsertDealerWiseALOTCCardRequestModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<MerchantInsertDealerWiseALOTCCardRequestModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_availityal_otc_card")]
+        public async Task<IActionResult> GetAvailityALOTCCard([FromBody] MerchantGetAvailityALOTCCardCardInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _merchant.GetAvailityALOTCCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<MerchantGetAvailityALOTCCardCardOutput> item = result.Cast<MerchantGetAvailityALOTCCardCardOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else

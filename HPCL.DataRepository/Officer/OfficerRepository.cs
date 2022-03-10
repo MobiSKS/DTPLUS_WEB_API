@@ -460,5 +460,13 @@ namespace HPCL.DataRepository.Officer
             return await connection.QueryAsync<OfficerGetDealerNameModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<OfficerCheckDealerCodeModelOutput>> CheckDealerCode([FromBody] OfficerCheckDealerCodeModelInput ObjClass)
+        {
+            var procedureName = "UspCheckDealerCode";
+            var parameters = new DynamicParameters();
+            parameters.Add("DealerCode", ObjClass.DealerCode, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<OfficerCheckDealerCodeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -911,6 +911,24 @@ namespace HPCL.DataRepository.Customer
         }
 
 
+        public async Task<IEnumerable<CustomerGetCustomerBalanceInfoModelOutput>> GetCustomerBalanceInfo([FromBody] CustomerGetCustomerBalanceInfoModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerBalanceInfo";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCustomerBalanceInfoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CustomerGetCustomerCardWiseBalancesModelOutput>> GetCustomerCardWiseBalances([FromBody] CustomerGetCustomerCardWiseBalancesModelInput ObjClass)
+        {
+            var procedureName = "UspGetCustomerCardWiseBalances";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCustomerCardWiseBalancesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }

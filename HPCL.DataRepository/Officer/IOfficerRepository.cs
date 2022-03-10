@@ -46,5 +46,7 @@ namespace HPCL.DataRepository.Officer
 
         public Task<IEnumerable<OfficerGetDealerNameModelOutput>> GetALDealerDetail([FromBody] OfficerGetDealerNameModelInput ObjClass);
 
+        public Task<IEnumerable<OfficerCheckDealerCodeModelOutput>> CheckDealerCode([FromBody] OfficerCheckDealerCodeModelInput ObjClass);
+
     }
 }

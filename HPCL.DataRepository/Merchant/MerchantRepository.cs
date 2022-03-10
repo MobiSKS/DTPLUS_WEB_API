@@ -906,7 +906,6 @@ namespace HPCL.DataRepository.Merchant
             storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
             storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
             return storedProcedureResult;
-
         }
 
         public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewTatkalCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
@@ -1138,22 +1137,100 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantGetTerminalTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<MerchantGetCustomerBalanceInfoModelOutput>> GetCustomerBalanceInfo([FromBody] MerchantGetCustomerBalanceInfoModelInput ObjClass)
+       
+
+
+        public async Task<IEnumerable<MerchantInsertALCustomerModelOutput>> InsertALCustomer([FromBody] MerchantInsertALCustomerModelInput ObjClass)
         {
-            var procedureName = "UspGetCustomerBalanceInfo";
+            var dtDBR = new DataTable("UserInsertALCard");
+            dtDBR.Columns.Add("CardNo", typeof(string));
+            dtDBR.Columns.Add("CardIdentifier", typeof(string));
+            dtDBR.Columns.Add("MobileNo", typeof(string));
+
+            if (ObjClass.ObjALCardEntryDetail != null)
+            {
+                foreach (ALCardEntryDetail ObjCardDetails in ObjClass.ObjALCardEntryDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CardNo"] = ObjCardDetails.CardNo;
+                    dr["VechileNo"] = ObjCardDetails.VechileNo;
+                    dr["VehicleType"] = ObjCardDetails.VehicleType;
+                    dr["VINNumber"] = ObjCardDetails.VINNumber;
+                    dr["MobileNo"] = ObjCardDetails.MobileNo;
+
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspInsertALCCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerType", 942, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerSubtype", 943, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
+            parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
+            parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress2", ObjClass.CommunicationAddress2, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationCityName", ObjClass.CommunicationCityName, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationPincode", ObjClass.CommunicationPincode, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationPhoneNo", ObjClass.CommunicationPhoneNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationFax", ObjClass.CommunicationFax, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("DealerCode", ObjClass.DealerCode, DbType.String, ParameterDirection.Input);
+            parameters.Add("SalesExecutiveEmployeeID", ObjClass.SalesExecutiveEmployeeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CopyofDriverLicense", ObjClass.CopyofDriverLicense, DbType.String, ParameterDirection.Input);
+            parameters.Add("CopyofVehicleRegistrationCertificate", ObjClass.CopyofVehicleRegistrationCertificate, DbType.String, ParameterDirection.Input);
+            parameters.Add("InsertALCard", dtDBR, DbType.Object, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantGetCustomerBalanceInfoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<MerchantInsertALCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<MerchantGetCustomerCardWiseBalancesModelOutput>> GetCustomerCardWiseBalances([FromBody] MerchantGetCustomerCardWiseBalancesModelInput ObjClass)
+
+        public async Task<IEnumerable<MerchantInsertDealerWiseALOTCCardRequestModelOutput>> InsertDealerWiseALOTCCardRequest([FromBody] MerchantInsertDealerWiseALOTCCardRequestModelInput ObjClass)
         {
-            var procedureName = "UspGetCustomerCardWiseBalances";
+            var procedureName = "UspInsertDealerWiseALOTCCard";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("DealerCode", ObjClass.DealerCode, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardType", "ALOTCCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantGetCustomerCardWiseBalancesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<MerchantInsertDealerWiseALOTCCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        //public async Task<IEnumerable<MerchantCheckAvailityCardOutput>> CheckAvailityALOTCCard([FromBody] MerchantCheckAvailityCardInput ObjClass)
+        //{
+        //    var procedureName = "UspCheckAvailityDummyCard";
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+        //    parameters.Add("CardType", "ALOTCCard", DbType.String, ParameterDirection.Input);
+        //    using var connection = _context.CreateConnection();
+        //    return await connection.QueryAsync<MerchantCheckAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        //}
+
+
+        public async Task<IEnumerable<MerchantGetAvailityALOTCCardCardOutput>> GetAvailityALOTCCard([FromBody] MerchantGetAvailityALOTCCardCardInput ObjClass)
+        {
+            var procedureName = "UspGetAvailityDummyCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardType", "ALOTCCard", DbType.String, ParameterDirection.Input);
+            parameters.Add("DealerCode", ObjClass.DealerCode, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantGetAvailityALOTCCardCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }
