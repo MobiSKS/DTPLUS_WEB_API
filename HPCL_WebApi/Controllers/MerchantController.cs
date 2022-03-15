@@ -2020,7 +2020,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_availityal_otc_card")]
+        [Route("get_availity_al_otc_card")]
         public async Task<IActionResult> GetAvailityALOTCCard([FromBody] MerchantGetAvailityALOTCCardCardInput ObjClass)
         {
 

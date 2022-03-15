@@ -1144,7 +1144,9 @@ namespace HPCL.DataRepository.Merchant
         {
             var dtDBR = new DataTable("UserInsertALCard");
             dtDBR.Columns.Add("CardNo", typeof(string));
-            dtDBR.Columns.Add("CardIdentifier", typeof(string));
+            dtDBR.Columns.Add("VechileNo", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(string));
+            dtDBR.Columns.Add("VINNumber", typeof(string));
             dtDBR.Columns.Add("MobileNo", typeof(string));
 
             if (ObjClass.ObjALCardEntryDetail != null)
@@ -1225,7 +1227,7 @@ namespace HPCL.DataRepository.Merchant
 
         public async Task<IEnumerable<MerchantGetAvailityALOTCCardCardOutput>> GetAvailityALOTCCard([FromBody] MerchantGetAvailityALOTCCardCardInput ObjClass)
         {
-            var procedureName = "UspGetAvailityDummyCard";
+            var procedureName = "UspGetAvailityALCard";
             var parameters = new DynamicParameters();
             parameters.Add("CardType", "ALOTCCard", DbType.String, ParameterDirection.Input);
             parameters.Add("DealerCode", ObjClass.DealerCode, DbType.String, ParameterDirection.Input);

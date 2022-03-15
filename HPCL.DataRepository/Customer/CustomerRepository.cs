@@ -929,6 +929,32 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerGetCustomerCardWiseBalancesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CustomerGetCcmsBalanceInfoForCustomerIdModelOutput>> GetCcmsBalanceInfoForCustomerId([FromBody] CustomerGetCcmsBalanceInfoForCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetCcmsBalanceInfoForCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerGetCcmsBalanceInfoForCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<CustomerGetTransactionsSummaryModelOutput> GetTransactionsSummary([FromBody] CustomerGetTransactionsSummaryModelInput ObjClass)
+        {
+            var procedureName = "UspGetTransactionsSummary";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerGetTransactionsSummaryModelOutput();
+            storedProcedureResult.GetTransactionsSaleSummary = (List<CustomerGetTransactionsSaleSummaryModelOutput>)await result.ReadAsync<CustomerGetTransactionsSaleSummaryModelOutput>();
+            storedProcedureResult.GetTransactionsDetailSummary = (List<CustomerGetTransactionsDetailSummaryModelOutput>)await result.ReadAsync<CustomerGetTransactionsDetailSummaryModelOutput>();
+            return storedProcedureResult;
+        }
 
     }
 }

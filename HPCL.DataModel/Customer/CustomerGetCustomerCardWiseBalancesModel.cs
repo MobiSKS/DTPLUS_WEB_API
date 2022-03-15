@@ -34,4 +34,43 @@ namespace HPCL.DataModel.Customer
         public double CardBalance { get; set; }
         
     }
+
+    public class CustomerGetCcmsBalanceInfoForCustomerIdModelInput : BaseClass
+    {
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+    }
+
+    public class CustomerGetCcmsBalanceInfoForCustomerIdModelOutput
+    {
+        [JsonProperty("Mode")]
+        [DataMember]
+        public string Mode { get; set; }
+
+        [JsonProperty("Description")]
+        [DataMember]
+        public string Description { get; set; }
+
+        [JsonProperty("TransactionDate")]
+        [DataMember]
+        public string TransactionDate { get; set; }
+
+        [JsonProperty("OpeningBalance")]
+        [DataMember]
+        public float OpeningBalance { get; set; }
+
+        [JsonProperty("PostingMethod")]
+        [DataMember]
+        public string PostingMethod { get; set; }
+
+        [JsonProperty("Amount")]
+        [DataMember]
+        public float Amount { get; set; }
+
+        [JsonProperty("ClosingBalance")]
+        [DataMember]
+        public float ClosingBalance { get; set; }
+
+    }
 }

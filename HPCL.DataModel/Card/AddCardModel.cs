@@ -69,6 +69,10 @@ namespace HPCL.DataModel.Card
         [JsonPropertyName("YearOfRegistration")]
         public int YearOfRegistration { get; set; }
 
+        [JsonPropertyName("MobileNo")]
+        public string MobileNo { get; set; }
+
+
     }
 
     public class AddCardModelOutput : BaseClassOutput

@@ -273,6 +273,87 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string CardIdentifier { get; set; }
     }
+
+
+    public class GetCcmsToCardBalanceTransferModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonPropertyName("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+
+
+        [JsonPropertyName("MobileNo")]
+        [DataMember]
+        public string MobileNo { get; set; }
+    }
+
+    public class GetCcmsToCardBalanceTransferModelOutput
+    {
+        [JsonProperty("AvailableCcmsBalanceModelOutput")]
+        public List<AvailableCcmsBalanceModelOutput> ObjAvailableCcmsBalance { get; set; }
+
+        [JsonProperty("GetCcmsToCardBalanceTransferDetailModelOutput")]
+        public List<GetCcmsToCardBalanceTransferDetailModelOutput> ObjCcmsToCardBalanceTransferDetail { get; set; }
+ 
+    }
+
+    public class AvailableCcmsBalanceModelOutput
+    {
+
+        [JsonProperty("AvailableCcmsBalance")]
+        [DataMember]
+        public float AvailableCcmsBalance { get; set; }
+    }
+
+    public class GetCcmsToCardBalanceTransferDetailModelOutput
+    {
+        [JsonProperty("SrNumber")]
+        [DataMember]
+        public int SrNumber { get; set; }
+
+
+        [JsonProperty("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+
+        [JsonProperty("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
+
+        [JsonProperty("Mobileno")]
+        [DataMember]
+        public string Mobileno { get; set; }
+
+
+        [JsonProperty("IssueDate")]
+        [DataMember]
+        public string IssueDate { get; set; }
+
+        [JsonProperty("ExpiryDate")]
+        [DataMember]
+        public string ExpiryDate { get; set; }
+
+        [JsonProperty("Status")]
+        [DataMember]
+        public string Status { get; set; }
+
+        [JsonProperty("Balance")]
+        [DataMember]
+        public float Balance { get; set; }
+
+        [JsonProperty("CashPurseLimit")]
+        [DataMember]
+        public float CashPurseLimit { get; set; }
+
+        [JsonProperty("CCMSLimit")]
+        [DataMember]
+        public string CCMSLimit { get; set; }
+    }
 }
 
 

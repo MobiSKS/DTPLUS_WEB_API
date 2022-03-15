@@ -32,5 +32,11 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<ApproveRejectCardModelOutput>> ApproveRejectCard([FromBody] ApproveRejectCardModelInput ObjClass);
 
         public Task<IEnumerable<CardSearchMappingDetailModelOutput>> SearchCardMappingDetail([FromBody] CardSearchMappingDetailModelInput ObjClass);
+
+        public Task<IEnumerable<GetCardtoCCMSBalanceTransferModelOutput>> GetCardtoCCMSBalanceTransfer([FromBody] GetCardtoCCMSBalanceTransferModelInput ObjClass);
+
+        public Task<GetCcmsToCardBalanceTransferModelOutput> GetCCMSToCardBalanceTransfer([FromBody] GetCcmsToCardBalanceTransferModelInput ObjClass);
+
+        public Task<IEnumerable<GetCardtoCardBalanceTransferModelOutput>> GetCardtoCardBalanceTransfer([FromBody] GetCardtoCardBalanceTransferModelInput ObjClass);
     }
 }

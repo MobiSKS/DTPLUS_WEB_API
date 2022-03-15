@@ -263,6 +263,7 @@ namespace HPCL.DataRepository.Card
             dtDBR.Columns.Add("VehicleMake", typeof(string));
             dtDBR.Columns.Add("VehicleType", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+            dtDBR.Columns.Add("MobileNo", typeof(string));
 
             var procedureName = "UspAddCard";
             var parameters = new DynamicParameters();
@@ -283,7 +284,7 @@ namespace HPCL.DataRepository.Card
                     dr["VehicleMake"] = ObjCardDetails.VehicleMake;
                     dr["VehicleType"] = ObjCardDetails.VehicleType;
                     dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
-
+                    dr["MobileNo"] = ObjCardDetails.MobileNo;
                     dtDBR.Rows.Add(dr);
                     dtDBR.AcceptChanges();
                 }
@@ -393,5 +394,42 @@ namespace HPCL.DataRepository.Card
         }
 
 
+        public async Task<IEnumerable<GetCardtoCCMSBalanceTransferModelOutput>> GetCardtoCCMSBalanceTransfer([FromBody] GetCardtoCCMSBalanceTransferModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardtoCCMSBalanceTransfer";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCardtoCCMSBalanceTransferModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<GetCcmsToCardBalanceTransferModelOutput> GetCCMSToCardBalanceTransfer([FromBody] GetCcmsToCardBalanceTransferModelInput ObjClass)
+        {
+            var procedureName = "UspGetCcmsToCardBalanceTransferDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new GetCcmsToCardBalanceTransferModelOutput();
+            storedProcedureResult.ObjAvailableCcmsBalance = (List<AvailableCcmsBalanceModelOutput>)await result.ReadAsync<AvailableCcmsBalanceModelOutput>();
+            storedProcedureResult.ObjCcmsToCardBalanceTransferDetail = (List<GetCcmsToCardBalanceTransferDetailModelOutput>)await result.ReadAsync<GetCcmsToCardBalanceTransferDetailModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<GetCardtoCardBalanceTransferModelOutput>> GetCardtoCardBalanceTransfer([FromBody] GetCardtoCardBalanceTransferModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardtoCardBalanceTransfer";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCardtoCardBalanceTransferModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

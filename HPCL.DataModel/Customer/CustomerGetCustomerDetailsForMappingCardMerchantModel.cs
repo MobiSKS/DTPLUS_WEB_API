@@ -13,6 +13,9 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("CustomerID")]
         [DataMember]
         public string CustomerID { get; set; }
+
+       
+        
     }
 
     public class CustomerGetCustomerDetailsForMappingCardMerchantModelOutput
