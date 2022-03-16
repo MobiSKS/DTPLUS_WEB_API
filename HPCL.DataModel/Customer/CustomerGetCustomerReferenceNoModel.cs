@@ -21,6 +21,11 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string KeyOfficialTitle { get; set; }
 
+        [JsonProperty("KeyInitials")]
+        [DataMember]
+        public string KeyOfficialIndividualInitials { get; set; }
+
+
         [JsonProperty("FirstName")]
         [DataMember]
         public string KeyOfficialFirstName { get; set; }

@@ -37,9 +37,9 @@ namespace HPCL.DataModel.Merchant
         public string MerchantId { get; set; }
 
 
-        [JsonPropertyName("TerminalID")]
+        [JsonPropertyName("TerminalId")]
         [DataMember]
-        public string TerminalID { get; set; }
+        public string TerminalId { get; set; }
 
     }
 
@@ -50,8 +50,8 @@ namespace HPCL.DataModel.Merchant
         public string MerchantId { get; set; }
 
 
-        [JsonProperty("TerminalID")]
+        [JsonProperty("TerminalId")]
         [DataMember]
-        public string TerminalID { get; set; }
+        public string TerminalId { get; set; }
     }
 }

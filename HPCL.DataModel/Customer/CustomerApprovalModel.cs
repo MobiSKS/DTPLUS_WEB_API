@@ -156,10 +156,23 @@ namespace HPCL.DataModel.Customer
         public DateTime FeePaymentDate { get; set; }
 
 
+        [JsonProperty("CustomerTypeId")]
+        [DataMember]
+        public Int32 CustomerTypeId { get; set; }
+
+        [JsonProperty("CustomerTypeName")]
+        [DataMember]
+        public string CustomerTypeName { get; set; }
+
     }
 
     public class GetApproveFeeWaiverCardDetailModelOutput
     {
+
+        [JsonProperty("SrNumber")]
+        [DataMember]
+        public string SrNumber { get; set; }
+
 
         [JsonProperty("CardIdentifier")]
         [DataMember]
@@ -183,6 +196,17 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("VechileOwnerName")]
         [DataMember]
         public string VechileOwnerName { get; set; }
+
+        [JsonProperty("VechileNo")]
+        [DataMember]
+        public string VechileNo { get; set; }
+
+
+        [JsonProperty("Mobileno")]
+        [DataMember]
+        public string Mobileno { get; set; }
+
+      
 
     }
 }

@@ -1003,7 +1003,7 @@ namespace HPCL.DataRepository.Merchant
         {
             var dtDBR = new DataTable("TypeMerchantTerminalMap");
             dtDBR.Columns.Add("MerchantId", typeof(string));
-            dtDBR.Columns.Add("TerminalID", typeof(string));
+            dtDBR.Columns.Add("TerminalId", typeof(string));
 
 
             if (ObjClass.ObjTerminalDeInstallationAuthorizationInput != null)
@@ -1012,7 +1012,7 @@ namespace HPCL.DataRepository.Merchant
                 {
                     DataRow dr = dtDBR.NewRow();
                     dr["MerchantId"] = ObjDetail.MerchantId;
-                    dr["TerminalID"] = ObjDetail.TerminalID;
+                    dr["TerminalId"] = ObjDetail.TerminalId;
                     dtDBR.Rows.Add(dr);
                     dtDBR.AcceptChanges();
                 }

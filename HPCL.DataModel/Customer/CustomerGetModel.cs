@@ -850,6 +850,25 @@ namespace HPCL.DataModel.Customer
         public string KYCStatus { get; set; }
 
 
+        [JsonProperty("ZonalOfficeId")]
+        [DataMember]
+        public Int32 ZonalOfficeId { get; set; }
+
+
+        [JsonProperty("ZonalOfficeName")]
+        [DataMember]
+        public string ZonalOfficeName { get; set; }
+
+
+        [JsonProperty("RegionalOfficeId")]
+        [DataMember]
+        public Int32 RegionalOfficeId { get; set; }
+
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
+
     }
 
 
