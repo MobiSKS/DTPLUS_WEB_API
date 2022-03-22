@@ -1234,5 +1234,70 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantGetAvailityALOTCCardCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<MerchantViewMerchantCautionLimitModelOutput>> ViewMerchantCautionLimit([FromBody] MerchantViewMerchantCautionLimitModelInput ObjClass)
+        {
+            var procedureName = "UspViewMerchantCautionLimit";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("MerchantStatus", ObjClass.MerchantStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.String, ParameterDirection.Input);
+            parameters.Add("SalesArea", ObjClass.SalesArea, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantViewMerchantCautionLimitModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantSettlementDetailsModelOutput>> MerchantSettlementDetail([FromBody] MerchantSettlementDetailsModelInput ObjClass)
+        {
+            var procedureName = "UspSettlementDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantSettlementDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<MerchantBatchDetailModelOutput>> MerchantBatchDetail([FromBody] MerchantBatchDetailModelInput ObjClass)
+        {
+            var procedureName = "UspBatchDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("BatchId", ObjClass.BatchId, DbType.Int64, ParameterDirection.Input);
+            //parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            //parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantBatchDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<MerchantTerminalDetailModelOutput> TerminalDetail([FromBody] MerchantTerminalDetailModelInput ObjClass)
+        {
+            var procedureName = "UspTerminalDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new MerchantTerminalDetailModelOutput();
+            storedProcedureResult.ObjTerminalDetail = (List<TerminalDetail>)await result.ReadAsync<TerminalDetail>();
+            storedProcedureResult.ObjTerminalDeploymentDetail = (List<TerminalDeploymentDetail>)await result.ReadAsync<TerminalDeploymentDetail>();
+            return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<MerchantTransactionDetailModelOutput>> MerchantTransactionDetail([FromBody] MerchantTransactionDetailModelInput ObjClass)
+        {
+            var procedureName = "UspTransactionDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("TransactionType", ObjClass.TransactionType, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantTransactionDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

@@ -10,9 +10,9 @@ namespace HPCL.DataModel.Customer
     public class CustomerUpdateModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("CustomerID")]
+        [JsonPropertyName("CustomerReferenceNo")]
         [DataMember]
-        public string CustomerID { get; set; }
+        public Int64 CustomerReferenceNo { get; set; }
         
 
         [Required]
@@ -317,6 +317,11 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("FleetSizeNoOfVechileOwnedCarJeep")]
         [DataMember]
         public Int16 FleetSizeNoOfVechileOwnedCarJeep { get; set; }
+
+
+        [JsonPropertyName("PanCardRemarks")]
+        [DataMember]
+        public string PanCardRemarks { get; set; }
 
 
         //[JsonPropertyName("NoOfCards")]

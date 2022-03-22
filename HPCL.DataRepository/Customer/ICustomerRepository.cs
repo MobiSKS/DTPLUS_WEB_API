@@ -85,6 +85,10 @@ namespace HPCL.DataRepository.Customer
         public  Task<IEnumerable<CustomerGetCcmsBalanceInfoForCustomerIdModelOutput>> GetCcmsBalanceInfoForCustomerId([FromBody] CustomerGetCcmsBalanceInfoForCustomerIdModelInput ObjClass);
 
         public Task<CustomerGetTransactionsSummaryModelOutput> GetTransactionsSummary([FromBody] CustomerGetTransactionsSummaryModelInput ObjClass);
+
+        public Task<IEnumerable<CustomerCheckPancardbyDistrictIdModelOutput>> CheckPancardbyDistrictId([FromBody] CustomerCheckPancardbyDistrictIdModelInput ObjClass);
+
+        public Task<IEnumerable<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>> CheckPancardbyDistrictIdAndCustomerReferenceNo([FromBody] CheckPancardbyDistrictIdAndCustomerReferenceNoModelInput ObjClass);
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -8,7 +9,7 @@ namespace HPCL.DataModel.Customer
 {
     public class CustomerGetTransactionsSummaryModelInput : BaseClass
     {
-        [Required]
+        //[Required]
         [JsonPropertyName("CustomerID")]
         [DataMember]
         public string CustomerID { get; set; }
@@ -21,10 +22,12 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string MobileNo { get; set; }
 
+        [Required]
         [JsonPropertyName("FromDate")]
         [DataMember]
         public string FromDate { get; set; }
 
+        [Required]
         [JsonPropertyName("ToDate")]
         [DataMember]
         public string ToDate { get; set; }
@@ -49,6 +52,10 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string CustomerName { get; set; }
 
+        [JsonProperty("CustomerId")]
+        [DataMember]
+        public string CustomerId { get; set; }
+
         [JsonProperty("Sale")]
         [DataMember]
         public double Sale { get; set; }
@@ -65,6 +72,10 @@ namespace HPCL.DataModel.Customer
 
     public class CustomerGetTransactionsDetailSummaryModelOutput
     {
+        [JsonProperty("SrNumber")]
+        [DataMember]
+        public int SrNumber { get; set; }
+
         [JsonProperty("TerminalId")]
         [DataMember]
         public string TerminalId { get; set; }
@@ -76,6 +87,11 @@ namespace HPCL.DataModel.Customer
         [JsonProperty("AccountNumber")]
         [DataMember]
         public string AccountNumber { get; set; }
+
+
+        [JsonProperty("BatchIdandROC")]
+        [DataMember]
+        public string BatchIdandROC { get; set; }
 
         [JsonProperty("VechileNo")]
         [DataMember]

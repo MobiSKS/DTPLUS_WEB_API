@@ -901,6 +901,69 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_pan_card_by_district_id")]
+        public async Task<IActionResult> CheckPancardbyDistrictId([FromBody] CustomerCheckPancardbyDistrictIdModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.CheckPancardbyDistrictId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<CustomerCheckPancardbyDistrictIdModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<CustomerCheckPancardbyDistrictIdModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_pan_card_by_district_id_and_customer_reference_no")]
+        public async Task<IActionResult> CheckPancardbyDistrictIdAndCustomerReferenceNo([FromBody] CheckPancardbyDistrictIdAndCustomerReferenceNoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.CheckPancardbyDistrictIdAndCustomerReferenceNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]

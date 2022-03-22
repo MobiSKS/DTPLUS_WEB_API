@@ -681,6 +681,76 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string TierOfCustomerName { get; set; }
 
+        [JsonProperty("RBEId")]
+        [DataMember]
+        public string RBEId { get; set; }
+
+        [JsonProperty("NoofVechileforAllCards")]
+        [DataMember]
+        public int NoofVechileforAllCards { get; set; }
+
+        [JsonProperty("MerchantId")]
+        [DataMember]
+        public string MerchantId { get; set; }
+
+        [JsonProperty("CopyofDriverLicense")]
+        [DataMember]
+        public string CopyofDriverLicense { get; set; }
+
+        [JsonProperty("CopyofVehicleRegistrationCertificate")]
+        [DataMember]
+        public string CopyofVehicleRegistrationCertificate { get; set; }
+
+        [JsonProperty("FeePaymentsReceivedStatus")]
+        [DataMember]
+        public int FeePaymentsReceivedStatus { get; set; }
+
+        [JsonProperty("FeePaymentsReceivedAmount")]
+        [DataMember]
+        public float FeePaymentsReceivedAmount { get; set; }
+
+        [JsonProperty("DrivingLicence")]
+        [DataMember]
+        public string DrivingLicence { get; set; }
+
+        [JsonProperty("DTPCustomerStatus")]
+        [DataMember]
+        public int DTPCustomerStatus { get; set; }
+
+        [JsonProperty("ExistingCustomerId")]
+        [DataMember]
+        public string ExistingCustomerId { get; set; }
+
+        [JsonProperty("BeneficiaryName")]
+        [DataMember]
+        public string BeneficiaryName { get; set; }
+
+
+        [JsonProperty("RelationwithBeneficiary")]
+        [DataMember]
+        public string RelationwithBeneficiary { get; set; }
+
+
+        [JsonProperty("BeneficiaryMobile")]
+        [DataMember]
+        public string BeneficiaryMobile { get; set; }
+
+        [JsonProperty("SignedOn")]
+        [DataMember]
+        public string SignedOn { get; set; }
+
+        [JsonProperty("DealerCode")]
+        [DataMember]
+        public string DealerCode { get; set; }
+
+        [JsonProperty("SalesExecutiveEmployeeID")]
+        [DataMember]
+        public string SalesExecutiveEmployeeID { get; set; }
+
+        [JsonProperty("PanCardRemarks")]
+        [DataMember]
+        public string PanCardRemarks { get; set; }
+
     }
     public class CustomerKYCDetailsModelOutput
     {

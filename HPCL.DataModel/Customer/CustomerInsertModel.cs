@@ -149,7 +149,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("CommunicationEmailid")]
         [DataMember]
-        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string CommunicationEmailid { get; set; }
 
 
@@ -246,7 +246,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonPropertyName("KeyOfficialEmail")]
         [DataMember]
-        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string KeyOfficialEmail { get; set; }
 
 
@@ -368,6 +368,10 @@ namespace HPCL.DataModel.Customer
         [JsonPropertyName("FormNumber")]
         [DataMember]
         public Int64 FormNumber { get; set; }
+
+        [JsonPropertyName("PanCardRemarks")]
+        [DataMember]
+        public string PanCardRemarks { get; set; }
     }
 
     //public class CardDetail
@@ -386,7 +390,7 @@ namespace HPCL.DataModel.Customer
 
     //    [JsonPropertyName("YearOfRegistration")]
     //    public int YearOfRegistration { get; set; }
-        
+
     //}
 
     public class CustomerInsertModelOutput : BaseClassOutput

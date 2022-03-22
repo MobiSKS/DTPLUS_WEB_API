@@ -193,7 +193,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("TypeOfCustomer", ObjClass.TypeOfCustomer, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
             parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
-
+            parameters.Add("PanCardRemarks", ObjClass.PanCardRemarks, DbType.String, ParameterDirection.Input);
             //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             //{
             //    foreach (CardDetail ObjCardDetails in ObjClass.ObjCardDetail)
@@ -227,7 +227,7 @@ namespace HPCL.DataRepository.Customer
             //var procedureName = "UspUpdateCustomer";
             var procedureName = "UspUpdateRawCustomer";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
             parameters.Add("ZonalOffice", ObjClass.ZonalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("RegionalOffice", ObjClass.RegionalOffice, DbType.Int32, ParameterDirection.Input);
             parameters.Add("DateOfApplication", ObjClass.DateOfApplication, DbType.DateTime, ParameterDirection.Input);
@@ -311,6 +311,7 @@ namespace HPCL.DataRepository.Customer
 
             //parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("PanCardRemarks", ObjClass.PanCardRemarks, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -954,6 +955,27 @@ namespace HPCL.DataRepository.Customer
             storedProcedureResult.GetTransactionsSaleSummary = (List<CustomerGetTransactionsSaleSummaryModelOutput>)await result.ReadAsync<CustomerGetTransactionsSaleSummaryModelOutput>();
             storedProcedureResult.GetTransactionsDetailSummary = (List<CustomerGetTransactionsDetailSummaryModelOutput>)await result.ReadAsync<CustomerGetTransactionsDetailSummaryModelOutput>();
             return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<CustomerCheckPancardbyDistrictIdModelOutput>> CheckPancardbyDistrictId([FromBody] CustomerCheckPancardbyDistrictIdModelInput ObjClass)
+        {
+            var procedureName = "UspCheckPancardDistrictId";
+            var parameters = new DynamicParameters();
+            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
+            parameters.Add("DistrictId", ObjClass.DistrictId, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerCheckPancardbyDistrictIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>> CheckPancardbyDistrictIdAndCustomerReferenceNo([FromBody] CheckPancardbyDistrictIdAndCustomerReferenceNoModelInput ObjClass)
+        {
+            var procedureName = "UspCheckPancardDistrictIdandCustomerReferenceNo";
+            var parameters = new DynamicParameters();
+            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
+            parameters.Add("DistrictId", ObjClass.DistrictId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }
