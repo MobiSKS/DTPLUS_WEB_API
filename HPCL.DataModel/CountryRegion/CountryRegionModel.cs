@@ -2,16 +2,17 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.CountryRegion
 {
+    
 
-    public class SettingGetRegionModelInput : BaseClass
+    public class GetCountryRegionModelInput : BaseClass
     {
         [JsonPropertyName("ZoneID")]
         [DataMember]
         public int ZoneID { get; set; }
     }
-    public class SettingGetRegionModelOutput
+    public class GetCountryRegionModelOutput
     {
         [JsonProperty("ZoneID")]
         [DataMember]
@@ -20,6 +21,10 @@ namespace HPCL.DataModel.Settings
         [JsonProperty("RegionID")]
         [DataMember]
         public int RegionID { get; set; }
+
+        [JsonProperty("RegionCode")]
+        [DataMember]
+        public string RegionCode { get; set; }
 
         [JsonProperty("RegionName")]
         [DataMember]
@@ -30,6 +35,21 @@ namespace HPCL.DataModel.Settings
         public string RegionShortName { get; set; }
     }
 
+    public class DeleteCountryRegionModelInput : BaseClass
+    {
+        [JsonPropertyName("RegionID")]
+        [DataMember]
+        public int RegionID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
 
 
+    }
+
+    public class DeleteCountryRegionModelOutput : BaseClassOutput
+    {
+
+    }
 }

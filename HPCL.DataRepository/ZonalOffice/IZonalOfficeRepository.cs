@@ -8,5 +8,7 @@ namespace HPCL.DataRepository.ZonalOffice
     public interface IZonalOfficeRepository
     {
         public Task<IEnumerable<GetZonalOfficeModelOutput>> GetZonalOffice([FromBody] GetZonalOfficeModelInput ObjClass);
+
+        public Task<IEnumerable<DeleteZonalOfficeModelOutput>> DeleteZonalOffice([FromBody] DeleteZonalOfficeModelInput ObjClass);
     }
 }

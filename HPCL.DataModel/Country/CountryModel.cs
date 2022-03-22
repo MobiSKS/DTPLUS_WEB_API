@@ -1,15 +1,14 @@
-﻿using Newtonsoft.Json;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.Country
 {
 
-    public class SettingGetCountryModelInput : BaseClass
+    public class GetCountryModelInput : BaseClass
     {
 
     }
-    public class SettingGetCountryModelOutput
+    public class GetCountryModelOutput
     {
         [JsonPropertyName("CountryID")]
         [DataMember]
@@ -18,5 +17,9 @@ namespace HPCL.DataModel.Settings
         [JsonPropertyName("CountryName")]
         [DataMember]
         public string CountryName { get; set; }
+
+        [JsonPropertyName("CountryShortName")]
+        [DataMember]
+        public string CountryShortName { get; set; }
     }
 }

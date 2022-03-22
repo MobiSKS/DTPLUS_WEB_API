@@ -143,5 +143,11 @@ namespace HPCL.DataRepository.Merchant
         public  Task<MerchantTerminalDetailModelOutput> TerminalDetail([FromBody] MerchantTerminalDetailModelInput ObjClass);
 
         public Task<IEnumerable<MerchantTransactionDetailModelOutput>> MerchantTransactionDetail([FromBody] MerchantTransactionDetailModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantSaleReloadDeltaDetailModelOutput>> MerchantSaleReloadDeltaDetail([FromBody] MerchantSaleReloadDeltaDetailModelInput ObjClass);
+
+        public Task<IEnumerable<MerchantERPReloadSaleEarningDetailModelOutput>> MerchantERPReloadSaleEarningDetail([FromBody] MerchantERPReloadSaleEarningDetailModelInput ObjClass);
+
+        public Task<MerchantViewCardMerchantAllocationModelOutput> ViewALOTCCardDealerAllocation([FromBody] ViewCardDealerAllocationModelInput ObjClass);
     }
 }

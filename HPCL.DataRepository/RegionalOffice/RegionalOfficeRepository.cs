@@ -24,5 +24,15 @@ namespace HPCL.DataRepository.RegionalOffice
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetRegionalOfficeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<DeleteRegionalOfficeModelOutput>> DeleteRegionalOffice([FromBody] DeleteRegionalOfficeModelInput ObjClass)
+        {
+            var procedureName = "UspInactiveRegionalOffice";
+            var parameters = new DynamicParameters();
+            parameters.Add("RegionalOfficeID", ObjClass.RegionalOfficeID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<DeleteRegionalOfficeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

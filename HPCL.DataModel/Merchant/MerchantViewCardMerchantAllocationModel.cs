@@ -20,7 +20,19 @@ namespace HPCL.DataModel.Merchant
         public string CardNo { get; set; }
     }
 
-    
+    public class ViewCardDealerAllocationModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("DealerCode")]
+        [DataMember]
+        public string DealerCode { get; set; }
+
+        [JsonPropertyName("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+    }
+
+
     public class MerchantTotalCardModelOutput
     {
         [JsonProperty("TotalAllocatedCards")]

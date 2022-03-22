@@ -1,0 +1,27 @@
+﻿using Dapper;
+using HPCL.DataModel.City;
+using HPCL.DataRepository.DBDapper;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+using System.Web.Http;
+
+namespace HPCL.DataRepository.City
+{
+    public class CityRepository: ICityRepository
+    {
+        private readonly DapperContext _context;
+        public CityRepository(DapperContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<GetCityModelOutput>> GetCity([FromBody] GetCityModelInput ObjClass)
+        {
+            var procedureName = "UspGetCity";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+
+        }
+    }
+}

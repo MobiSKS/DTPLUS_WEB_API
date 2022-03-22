@@ -16,26 +16,6 @@ namespace HPCL.DataRepository.Settings
             _context = context;
         }
 
-        public async Task<IEnumerable<SettingGetZoneModelOutput>> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
-        {
-            var procedureName = "UspGetZone";
-            var parameters = new DynamicParameters();
-            parameters.Add("HQID", ObjClass.HQID, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetZoneModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public async Task<IEnumerable<SettingGetRegionModelOutput>> GetRegion([FromBody] SettingGetRegionModelInput ObjClass)
-        {
-            var procedureName = "UspGetRegion";
-            var parameters = new DynamicParameters();
-            parameters.Add("ZoneID", ObjClass.ZoneID, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetRegionModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-        }
-
         public async Task<IEnumerable<SettingGetSalesareaModelOutput>> GetSalesarea([FromBody] SettingGetSalesareaModelInput ObjClass)
         {
             var procedureName = "UspGetSalesarea";
@@ -52,25 +32,6 @@ namespace HPCL.DataRepository.Settings
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetTransactionTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
-
-        public async Task<IEnumerable<SettingGetCountryModelOutput>> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
-        {
-            var procedureName = "UspGetCountry";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetCountryModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public async Task<IEnumerable<SettingGetStateModelOutput>> GetState([FromBody] SettingGetStateModelInput ObjClass)
-        {
-            var procedureName = "UspGetState";
-            var parameters = new DynamicParameters();
-            parameters.Add("CountryID", ObjClass.CountryID, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetStateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-        }
-
 
 
         public async Task<IEnumerable<SettingGetRoleModelOutput>> GetRole([FromBody] SettingGetRoleModelInput ObjClass)
@@ -104,24 +65,6 @@ namespace HPCL.DataRepository.Settings
             parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetEntityTypesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<SettingGetCityModelOutput>> GetCity([FromBody] SettingGetCityModelInput ObjClass)
-        {
-            var procedureName = "UspGetCity";
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetCityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public async Task<IEnumerable<SettingGetDistrictModelOutput>> GetDistrict([FromBody] SettingGetDistrictModelInput ObjClass)
-        {
-            var procedureName = "UspGetDistrict";
-            var parameters = new DynamicParameters();
-            parameters.Add("StateID", ObjClass.StateID, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SettingGetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
 

@@ -24,63 +24,9 @@ namespace HPCL_WebApi.Controllers
             _settingRepo = settingRepo;
         }
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_zone_for_location_mapping")]
-        public async Task<IActionResult> GetZone([FromBody] SettingGetZoneModelInput ObjClass)
-        {
+       
 
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetZone(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<SettingGetZoneModelOutput> item = result.Cast<SettingGetZoneModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_region_for_location_mapping")]
-        public async Task<IActionResult> GetRegion([FromBody] SettingGetRegionModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetRegion(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<SettingGetRegionModelOutput> item = result.Cast<SettingGetRegionModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
+        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -142,63 +88,9 @@ namespace HPCL_WebApi.Controllers
 
         
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_country")]
-        public async Task<IActionResult> GetCountry([FromBody] SettingGetCountryModelInput ObjClass)
-        {
+        
 
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetCountry(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    List<SettingGetCountryModelOutput> item = result.Cast<SettingGetCountryModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_state")]
-        public async Task<IActionResult> GetState([FromBody] SettingGetStateModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetState(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    List<SettingGetStateModelOutput> item = result.Cast<SettingGetStateModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
+        
 
         
 
@@ -320,63 +212,8 @@ namespace HPCL_WebApi.Controllers
 
         
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_city")]
-        public async Task<IActionResult> GetCity([FromBody] SettingGetCityModelInput ObjClass)
-        {
+        
 
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass,null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetCity(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass,null, _logger);
-                }
-                else
-                {
-                    List<SettingGetCityModelOutput> item = result.Cast<SettingGetCityModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_district")]
-        public async Task<IActionResult> GetDistrict([FromBody] SettingGetDistrictModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _settingRepo.GetDistrict(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<SettingGetDistrictModelOutput> item = result.Cast<SettingGetDistrictModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-
-        }
 
 
 

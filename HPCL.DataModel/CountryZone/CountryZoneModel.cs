@@ -2,16 +2,15 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.CountryZone
 {
-
-    public class SettingGetZoneModelInput : BaseClass
+    public class GetCountryZoneModelInput : BaseClass
     {
         [JsonPropertyName("HQID")]
         [DataMember]
         public int HQID { get; set; }
     }
-    public class SettingGetZoneModelOutput
+    public class GetCountryZoneModelOutput
     {
         [JsonProperty("HQID")]
         [DataMember]

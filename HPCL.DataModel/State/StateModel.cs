@@ -2,16 +2,15 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Settings
+namespace HPCL.DataModel.State
 {
-
-    public class SettingGetStateModelInput : BaseClass
+    public class GetStateModelInput : BaseClass
     {
         [JsonPropertyName("CountryID")]
         [DataMember]
         public int CountryID { get; set; }
     }
-    public class SettingGetStateModelOutput
+    public class GetStateModelOutput
     {
         [JsonProperty("CountryID")]
         [DataMember]
@@ -24,5 +23,14 @@ namespace HPCL.DataModel.Settings
         [JsonProperty("StateName")]
         [DataMember]
         public string StateName { get; set; }
+
+        [JsonProperty("StateCode")]
+        [DataMember]
+        public string StateCode { get; set; }
+
+
+        [JsonProperty("StateShortName")]
+        [DataMember]
+        public string StateShortName { get; set; }
     }
 }

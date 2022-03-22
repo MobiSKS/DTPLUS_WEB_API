@@ -22,5 +22,15 @@ namespace HPCL.DataRepository.ZonalOffice
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetZonalOfficeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<DeleteZonalOfficeModelOutput>> DeleteZonalOffice([FromBody] DeleteZonalOfficeModelInput ObjClass)
+        {
+            var procedureName = "UspInactiveZonalOffice";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZonalOfficeID", ObjClass.ZonalOfficeID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<DeleteZonalOfficeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

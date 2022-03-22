@@ -42,6 +42,12 @@
 
   <ItemGroup>
     <Folder Include="CustomerKYCImage\" />
+    <Folder Include="CountryRegion\" />
+    <Folder Include="District\" />
+    <Folder Include="City\" />
+    <Folder Include="CountryZone\" />
+    <Folder Include="Country\" />
+    <Folder Include="State\" />
   </ItemGroup>
 
 </Project>

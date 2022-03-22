@@ -1,5 +1,5 @@
-﻿using HPCL.DataModel.RegionalOffice;
-using HPCL.DataRepository.RegionalOffice;
+﻿using HPCL.DataModel.CountryRegion;
+using HPCL.DataRepository.CountryRegion;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
-    [Route("api/dtplus/regionaloffice")]
+    [Route("api/dtplus/countryregion")]
     [ApiController]
-    public class RegionalOfficeController : ControllerBase
+    public class CountryRegionController : ControllerBase
     {
-        private readonly ILogger<RegionalOfficeController> _logger;
+        private readonly ILogger<CountryRegionController> _logger;
 
-        private readonly IRegionalOfficeRepository _RORepo;
-        public RegionalOfficeController(ILogger<RegionalOfficeController> logger, IRegionalOfficeRepository RORepo)
+        private readonly ICountryRegionRepository _CRRepo;
+        public CountryRegionController(ILogger<CountryRegionController> logger, ICountryRegionRepository CRRepo)
         {
             _logger = logger;
-            _RORepo = RORepo;
+            _CRRepo = CRRepo;
         }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_regional_office")]
-        public async Task<IActionResult> GetRegionalOffice([FromBody] GetRegionalOfficeModelInput ObjClass)
+        [Route("get_country_region")]
+        public async Task<IActionResult> GetCountryRegion([FromBody] GetCountryRegionModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -35,14 +35,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RORepo.GetRegionalOffice(ObjClass);
+                var result = await _CRRepo.GetCountryRegion(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<GetRegionalOfficeModelOutput> item = result.Cast<GetRegionalOfficeModelOutput>().ToList();
+                    List<GetCountryRegionModelOutput> item = result.Cast<GetCountryRegionModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -52,10 +52,11 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("delete_regional_office")]
-        public async Task<IActionResult> DeleteRegionalOffice([FromBody] DeleteRegionalOfficeModelInput ObjClass)
+        [Route("delete_country_region")]
+        public async Task<IActionResult> DeleteCountryRegion([FromBody] DeleteCountryRegionModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -64,25 +65,28 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RORepo.DeleteRegionalOffice(ObjClass);
+                var result = await _CRRepo.DeleteCountryRegion(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    if (result.Cast<DeleteRegionalOfficeModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<DeleteCountryRegionModelOutput>().ToList()[0].Status == 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
                         return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<DeleteRegionalOfficeModelOutput>().ToList()[0].Reason);
+                            result.Cast<DeleteCountryRegionModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
 
         }
+
+
     }
+
 }

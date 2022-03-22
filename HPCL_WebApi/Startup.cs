@@ -24,6 +24,12 @@ using HPCL.DataRepository.RegionalOffice;
 using HPCL.DataRepository.ZonalOffice;
 using HPCL.DataRepository.Transaction;
 using HPCL.DataRepository.Login;
+using HPCL.DataRepository.City;
+using HPCL.DataRepository.Country;
+using HPCL.DataRepository.CountryRegion;
+using HPCL.DataRepository.CountryZone;
+using HPCL.DataRepository.District;
+using HPCL.DataRepository.State;
 
 namespace HPCL_WebApi
 {
@@ -84,6 +90,15 @@ namespace HPCL_WebApi
             services.AddScoped<IZonalOfficeRepository, ZonalOfficeRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
+            
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IDistrictRepository, DistrictRepository>();
+            services.AddScoped<ICountryRegionRepository, CountryRegionRepository>();
+            services.AddScoped<ICountryZoneRepository, CountryZoneRepository>();
+            
+
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {
