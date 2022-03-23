@@ -84,7 +84,7 @@ namespace HPCL.DataModel.Hotlist
 
         [JsonPropertyName("EntityIdVal")]
         [DataMember]
-        public int EntityIdVal { get; set; }
+        public string EntityIdVal { get; set; }
     }
     public class GetHotlistedOrReactivatedDetailsOutput
     {
@@ -98,7 +98,7 @@ namespace HPCL.DataModel.Hotlist
 
         [JsonProperty("HotlistDate")]
         [DataMember]
-        public string HotlistDate { get; set; }
+        public DateTime HotlistDate { get; set; }
 
         [JsonProperty("Action")]
         [DataMember]

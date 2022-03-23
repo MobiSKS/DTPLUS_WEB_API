@@ -89,6 +89,8 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<CustomerCheckPancardbyDistrictIdModelOutput>> CheckPancardbyDistrictId([FromBody] CustomerCheckPancardbyDistrictIdModelInput ObjClass);
 
         public Task<IEnumerable<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>> CheckPancardbyDistrictIdAndCustomerReferenceNo([FromBody] CheckPancardbyDistrictIdAndCustomerReferenceNoModelInput ObjClass);
+
+        public Task<CustomerViewAccountStatementModelOutput> ViewAccountStatementSummary([FromBody] CustomerViewAccountStatementModelInput ObjClass);
     }
 
 }

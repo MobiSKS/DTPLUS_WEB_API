@@ -1498,6 +1498,31 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-    }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("view_account_statement_summary")]
+        public async Task<IActionResult> ViewAccountStatementSummary([FromBody] CustomerViewAccountStatementModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.ViewAccountStatementSummary(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.GetCardTransactionDetails.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+    }
 }

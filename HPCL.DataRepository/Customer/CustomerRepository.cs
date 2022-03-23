@@ -978,5 +978,19 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CheckPancardbyDistrictIdAndCustomerReferenceNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<CustomerViewAccountStatementModelOutput> ViewAccountStatementSummary([FromBody] CustomerViewAccountStatementModelInput ObjClass)
+        {
+            var procedureName = "UspViewAccountStatement";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new CustomerViewAccountStatementModelOutput();
+            storedProcedureResult.GetCcmsAccountSummary = (List<CcmsAccountSummaryModelOutput>)await result.ReadAsync<CcmsAccountSummaryModelOutput>();
+            storedProcedureResult.GetCardTransactionDetails = (List<CardTransactionDetailsModelOutput>)await result.ReadAsync<CardTransactionDetailsModelOutput>();
+            return storedProcedureResult;
+        }
     }
 }
