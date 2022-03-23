@@ -82,7 +82,7 @@ namespace HPCL.DataModel.Hotlist
         [Required]
         [JsonPropertyName("EntityTypeId")]
         [DataMember]
-        public int EntityTypeId { get; set; }
+        public Int32 EntityTypeId { get; set; }
 
         [Required]
         [JsonPropertyName("EntityIdVal")]
@@ -115,4 +115,38 @@ namespace HPCL.DataModel.Hotlist
         [DataMember]
         public string Remarks { get; set; }
     }
+
+    public class GetHotlistApprovalInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("EntityTypeId")]
+        [DataMember]
+        public Int32 EntityTypeId { get; set; }
+
+        [Required]
+        [JsonPropertyName("ActionId")]
+        [DataMember]
+        public Int32 ActionId { get; set; }
+
+        [Required]
+        [JsonPropertyName("FromDate")]
+        [DataMember]
+        public string FromDate { get; set; }
+
+        [Required]
+        [JsonPropertyName("ToDate")]
+        [DataMember]
+        public string ToDate { get; set; }
+    }
+    public class GetHotlistApprovalOutput
+    {
+        [JsonProperty("EntityCode")]
+        [DataMember]
+        public string EntityCode { get; set; }
+
+        [JsonProperty("CreatedDate")]
+        [DataMember]
+        public DateTime CreatedDate { get; set; }
+    }
+
 }

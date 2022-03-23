@@ -17,5 +17,7 @@ namespace HPCL.DataRepository.Hotlist
         public Task<IEnumerable<GetHotlistedOrReactivatedDetailsOutput>> GetHotlistedOrReactivatedDetails([FromBody] GetHotlistedOrReactivatedDetailsInput ObjClass);
 
         public Task<IEnumerable<HotlistUpdateModelOutput>> UpdateHotlistOrReactivate([FromBody] HotlistUpdateModelInput ObjClass);
+
+        public Task<IEnumerable<GetHotlistApprovalOutput>> GetHotlistApproval([FromBody] GetHotlistApprovalInput ObjClass);
     }
 }

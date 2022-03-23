@@ -45,7 +45,7 @@ namespace HPCL.DataRepository.Hotlist
         {
             var procedureName = "UspGetHotlistedOrReactivatedDetails";
             var parameters = new DynamicParameters();
-            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("EntityIdVal", ObjClass.EntityIdVal, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetHotlistedOrReactivatedDetailsOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -66,6 +66,18 @@ namespace HPCL.DataRepository.Hotlist
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<HotlistUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
+        }
+
+        public async Task<IEnumerable<GetHotlistApprovalOutput>> GetHotlistApproval([FromBody] GetHotlistApprovalInput ObjClass)
+        {
+            var procedureName = "UspGetHotlistApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ActionId", ObjClass.ActionId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetHotlistApprovalOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }
