@@ -1341,5 +1341,16 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantERPReloadSaleEarningDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<MerchantReceivablePayableDetailModelOutput>> MerchantReceivablePayableDetail([FromBody] MerchantReceivablePayableDetailModelInput ObjClass)
+        {
+            var procedureName = "UspReceivablePayableDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("TerminalId", ObjClass.TerminalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MerchantReceivablePayableDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

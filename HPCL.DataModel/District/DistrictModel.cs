@@ -19,6 +19,10 @@ namespace HPCL.DataModel.District
         [DataMember]
         public int StateID { get; set; }
 
+        [JsonPropertyName("StateName")]
+        [DataMember]
+        public string StateName { get; set; }
+
         [JsonPropertyName("DistrictID")]
         [DataMember]
         public int DistrictID { get; set; }

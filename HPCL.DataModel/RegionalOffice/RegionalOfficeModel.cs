@@ -16,6 +16,11 @@ namespace HPCL.DataModel.RegionalOffice
         [DataMember]
         public int ZonalID { get; set; }
 
+        [JsonProperty("ZonalOfficeName")]
+        [DataMember]
+        public string ZonalOfficeName { get; set; }
+
+
         [JsonProperty("RegionalOfficeID")]
         [DataMember]
         public int RegionalOfficeID { get; set; }

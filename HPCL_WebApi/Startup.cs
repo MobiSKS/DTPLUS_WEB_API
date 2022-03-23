@@ -30,6 +30,7 @@ using HPCL.DataRepository.CountryRegion;
 using HPCL.DataRepository.CountryZone;
 using HPCL.DataRepository.District;
 using HPCL.DataRepository.State;
+using HPCL.DataRepository.Hotlist;
 
 namespace HPCL_WebApi
 {
@@ -76,7 +77,6 @@ namespace HPCL_WebApi
             //services.AddDbContext<HPCLAppContext>(options =>
             //options.UseSqlServer(Configuration.GetConnectionString("HPCLConnectionString")));
             //services.AddSingleton<_IDapperContext, DapperContext>();
-
             services.AddSingleton<DapperContext>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
@@ -90,15 +90,13 @@ namespace HPCL_WebApi
             services.AddScoped<IZonalOfficeRepository, ZonalOfficeRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
-            
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<ICountryRegionRepository, CountryRegionRepository>();
             services.AddScoped<ICountryZoneRepository, CountryZoneRepository>();
-            
-
+            services.AddScoped<IHotlistRepository, HotlistRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {
