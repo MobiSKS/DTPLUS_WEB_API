@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.AshokLeyland
 {
-    public class OfficerGetDealerNameModelInput : BaseClass
+    public class GetDealerNameModelInput : BaseClass
     {
 
         [JsonPropertyName("DealerCode")]
@@ -17,7 +17,7 @@ namespace HPCL.DataModel.Officer
         public string DTPDealerCode { get; set; }
     }
 
-    public class OfficerGetDealerNameModelOutput
+    public class GetDealerNameModelOutput
     {
 
         [JsonProperty("DealerCode")]
@@ -91,7 +91,7 @@ namespace HPCL.DataModel.Officer
     }
 
 
-    public class OfficerCheckDealerCodeModelInput : BaseClass
+    public class CheckDealerCodeModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("DealerCode")]
@@ -101,7 +101,7 @@ namespace HPCL.DataModel.Officer
         
     }
 
-    public class OfficerCheckDealerCodeModelOutput : BaseClassOutput
+    public class CheckDealerCodeModelOutput : BaseClassOutput
     {
 
     }

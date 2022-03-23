@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Merchant
+namespace HPCL.DataModel.AshokLeyland
 {
 
-    public class MerchantInsertDealerWiseALOTCCardRequestModelInput : BaseClass
+    public class InsertDealerWiseALOTCCardRequestModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("DealerCode")]
@@ -24,7 +24,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CreatedBy { get; set; }
     }
-    public class MerchantInsertDealerWiseALOTCCardRequestModelOutput : BaseClassOutput
+    public class InsertDealerWiseALOTCCardRequestModelOutput : BaseClassOutput
     {
 
     }

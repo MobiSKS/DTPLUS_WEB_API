@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.AshokLeyland
 {
     
 
-    public class OfficerUpdateALDealerEnrollmentModelInput : BaseClass
+    public class UpdateALDealerEnrollmentModelInput : BaseClass
     {
 
         [Required]
@@ -80,7 +80,7 @@ namespace HPCL.DataModel.Officer
 
     }
 
-    public class OfficerUpdateALDealerEnrollmentModelOutput : BaseClassOutput
+    public class UpdateALDealerEnrollmentModelOutput : BaseClassOutput
     {
         [JsonProperty("ReferenceId")]
         [DataMember]

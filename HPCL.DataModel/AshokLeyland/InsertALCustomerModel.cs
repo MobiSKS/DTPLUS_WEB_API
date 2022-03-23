@@ -5,10 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Merchant
+namespace HPCL.DataModel.AshokLeyland
 {
-     
-    public class MerchantInsertALCustomerModelInput : BaseClass
+    public class InsertALCustomerModelInput : BaseClass
     {
 
         [Required]
@@ -131,7 +130,7 @@ namespace HPCL.DataModel.Merchant
 
     }
 
-    public class MerchantInsertALCustomerModelOutput : BaseClassOutput
+    public class InsertALCustomerModelOutput : BaseClassOutput
     {
         [JsonProperty("ReferenceId")]
         [DataMember]
