@@ -54,7 +54,6 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "You can create only one or two terminal at the time of merchant creation")] Terminal_Creation = 1044,
             [Display(Name = "ErpCode is already registered")] ErpCode_already_registered = 1045,
             [Display(Name = "Merchant is already registered")] Merchant_already_registered = 1046,
-
             [Display(Name = "Failed due to one time transcation limit")] Failed_due_to_one_time_Transcation_limit = 1047,
             [Display(Name = "Failed due to day transcation limit")] Failed_due_to_day_transcation_limit = 1048,
             [Display(Name = "Failed due to monthly transcation limit")] Failed_due_to_monthly_transcation_limit = 1049,
@@ -85,6 +84,16 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Trans Type Mismatched")] Trans_Type_Mismatched = 1074,
             [Display(Name = "Batch Already Settled")] Batch_Already_Settled = 1075,
             [Display(Name = "Transaction Mismatched")] Transaction_Mismatched = 1076,
+
+            [Display(Name = "Zonal Office not found")] Zonal_Office_not_found = 1077,
+            [Display(Name = "Regional Office not found")] Regional_Office_not_found = 1078,
+            [Display(Name = "Country Region not found")] Country_Region_not_found = 1079,
+            [Display(Name = "State not found")] State_not_found = 1080,
+            [Display(Name = "District not found")] District_not_found = 1081,
+            [Display(Name = "City not found")] City_not_found = 1082,
+            [Display(Name = "Country not found")] Country_not_found = 1083,
+            [Display(Name = "Country Zone not found")] Country_Zone_not_found = 1084,
+
             None = int.MaxValue
         }
 

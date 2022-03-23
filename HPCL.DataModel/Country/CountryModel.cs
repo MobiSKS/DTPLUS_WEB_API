@@ -22,4 +22,22 @@ namespace HPCL.DataModel.Country
         [DataMember]
         public string CountryShortName { get; set; }
     }
+
+    public class DeleteCountryModelInput : BaseClass
+    {
+        [JsonPropertyName("CountryID")]
+        [DataMember]
+        public int CountryID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
+    }
+
+    public class DeleteCountryModelOutput : BaseClassOutput
+    {
+
+    }
 }

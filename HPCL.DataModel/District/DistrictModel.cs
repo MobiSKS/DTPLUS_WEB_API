@@ -35,4 +35,22 @@ namespace HPCL.DataModel.District
         [DataMember]
         public string DistrictCode { get; set; }
     }
+
+    public class DeleteDistrictModelInput : BaseClass
+    {
+        [JsonPropertyName("DistrictID")]
+        [DataMember]
+        public int DistrictID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
+    }
+
+    public class DeleteDistrictModelOutput : BaseClassOutput
+    {
+
+    }
 }

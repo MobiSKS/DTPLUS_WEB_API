@@ -33,4 +33,23 @@ namespace HPCL.DataModel.State
         [DataMember]
         public string StateShortName { get; set; }
     }
+
+
+    public class DeleteStateModelInput : BaseClass
+    {
+        [JsonPropertyName("StateID")]
+        [DataMember]
+        public int StateID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
+    }
+
+    public class DeleteStateModelOutput : BaseClassOutput
+    {
+
+    }
 }

@@ -8,5 +8,7 @@ namespace HPCL.DataRepository.Country
     public interface ICountryRepository
     {
         public Task<IEnumerable<GetCountryModelOutput>> GetCountry([FromBody] GetCountryModelInput ObjClass);
+
+        public Task<IEnumerable<DeleteCountryModelOutput>> DeleteCountry([FromBody] DeleteCountryModelInput ObjClass);
     }
 }

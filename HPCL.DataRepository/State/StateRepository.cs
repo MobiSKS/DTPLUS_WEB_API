@@ -25,5 +25,15 @@ namespace HPCL.DataRepository.State
             return await connection.QueryAsync<GetStateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
         }
+
+        public async Task<IEnumerable<DeleteStateModelOutput>> DeleteState([FromBody] DeleteStateModelInput ObjClass)
+        {
+            var procedureName = "UspInactiveState";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateID", ObjClass.StateID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<DeleteStateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

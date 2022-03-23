@@ -8,5 +8,7 @@ namespace HPCL.DataRepository.District
     public interface IDistrictRepository
     {
         public Task<IEnumerable<GetDistrictModelOutput>> GetDistrict([FromBody] GetDistrictModelInput ObjClass);
+
+        public Task<IEnumerable<DeleteDistrictModelOutput>> DeleteDistrict([FromBody] DeleteDistrictModelInput ObjClass);
     }
 }

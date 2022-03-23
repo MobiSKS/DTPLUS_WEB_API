@@ -169,7 +169,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 ResponseMessage = StatusInformation.Merchant_already_registered.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Merchant_already_registered;
             }
-            ////
+           
             if (Message == "Failed due to one time transcation limit")
             {
                 ResponseMessage = StatusInformation.Failed_due_to_one_time_Transcation_limit.GetDisplayName().ToString();
@@ -356,6 +356,54 @@ namespace HPCL_WebApi.ExtensionMethod
             {
                 ResponseMessage = StatusInformation.Transaction_Mismatched.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Transaction_Mismatched;
+            }
+
+            if (Message == "Zonal Office not found")
+            {
+                ResponseMessage = StatusInformation.Zonal_Office_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Zonal_Office_not_found;
+            }
+
+            if (Message == "Regional Office not found")
+            {
+                ResponseMessage = StatusInformation.Regional_Office_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Regional_Office_not_found;
+            }
+
+            if (Message == "Country Region not found")
+            {
+                ResponseMessage = StatusInformation.Country_Region_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Country_Region_not_found;
+            }
+
+            if (Message == "State not found")
+            {
+                ResponseMessage = StatusInformation.State_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.State_not_found;
+            }
+
+            if (Message == "District not found")
+            {
+                ResponseMessage = StatusInformation.District_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.District_not_found;
+            }
+
+            if (Message == "City not found")
+            {
+                ResponseMessage = StatusInformation.City_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.City_not_found;
+            }
+
+            if (Message == "Country not found")
+            {
+                ResponseMessage = StatusInformation.Country_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Country_not_found;
+            }
+
+            if (Message == "Country Zone not found")
+            {
+                ResponseMessage = StatusInformation.Country_Zone_not_found.GetDisplayName().ToString();
+                IntResponseMessage = (int)StatusInformation.Country_Zone_not_found;
             }
 
             //var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);

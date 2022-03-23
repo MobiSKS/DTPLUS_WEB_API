@@ -23,5 +23,15 @@ namespace HPCL.DataRepository.City
             return await connection.QueryAsync<GetCityModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
 
         }
+
+        public async Task<IEnumerable<DeleteCityModelOutput>> DeleteCity([FromBody] DeleteCityModelInput ObjClass)
+        {
+            var procedureName = "UspInactiveCity";
+            var parameters = new DynamicParameters();
+            parameters.Add("CityID", ObjClass.CityID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<DeleteCityModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

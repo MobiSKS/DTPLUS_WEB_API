@@ -8,5 +8,7 @@ namespace HPCL.DataRepository.City
     public interface ICityRepository
     {
         public Task<IEnumerable<GetCityModelOutput>> GetCity([FromBody] GetCityModelInput ObjClass);
+
+        public Task<IEnumerable<DeleteCityModelOutput>> DeleteCity([FromBody] DeleteCityModelInput ObjClass);
     }
 }

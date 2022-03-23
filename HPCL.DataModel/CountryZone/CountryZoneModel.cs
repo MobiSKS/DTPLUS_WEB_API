@@ -28,4 +28,23 @@ namespace HPCL.DataModel.CountryZone
         [DataMember]
         public string ZoneShortName { get; set; }
     }
+
+
+    public class DeleteCountryZoneModelInput : BaseClass
+    {
+        [JsonPropertyName("ZoneID")]
+        [DataMember]
+        public int ZoneID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
+    }
+
+    public class DeleteCountryZoneModelOutput : BaseClassOutput
+    {
+
+    }
 }

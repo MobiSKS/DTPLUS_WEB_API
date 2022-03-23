@@ -8,5 +8,7 @@ namespace HPCL.DataRepository.State
     public interface IStateRepository
     {
         public Task<IEnumerable<GetStateModelOutput>> GetState([FromBody] GetStateModelInput ObjClass);
+
+        public Task<IEnumerable<DeleteStateModelOutput>> DeleteState([FromBody] DeleteStateModelInput ObjClass);
     }
 }

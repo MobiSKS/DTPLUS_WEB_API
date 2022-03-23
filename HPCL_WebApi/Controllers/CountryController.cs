@@ -52,6 +52,40 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("delete_country")]
+        public async Task<IActionResult> DeleteCountry([FromBody] DeleteCountryModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CRepo.DeleteCountry(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<DeleteCountryModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<DeleteCountryModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+
+        }
+
     }
 
 }

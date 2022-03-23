@@ -31,4 +31,22 @@ namespace HPCL.DataModel.City
         [DataMember]
         public string CityShortName { get; set; }
     }
+
+    public class DeleteCityModelInput : BaseClass
+    {
+        [JsonPropertyName("CityID")]
+        [DataMember]
+        public int CityID { get; set; }
+
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+
+    }
+
+    public class DeleteCityModelOutput : BaseClassOutput
+    {
+
+    }
 }
