@@ -56,25 +56,13 @@ namespace HPCL.DataRepository.Customer
 
         public Task<CustomerGetCustomerDetailsForMappingCardMerchantModelOutput> GetCustomerDetailsForMappingCardMerchant([FromBody] CustomerGetCustomerDetailsForMappingCardMerchantModelInput ObjClass);
 
-        public Task<IEnumerable<CustomerCardRequestEntryModelOutput>> InsertOTCCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass);
-
-        public Task<IEnumerable<CustomerCardRequestEntryModelOutput>> InsertTatkalCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass);
-
-        public Task<IEnumerable<CustomerCardRequestEntryModelOutput>> InsertDriverCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass);
 
         public Task<IEnumerable<CustomerAddCustomerCardMerchantMappingModelOutput>> AddCustomerCardMerchantMapping([FromBody] CustomerAddCustomerCardMerchantMappingModelInput ObjClass);
 
-        public Task<IEnumerable<CustomerInsertTatkalCustomerModelOutput>> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetMappingUserCardstoMerchantsModelOutput>> GetMappingUserCardstoMerchants([FromBody] CustomerGetMappingUserCardstoMerchantsModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetCustomerNameModelOutput>> GetCustomerNameByCustomerId([FromBody] CustomerGetByCustomerIdModelInput ObjClass);
-
-        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetOTCCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
-
-        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
-
-        public Task<IEnumerable<CustomerGetCardAllocationActivationModelOutput>> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetCustomerDetailsForSearchModelOutput>> GetCustomerDetailsForSearch([FromBody] CustomerGetByCustomerIdModelInput ObjClass);
 

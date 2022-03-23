@@ -15,11 +15,11 @@ namespace HPCL.DataRepository.Merchant
     public class MerchantRepository : IMerchantRepository
     {
         private readonly DapperContext _context;
-        private readonly IHostingEnvironment _hostingEnvironment;
-        public MerchantRepository(DapperContext context, IHostingEnvironment hostingEnvironment)
+      
+        public MerchantRepository(DapperContext context)
         {
             _context = context;
-            _hostingEnvironment = hostingEnvironment;
+        
         }
 
         public async Task<IEnumerable<GetMerchantTypeModelOutput>> GetMerchantType([FromBody] GetMerchantTypeModelInput ObjClass)
@@ -241,124 +241,6 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantSearchMerchantForCardCreationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<MerchantInsertOTCCustomerModelOutput>> InsertOTCCustomer([FromBody] MerchantInsertOTCCustomerModelInput ObjClass)
-        {
-            var dtDBR = new DataTable("UserInsertOTCCard");
-            dtDBR.Columns.Add("CardNo", typeof(string));
-            dtDBR.Columns.Add("CardIdentifier", typeof(string));
-            dtDBR.Columns.Add("MobileNo", typeof(string));
-
-            if (ObjClass.ObjOTCCardEntryDetail != null)
-            {
-                foreach (OTCCardEntryDetail ObjCardDetails in ObjClass.ObjOTCCardEntryDetail)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardNo"] = ObjCardDetails.CardNo;
-                    dr["CardIdentifier"] = ObjCardDetails.VechileNo;
-                    dr["MobileNo"] = ObjCardDetails.MobileNo;
-
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
-
-            var procedureName = "UspInsertOTCCustomer";
-            var parameters = new DynamicParameters();
-            parameters.Add("CustomerType", 918, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CustomerSubtype", 920, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
-            parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
-            parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
-            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationAddress2", ObjClass.CommunicationAddress2, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationCityName", ObjClass.CommunicationCityName, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationPincode", ObjClass.CommunicationPincode, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CommunicationPhoneNo", ObjClass.CommunicationPhoneNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationFax", ObjClass.CommunicationFax, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CopyofDriverLicense", ObjClass.CopyofDriverLicense, DbType.String, ParameterDirection.Input);
-            parameters.Add("CopyofVehicleRegistrationCertificate", ObjClass.CopyofVehicleRegistrationCertificate, DbType.String, ParameterDirection.Input);
-            parameters.Add("InsertOTCCard", dtDBR, DbType.Object, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantInsertOTCCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantCheckAvailityCardOutput>> CheckAvailityOTCCard([FromBody] MerchantCheckAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspCheckAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantCheckAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<MerchantCheckAvailityCardOutput>> CheckAvailityTatkalCard([FromBody] MerchantCheckAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspCheckAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantCheckAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantCheckAvailityCardOutput>> CheckAvailityDriverCard([FromBody] MerchantCheckAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspCheckAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantCheckAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantGetAvailityCardOutput>> GetAvailityOTCCard([FromBody] MerchantGetAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspGetAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("RegionalId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantGetAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-        public async Task<IEnumerable<MerchantGetAvailityCardOutput>> GetAvailityTatkalCard([FromBody] MerchantGetAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspGetAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("RegionalId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantGetAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantGetAvailityCardOutput>> GetAvailityDriverCard([FromBody] MerchantGetAvailityCardInput ObjClass)
-        {
-            var procedureName = "UspGetAvailityDummyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("RegionalId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantGetAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-
         public async Task<IEnumerable<VerifyMerchantByMerchantIdModelOutput>> VerifyMerchantByMerchantId([FromBody] VerifyMerchantByMerchantIdModelInput ObjClass)
         {
             var procedureName = "UspVerifyMerchantID";
@@ -378,336 +260,6 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<VerifyMerchantByMerchantIdandRegionalIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-        public async Task<MerchantGetAllUnAllocatedCardsModelOutput> GetAllUnAllocatedCardsForOTCCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
-        {
-            var procedureName = "UspGetAllUnAllocatedCards";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-            var storedProcedureResult = new MerchantGetAllUnAllocatedCardsModelOutput();
-            storedProcedureResult.ObjNoOfUnAllocatedCard = (List<NoOfUnAllocatedCard>)await result.ReadAsync<NoOfUnAllocatedCard>();
-            storedProcedureResult.ObjUnAllocatedCard = (List<UnAllocatedCard>)await result.ReadAsync<UnAllocatedCard>();
-            return storedProcedureResult;
-
-        }
-
-        public async Task<MerchantGetAllUnAllocatedCardsModelOutput> GetAllUnAllocatedCardsForDriverCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
-        {
-            var procedureName = "UspGetAllUnAllocatedCards";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-            var storedProcedureResult = new MerchantGetAllUnAllocatedCardsModelOutput();
-            storedProcedureResult.ObjNoOfUnAllocatedCard = (List<NoOfUnAllocatedCard>)await result.ReadAsync<NoOfUnAllocatedCard>();
-            storedProcedureResult.ObjUnAllocatedCard = (List<UnAllocatedCard>)await result.ReadAsync<UnAllocatedCard>();
-            return storedProcedureResult;
-
-        }
-
-        public async Task<MerchantGetAllUnAllocatedCardsModelOutput> GetAllUnAllocatedCardsForTatkalCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
-        {
-            var procedureName = "UspGetAllUnAllocatedCards";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
-            var storedProcedureResult = new MerchantGetAllUnAllocatedCardsModelOutput();
-            storedProcedureResult.ObjNoOfUnAllocatedCard = (List<NoOfUnAllocatedCard>)await result.ReadAsync<NoOfUnAllocatedCard>();
-            storedProcedureResult.ObjUnAllocatedCard = (List<UnAllocatedCard>)await result.ReadAsync<UnAllocatedCard>();
-            return storedProcedureResult;
-
-        }
-
-
-        public async Task<IEnumerable<MerchantAllocatedCardsToMerchantModelOutput>> AllocatedOTCCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
-        {
-            var dtDBR = new DataTable("TypeCardNos");
-            dtDBR.Columns.Add("CardNo", typeof(string));
-
-
-            if (ObjClass.ObjAllocatedCardsToMerchant != null)
-            {
-                foreach (AllocatedCardsToMerchantModelInput ObjDetail in ObjClass.ObjAllocatedCardsToMerchant)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardNo"] = ObjDetail.CardNo;
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
-
-            var procedureName = "UspAllocateUnAllocatedCardsToMerchant";
-            var parameters = new DynamicParameters();
-            parameters.Add("NoOfCardsAllocated", ObjClass.NoOfCardsAllocated, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("UpdateCardsAllocationReq", dtDBR, DbType.Object, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantAllocatedCardsToMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantAllocatedCardsToMerchantModelOutput>> AllocatedDriverCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
-        {
-            var dtDBR = new DataTable("TypeCardNos");
-            dtDBR.Columns.Add("CardNo", typeof(string));
-
-
-            if (ObjClass.ObjAllocatedCardsToMerchant != null)
-            {
-                foreach (AllocatedCardsToMerchantModelInput ObjDetail in ObjClass.ObjAllocatedCardsToMerchant)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardNo"] = ObjDetail.CardNo;
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
-
-            var procedureName = "UspAllocateUnAllocatedCardsToMerchant";
-            var parameters = new DynamicParameters();
-            parameters.Add("NoOfCardsAllocated", ObjClass.NoOfCardsAllocated, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("UpdateCardsAllocationReq", dtDBR, DbType.Object, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantAllocatedCardsToMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<MerchantAllocatedCardsToMerchantModelOutput>> AllocatedTatkalCardToMerchant([FromBody] MerchantAllocatedCardsToMerchantModelInput ObjClass)
-        {
-            var dtDBR = new DataTable("TypeCardNos");
-            dtDBR.Columns.Add("CardNo", typeof(string));
-
-
-            if (ObjClass.ObjAllocatedCardsToMerchant != null)
-            {
-                foreach (AllocatedCardsToMerchantModelInput ObjDetail in ObjClass.ObjAllocatedCardsToMerchant)
-                {
-                    DataRow dr = dtDBR.NewRow();
-                    dr["CardNo"] = ObjDetail.CardNo;
-                    dtDBR.Rows.Add(dr);
-                    dtDBR.AcceptChanges();
-                }
-            }
-
-            var procedureName = "UspAllocateUnAllocatedCardsToMerchant";
-            var parameters = new DynamicParameters();
-            parameters.Add("NoOfCardsAllocated", ObjClass.NoOfCardsAllocated, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("UpdateCardsAllocationReq", dtDBR, DbType.Object, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantAllocatedCardsToMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<MerchantInsertDriverCardCustomerModelOutput>> InsertDriverCardCustomer([Microsoft.AspNetCore.Mvc.FromForm] MerchantInsertDriverCardCustomerModelInput ObjClass)
-        {
-
-            string FileNamePathAddressProof = string.Empty;
-            var ImageFileNameAddressProofFront = ObjClass.AddressProof;
-            if (ImageFileNameAddressProofFront != null)
-            {
-                if (ImageFileNameAddressProofFront.Length > 0)
-                {
-                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
-                    var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
-                    var extension = ext.ToLower();
-                    if (AllowedFileExtensions.Contains(extension))
-                    {
-
-                        string contentRootPath = _hostingEnvironment.ContentRootPath;
-                        FileNamePathAddressProof = "/CustomerKYCImage/" + ObjClass.FormNumber + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")
-                            + "_" + ObjClass.AddressProofType + "_" + ImageFileNameAddressProofFront.FileName;
-                        string filePathAddressProofFront = contentRootPath + FileNamePathAddressProof;
-                        var fileStream = new FileStream(filePathAddressProofFront, FileMode.Create);
-                        ImageFileNameAddressProofFront.CopyTo(fileStream);
-                    }
-                }
-            }
-
-
-            var procedureName = "UspInsertDriverCardCustomer";
-            var parameters = new DynamicParameters();
-            parameters.Add("CustomerType", 927, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CustomerSubtype", 929, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("IndividualOrgNameTitle", ObjClass.IndividualOrgNameTitle, DbType.String, ParameterDirection.Input);
-            parameters.Add("IndividualOrgName", ObjClass.IndividualOrgName, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationCityName", ObjClass.CommunicationCityName, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationPincode", ObjClass.CommunicationPincode, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationPhoneNo", ObjClass.CommunicationPhoneNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
-            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
-            parameters.Add("AddressProofType", ObjClass.AddressProofType, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("AddressProofDocumentNo", ObjClass.AddressProofDocumentNo, DbType.String, ParameterDirection.Input);
-            parameters.Add("AddressProof", FileNamePathAddressProof, DbType.String, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("DrivingLicence", ObjClass.DrivingLicence, DbType.String, ParameterDirection.Input);
-            parameters.Add("DTPCustomerStatus", ObjClass.DTPCustomerStatus, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("ExistingCustomerId", ObjClass.ExistingCustomerId, DbType.String, ParameterDirection.Input);
-            parameters.Add("BeneficiaryName", ObjClass.BeneficiaryName, DbType.String, ParameterDirection.Input);
-            parameters.Add("RelationwithBeneficiary", ObjClass.RelationwithBeneficiary, DbType.String, ParameterDirection.Input);
-            parameters.Add("BeneficiaryMobile", ObjClass.BeneficiaryMobile, DbType.String, ParameterDirection.Input);
-
-
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantInsertDriverCardCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-
-        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedOTCCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
-        {
-            var procedureName = "UspViewRequestedMyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedTatkalCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
-        {
-            var procedureName = "UspViewRequestedMyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedDriverCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
-        {
-            var procedureName = "UspViewRequestedMyCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.Int32, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantViewRequestedCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-
-        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseOTCCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
-        {
-            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseTatkalCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
-        {
-            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<MerchantInsertDealerWiseCardRequestModelOutput>> InsertDealerWiseDriverCardRequest([FromBody] MerchantInsertDealerWiseCardRequestModelInput ObjClass)
-        {
-            var procedureName = "UspInsertMerchantWiseOTCTatkalDriverCard";
-            var parameters = new DynamicParameters();
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("NoofCards", ObjClass.NoofCards, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MerchantInsertDealerWiseCardRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewOTCCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
-        {
-            var procedureName = "UspViewCardMerchantAllocation";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "OTCCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
-            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
-            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
-            return storedProcedureResult;
-        }
-
-        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewTatkalCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
-        {
-            var procedureName = "UspViewCardMerchantAllocation";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "TatkalCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
-            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
-            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
-            return storedProcedureResult;
-        }
-
-        public async Task<MerchantViewCardMerchantAllocationModelOutput> ViewDriverCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
-        {
-            var procedureName = "UspViewCardMerchantAllocation";
-            var parameters = new DynamicParameters();
-            parameters.Add("CardType", "DriverCard", DbType.String, ParameterDirection.Input);
-            parameters.Add("MerchantId", ObjClass.MerchantId, DbType.String, ParameterDirection.Input);
-            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var storedProcedureResult = new MerchantViewCardMerchantAllocationModelOutput();
-            storedProcedureResult.ObjMerchantTotalCardDetail = (List<MerchantTotalCardModelOutput>)await result.ReadAsync<MerchantTotalCardModelOutput>();
-            storedProcedureResult.ObjMerchantViewCardDetail = (List<MerchantViewCardMerchantDetailModelOutput>)await result.ReadAsync<MerchantViewCardMerchantDetailModelOutput>();
-            return storedProcedureResult;
-        }
-
-
-
-
-
         public async Task<IEnumerable<MerchantSearchMerchantModelOutput>> SearchMerchant([FromBody] MerchantSearchMerchantModelInput ObjClass)
         {
             var procedureName = "UspSearchMerchant";
@@ -722,15 +274,12 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantSearchMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-
         public async Task<IEnumerable<MerchantGetMerchantStatusModelOutput>> GetMerchantStatus([FromBody] MerchantGetMerchantStatusModelInput ObjClass)
         {
             var procedureName = "UspGetMerchantStatus";
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantGetMerchantStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
-
 
         public async Task<IEnumerable<MerchantViewMerchantCautionLimitModelOutput>> ViewMerchantCautionLimit([FromBody] MerchantViewMerchantCautionLimitModelInput ObjClass)
         {
@@ -770,8 +319,6 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantBatchDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-
         public async Task<IEnumerable<MerchantTransactionDetailModelOutput>> MerchantTransactionDetail([FromBody] MerchantTransactionDetailModelInput ObjClass)
         {
             var procedureName = "UspTransactionDetails";
@@ -784,8 +331,6 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantTransactionDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
-
         public async Task<IEnumerable<MerchantSaleReloadDeltaDetailModelOutput>> MerchantSaleReloadDeltaDetail([FromBody] MerchantSaleReloadDeltaDetailModelInput ObjClass)
         {
             var procedureName = "UspMerchantSaleReloadDeltaDetails";
@@ -797,8 +342,6 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantSaleReloadDeltaDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
-
         public async Task<IEnumerable<MerchantERPReloadSaleEarningDetailModelOutput>> MerchantERPReloadSaleEarningDetail([FromBody] MerchantERPReloadSaleEarningDetailModelInput ObjClass)
         {
             var procedureName = "UspMerchantERPReloadSaleEarningDetails";
@@ -810,7 +353,6 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantERPReloadSaleEarningDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
         public async Task<IEnumerable<MerchantReceivablePayableDetailModelOutput>> MerchantReceivablePayableDetail([FromBody] MerchantReceivablePayableDetailModelInput ObjClass)
         {
             var procedureName = "UspReceivablePayableDetails";
