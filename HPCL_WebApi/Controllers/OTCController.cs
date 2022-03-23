@@ -346,6 +346,34 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("verify_otc_card_customer")]
+        public async Task<IActionResult> VerifyOTCCardCustomer([FromBody] VerifyOTCCardCustomerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _OTCRepo.VerifyOTCCardCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<VerifyOTCCardCustomerModelOutput> item = result.Cast<VerifyOTCCardCustomerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
     }
 
 }

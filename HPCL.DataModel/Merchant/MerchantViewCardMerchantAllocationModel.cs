@@ -215,4 +215,51 @@ namespace HPCL.DataModel.Merchant
         public string IsDTPCustomer { get; set; }
     }
 
+    public class VerifyOTCCardCustomerModelInput : BaseClass
+    {
+
+        [JsonPropertyName("RegionalOfficeId")]
+        [DataMember]
+        public Int32 RegionalOfficeId { get; set; }
+
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonPropertyName("CardNo")]
+        [DataMember]
+        public string CardNo { get; set; }
+    }
+
+    public class VerifyOTCCardCustomerModelOutput
+    {
+        [JsonProperty("ZonalOfficeName")]
+        [DataMember]
+        public string ZonalOfficeName { get; set; }
+
+        [JsonProperty("RegionalOfficeName")]
+        [DataMember]
+        public string RegionalOfficeName { get; set; }
+
+        [JsonProperty("CustomerId")]
+        [DataMember]
+        public string CustomerId { get; set; }
+
+        [JsonProperty("CustomerName")]
+        [DataMember]
+        public string CustomerName { get; set; }
+
+        [JsonProperty("MerchantId")]
+        [DataMember]
+        public string MerchantId { get; set; }
+
+        [JsonProperty("CreatedDate")]
+        [DataMember]
+        public DateTime CreatedDate { get; set; }
+
+        [JsonProperty("CreatedBy")]
+        [DataMember]
+        public string CreatedBy { get; set; }
+    }
+
 }

@@ -26,6 +26,6 @@ namespace HPCL.DataRepository.OTC
 
         public Task<IEnumerable<CardRequestEntryModelOutput>> InsertOTCCardRequest([FromBody] CardRequestEntryModelInput ObjClass);
 
-        public Task<IEnumerable<GetCardAllocationActivationModelOutput>> GetOTCCardAllocationActivation([FromBody] GetCardAllocationActivationModelInput ObjClass);
+        public Task<IEnumerable<GetCardAllocationActivationModelOutput>> GetOTCCardAllocationActivation([FromBody] GetCardAllocationActivationModelInput ObjClass); Task<IEnumerable<VerifyOTCCardCustomerModelOutput>> VerifyOTCCardCustomer([FromBody] VerifyOTCCardCustomerModelInput ObjClass);
     }
 }

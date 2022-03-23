@@ -210,5 +210,17 @@ namespace HPCL.DataRepository.OTC
             return await connection.QueryAsync<GetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<VerifyOTCCardCustomerModelOutput>> VerifyOTCCardCustomer([FromBody] VerifyOTCCardCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspVerifyOTCCardCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<VerifyOTCCardCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
