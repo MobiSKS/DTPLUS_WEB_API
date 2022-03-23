@@ -32,6 +32,7 @@ using HPCL.DataRepository.District;
 using HPCL.DataRepository.State;
 using HPCL.DataRepository.Hotlist;
 using HPCL.DataRepository.Terminal;
+using HPCL.DataRepository.AshokLeyland;
 
 namespace HPCL_WebApi
 {
@@ -98,6 +99,7 @@ namespace HPCL_WebApi
             services.AddScoped<ICountryRegionRepository, CountryRegionRepository>();
             services.AddScoped<ICountryZoneRepository, CountryZoneRepository>();
             services.AddScoped<IHotlistRepository, HotlistRepository>();
+            services.AddScoped<IAshokLeylandRepository, AshokLeylandRepository>();
             services.AddScoped<ITerminalRepository, TerminalRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>

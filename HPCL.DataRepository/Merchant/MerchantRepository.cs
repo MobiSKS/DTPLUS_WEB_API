@@ -357,8 +357,8 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantGetAvailityCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-      
-        
+
+
         public async Task<IEnumerable<VerifyMerchantByMerchantIdModelOutput>> VerifyMerchantByMerchantId([FromBody] VerifyMerchantByMerchantIdModelInput ObjClass)
         {
             var procedureName = "UspVerifyMerchantID";
@@ -410,7 +410,7 @@ namespace HPCL.DataRepository.Merchant
             return storedProcedureResult;
 
         }
-        
+
         public async Task<MerchantGetAllUnAllocatedCardsModelOutput> GetAllUnAllocatedCardsForTatkalCard([FromBody] MerchantGetAllUnAllocatedCardsModelInput ObjClass)
         {
             var procedureName = "UspGetAllUnAllocatedCards";
@@ -578,7 +578,7 @@ namespace HPCL.DataRepository.Merchant
         }
 
 
-       
+
         public async Task<IEnumerable<MerchantViewRequestedCardModelOutput>> ViewRequestedOTCCard([FromBody] MerchantViewRequestedCardModelInput ObjClass)
         {
             var procedureName = "UspViewRequestedMyCard";
@@ -705,10 +705,10 @@ namespace HPCL.DataRepository.Merchant
         }
 
 
-        
 
 
-           public async Task<IEnumerable<MerchantSearchMerchantModelOutput>> SearchMerchant([FromBody] MerchantSearchMerchantModelInput ObjClass)
+
+        public async Task<IEnumerable<MerchantSearchMerchantModelOutput>> SearchMerchant([FromBody] MerchantSearchMerchantModelInput ObjClass)
         {
             var procedureName = "UspSearchMerchant";
             var parameters = new DynamicParameters();
@@ -722,7 +722,7 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantSearchMerchantModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-       
+
 
         public async Task<IEnumerable<MerchantGetMerchantStatusModelOutput>> GetMerchantStatus([FromBody] MerchantGetMerchantStatusModelInput ObjClass)
         {
@@ -770,7 +770,7 @@ namespace HPCL.DataRepository.Merchant
             return await connection.QueryAsync<MerchantBatchDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-       
+
 
         public async Task<IEnumerable<MerchantTransactionDetailModelOutput>> MerchantTransactionDetail([FromBody] MerchantTransactionDetailModelInput ObjClass)
         {
