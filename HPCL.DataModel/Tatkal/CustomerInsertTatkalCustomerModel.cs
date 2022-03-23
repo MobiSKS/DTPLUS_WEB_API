@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Customer
+namespace HPCL.DataModel.Tatkal
 {
-    public class CustomerInsertTatkalCustomerModelInput : BaseClass
+    public class InsertTatkalCustomerModelInput : BaseClass
     {
         
         [Required]
@@ -121,7 +121,7 @@ namespace HPCL.DataModel.Customer
         public Int64 FormNumber { get; set; }
     }
 
-    public class CustomerInsertTatkalCustomerModelOutput : BaseClassOutput
+    public class InsertTatkalCustomerModelOutput : BaseClassOutput
     {
         [JsonProperty("ReferenceId")]
         [DataMember]

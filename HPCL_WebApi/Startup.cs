@@ -33,6 +33,9 @@ using HPCL.DataRepository.State;
 using HPCL.DataRepository.Hotlist;
 using HPCL.DataRepository.Terminal;
 using HPCL.DataRepository.AshokLeyland;
+using HPCL.DataRepository.OTC;
+using HPCL.DataRepository.Driver;
+using HPCL.DataRepository.Tatkal;
 
 namespace HPCL_WebApi
 {
@@ -101,6 +104,9 @@ namespace HPCL_WebApi
             services.AddScoped<IHotlistRepository, HotlistRepository>();
             services.AddScoped<IAshokLeylandRepository, AshokLeylandRepository>();
             services.AddScoped<ITerminalRepository, TerminalRepository>();
+            services.AddScoped<IOTCRepository, OTCRepository>();
+            services.AddScoped<IDriverRepository, DriverRepository>();
+            services.AddScoped<ITatkalRepository, TatkalRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {

@@ -1047,101 +1047,11 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("insert_otc_card_request")]
-        public async Task<IActionResult> InsertOTCCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.InsertOTCCardRequest(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Status == 1)
-                    {
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Reason);
-                    }
+       
 
-                }
-            }
-        }
+        
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("insert_tatkal_card_request")]
-        public async Task<IActionResult> InsertTatkalCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.InsertTatkalCardRequest(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Status == 1)
-                    {
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Reason);
-                    }
-
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("insert_driver_card_request")]
-        public async Task<IActionResult> InsertDriverCardRequest([FromBody] CustomerCardRequestEntryModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.InsertDriverCardRequest(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Status == 1)
-                    {
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerCardRequestEntryModelOutput>().ToList()[0].Reason);
-                    }
-
-                }
-            }
-        }
+        
 
 
         [HttpPost]
@@ -1177,45 +1087,7 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("insert_tatkal_card_customer")]
-        public async Task<IActionResult> InsertTatkalCustomer([FromBody] CustomerInsertTatkalCustomerModelInput ObjClass)
-        {
-
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.InsertTatkalCustomer(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    if (result.Cast<CustomerInsertTatkalCustomerModelOutput>().ToList()[0].Status == 1)
-                    {
-
-                        string EmailSubject = "<p>Hi <b>" + ObjClass.IndividualOrgName + "</br> User Name : "
-                                + result.Cast<CustomerInsertTatkalCustomerModelOutput>().ToList()[0].CustomerID + " </br> Password : "
-                                + result.Cast<CustomerInsertTatkalCustomerModelOutput>().ToList()[0].Password + " </p>";
-
-                        Variables.FunSendMail(ObjClass.CommunicationEmailid, EmailSubject, "OTC Customer Details");
-
-                        return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<CustomerInsertTatkalCustomerModelOutput>().ToList()[0].Reason);
-                    }
-                }
-            }
-
-        }
+      
 
 
         [HttpPost]
@@ -1277,60 +1149,6 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_otc_card_allocation_activation")]
-        public async Task<IActionResult> GetOTCCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.GetOTCCardAllocationActivation(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_driver_card_allocation_activation")]
-        public async Task<IActionResult> GetDriverCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.GetDriverCardAllocationActivation(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_customer_balance_info")]
         public async Task<IActionResult> GetCustomerBalanceInfo([FromBody] CustomerGetCustomerBalanceInfoModelInput ObjClass)
         {
@@ -1387,36 +1205,7 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
-
-
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_tatkal_card_allocation_activation")]
-        public async Task<IActionResult> GetTatkalCardAllocationActivation([FromBody] CustomerGetCardAllocationActivationModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.GetTatkalCardAllocationActivation(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<CustomerGetCardAllocationActivationModelOutput> item = result.Cast<CustomerGetCardAllocationActivationModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-        }
+        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
