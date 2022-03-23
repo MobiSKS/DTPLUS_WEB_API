@@ -138,5 +138,39 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_hotlist_or_reactivate")]
+        public async Task<IActionResult> UpdateHotlistOrReactivate([FromBody] HotlistUpdateModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _HLRepo.UpdateHotlistOrReactivate(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<HotlistUpdateModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<HotlistUpdateModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,14 +10,17 @@ namespace HPCL.DataModel.Customer
 {
     public class CustomerViewAccountStatementModelInput : BaseClass
     {
+        [Required]
         [JsonPropertyName("CustomerID")]
         [DataMember]
         public string CustomerID { get; set; }
 
+        [Required]
         [JsonPropertyName("FromDate")]
         [DataMember]
         public string FromDate { get; set; }
 
+        [Required]
         [JsonPropertyName("ToDate")]
         [DataMember]
         public string ToDate { get; set; }

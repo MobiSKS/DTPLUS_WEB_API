@@ -50,5 +50,23 @@ namespace HPCL.DataRepository.Hotlist
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetHotlistedOrReactivatedDetailsOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<HotlistUpdateModelOutput>> UpdateHotlistOrReactivate([FromBody] HotlistUpdateModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateHotlistOrReactivate";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("EntityIdVal", ObjClass.EntityIdVal, DbType.String, ParameterDirection.Input);
+            parameters.Add("ActionId", ObjClass.ActionId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ReasonId", ObjClass.ReasonId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ReasonDetails", ObjClass.ReasonDetails, DbType.String, ParameterDirection.Input);
+            parameters.Add("Remarks", ObjClass.Remarks, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<HotlistUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+        }
+
     }
 }

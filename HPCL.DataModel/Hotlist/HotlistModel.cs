@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -78,10 +79,12 @@ namespace HPCL.DataModel.Hotlist
 
     public class GetHotlistedOrReactivatedDetailsInput : BaseClass
     {
+        [Required]
         [JsonPropertyName("EntityTypeId")]
         [DataMember]
         public int EntityTypeId { get; set; }
 
+        [Required]
         [JsonPropertyName("EntityIdVal")]
         [DataMember]
         public string EntityIdVal { get; set; }
