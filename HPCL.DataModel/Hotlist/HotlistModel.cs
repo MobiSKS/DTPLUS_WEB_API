@@ -75,4 +75,41 @@ namespace HPCL.DataModel.Hotlist
 
 
     }
+
+    public class GetHotlistedOrReactivatedDetailsInput : BaseClass
+    {
+        [JsonPropertyName("EntityTypeId")]
+        [DataMember]
+        public int EntityTypeId { get; set; }
+
+        [JsonPropertyName("EntityIdVal")]
+        [DataMember]
+        public int EntityIdVal { get; set; }
+    }
+    public class GetHotlistedOrReactivatedDetailsOutput
+    {
+        [JsonProperty("EntityType")]
+        [DataMember]
+        public string EntityType { get; set; }
+
+        [JsonProperty("EntityIdValue")]
+        [DataMember]
+        public string EntityIdValue { get; set; }
+
+        [JsonProperty("HotlistDate")]
+        [DataMember]
+        public string HotlistDate { get; set; }
+
+        [JsonProperty("Action")]
+        [DataMember]
+        public string Action { get; set; }
+
+        [JsonProperty("Reason")]
+        [DataMember]
+        public string Reason { get; set; }
+
+        [JsonProperty("Remarks")]
+        [DataMember]
+        public string Remarks { get; set; }
+    }
 }

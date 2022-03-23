@@ -41,6 +41,14 @@ namespace HPCL.DataRepository.Hotlist
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetReasonListForEntitiesOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
+        public async Task<IEnumerable<GetHotlistedOrReactivatedDetailsOutput>> GetHotlistedOrReactivatedDetails([FromBody] GetHotlistedOrReactivatedDetailsInput ObjClass)
+        {
+            var procedureName = "UspGetHotlistedOrReactivatedDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("EntityIdVal", ObjClass.EntityIdVal, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetHotlistedOrReactivatedDetailsOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
