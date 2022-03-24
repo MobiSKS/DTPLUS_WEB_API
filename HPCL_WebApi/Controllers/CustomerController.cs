@@ -1306,7 +1306,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.GetCardTransactionDetails.Count > 0)
+                    if (result.GetCardTransactionDetails.Count > 0 && result.GetCcmsAccountSummary.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
                         return this.Fail(ObjClass, result, _logger);
