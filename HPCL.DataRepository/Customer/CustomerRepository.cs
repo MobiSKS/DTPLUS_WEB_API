@@ -872,5 +872,7 @@ namespace HPCL.DataRepository.Customer
             storedProcedureResult.GetCardTransactionDetails = (List<CardTransactionDetailsModelOutput>)await result.ReadAsync<CardTransactionDetailsModelOutput>();
             return storedProcedureResult;
         }
+
+      
     }
 }
