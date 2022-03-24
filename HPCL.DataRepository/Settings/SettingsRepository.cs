@@ -84,5 +84,12 @@ namespace HPCL.DataRepository.Settings
             return await connection.QueryAsync<SettingGetTierModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<SettingGetRecordTypeModelOutput>> GetRecordType([FromBody] SettingGetRecordTypeModelInput ObjClass)
+        {
+            var procedureName = "UspGetRecordType";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetRecordTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

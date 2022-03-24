@@ -275,6 +275,34 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_record_type")]
+        public async Task<IActionResult> GetRecordType([FromBody] SettingGetRecordTypeModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetRecordType(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<SettingGetRecordTypeModelOutput> item = result.Cast<SettingGetRecordTypeModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
 
     }
 

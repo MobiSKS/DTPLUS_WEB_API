@@ -89,6 +89,6 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("Date")]
         [DataMember]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }
