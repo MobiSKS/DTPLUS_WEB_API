@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
-    [Route("api/dtplus/driver")]
+    [Route("api/dtplus/tatkal")]
     [ApiController]
     public class TatkalController : ControllerBase
     {
