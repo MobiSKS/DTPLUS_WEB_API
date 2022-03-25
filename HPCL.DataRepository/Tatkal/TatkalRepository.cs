@@ -187,6 +187,40 @@ namespace HPCL.DataRepository.Tatkal
             return await connection.QueryAsync<GetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<MapTatkalCardsToTatkalCustomerModelOutput>> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspMapTatkalCardsToTatkalCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<MapTatkalCardsToTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
 
+
+
+        public async Task<IEnumerable<UpdateMapTatkalCardsToTatkalCustomerModelOutput>> UpdateMapTatkalCardsToTatkalCustomer([FromBody] UpdateMapTatkalCardsToTatkalCustomerModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeCardNos");
+            dtDBR.Columns.Add("CardNo", typeof(string));
+
+            foreach (CardMapModelInput ObjCardLimits in ObjClass.ObjCardMap)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["CardNo"] = ObjCardLimits.CardNo;
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+
+            var procedureName = "UspUpdateMapTatkalCardsToTatkalCustomer";
+            var parameters = new DynamicParameters();
+
+            //parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UpdateMapCard", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateMapTatkalCardsToTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

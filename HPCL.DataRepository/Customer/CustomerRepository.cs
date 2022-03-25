@@ -873,6 +873,21 @@ namespace HPCL.DataRepository.Customer
             return storedProcedureResult;
         }
 
-      
+        public async Task<SearchCustomerandCardFormModelOutput> SearchCustomerandCardForm([FromBody] SearchCustomerandCardFormModelInput ObjClass)
+        {
+            var procedureName = "UspSearchCustomerandCardForm";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityId", ObjClass.EntityId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("StateID", ObjClass.StateID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CityName", ObjClass.CityName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new SearchCustomerandCardFormModelOutput();
+            storedProcedureResult.GetCustomerSearchOutput = (List<CustomerSearchModelOutput>)await result.ReadAsync<CustomerSearchModelOutput>();
+            storedProcedureResult.GetCardSearchOutput = (List<CardSearchModelOutput>)await result.ReadAsync<CardSearchModelOutput>();
+            return storedProcedureResult;
+        }
+
     }
 }
