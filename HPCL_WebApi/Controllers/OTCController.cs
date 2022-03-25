@@ -258,7 +258,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("view_otc_card_OTCRepo_allocation")]
+        [Route("view_otc_card_merchant_allocation")]
         public async Task<IActionResult> ViewOTCCardMerchantAllocation([FromBody] MerchantViewCardMerchantAllocationModelInput ObjClass)
         {
 

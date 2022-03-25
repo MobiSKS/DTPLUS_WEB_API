@@ -101,7 +101,7 @@ namespace HPCL.DataModel.Hotlist
 
         [JsonProperty("HotlistDate")]
         [DataMember]
-        public DateTime HotlistDate { get; set; }
+        public string HotlistDate { get; set; }
 
         [JsonProperty("Action")]
         [DataMember]
