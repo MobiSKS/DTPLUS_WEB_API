@@ -133,7 +133,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Card_Not_Found;
             }
 
-            if (Message == "Vechile No is already present.Please pass different vechile no")
+            if (Message == "Vehicle No. already exists. Please enter different Vehicle No.")
             {
                 ResponseMessage = StatusInformation.Vechile_No.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Vechile_No;
@@ -298,7 +298,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Customer_Reference_no_not_found;
             }
 
-            if (Message == "Form Number is already exits")
+            if (Message == "Form Number already exists")
             {
                 ResponseMessage = StatusInformation.Form_Number_is_already_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Form_Number_is_already_exits;
@@ -310,7 +310,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Pancard_is_already_present;
             }
 
-            if (Message == "Mobile No is already present.Please pass different Mobile no")
+            if (Message == "Mobile No. already exists. Please enter different Mobile No.")
             {
                 ResponseMessage = StatusInformation.Mobile_No_is_already_present_Please_pass_different_Mobileno.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Mobile_No_is_already_present_Please_pass_different_Mobileno;
