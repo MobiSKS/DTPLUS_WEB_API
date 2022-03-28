@@ -9,7 +9,7 @@ namespace HPCL.DataRepository.RBE
 {
     public interface IRBERepository
     {
-        public Task<IEnumerable<ChangeRBEMappingModelOutput>> ChangeRBEMappingModel([FromBody] ChangeRBEMappingModelInput ObjClass);
+        public Task<IEnumerable<ChangeRBEMappingModelOutput>> ChangeRBEMapping([FromBody] ChangeRBEMappingModelInput ObjClass);
 
         public Task<IEnumerable<ManageRBEUserModelOutput>> ManageRBEUser([FromBody] ManageRBEUserModelInput ObjClass);
     }

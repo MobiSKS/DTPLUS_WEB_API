@@ -25,8 +25,8 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("change_rbe_mapping_model")]
-        public async Task<IActionResult> ChangeRBEMappingModel([FromBody] ChangeRBEMappingModelInput ObjClass)
+        [Route("change_rbe_mapping")]
+        public async Task<IActionResult> ChangeRBEMapping([FromBody] ChangeRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -34,7 +34,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.ChangeRBEMappingModel(ObjClass);
+                var result = await _RBERepo.ChangeRBEMapping(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);

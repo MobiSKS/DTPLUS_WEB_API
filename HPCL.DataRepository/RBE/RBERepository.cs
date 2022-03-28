@@ -18,7 +18,7 @@ namespace HPCL.DataRepository.RBE
             _context = context;
         }
 
-        public async Task<IEnumerable<ChangeRBEMappingModelOutput>> ChangeRBEMappingModel([FromBody] ChangeRBEMappingModelInput ObjClass)
+        public async Task<IEnumerable<ChangeRBEMappingModelOutput>> ChangeRBEMapping([FromBody] ChangeRBEMappingModelInput ObjClass)
         {
             var procedureName = "UspGetHotlistApproval";
             var parameters = new DynamicParameters();
