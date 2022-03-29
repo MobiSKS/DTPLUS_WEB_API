@@ -354,7 +354,8 @@ namespace HPCL.DataRepository.Card
             parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
             parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
-            parameters.Add("Createdon", ObjClass.Createdon, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<BindPendingCustomerforCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);

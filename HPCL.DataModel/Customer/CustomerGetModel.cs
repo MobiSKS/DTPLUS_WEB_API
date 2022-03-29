@@ -833,9 +833,13 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string CustomerName { get; set; }
 
-        [JsonPropertyName("Createdon")]
+        [JsonPropertyName("FromDate")]
         [DataMember]
-        public string Createdon { get; set; }
+        public string FromDate { get; set; }
+
+        [JsonPropertyName("ToDate")]
+        [DataMember]
+        public string ToDate { get; set; }
 
 
         [JsonPropertyName("Createdby")]
