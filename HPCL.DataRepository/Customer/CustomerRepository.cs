@@ -626,6 +626,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -641,6 +642,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }

@@ -181,7 +181,9 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string Createdby { get; set; }
 
-
+        [JsonPropertyName("RegionalOfficeId")]
+        [DataMember]
+        public string RegionalOfficeId { get; set; }
     }
 
     public class BindPendingCustomerforCardModelOutput
