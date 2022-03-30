@@ -203,9 +203,9 @@ namespace HPCL.DataModel.Officer
         public string Fax { get; set; }
 
         [Required]
-        [JsonPropertyName("Createdby")]
+        [JsonPropertyName("CreatedBy")]
         [DataMember]
-        public string Createdby { get; set; }
+        public string CreatedBy { get; set; }
 
 
         [JsonPropertyName("Password")]
