@@ -41,7 +41,7 @@ namespace HPCL.DataRepository.Officer
             parameters.Add("PhoneNo", ObjClass.PhoneNo, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("Fax", ObjClass.Fax, DbType.String, ParameterDirection.Input);
-            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             parameters.Add("OfficerType", ObjClass.OfficerType, DbType.Int32, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
