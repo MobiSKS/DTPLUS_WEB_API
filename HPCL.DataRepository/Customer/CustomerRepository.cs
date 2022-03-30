@@ -781,13 +781,6 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerGetMappingUserCardstoMerchantsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-       
-
-        
-       
-
-
         public async Task<IEnumerable<CustomerGetCustomerDetailsForSearchModelOutput>> GetCustomerDetailsForSearch([FromBody] CustomerGetByCustomerIdModelInput ObjClass)
         {
             var procedureName = "UspGetCustomerDetailsForSearch";
