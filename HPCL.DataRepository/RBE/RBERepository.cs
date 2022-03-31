@@ -20,10 +20,10 @@ namespace HPCL.DataRepository.RBE
 
         public async Task<IEnumerable<ChangeRBEMappingModelOutput>> ChangeRBEMapping([FromBody] ChangeRBEMappingModelInput ObjClass)
         {
-            var procedureName = "UspGetHotlistApproval";
+            var procedureName = "UspChangeRBEMapping";
             var parameters = new DynamicParameters();
-            parameters.Add("EntityTypeId", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
-            parameters.Add("ActionId", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -32,8 +32,8 @@ namespace HPCL.DataRepository.RBE
         {
             var procedureName = "UspManageRBEUser";
             var parameters = new DynamicParameters();
-            parameters.Add("EntityTypeId", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
-            parameters.Add("ActionId", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ManageRBEUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
