@@ -68,7 +68,7 @@ namespace HPCL.DataModel.Officer
         public string Pin { get; set; }
 
         //[Required]
-        //[StringLength(10, MinimumLength = 10)]
+        [StringLength(10, MinimumLength = 10)]
         [JsonPropertyName("MobileNo")]
         [DataMember]
         public string MobileNo { get; set; }
