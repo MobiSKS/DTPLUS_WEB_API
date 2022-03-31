@@ -13,9 +13,9 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string FirstName { get; set; }
 
-        [JsonPropertyName("MobileNo")]
+        [JsonPropertyName("UserName")]
         [DataMember]
-        public string MobileNo { get; set; }
+        public string UserName { get; set; }
     }
 
     public class ChangeRBEMappingModelOutput
@@ -58,9 +58,9 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string FirstName { get; set; }
 
-        [JsonPropertyName("MobileNo")]
+        [JsonPropertyName("UserName")]
         [DataMember]
-        public string MobileNo { get; set; }
+        public string UserName { get; set; }
     }
 
     public class ManageRBEUserModelOutput

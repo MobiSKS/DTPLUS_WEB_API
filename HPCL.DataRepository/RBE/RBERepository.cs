@@ -23,7 +23,7 @@ namespace HPCL.DataRepository.RBE
             var procedureName = "UspChangeRBEMapping";
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
-            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.UserName, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -33,7 +33,7 @@ namespace HPCL.DataRepository.RBE
             var procedureName = "UspManageRBEUser";
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
-            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.UserName, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ManageRBEUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
