@@ -372,7 +372,7 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("update_map_tatkal_cards_to_tatkal_customer")]
         public async Task<IActionResult> UpdateMapTatkalCardsToTatkalCustomer([FromBody] UpdateMapTatkalCardsToTatkalCustomerModelInput ObjClass)
         {

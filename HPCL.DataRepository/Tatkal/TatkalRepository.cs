@@ -219,6 +219,9 @@ namespace HPCL.DataRepository.Tatkal
             parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateMapCard", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateMapTatkalCardsToTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
