@@ -347,6 +347,14 @@ namespace HPCL.DataModel.Customer
         //[DataMember]
         //public List<UpdateCardDetail> ObjCardDetail { get; set; }
 
+        [JsonPropertyName("TierOfCustomer")]
+        [DataMember]
+        public int TierOfCustomer { get; set; }
+
+        [JsonPropertyName("TypeOfCustomer")]
+        [DataMember]
+        public int TypeOfCustomer { get; set; }
+
     }
 
     //public class UpdateCardDetail

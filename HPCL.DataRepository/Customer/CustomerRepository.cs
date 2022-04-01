@@ -292,6 +292,8 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
 
+            parameters.Add("TierOfCustomer", ObjClass.TierOfCustomer, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("TypeOfCustomer", ObjClass.TypeOfCustomer, DbType.Int32, ParameterDirection.Input);
 
             //if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
             //{
