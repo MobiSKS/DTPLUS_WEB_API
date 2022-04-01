@@ -44,5 +44,7 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<AddOnCardModelOutput>> AddOnCard([FromBody] AddOnCardModelInput ObjClass);
 
         public Task<IEnumerable<CheckAddOnFormNumberModelOutput>> CheckAddOnFormNumber([FromBody] CheckAddOnFormNumberModelInput ObjClass);
+
+        public Task<IEnumerable<BindPendingCustomerForAddOnCardApprovalModelOutput>> BindPendingCustomerForAddOnCardApproval([FromBody] BindPendingCustomerForAddOnCardApprovalModelInput ObjClass);
     }
 }

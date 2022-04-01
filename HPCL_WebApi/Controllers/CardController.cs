@@ -793,5 +793,32 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_pending_customer_for_addon_card_approval")]
+        public async Task<IActionResult> BindPendingCustomerForAddOnCardApproval([FromBody] BindPendingCustomerForAddOnCardApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.BindPendingCustomerForAddOnCardApproval(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<BindPendingCustomerForAddOnCardApprovalModelOutput> item = result.Cast<BindPendingCustomerForAddOnCardApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }

@@ -76,5 +76,168 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_pending_rbe_consent")]
+        public async Task<IActionResult> GetPendingRbeConsent([FromBody] GetPendingRbeConsentModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetPendingRbeConsent(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetPendingRbeConsentModelOutput> item = result.Cast<GetPendingRbeConsentModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_sent_otp_forgot_password")]
+        public async Task<IActionResult> RbeSentOtpForgotPassword([FromBody] RbeSentOtpForgotPasswordModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RbeSentOtpForgotPassword(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RbeSentOtpForgotPasswordModelOutput> item = result.Cast<RbeSentOtpForgotPasswordModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_validate_forgot_password")]
+        public async Task<IActionResult> RbeValidateForgotPassword([FromBody] RbeValidateForgotPasswordModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RbeValidateForgotPassword(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RbeValidateForgotPasswordModelOutput> item = result.Cast<RbeValidateForgotPasswordModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_rbe_dashboard")]
+        public async Task<IActionResult> GetRbeDashboard([FromBody] GetRbeDashboardModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetRbeDashboard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetRbeDashboardModelOutput> item = result.Cast<GetRbeDashboardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_new_rbe_add_cards")]
+        public async Task<IActionResult> GetNewRbeAddCards([FromBody] GetNewRbeAddCardsModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetNewRbeAddCards(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetNewRbeAddCardsModelOutput> item = result.Cast<GetNewRbeAddCardsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_new_rbe_enroll_customers")]
+        public async Task<IActionResult> GetNewRbeEnrollCustomers([FromBody] GetNewRbeEnrollCustomersModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetNewRbeEnrollCustomers(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetNewRbeEnrollCustomersModelOutput> item = result.Cast<GetNewRbeEnrollCustomersModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
     }
 }

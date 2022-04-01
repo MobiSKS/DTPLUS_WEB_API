@@ -499,5 +499,21 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CheckAddOnFormNumberModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<BindPendingCustomerForAddOnCardApprovalModelOutput>> BindPendingCustomerForAddOnCardApproval([FromBody] BindPendingCustomerForAddOnCardApprovalModelInput ObjClass)
+        {
+            var procedureName = "UspCheckAddOnFormNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindPendingCustomerForAddOnCardApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -222,5 +222,19 @@ namespace HPCL.DataRepository.Tatkal
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateMapTatkalCardsToTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<ViewTatkalCardsModelOutput>> ViewTatkalCards([FromBody] ViewTatkalCardsModelInput ObjClass)
+        {
+            var procedureName = "UspViewTatkalCards";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZonalOfficeID", ObjClass.ZonalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeID", ObjClass.RegionalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("StatusId", ObjClass.StatusId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ViewTatkalCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

@@ -31,5 +31,9 @@ namespace HPCL.DataRepository.Tatkal
         public Task<IEnumerable<MapTatkalCardsToTatkalCustomerModelOutput>> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass);
 
         public Task<IEnumerable<UpdateMapTatkalCardsToTatkalCustomerModelOutput>> UpdateMapTatkalCardsToTatkalCustomer([FromBody] UpdateMapTatkalCardsToTatkalCustomerModelInput ObjClass);
+
+        public Task<IEnumerable<ViewTatkalCardsModelOutput>> ViewTatkalCards([FromBody] ViewTatkalCardsModelInput ObjClass);
+
+
     }
 }
