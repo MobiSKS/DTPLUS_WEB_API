@@ -738,7 +738,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("addon_card")]
+        [Route("add_addon_card")]
         public async Task<IActionResult> AddOnCard([FromBody] AddOnCardModelInput ObjClass)
         {
             if (ObjClass == null)
