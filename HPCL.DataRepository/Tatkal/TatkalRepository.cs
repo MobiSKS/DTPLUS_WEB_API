@@ -236,5 +236,17 @@ namespace HPCL.DataRepository.Tatkal
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ViewTatkalCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<ValidateTatkalCustomerWithRegionModelOutput>> ValidateTatkalCustomerWithRegion([FromBody] ValidateTatkalCustomerWithRegionModelInput ObjClass)
+        {
+            var procedureName = "UspValidateTatkalCustomerWithRegion";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalId", ObjClass.RegionalId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateTatkalCustomerWithRegionModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

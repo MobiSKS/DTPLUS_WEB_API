@@ -364,5 +364,14 @@ namespace HPCL.DataRepository.Merchant
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<MerchantReceivablePayableDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<ValidateMerchantErpCodeModelOutput>> ValidateMerchantErpCode([FromBody] ValidateMerchantErpCodeModelInput ObjClass)
+        {
+            var procedureName = "UspValidateMerchantErpCode";
+            var parameters = new DynamicParameters();
+            parameters.Add("ErpCode", ObjClass.ErpCode, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateMerchantErpCodeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

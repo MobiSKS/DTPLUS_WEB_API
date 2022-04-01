@@ -430,6 +430,34 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("validate_tatkal_customer_with_region")]
+        public async Task<IActionResult> ValidateTatkalCustomerWithRegion([FromBody] ValidateTatkalCustomerWithRegionModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _TatkalRepo.ValidateTatkalCustomerWithRegion(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ValidateTatkalCustomerWithRegionModelOutput> item = result.Cast<ValidateTatkalCustomerWithRegionModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
     }
 
 }
