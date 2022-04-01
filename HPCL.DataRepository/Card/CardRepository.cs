@@ -449,6 +449,7 @@ namespace HPCL.DataRepository.Card
             dtDBR.Columns.Add("VehicleMake", typeof(string));
             dtDBR.Columns.Add("VehicleType", typeof(string));
             dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+            dtDBR.Columns.Add("MobileNo", typeof(string));
 
             var procedureName = "UspAddOnCard";
             var parameters = new DynamicParameters();
@@ -470,6 +471,8 @@ namespace HPCL.DataRepository.Card
                     dr["VehicleMake"] = ObjCardDetails.VehicleMake;
                     dr["VehicleType"] = ObjCardDetails.VehicleType;
                     dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+                    dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+                    dr["MobileNo"] = ObjCardDetails.MobileNo;
                     dtDBR.Rows.Add(dr);
                     dtDBR.AcceptChanges();
                 }

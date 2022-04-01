@@ -22,5 +22,9 @@ namespace HPCL.DataRepository.AshokLeyland
         public Task<IEnumerable<GetAvailityALOTCCardCardOutput>> GetAvailityALOTCCard([FromBody] GetAvailityALOTCCardCardInput ObjClass);
 
         public Task<ALViewCardMerchantAllocationModelOutput> ViewALOTCCardDealerAllocation([FromBody] ALViewCardDealerAllocationModelInput ObjClass);
+
+        public Task<GetAlAddonOTCCardMappingCustomerDetailsModelOutput> GetAlAddonOTCCardMappingCustomerDetails([FromBody] GetAlAddonOTCCardMappingCustomerDetailsModelInput ObjClass);
+
+        public Task<IEnumerable<GetAlSalesExeEmpIdAddOnOTCCardMappingModelOutput>> GetAlSalesExeEmpIdAddOnOTCCardMapping([FromBody] GetAlSalesExeEmpIdAddOnOTCCardMappingModelInput ObjClass);
     }
 }

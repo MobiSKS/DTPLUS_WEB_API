@@ -17,15 +17,24 @@ namespace HPCL.DataModel.Customer
     }
     public class GetNameandFormNumberbyCustomerIdModelOutput
     {
-        [JsonProperty("GetNameandFormNumberbyCustomerId")]
-        public List<GetNameandFormNumberModelOutput> GetNameandFormNumberOutput { get; set; }
 
         [JsonProperty("GetStatus")]
         public List<GetStatusModelOutput> GetStatusOutput { get; set; }
+
+        [JsonProperty("GetNameandFormNumberbyCustomerId")]
+        public List<GetNameandFormNumberModelOutput> GetNameandFormNumberOutput { get; set; }
     }
 
     public class GetNameandFormNumberModelOutput
     {
+        [JsonProperty("CustomerId")]
+        [DataMember]
+        public string CustomerId { get; set; }
+
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public string CustomerReferenceNo { get; set; }
+
         [JsonProperty("CustomerName")]
         [DataMember]
         public string CustomerName { get; set; }

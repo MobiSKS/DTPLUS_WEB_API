@@ -898,8 +898,8 @@ namespace HPCL.DataRepository.Customer
             using var connection = _context.CreateConnection();
             var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
             var storedProcedureResult = new GetNameandFormNumberbyCustomerIdModelOutput();
-            storedProcedureResult.GetNameandFormNumberOutput = (List<GetNameandFormNumberModelOutput>)await result.ReadAsync<GetNameandFormNumberModelOutput>();
             storedProcedureResult.GetStatusOutput = (List<GetStatusModelOutput>)await result.ReadAsync<GetStatusModelOutput>();
+            storedProcedureResult.GetNameandFormNumberOutput = (List<GetNameandFormNumberModelOutput>)await result.ReadAsync<GetNameandFormNumberModelOutput>();
             return storedProcedureResult;
         }
     }

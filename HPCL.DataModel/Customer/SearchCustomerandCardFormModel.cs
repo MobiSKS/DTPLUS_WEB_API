@@ -30,10 +30,10 @@ namespace HPCL.DataModel.Customer
 
     public class SearchCustomerandCardFormModelOutput
     {
-        [JsonProperty("GetCcmsAccountSummary")]
+        [JsonProperty("GetCustomerSearchOutput")]
         public List<CustomerSearchModelOutput> GetCustomerSearchOutput { get; set; }
 
-        [JsonProperty("GetCardTransactionDetails")]
+        [JsonProperty("GetCardSearchOutput")]
         public List<CardSearchModelOutput> GetCardSearchOutput { get; set; }
     }
 
