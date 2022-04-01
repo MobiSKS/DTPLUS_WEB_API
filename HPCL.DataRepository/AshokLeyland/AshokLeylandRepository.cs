@@ -221,49 +221,42 @@ namespace HPCL.DataRepository.AshokLeyland
             return await connection.QueryAsync<GetAlSalesExeEmpIdAddOnOTCCardMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        //public async Task<IEnumerable<AddOnCardModelOutput>> AlAddOnOTCCard([FromBody] AddOnCardModelInput ObjClass)
-        //{
-        //    var dtDBR = new DataTable("UserDTNoofCards");
-        //    dtDBR.Columns.Add("CardIdentifier", typeof(string));
-        //    dtDBR.Columns.Add("VechileNo", typeof(string));
-        //    dtDBR.Columns.Add("VehicleMake", typeof(string));
-        //    dtDBR.Columns.Add("VehicleType", typeof(string));
-        //    dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+        public async Task<IEnumerable<AlAddOnOTCCardModelOutput>> AlAddOnOTCCard([FromBody] AlAddOnOTCCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("UserDTNoofCards");
+            dtDBR.Columns.Add("CardNo", typeof(string));
+            dtDBR.Columns.Add("VechileNo", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(string));
+            dtDBR.Columns.Add("VINNumber", typeof(int));
+            dtDBR.Columns.Add("MobileNo", typeof(int));
 
-        //    var procedureName = "UspInsertAlAddOnOTCCardMapping";
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
-        //    parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
-        //    parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
-        //    parameters.Add("FeePaymentNo", ObjClass.FeePaymentNo, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("FeePaymentDate", ObjClass.FeePaymentDate, DbType.DateTime, ParameterDirection.Input);
+            var procedureName = "UspInsertAlAddOnOTCCardMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
 
-        //    if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
-        //    {
-        //        foreach (AddonCardDetails ObjCardDetails in ObjClass.ObjCardDetail)
-        //        {
-        //            DataRow dr = dtDBR.NewRow();
-        //            dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
-        //            dr["VechileNo"] = ObjCardDetails.VechileNo;
-        //            dr["VehicleMake"] = ObjCardDetails.VehicleMake;
-        //            dr["VehicleType"] = ObjCardDetails.VehicleType;
-        //            dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
-        //            dtDBR.Rows.Add(dr);
-        //            dtDBR.AcceptChanges();
-        //        }
-        //    }
-        //    parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
-        //    parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("CardPreference", ObjClass.CardPreference, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
-        //    parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
-        //    parameters.Add("NoofVechileforAllCards", ObjClass.NoofVechileforAllCards, DbType.Int32, ParameterDirection.Input);
-        //    using var connection = _context.CreateConnection();
-        //    return await connection.QueryAsync<AddOnCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        //}
+            if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
+            {
+                foreach (AlAddOnOTCCardDetails ObjCardDetails in ObjClass.ObjCardDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CardNo"] = ObjCardDetails.CardNo;
+                    dr["VechileNo"] = ObjCardDetails.VechileNo;
+                    dr["VehicleType"] = ObjCardDetails.VehicleType;
+                    dr["VINNumber"] = ObjCardDetails.VINNumber;
+                    dr["MobileNo"] = ObjCardDetails.MobileNo;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+            parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AlAddOnOTCCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

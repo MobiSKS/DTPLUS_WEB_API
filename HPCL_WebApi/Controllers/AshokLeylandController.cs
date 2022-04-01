@@ -333,6 +333,37 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("al_addon_otc_card")]
+        public async Task<IActionResult> AlAddOnOTCCard([FromBody] AlAddOnOTCCardModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.AlAddOnOTCCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<AlAddOnOTCCardModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<AlAddOnOTCCardModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
     }
 
 }
