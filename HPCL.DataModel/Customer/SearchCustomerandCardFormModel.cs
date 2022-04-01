@@ -53,7 +53,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("RegionalOffice")]
         [DataMember]
-        public Int32 RegionalOffice { get; set; }
+        public string RegionalOffice { get; set; }
 
         [JsonProperty("FormNumber")]
         [DataMember]
