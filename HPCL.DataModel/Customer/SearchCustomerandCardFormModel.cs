@@ -57,7 +57,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("FormNumber")]
         [DataMember]
-        public Int64 FormNumber { get; set; }
+        public string FormNumber { get; set; }
 
         [JsonProperty("CustomerStatus")]
         [DataMember]
@@ -104,7 +104,7 @@ namespace HPCL.DataModel.Customer
 
         [JsonProperty("FormNumber")]
         [DataMember]
-        public Int64 FormNumber { get; set; }
+        public string FormNumber { get; set; }
 
         [JsonProperty("Status")]
         [DataMember]

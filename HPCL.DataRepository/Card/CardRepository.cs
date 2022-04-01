@@ -441,5 +441,58 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<CardCheckVechileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<AddOnCardModelOutput>> AddOnCard([FromBody] AddOnCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("UserDTNoofCards");
+            dtDBR.Columns.Add("CardIdentifier", typeof(string));
+            dtDBR.Columns.Add("VechileNo", typeof(string));
+            dtDBR.Columns.Add("VehicleMake", typeof(string));
+            dtDBR.Columns.Add("VehicleType", typeof(string));
+            dtDBR.Columns.Add("YearOfRegistration", typeof(int));
+
+            var procedureName = "UspAddOnCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("NoOfCards", ObjClass.NoOfCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.Int16, ParameterDirection.Input);
+            parameters.Add("FeePaymentNo", ObjClass.FeePaymentNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeePaymentDate", ObjClass.FeePaymentDate, DbType.DateTime, ParameterDirection.Input);
+
+            if (ObjClass.NoOfCards > 0 && ObjClass.ObjCardDetail != null)
+            {
+                foreach (AddonCardDetails ObjCardDetails in ObjClass.ObjCardDetail)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CardIdentifier"] = ObjCardDetails.CardIdentifier;
+                    dr["VechileNo"] = ObjCardDetails.VechileNo;
+                    dr["VehicleMake"] = ObjCardDetails.VehicleMake;
+                    dr["VehicleType"] = ObjCardDetails.VehicleType;
+                    dr["YearOfRegistration"] = ObjCardDetails.YearOfRegistration;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+            parameters.Add("CardDetails", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardPreference", ObjClass.CardPreference, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            parameters.Add("NoofVechileforAllCards", ObjClass.NoofVechileforAllCards, DbType.Int32, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AddOnCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<CheckAddOnFormNumberModelOutput>> CheckAddOnFormNumber([FromBody] CheckAddOnFormNumberModelInput ObjClass)
+        {
+            var procedureName = "UspCheckAddOnFormNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckAddOnFormNumberModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

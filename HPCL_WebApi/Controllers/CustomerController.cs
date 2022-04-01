@@ -1340,5 +1340,31 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_name_and_formnumber_by_customerid")]
+        public async Task<IActionResult> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetNameandFormNumberbyCustomerId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.GetNameandFormNumberOutput.Count > 0 && result.GetStatusOutput.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }

@@ -82,6 +82,8 @@ namespace HPCL.DataRepository.Customer
 
 
         public Task<SearchCustomerandCardFormModelOutput> SearchCustomerandCardForm([FromBody] SearchCustomerandCardFormModelInput ObjClass);
+
+        public Task<GetNameandFormNumberbyCustomerIdModelOutput> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass);
     }
 
 }
