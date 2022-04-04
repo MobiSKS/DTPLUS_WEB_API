@@ -146,7 +146,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_driver_card_customer")]
         public async Task<IActionResult> InsertDriverCardCustomer([FromForm] MerchantInsertDriverCardCustomerModelInput ObjClass)
         {
