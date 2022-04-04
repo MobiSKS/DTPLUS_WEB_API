@@ -15,7 +15,7 @@ namespace HPCL.DataModel.Customer
 
   
 
-    public class CustomerGetCustomerReferenceNoModelOutput
+    public class CustomerGetCustomerReferenceNoModelOutput :BaseClassOutput
     {
         //[JsonProperty("Title")]
         //[DataMember]
