@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.RBE
 {
-    public class OfficerInsertModelInput : BaseClass
+    public class InsertRBEModelInput : BaseClass
     {
-        [Required]
+
         [JsonPropertyName("FirstName")]
         [DataMember]
         public string FirstName { get; set; }
 
-        //[Required]
+
         [JsonPropertyName("LastName")]
         [DataMember]
         public string LastName { get; set; }
@@ -34,12 +34,12 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public int LocationId { get; set; }
 
-        //[Required]
+
         [JsonPropertyName("Address1")]
         [DataMember]
         public string Address1 { get; set; }
 
-        //[JsonPropertyName("Address2")]
+
         [DataMember]
         public string Address2 { get; set; }
 
@@ -68,7 +68,7 @@ namespace HPCL.DataModel.Officer
         public string Pin { get; set; }
 
         //[Required]
-        [StringLength(10, MinimumLength = 10)]
+        //[StringLength(10, MinimumLength = 10)]
         [JsonPropertyName("MobileNo")]
         [DataMember]
         public string MobileNo { get; set; }
@@ -80,7 +80,7 @@ namespace HPCL.DataModel.Officer
         //[Required]
         [JsonPropertyName("EmailId")]
         [DataMember]
-        [RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
+        //[RegularExpression("\\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z", ErrorMessage = "Invalid Email Id")]
         public string EmailId { get; set; }
 
 
@@ -93,17 +93,17 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string CreatedBy { get; set; }
 
-       
+
         [JsonPropertyName("Password")]
         [DataMember]
         public string Password { get; set; }
 
     }
 
-    public class OfficerInsertModelOutput : BaseClassOutput
+    public class InsertRBEModelOutput : BaseClassOutput
     {
 
-        
+
         [JsonProperty("ReferenceId")]
         [DataMember]
         public string ReferenceId { get; set; }
@@ -117,8 +117,4 @@ namespace HPCL.DataModel.Officer
         public int OfficerID { get; set; }
 
     }
-
-
-    
-
 }

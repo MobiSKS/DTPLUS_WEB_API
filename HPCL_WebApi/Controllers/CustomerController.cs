@@ -584,62 +584,7 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("send_otp_consent")]
-        public async Task<IActionResult> SendOTPConsent([FromBody] SendOTPConsentModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.SendOTPConsent(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<SendOTPConsentModelOutput> item = result.Cast<SendOTPConsentModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("validate_otp_consent")]
-        public async Task<IActionResult> ValidateOTPConsent([FromBody] ValidateOTPConsentModelInput ObjClass)
-        {
-            if (ObjClass == null)
-            {
-                return this.BadRequestCustom(ObjClass, null, _logger);
-            }
-            else
-            {
-                var result = await _customerRepo.ValidateOTPConsent(ObjClass);
-                if (result == null)
-                {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
-                }
-                else
-                {
-                    List<ValidateOTPConsentModelOutput> item = result.Cast<ValidateOTPConsentModelOutput>().ToList();
-                    if (item.Count > 0)
-                        return this.OkCustom(ObjClass, result, _logger);
-                    else
-                        return this.Fail(ObjClass, result, _logger);
-                }
-            }
-        }
-
+         
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]

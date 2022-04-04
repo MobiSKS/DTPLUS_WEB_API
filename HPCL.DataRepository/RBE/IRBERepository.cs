@@ -1,7 +1,5 @@
 ﻿using HPCL.DataModel.RBE;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -26,6 +24,26 @@ namespace HPCL.DataRepository.RBE
         public Task<IEnumerable<GetNewRbeEnrollCustomersModelOutput>> GetNewRbeEnrollCustomers([FromBody] GetNewRbeEnrollCustomersModelInput ObjClass);
 
         public Task<IEnumerable<RBEGetModelOutput>> GetRBEId([FromBody] RBEGetModelInput ObjClass);
+
+        public Task<IEnumerable<RbeSentOtpNewEnrollCustomerModelOutput>> RbeSentOtpNewEnrollCustomer([FromBody] RbeSentOtpNewEnrollCustomerModelInput ObjClass);
+
+        public Task<IEnumerable<RbeValidateOtpNewEnrollCustomerModelOutput>> RbeValidateOtpNewEnrollCustomer([FromBody] RbeValidateOtpNewEnrollCustomerModelInput ObjClass);
+
+        public Task<IEnumerable<BindRBEModelOutput>> BindRBEbyRBEId([FromBody] BindRBEModelInput ObjClass);
+
+        public Task<IEnumerable<InsertRBEModelOutput>> InsertRBE([FromBody] InsertRBEModelInput ObjClass);
+
+        public Task<IEnumerable<RBEUpdateModelOutput>> UpdateRBE([FromBody] RBEUpdateModelInput ObjClass);
+
+        public Task<IEnumerable<RBEKYCModelOutput>> UploadRBEKYC([Microsoft.AspNetCore.Mvc.FromForm] RBEKYCModelInput ObjClass);
+
+        public Task<IEnumerable<GetRBEMobilenoModelOutput>> CheckRBEMobileNo([FromBody] GetRBEMobilenoModelInput ObjClass);
+
+        public Task<IEnumerable<GetRBECreationApprovalModelOutput>> BindRBEDetail([FromBody] GetRBECreationApprovalModelInput ObjClass);
+
+        public Task<IEnumerable<GetRBEDetailbyUserNameModelOutput>> GetRBEDetailbyUserName([FromBody] GetRBEDetailbyUserNameModelInput ObjClass);
+
+        public Task<IEnumerable<RBEApprovalRejectApprovalModelOutput>> ApproveRejectRBE([FromBody] RBEApprovalRejectModelInput ObjClass);
 
     }
 }

@@ -637,25 +637,6 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<BindPendingCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<SendOTPConsentModelOutput>> SendOTPConsent([FromBody] SendOTPConsentModelInput ObjClass)
-        {
-            var procedureName = "UspSendOTPConsent";
-            var parameters = new DynamicParameters();
-            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<SendOTPConsentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public async Task<IEnumerable<ValidateOTPConsentModelOutput>> ValidateOTPConsent([FromBody] ValidateOTPConsentModelInput ObjClass)
-        {
-            var procedureName = "UspValidateOTPConsent";
-            var parameters = new DynamicParameters();
-            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
-            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
-            using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<ValidateOTPConsentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-        }
-
         public async Task<CustomerDetailsModelOutput> GetPendingCustomerDetailbyFormNumber([FromBody] CustomerDetailsbyFormNumberModelInput ObjClass)
         {
             var procedureName = "UspGetPendingCustomerDetailbyFormNumber";

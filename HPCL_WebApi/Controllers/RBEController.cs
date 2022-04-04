@@ -1,10 +1,10 @@
 ﻿using HPCL.DataModel.RBE;
 using HPCL.DataRepository.RBE;
+using HPCL.Infrastructure.CommonClass;
 using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -269,6 +269,312 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_sent_otp_new_enroll_customer")]
+        public async Task<IActionResult> RbeSentOtpNewEnrollCustomer([FromBody] RbeSentOtpNewEnrollCustomerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RbeSentOtpNewEnrollCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RbeSentOtpNewEnrollCustomerModelOutput> item = result.Cast<RbeSentOtpNewEnrollCustomerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_validate_otp_new_enroll_customer")]
+        public async Task<IActionResult> RbeValidateOtpNewEnrollCustomer([FromBody] RbeValidateOtpNewEnrollCustomerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RbeValidateOtpNewEnrollCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RbeValidateOtpNewEnrollCustomerModelOutput> item = result.Cast<RbeValidateOtpNewEnrollCustomerModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_rbe_by_rbe_id")]
+        public async Task<IActionResult> BindRBEbyRBEId([FromBody] BindRBEModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.BindRBEbyRBEId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<BindRBEModelOutput> item = result.Cast<BindRBEModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_rbe")]
+        public async Task<IActionResult> InsertRBEOfficer([FromBody] InsertRBEModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.InsertRBE(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<InsertRBEModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<InsertRBEModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_rbe")]
+        public async Task<IActionResult> UpdateRBEOfficer([FromBody] RBEUpdateModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.UpdateRBE(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RBEUpdateModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RBEUpdateModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
+
+        [HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("upload_officer_kyc")]
+        public async Task<IActionResult> UploadOfficerKYC([FromForm] RBEKYCModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.UploadRBEKYC(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RBEKYCModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RBEKYCModelOutput>().ToList()[0].Reason);
+                    }
+
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_rbe_mobile_no")]
+        public async Task<IActionResult> CheckRBEMobileNo([FromBody] GetRBEMobilenoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.CheckRBEMobileNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<GetRBEMobilenoModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<GetRBEMobilenoModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("bind_rbe_detail")]
+        public async Task<IActionResult> BindRBEDetail([FromBody] GetRBECreationApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.BindRBEDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetRBECreationApprovalModelOutput> item = result.Cast<GetRBECreationApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_rbe_detail_by_user_name")]
+        public async Task<IActionResult> GetRBEDetailbyUserName([FromBody] GetRBEDetailbyUserNameModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetRBEDetailbyUserName(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetRBEDetailbyUserNameModelOutput> item = result.Cast<GetRBEDetailbyUserNameModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_rbe")]
+        public async Task<IActionResult> ApproveRejectRBE([FromBody] RBEApprovalRejectModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ApproveRejectRBE(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        string EmailSubject = "<p>Hi <b>" + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].FirstName + " "
+                            + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].LastName + "<b></br> User Name : "
+                               + ObjClass.UserName + " </br> Password : " + result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].RBEOTP + " </p>";
+
+                        Variables.FunSendMail(result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].EmailId, EmailSubject, "RBE Details");
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RBEApprovalRejectApprovalModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+
 
     }
 }

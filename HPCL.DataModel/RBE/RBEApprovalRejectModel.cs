@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.RBE
 {
-     
-
     public class RBEApprovalRejectModelInput : BaseClass
     {
         [Required]
@@ -19,7 +17,6 @@ namespace HPCL.DataModel.Officer
         [JsonPropertyName("Comments")]
         [DataMember]
         public string Comments { get; set; }
-
 
 
         [Required]

@@ -1,35 +1,89 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace HPCL.DataModel.Officer
+namespace HPCL.DataModel.RBE
 {
-    
 
-    public class GetOfficerModelInput : BaseClass
+    public class GetRBEDetailbyUserNameModelInput : BaseClass
     {
-        [Required]
-        [JsonPropertyName("OfficerType")]
+        [JsonPropertyName("UserName")]
         [DataMember]
-        public int OfficerType { get; set; }
-
-        [JsonPropertyName("Location")]
-        [DataMember]
-        public int Location { get; set; }
+        public string UserName { get; set; }
     }
 
-    public class BindOfficerModelInput : BaseClass
+    public class GetRBEDetailbyUserNameModelOutput
     {
-        [Required]
-        [JsonPropertyName("OfficerID")]
+        [JsonProperty("Name")]
         [DataMember]
-        public int OfficerID { get; set; }
- 
+        public string Name { get; set; }
+
+        [JsonProperty("RoleName")]
+        [DataMember]
+        public string RoleName { get; set; }
+
+        [JsonProperty("Location")]
+        [DataMember]
+        public string Location { get; set; }
+
+        [JsonProperty("IdProofTypeId")]
+        [DataMember]
+        public Int32 IdProofTypeId { get; set; }
+
+        [JsonProperty("IdProofTypeName")]
+        [DataMember]
+        public string IdProofTypeName { get; set; }
+
+        [JsonProperty("IdProofDocumentNo")]
+        [DataMember]
+        public string IdProofDocumentNo { get; set; }
+
+        [JsonProperty("IdProofFront")]
+        [DataMember]
+        public string IdProofFront { get; set; }
+
+
+        [JsonProperty("IdProofBack")]
+        [DataMember]
+        public string IdProofBack { get; set; }
+
+        [JsonProperty("AddressProofTypeId")]
+        [DataMember]
+        public string AddressProofTypeId { get; set; }
+
+        [JsonProperty("AddressProofTypeName")]
+        [DataMember]
+        public string AddressProofTypeName { get; set; }
+
+        [JsonProperty("AddressProofDocumentNo")]
+        [DataMember]
+        public string AddressProofDocumentNo { get; set; }
+
+        [JsonProperty("AddressProofFront")]
+        [DataMember]
+        public string AddressProofFront { get; set; }
+
+        [JsonProperty("AddressProofBack")]
+        [DataMember]
+        public string AddressProofBack { get; set; }
+
+        [JsonProperty("RBEPhoto")]
+        [DataMember]
+        public string RBEPhoto { get; set; }
     }
 
-    
-    public class GetOfficerModelOutput
+    public class BindRBEModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("RBEId")]
+        [DataMember]
+        public string RBEId { get; set; }
+
+    }
+
+    public class BindRBEModelOutput
     {
 
         [JsonProperty("OfficerTypeID")]
@@ -52,9 +106,9 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string LastName { get; set; }
 
-        [JsonProperty("UserName")]
+        [JsonProperty("RBEId")]
         [DataMember]
-        public string UserName { get; set; }
+        public string RBEId { get; set; }
 
         [JsonProperty("Address1")]
         [DataMember]
@@ -101,7 +155,7 @@ namespace HPCL.DataModel.Officer
         //[JsonProperty("LocationId")]
         //[DataMember]
         //public int LocationId { get; set; }
-       
+
 
         [JsonProperty("StateId")]
         [DataMember]
@@ -129,101 +183,21 @@ namespace HPCL.DataModel.Officer
         [DataMember]
         public string CityName { get; set; }
 
-
-        [JsonProperty("Location")]
+        [JsonProperty("RegionalOfficeId")]
         [DataMember]
-        public string Location { get; set; }
-
-    }
-
-    public class GetOfficerLocationMappingModelOutput
-    {
-
-        [JsonProperty("OfficerId")]
-        [DataMember]
-        public int OfficerId { get; set; }
-
-        [JsonProperty("ZOId")]
-        [DataMember]
-        public int ZOId { get; set; }
-
-        [JsonProperty("ZOName")]
-        [DataMember]
-        public string ZOName { get; set; }
-
-
-        [JsonProperty("ROId")]
-        [DataMember]
-        public int ROId { get; set; }
-
-        [JsonProperty("ROName")]
-        [DataMember]
-        public string ROName { get; set; }
-
-    }
-
-
-    
-
-    public class GetOfficerDetailModelInput : BaseClass
-    {
-        [JsonPropertyName("ZO")]
-        [DataMember]
-        public string ZO { get; set; }
-
-        [JsonPropertyName("RO")]
-        [DataMember]
-        public string RO { get; set; }
-
-        [JsonPropertyName("StateId")]
-        [DataMember]
-        public string StateId { get; set; }
-
-        [JsonPropertyName("DistrictId")]
-        [DataMember]
-        public string DistrictId { get; set; }
-
-    }
-
-    public class GetOfficerDetailModelOutput
-    {
-        [JsonProperty("ZonalOfficeName")]
-        [DataMember]
-        public string ZonalOfficeName { get; set; }
+        public int RegionalOfficeId { get; set; }
 
         [JsonProperty("RegionalOfficeName")]
         [DataMember]
         public string RegionalOfficeName { get; set; }
 
-
-        [JsonProperty("StateName")]
+        [JsonProperty("ZonalOfficeId")]
         [DataMember]
-        public string StateName { get; set; }
+        public int ZonalOfficeId { get; set; }
 
-
-        [JsonProperty("DistrictName")]
+        [JsonProperty("ZonalOfficeName")]
         [DataMember]
-        public string DistrictName { get; set; }
-
-
-        [JsonProperty("MarketingOfficerName")]
-        [DataMember]
-        public string MarketingOfficerName { get; set; }
-
-
-        [JsonProperty("MarketingOfficerEmail")]
-        [DataMember]
-        public string MarketingOfficerEmail { get; set; }
-
-
-        [JsonProperty("ZonalOfficerName")]
-        [DataMember]
-        public string ZonalOfficerName { get; set; }
-
-
-        [JsonProperty("ZonalOfficerEmail")]
-        [DataMember]
-        public string ZonalOfficerEmail { get; set; }
+        public string ZonalOfficeName { get; set; }
 
 
     }
