@@ -58,10 +58,14 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string CardPreference { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("NoofVechileforAllCards")]
         [DataMember]
         public Int32 NoofVechileforAllCards { get; set; }
+
+        [JsonPropertyName("VehicleNoVerifiedManually")]
+        [DataMember]
+        public Int32 VehicleNoVerifiedManually { get; set; }
     }
 
     public class AddonCardDetails

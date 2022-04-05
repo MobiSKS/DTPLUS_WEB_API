@@ -488,6 +488,7 @@ namespace HPCL.DataRepository.Card
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             parameters.Add("NoofVechileforAllCards", ObjClass.NoofVechileforAllCards, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("VehicleNoVerifiedManually", ObjClass.VehicleNoVerifiedManually, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<AddOnCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
