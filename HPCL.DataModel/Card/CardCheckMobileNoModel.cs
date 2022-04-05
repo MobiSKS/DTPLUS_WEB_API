@@ -4,18 +4,15 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Card
 {
-
-    public class CardCheckVechileNoModelInput : BaseClass
+    public class CardCheckMobileNoModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("VechileNo")]
+        [JsonPropertyName("Mobileno")]
         [DataMember]
-        public string VechileNo { get; set; }
+        public string Mobileno { get; set; }
     }
-    public class CardCheckVechileNoModelOutput : BaseClassOutput
+    public class CardCheckMobileNoModelOutput : BaseClassOutput
     {
 
     }
-
-    
 }

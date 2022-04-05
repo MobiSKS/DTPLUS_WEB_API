@@ -515,5 +515,15 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<BindPendingCustomerForAddOnCardApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<CardCheckMobileNoModelOutput>> CheckMobileNo([FromBody] CardCheckMobileNoModelInput ObjClass)
+        {
+            var procedureName = "UspCheckMobileNo";
+            var parameters = new DynamicParameters();
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CardCheckMobileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
