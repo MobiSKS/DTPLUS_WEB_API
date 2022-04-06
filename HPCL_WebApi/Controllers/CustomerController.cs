@@ -450,7 +450,32 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_name_and_form_number_by_reference_no_for_add_card")]
+        public async Task<IActionResult> GetNameandFormNumberbyReferenceNoforAddCard([FromBody] CustomerGetCustomerReferenceNoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.GetNameandFormNumberbyReferenceNoforAddCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerGetCustomerReferenceNoModelOutput> item = result.Cast<CustomerGetCustomerReferenceNoModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
