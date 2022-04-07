@@ -15,29 +15,32 @@ namespace HPCL.DataModel.Customer
 
   
 
-    public class CustomerGetCustomerReferenceNoModelOutput
+    public class CustomerGetCustomerReferenceNoModelOutput :BaseClassOutput
     {
-        [JsonProperty("Title")]
+        //[JsonProperty("Title")]
+        //[DataMember]
+        //public string KeyOfficialTitle { get; set; }
+
+        //[JsonProperty("KeyInitials")]
+        //[DataMember]
+        //public string KeyOfficialIndividualInitials { get; set; }
+
+
+        //[JsonProperty("FirstName")]
+        //[DataMember]
+        //public string KeyOfficialFirstName { get; set; }
+
+        //[JsonProperty("MiddleName")]
+        //[DataMember]
+        //public string KeyOfficialMiddleName { get; set; }
+
+        //[JsonProperty("LastName")]
+        //[DataMember]
+        //public string KeyOfficialLastName { get; set; }
+
+        [JsonProperty("CustomerName")]
         [DataMember]
-        public string KeyOfficialTitle { get; set; }
-
-        [JsonProperty("KeyInitials")]
-        [DataMember]
-        public string KeyOfficialIndividualInitials { get; set; }
-
-
-        [JsonProperty("FirstName")]
-        [DataMember]
-        public string KeyOfficialFirstName { get; set; }
-
-        [JsonProperty("MiddleName")]
-        [DataMember]
-        public string KeyOfficialMiddleName { get; set; }
-
-        [JsonProperty("LastName")]
-        [DataMember]
-        public string KeyOfficialLastName { get; set; }
-
+        public string CustomerName { get; set; }
 
         [JsonProperty("FormNumber")]
         [DataMember]
