@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
-namespace HPCL.DataModel.Customer
+namespace HPCL.DataModel.RBE
 {
     public class RBEGetModelInput : BaseClass
     {
@@ -12,7 +16,7 @@ namespace HPCL.DataModel.Customer
         public string RBEId { get; set; }
     }
 
-    public class RBEGetModelOutput :BaseClassOutput
+    public class RBEGetModelOutput : BaseClassOutput
     {
         [JsonProperty("RBEId")]
         [DataMember]
@@ -22,6 +26,4 @@ namespace HPCL.DataModel.Customer
         [DataMember]
         public string RBEName { get; set; }
     }
-
-  
 }

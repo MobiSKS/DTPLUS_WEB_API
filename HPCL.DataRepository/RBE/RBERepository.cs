@@ -99,5 +99,14 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetNewRbeEnrollCustomersModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<RBEGetModelOutput>> GetRBEId([FromBody] RBEGetModelInput ObjClass)
+        {
+            var procedureName = "UspGetValidRBE";
+            var parameters = new DynamicParameters();
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RBEGetModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
