@@ -15,6 +15,10 @@ namespace HPCL.DataModel.Tatkal
         [DataMember]
         public string Customerid { get; set; }
 
+        [JsonPropertyName("RegionalOfcId")]
+        [DataMember]
+        public string RegionalOfcId { get; set; }
+
         [Required]
         [JsonPropertyName("ModifiedBy")]
         [DataMember]

@@ -222,6 +222,7 @@ namespace HPCL.DataRepository.Tatkal
 
             //parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfcId", ObjClass.RegionalOfcId, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateMapCard", dtDBR, DbType.Object, ParameterDirection.Input);
             parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
