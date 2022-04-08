@@ -28,7 +28,7 @@ namespace HPCL.DataRepository.Tatkal
 
         public Task<IEnumerable<GetCardAllocationActivationModelOutput>> GetTatkalCardAllocationActivation([FromBody] GetCardAllocationActivationModelInput ObjClass);
 
-        public Task<IEnumerable<MapTatkalCardsToTatkalCustomerModelOutput>> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass);
+        public Task<MapTatkalCardsToTatkalCustomerModelOutput> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass);
 
         public Task<IEnumerable<UpdateMapTatkalCardsToTatkalCustomerModelOutput>> UpdateMapTatkalCardsToTatkalCustomer([FromBody] UpdateMapTatkalCardsToTatkalCustomerModelInput ObjClass);
 

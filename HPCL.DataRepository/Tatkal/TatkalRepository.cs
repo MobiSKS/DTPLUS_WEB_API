@@ -187,13 +187,18 @@ namespace HPCL.DataRepository.Tatkal
             return await connection.QueryAsync<GetCardAllocationActivationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<MapTatkalCardsToTatkalCustomerModelOutput>> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass)
+        public async Task<MapTatkalCardsToTatkalCustomerModelOutput> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass)
         {
             var procedureName = "UspMapTatkalCardsToTatkalCustomer";
             var parameters = new DynamicParameters();
             parameters.Add("RegionalId", ObjClass.RegionalId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<MapTatkalCardsToTatkalCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new MapTatkalCardsToTatkalCustomerModelOutput();
+            storedProcedureResult.ObjGetStatusTatkalCardsToTatkalCustomer = (List<GetStatusTatkalCardsToTatkalCustomerModelOutput>)await result.ReadAsync<GetStatusTatkalCardsToTatkalCustomerModelOutput>();
+            storedProcedureResult.ObjGetCardDetailsTatkalCardsToTatkalCustomer = (List<GetCardDetailsTatkalCardsToTatkalCustomerModelOutput>)await result.ReadAsync<GetCardDetailsTatkalCardsToTatkalCustomerModelOutput>();
+            return storedProcedureResult;
         }
 
 

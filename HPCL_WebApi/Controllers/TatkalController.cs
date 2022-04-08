@@ -342,12 +342,12 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("map_tatkal_cards_to_tatkal_customer")]
         public async Task<IActionResult> MapTatkalCardsToTatkalCustomer([FromBody] MapTatkalCardsToTatkalCustomerModelInput ObjClass)
         {
+
             if (ObjClass == null)
             {
                 return this.BadRequestCustom(ObjClass, null, _logger);
@@ -361,15 +361,14 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<MapTatkalCardsToTatkalCustomerModelOutput> item = result.Cast<MapTatkalCardsToTatkalCustomerModelOutput>().ToList();
-                    if (item.Count > 0)
+                    if (result.ObjGetCardDetailsTatkalCardsToTatkalCustomer.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
                         return this.Fail(ObjClass, result, _logger);
                 }
             }
-        }
 
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
