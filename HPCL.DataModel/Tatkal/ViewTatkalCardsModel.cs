@@ -52,7 +52,7 @@ namespace HPCL.DataModel.Tatkal
 
         [JsonProperty("CardProcessDate")]
         [DataMember]
-        public DateTime CardProcessDate { get; set; }
+        public string CardProcessDate { get; set; }
 
         [JsonProperty("MappingStatus")]
         [DataMember]
