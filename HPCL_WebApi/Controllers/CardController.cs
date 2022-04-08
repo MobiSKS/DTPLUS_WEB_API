@@ -820,5 +820,33 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_mobile_no")]
+        public async Task<IActionResult> CheckMobileNo([FromBody] CardCheckMobileNoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.CheckMobileNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CardCheckMobileNoModelOutput> item = result.Cast<CardCheckMobileNoModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }

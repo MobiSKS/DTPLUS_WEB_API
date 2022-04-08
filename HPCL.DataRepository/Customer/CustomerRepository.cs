@@ -214,7 +214,7 @@ namespace HPCL.DataRepository.Customer
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerInsertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        
+
         public async Task<IEnumerable<CustomerUpdateModelOutput>> UpdateCustomer([FromBody] CustomerUpdateModelInput ObjClass)
         {
             //var dtDBR = new DataTable("UserDTNoofCards");
@@ -858,17 +858,28 @@ namespace HPCL.DataRepository.Customer
             storedProcedureResult.GetCardSearchOutput = (List<CardSearchModelOutput>)await result.ReadAsync<CardSearchModelOutput>();
             return storedProcedureResult;
         }
-        public async Task<GetNameandFormNumberbyCustomerIdModelOutput> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass)
+        //public async Task<GetNameandFormNumberbyCustomerIdModelOutput> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass)
+        //{
+        //    var procedureName = "UspGetNameandFormNumberbyCustomerId";
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+        //    using var connection = _context.CreateConnection();
+        //    var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        //    var storedProcedureResult = new GetNameandFormNumberbyCustomerIdModelOutput();
+        //    storedProcedureResult.GetStatusOutput = (List<GetStatusModelOutput>)await result.ReadAsync<GetStatusModelOutput>();
+        //    storedProcedureResult.GetNameandFormNumberOutput = (List<GetNameandFormNumberModelOutput>)await result.ReadAsync<GetNameandFormNumberModelOutput>();
+        //    return storedProcedureResult;
+        //}
+ 
+
+        public async Task<IEnumerable<GetNameandFormNumberbyCustomerIdModelOutput>> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass)
         {
             var procedureName = "UspGetNameandFormNumberbyCustomerId";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var storedProcedureResult = new GetNameandFormNumberbyCustomerIdModelOutput();
-            storedProcedureResult.GetStatusOutput = (List<GetStatusModelOutput>)await result.ReadAsync<GetStatusModelOutput>();
-            storedProcedureResult.GetNameandFormNumberOutput = (List<GetNameandFormNumberModelOutput>)await result.ReadAsync<GetNameandFormNumberModelOutput>();
-            return storedProcedureResult;
+            return await connection.QueryAsync<GetNameandFormNumberbyCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
     }
 }

@@ -1274,7 +1274,8 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.GetNameandFormNumberOutput.Count > 0 && result.GetStatusOutput.Count > 0)
+                    List<GetNameandFormNumberbyCustomerIdModelOutput> item = result.Cast<GetNameandFormNumberbyCustomerIdModelOutput>().ToList();
+                    if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
                         return this.Fail(ObjClass, result, _logger);

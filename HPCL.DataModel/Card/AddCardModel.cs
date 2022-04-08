@@ -50,6 +50,10 @@ namespace HPCL.DataModel.Card
         [JsonPropertyName("NoofVechileforAllCards")]
         [DataMember]
         public Int32 NoofVechileforAllCards { get; set; }
+
+        [JsonPropertyName("VehicleNoVerifiedManually")]
+        [DataMember]
+        public Int32 VehicleNoVerifiedManually { get; set; }
     }
 
     public class CardDetail
