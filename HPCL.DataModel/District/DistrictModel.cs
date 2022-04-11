@@ -13,6 +13,13 @@ namespace HPCL.DataModel.District
         [DataMember]
         public int StateID { get; set; }
     }
+
+    public class GetDistrictByMultipleStateIDModelInput : BaseClass
+    {
+        [JsonPropertyName("StateID")]
+        [DataMember]
+        public string StateID { get; set; }
+    }
     public class GetDistrictModelOutput
     {
         [JsonPropertyName("StateID")]

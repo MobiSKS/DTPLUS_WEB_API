@@ -10,6 +10,13 @@ namespace HPCL.DataModel.RegionalOffice
         [DataMember]
         public int ZonalID { get; set; }
     }
+
+    public class GetRegionalOfficebyMultipleZoneModelInput : BaseClass
+    {
+        [JsonPropertyName("ZonalID")]
+        [DataMember]
+        public string ZonalID { get; set; }
+    }
     public class GetRegionalOfficeModelOutput
     {
         [JsonProperty("ZonalID")]
