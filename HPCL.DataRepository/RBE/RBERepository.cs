@@ -372,5 +372,15 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<RBEDeviceIdResetRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<RBEMobileChangeRequestModelOutput>> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass)
+        {
+            var procedureName = "UspRBEMobileChangeRequest";
+            var parameters = new DynamicParameters();
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RBEMobileChangeRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
