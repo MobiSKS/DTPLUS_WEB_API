@@ -27,7 +27,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_block_unblock_customer_ccms_account_by_customerid")]
-        public async Task<IActionResult> GetMerchantType([FromBody] GetBlockUnBlockCustomerCCMSAccountByCustomerIdModelInput ObjClass)
+        public async Task<IActionResult> GetBlockUnBlockCustomerCCMSAccountByCustomerId([FromBody] GetBlockUnBlockCustomerCCMSAccountByCustomerIdModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -51,6 +51,36 @@ namespace HPCL_WebApi.Controllers
                 }
             }
 
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("block_unblock_customer_ccms_account")]
+        public async Task<IActionResult> BlockUnBlockCustomerCCMSAccount([FromBody] BlockUnBlockCustomerCCMSAccountInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.BlockUnBlockCustomerCCMSAccount(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<BlockUnBlockCustomerCCMSAccountOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<BlockUnBlockCustomerCCMSAccountOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
         }
     }
 }
