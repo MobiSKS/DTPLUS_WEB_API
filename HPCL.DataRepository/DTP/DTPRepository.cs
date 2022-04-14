@@ -28,5 +28,18 @@ namespace HPCL.DataRepository.DTP
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetBlockUnBlockCustomerCCMSAccountByCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<BlockUnBlockCustomerCCMSAccountOutput>> BlockUnBlockCustomerCCMSAccount([FromBody] BlockUnBlockCustomerCCMSAccountInput ObjClass)
+        {
+            var procedureName = "UspBlockUnBlockCustomerCCMSAccount";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CCMSBalanceStatus", ObjClass.CCMSBalanceStatus, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CCMSBalanceRemarks", ObjClass.CCMSBalanceRemarks, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BlockUnBlockCustomerCCMSAccountOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

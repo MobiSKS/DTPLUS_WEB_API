@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace HPCL.DataModel.DTP
 {
@@ -20,17 +15,18 @@ namespace HPCL.DataModel.DTP
 
     public class GetBlockUnBlockCustomerCCMSAccountByCustomerIdModelOutput : BaseClassOutput
     {
-        [JsonProperty("IndividualOrgName")]
+        [JsonProperty("CustomerName")]
         [DataMember]
-        public string IndividualOrgName { get; set; }
-
-        [JsonProperty("StatusName")]
-        [DataMember]
-        public string StatusName { get; set; }
-
+        public string CustomerName { get; set; }
+       
         [JsonProperty("CCMSBalanceStatusId")]
         [DataMember]
         public int CCMSBalanceStatusId { get; set; }
+
+        [JsonProperty("CCMSBalanceStatusName")]
+        [DataMember]
+        public string CCMSBalanceStatusName { get; set; }
+
 
         [JsonProperty("CCMSBalanceRemarks")]
         [DataMember]
