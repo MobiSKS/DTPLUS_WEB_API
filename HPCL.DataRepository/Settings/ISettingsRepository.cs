@@ -17,5 +17,7 @@ namespace HPCL.DataRepository.Settings
         public Task<IEnumerable<SettingGetProofTypeModelOutput>> GetProofType([FromBody] SettingGetProofTypeModelInput ObjClass);
         public Task<IEnumerable<SettingGetTierModelOutput>> GetTier([FromBody] SettingGetTierModelInput ObjClass);
         public Task<IEnumerable<SettingGetRecordTypeModelOutput>> GetRecordType([FromBody] SettingGetRecordTypeModelInput ObjClass);
+
+        public Task<IEnumerable<SettingGetSalesareaModelOutput>> GetSalesAreaByMultipleRegion([FromBody] SettingGetSalesAreaByMultipleRegionModelInput ObjClass);
     }
 }

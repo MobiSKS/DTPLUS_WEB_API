@@ -24,9 +24,6 @@ namespace HPCL_WebApi.Controllers
             _settingRepo = settingRepo;
         }
 
-       
-
-        
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -44,6 +41,36 @@ namespace HPCL_WebApi.Controllers
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass,null, _logger);
+                }
+                else
+                {
+                    List<SettingGetSalesareaModelOutput> item = result.Cast<SettingGetSalesareaModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_sales_area_by_multiple_region")]
+        public async Task<IActionResult> GetSalesAreaByMultipleRegion([FromBody] SettingGetSalesAreaByMultipleRegionModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetSalesAreaByMultipleRegion(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {

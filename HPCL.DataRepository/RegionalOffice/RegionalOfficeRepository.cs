@@ -34,5 +34,14 @@ namespace HPCL.DataRepository.RegionalOffice
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<DeleteRegionalOfficeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GetRegionalOfficeModelOutput>> GetRegionalOfficeByMultipleZone([FromBody] GetRegionalOfficebyMultipleZoneModelInput ObjClass)
+        {
+            var procedureName = "UspGetRegionalOfficeByMultipleZone";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZonalID", ObjClass.ZonalID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetRegionalOfficeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
