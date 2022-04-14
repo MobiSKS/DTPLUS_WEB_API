@@ -213,7 +213,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_new_rbe_enroll_customers")]
         public async Task<IActionResult> GetNewRbeEnrollCustomers([FromBody] GetNewRbeEnrollCustomersModelInput ObjClass)
         {
@@ -324,8 +324,6 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-
-
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("bind_rbe_by_rbe_id")]
@@ -417,7 +415,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("upload_officer_kyc")]
         public async Task<IActionResult> UploadOfficerKYC([FromForm] RBEKYCModelInput ObjClass)
         {
@@ -447,7 +445,6 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -535,7 +532,6 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
-
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("approve_reject_rbe")]
@@ -574,7 +570,59 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_deviceid_reset_request")]
+        public async Task<IActionResult> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RBEDeviceIdResetRequest(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RBEDeviceIdResetRequestModelOutput> item = result.Cast<RBEDeviceIdResetRequestModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_mobile_change_request")]
+        public async Task<IActionResult> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RBEMobileChangeRequest(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RBEMobileChangeRequestModelOutput> item = result.Cast<RBEMobileChangeRequestModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
 
     }
 }

@@ -23,7 +23,6 @@ namespace HPCL.DataRepository.Settings
             parameters.Add("RegionID", ObjClass.RegionID, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetSalesareaModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
-
         }
 
         public async Task<IEnumerable<SettingGetTransactionTypeModelOutput>> GetTransactionType([FromBody] SettingGetTransactionTypeModelInput ObjClass)
@@ -89,6 +88,15 @@ namespace HPCL.DataRepository.Settings
             var procedureName = "UspGetRecordType";
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<SettingGetRecordTypeModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<SettingGetSalesareaModelOutput>> GetSalesAreaByMultipleRegion([FromBody] SettingGetSalesAreaByMultipleRegionModelInput ObjClass)
+        {
+            var procedureName = "UspGetSalesAreaByMultipleRegion";
+            var parameters = new DynamicParameters();
+            parameters.Add("RegionID", ObjClass.RegionID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SettingGetSalesareaModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }
