@@ -624,5 +624,39 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_customer")]
+        public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RequestToChangeRBEMapping(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
+                    {                            
+                        //    Variables.SendSMS(2, "1007862494411670929", result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CommunicationMobileNo,
+                        //         ObjClass.ApprovedBy, result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CustomerID,
+                        //         result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].ControlCardNo);               
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
     }
 }

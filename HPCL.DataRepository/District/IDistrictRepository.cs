@@ -10,5 +10,7 @@ namespace HPCL.DataRepository.District
         public Task<IEnumerable<GetDistrictModelOutput>> GetDistrict([FromBody] GetDistrictModelInput ObjClass);
 
         public Task<IEnumerable<DeleteDistrictModelOutput>> DeleteDistrict([FromBody] DeleteDistrictModelInput ObjClass);
+
+        public Task<IEnumerable<GetDistrictModelOutput>> GetDistrictByMultipleStateID([FromBody] GetDistrictByMultipleStateIDModelInput ObjClass);
     }
 }

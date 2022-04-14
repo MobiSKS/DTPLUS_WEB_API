@@ -382,5 +382,14 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<RBEMobileChangeRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<RequestToChangeRBEMappingModelOutput>> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
+        {
+            var procedureName = "UspRequestToChangeRBEMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("NewRBEUserName", ObjClass.NewRBEUserName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RequestToChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

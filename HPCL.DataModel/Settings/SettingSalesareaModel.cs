@@ -11,6 +11,13 @@ namespace HPCL.DataModel.Settings
         [DataMember]
         public int RegionID { get; set; }
     }
+
+    public class SettingGetSalesAreaByMultipleRegionModelInput : BaseClass
+    {
+        [JsonPropertyName("RegionID")]
+        [DataMember]
+        public string RegionID { get; set; }
+    }
     public class SettingGetSalesareaModelOutput
     {
         [JsonProperty("RegionID")]

@@ -34,5 +34,14 @@ namespace HPCL.DataRepository.District
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<DeleteDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GetDistrictModelOutput>> GetDistrictByMultipleStateID([FromBody] GetDistrictByMultipleStateIDModelInput ObjClass)
+        {
+            var procedureName = "UspGetDistrictByMultipleState";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateID", ObjClass.StateID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetDistrictModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
