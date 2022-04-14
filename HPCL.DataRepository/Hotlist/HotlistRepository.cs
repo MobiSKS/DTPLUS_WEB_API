@@ -68,16 +68,43 @@ namespace HPCL.DataRepository.Hotlist
 
         }
 
-        public async Task<IEnumerable<GetHotlistApprovalOutput>> GetHotlistApproval([FromBody] GetHotlistApprovalInput ObjClass)
+        public async Task<IEnumerable<GetHotlistApprovalModelOutput>> GetHotlistApproval([FromBody] GetHotlistApprovalModelInput ObjClass)
         {
-            var procedureName = "UspGetHotlistApproval";
+            var procedureName = "UspGetHotlistOrReactivateApproval";
             var parameters = new DynamicParameters();
             parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ActionId", ObjClass.ActionId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
             parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<GetHotlistApprovalOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetHotlistApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateHotlistApprovalModelOutput>> UpdateHotlistApproval([FromBody] UpdateHotlistApprovalModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("EntityCodes");
+            dtDBR.Columns.Add("EntityCode", typeof(string));
+
+
+            if (ObjClass.ObjUpdateHotlistApprovalEntityCode != null)
+            {
+                foreach (UpdateHotlistApprovalEntityCodeModelInput ObjDetail in ObjClass.ObjUpdateHotlistApprovalEntityCode)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["EntityCode"] = ObjDetail.EntityCode;
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+                }
+            }
+
+            var procedureName = "UspUpdateHotlistOrReactivateApproval";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ActionId", ObjClass.ActionId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("EntityTypeCodes", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateHotlistApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

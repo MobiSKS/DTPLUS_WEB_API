@@ -116,7 +116,7 @@ namespace HPCL.DataModel.Hotlist
         public string Remarks { get; set; }
     }
 
-    public class GetHotlistApprovalInput : BaseClass
+    public class GetHotlistApprovalModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("EntityTypeId")]
@@ -138,15 +138,48 @@ namespace HPCL.DataModel.Hotlist
         [DataMember]
         public string ToDate { get; set; }
     }
-    public class GetHotlistApprovalOutput
+    public class GetHotlistApprovalModelOutput
     {
         [JsonProperty("EntityCode")]
         [DataMember]
         public string EntityCode { get; set; }
 
-        [JsonProperty("CreatedDate")]
+        [JsonProperty("CreationDate")]
         [DataMember]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 
+    public class UpdateHotlistApprovalModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("EntityTypeId")]
+        [DataMember]
+        public Int32 EntityTypeId { get; set; }
+
+        [Required]
+        [JsonPropertyName("ActionId")]
+        [DataMember]
+        public Int32 ActionId { get; set; }
+
+        [Required]
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+        [JsonPropertyName("ObjUpdateHotlistApprovalEntityCode")]
+        [DataMember]
+        public List<UpdateHotlistApprovalEntityCodeModelInput> ObjUpdateHotlistApprovalEntityCode { get; set; }
+    }
+    public class UpdateHotlistApprovalEntityCodeModelInput
+    {
+        [JsonProperty("EntityCode")]
+        [DataMember]
+        public string EntityCode { get; set; }
+    }
+    public class UpdateHotlistApprovalModelOutput : BaseClassOutput
+    {
+        [JsonProperty("EntityCode")]
+        [DataMember]
+        public string EntityCode { get; set; }
+    }
 }

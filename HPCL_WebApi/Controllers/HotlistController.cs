@@ -175,7 +175,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_hotlist_approval")]
-        public async Task<IActionResult> GetHotlistApproval([FromBody] GetHotlistApprovalInput ObjClass)
+        public async Task<IActionResult> GetHotlistApproval([FromBody] GetHotlistApprovalModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -190,7 +190,34 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetHotlistApprovalOutput> item = result.Cast<GetHotlistApprovalOutput>().ToList();
+                    List<GetHotlistApprovalModelOutput> item = result.Cast<GetHotlistApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_hotlist_approval")]
+        public async Task<IActionResult> UpdateHotlistApproval([FromBody] UpdateHotlistApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _HLRepo.UpdateHotlistApproval(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<UpdateHotlistApprovalModelOutput> item = result.Cast<UpdateHotlistApprovalModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else

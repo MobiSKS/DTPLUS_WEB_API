@@ -94,7 +94,6 @@ namespace HPCL.DataRepository.Terminal
 
             var procedureName = "UspUpdateTerminalInstallationRequestClose";
             var parameters = new DynamicParameters();
-            //parameters.Add("StatusId", ObjClass.StatusId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ReasonId", ObjClass.ReasonId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             parameters.Add("UpdateTerminalInstReq", dtDBR, DbType.Object, ParameterDirection.Input);
