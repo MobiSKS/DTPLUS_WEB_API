@@ -385,6 +385,18 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<CardSearchMappingDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CardSearchMappingDetailsWithBlankMobileModelOutput>> SearchCardMappingDetailsWithBlankMobile([FromBody] CardSearchMappingDetailsWithBlankMobileModelInput ObjClass)
+        {
+            var procedureName = "UspGetMappingDetailsWithBlankMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("Customerid", ObjClass.Customerid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Vehiclenumber", ObjClass.Vehiclenumber, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CardSearchMappingDetailsWithBlankMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
         public async Task<IEnumerable<GetCCMSLimitsForAllCardsModelOutput>> OTCCardRequestEntry([FromBody] GetCCMSLimitsForAllCardsModelInput ObjClass)
         {
