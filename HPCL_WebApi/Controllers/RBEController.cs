@@ -643,10 +643,10 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
-                    {                            
-                        //    Variables.SendSMS(2, "1007862494411670929", result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CommunicationMobileNo,
-                        //         ObjClass.ApprovedBy, result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CustomerID,
-                        //         result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].ControlCardNo);               
+                    {
+                        //Variables.SendSMS(2, "1007862494411670929", result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CommunicationMobileNo,
+                        //     ObjClass.ApprovedBy, result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CustomerID,
+                        //     result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].ControlCardNo);
 
                         return this.OkCustom(ObjClass, result, _logger);
                     }
