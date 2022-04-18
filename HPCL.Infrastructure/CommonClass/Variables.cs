@@ -202,6 +202,7 @@ namespace HPCL.Infrastructure.CommonClass
 
                     SMSText = SMSText.Replace("[CustId]", ButtonText[0]).Replace("[CntlCrNo]", ButtonText[1]);
 
+
                 string URL = SMSAPIURL.Replace("[senderid]", SenderId).Replace("[mob]", MobileNo).Replace("[msg]", System.Web.HttpUtility.UrlEncode(SMSText)).Replace("[CTID]", CTID);
                 string getmobileno = RightString(MobileNo, 10);
                 bool checkNo = IsPhoneNumber(getmobileno);

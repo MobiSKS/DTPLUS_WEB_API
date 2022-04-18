@@ -626,7 +626,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("approve_reject_customer")]
+        [Route("request_to_change_rbe_mapping")]
         public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -644,9 +644,8 @@ namespace HPCL_WebApi.Controllers
                 {
                     if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
                     {
-                        //Variables.SendSMS(2, "1007862494411670929", result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CommunicationMobileNo,
-                        //     ObjClass.ApprovedBy, result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].CustomerID,
-                        //     result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].ControlCardNo);
+                        Variables.SendSMS(1, "1007281863891553879", ObjClass.NewRBEUserName, ObjClass.CreatedBy,
+                            result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].OTP);
 
                         return this.OkCustom(ObjClass, result, _logger);
                     }

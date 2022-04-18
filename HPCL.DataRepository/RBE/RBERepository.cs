@@ -386,7 +386,9 @@ namespace HPCL.DataRepository.RBE
         {
             var procedureName = "UspRequestToChangeRBEMapping";
             var parameters = new DynamicParameters();
+            parameters.Add("PreRBEUserName", ObjClass.PreRBEUserName, DbType.String, ParameterDirection.Input);
             parameters.Add("NewRBEUserName", ObjClass.NewRBEUserName, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RequestToChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
