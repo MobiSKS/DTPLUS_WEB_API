@@ -45,6 +45,10 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string CreatedDate { get; set; }
 
+        [JsonProperty("IssueDate")]
+        [DataMember]
+        public string IssueDate { get; set; }
+
         [JsonProperty("AssignStatus")]
         [DataMember]
         public string AssignStatus { get; set; }

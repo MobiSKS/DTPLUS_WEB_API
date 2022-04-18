@@ -38,6 +38,7 @@ using HPCL.DataRepository.Driver;
 using HPCL.DataRepository.Tatkal;
 using HPCL.DataRepository.RBE;
 using HPCL.DataRepository.TMS;
+using HPCL.DataRepository.DTP;
 
 namespace HPCL_WebApi
 {
@@ -111,6 +112,7 @@ namespace HPCL_WebApi
             services.AddScoped<ITatkalRepository, TatkalRepository>();
             services.AddScoped<ITMSRepository,TMSRepository>();
             services.AddScoped<IRBERepository, RBERepository>();
+            services.AddScoped<IDTPRepository, DTPRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {
