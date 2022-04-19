@@ -660,7 +660,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Validate_Otp_RBE_Mapping")]
+        [Route("validate_otp_rbe_mapping")]
         public async Task<IActionResult> ValidateOtpRBEMapping([FromBody] ValidateOtpRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)

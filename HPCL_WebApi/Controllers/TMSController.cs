@@ -37,7 +37,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_Enroll_transport_management_system")]
+        [Route("get_enroll_transport_management_system")]
         public async Task<IActionResult> GetEnrollTransportManagementSystem([FromBody] GetEnrollTransportManagementSystemModelInput ObjClass)
         {
           
