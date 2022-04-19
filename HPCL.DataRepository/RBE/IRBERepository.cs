@@ -47,6 +47,7 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<RBEDeviceIdResetRequestModelOutput>> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass);
         public Task<IEnumerable<RBEMobileChangeRequestModelOutput>> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass);
+        public Task<IEnumerable<RequestToChangeRBEMappingModelOutput>> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass);
 
     }
 }

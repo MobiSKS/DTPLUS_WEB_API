@@ -624,5 +624,38 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("request_to_change_rbe_mapping")]
+        public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RequestToChangeRBEMapping(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
+                    {
+                        Variables.SendSMS(1, "1007281863891553879", ObjClass.NewRBEUserName, ObjClass.CreatedBy,
+                            result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].OTP);
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
     }
 }
