@@ -42,6 +42,13 @@ namespace HPCL.DataRepository.DTP
             return await connection.QueryAsync<BlockUnBlockCustomerCCMSAccountOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        //
+        public async Task<IEnumerable<CardBalanceTransferModelOutput>> CardBalanceTransfer([FromBody] CardBalanceTransferModelInput ObjClass)
+        {
+            var procedureName = "UspCardBalanceTransfer";
+            var parameters = new DynamicParameters();
+            parameters.Add("@CardNo", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CardBalanceTransferModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
