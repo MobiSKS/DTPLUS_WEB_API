@@ -57,6 +57,7 @@ namespace HPCL.DataRepository.Merchant
 
         public Task<IEnumerable<ValidateMerchantErpCodeModelOutput>> ValidateMerchantErpCode([FromBody] ValidateMerchantErpCodeModelInput ObjClass);
 
+        public Task<IEnumerable<CheckMappedMerchantIDModelOutput>> CheckMappedMerchantID([FromBody] CheckMappedMerchantIDModelInput ObjClass);
 
     }
 }
