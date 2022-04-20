@@ -332,9 +332,9 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public Int32 YearOfRegistration { get; set; }
 
-        [JsonProperty("VechileOwnerName")]
+        [JsonProperty("Mobileno")]
         [DataMember]
-        public string VechileOwnerName { get; set; }
+        public string Mobileno { get; set; }
 
         [JsonProperty("RBEId")]
         [DataMember]
