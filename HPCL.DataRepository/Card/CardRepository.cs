@@ -451,7 +451,9 @@ namespace HPCL.DataRepository.Card
         {
             var procedureName = "UspCheckVechileNo";
             var parameters = new DynamicParameters();
-            parameters.Add("VechileNo", ObjClass.VechileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("VehicleRegistrationNumber", ObjClass.VechileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MethodName", "CheckVechileNo", DbType.String, ParameterDirection.Input);
+
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CardCheckVechileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
