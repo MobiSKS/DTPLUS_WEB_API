@@ -24,7 +24,7 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public Int32 NoOfCards { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("RBEId")]
         [DataMember]
         public string RBEId { get; set; }
