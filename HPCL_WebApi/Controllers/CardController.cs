@@ -765,6 +765,33 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_fastag_no_duplicacy_in_card")]
+        public async Task<IActionResult> CheckFastagNoDuplicacyInCard([FromBody] CheckFastagNoDuplicacyInCardModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.CheckFastagNoDuplicacyInCard(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CheckFastagNoDuplicacyInCardModelOutput> item = result.Cast<CheckFastagNoDuplicacyInCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("add_addon_card")]
         public async Task<IActionResult> AddOnCard([FromBody] AddOnCardModelInput ObjClass)
         {

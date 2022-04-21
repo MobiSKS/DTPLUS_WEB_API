@@ -42,6 +42,8 @@ namespace HPCL.DataRepository.Card
 
         public Task<IEnumerable<CardCheckVechileNoModelOutput>> CheckVechileNo([FromBody] CardCheckVechileNoModelInput ObjClass);
 
+        public Task<IEnumerable<CheckFastagNoDuplicacyInCardModelOutput>> CheckFastagNoDuplicacyInCard([FromBody] CheckFastagNoDuplicacyInCardModelInput ObjClass);
+
         public Task<IEnumerable<AddOnCardModelOutput>> AddOnCard([FromBody] AddOnCardModelInput ObjClass);
 
         public Task<IEnumerable<CheckAddOnFormNumberModelOutput>> CheckAddOnFormNumber([FromBody] CheckAddOnFormNumberModelInput ObjClass);
