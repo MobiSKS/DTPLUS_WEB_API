@@ -30,5 +30,4 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string OTP { get; set; }
     }
-
 }
