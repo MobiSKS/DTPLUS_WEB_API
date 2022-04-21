@@ -79,6 +79,7 @@ namespace HPCL.DataRepository.DTP
         public async Task<IEnumerable<UpdateTeamMappingModelOutput>> UpdateTeamMapping([FromBody] UpdateTeamMappingModelInput ObjClass)
         {
             var procedureName = "UspUpdateTeamMapping";
+
             var parameters = new DynamicParameters();
             parameters.Add("TeamMappingId", ObjClass.TeamMappingId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ZBMID", ObjClass.ZBMID, DbType.String, ParameterDirection.Input);
