@@ -25,32 +25,36 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string RBEID { get; set; }
 
-        [JsonProperty("MobileNo")]
+        [JsonProperty("NewRBEUser")]
         [DataMember]
-        public string MobileNo { get; set; }
+        public string NewRBEUser { get; set; }
 
-        [JsonProperty("FirstName")]
+        [JsonProperty("NewUserName")]
         [DataMember]
-        public string FirstName { get; set; }
+        public string NewUserName { get; set; }
 
-        [JsonProperty("LastName")]
+        [JsonProperty("PreRBEUser")]
         [DataMember]
-        public string LastName { get; set; }
+        public string PreRBEUser { get; set; }
 
-        [JsonProperty("EmailId")]
+        [JsonProperty("PreUserName")]
         [DataMember]
-        public string EmailId { get; set; }
+        public string PreUserName { get; set; }
 
-        [JsonProperty("Region")]
+        [JsonProperty("FromLocation")]
         [DataMember]
-        public string Region { get; set; }
+        public string FromLocation { get; set; }
 
-        [JsonProperty("Zone")]
+        [JsonProperty("ToLocation")]
         [DataMember]
-        public string Zone { get; set; }
+        public string ToLocation { get; set; }
 
-        [JsonProperty("Action")]
+        [JsonProperty("status")]
         [DataMember]
-        public string Action { get; set; }
+        public string status { get; set; }
+
+        [JsonProperty("ChangeRBE")]
+        [DataMember]
+        public string ChangeRBE { get; set; }
     }
 }

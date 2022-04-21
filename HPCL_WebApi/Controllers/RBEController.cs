@@ -660,7 +660,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Validate_Otp_RBE_Mapping")]
+        [Route("validate_otp_rbe_mapping")]
         public async Task<IActionResult> ValidateOtpRBEMapping([FromBody] ValidateOtpRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -683,6 +683,62 @@ namespace HPCL_WebApi.Controllers
                         return this.Fail(ObjClass, result, _logger);
                 }
             }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_change_rbe_mapping")]
+        public async Task<IActionResult> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ApproveChangeRBEMapping(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ApproveChangeRBEMappingModelOutput> item = result.Cast<ApproveChangeRBEMappingModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("rbe_mapping_status")]
+        public async Task<IActionResult> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.RbeMappingStatus(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<RbeMappingStatusModelOutput> item = result.Cast<RbeMappingStatusModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
         }
     }
 }

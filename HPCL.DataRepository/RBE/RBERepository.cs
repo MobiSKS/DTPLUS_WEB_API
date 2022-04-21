@@ -392,7 +392,7 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RequestToChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
+       
         public async Task<IEnumerable<ValidateOtpRBEMappingModelOutput>> ValidateOtpRBEMapping([FromBody] ValidateOtpRBEMappingModelInput ObjClass)
         {
             var procedureName = "UspValidateOtpRBEMapping";
@@ -404,15 +404,23 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ValidateOtpRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
+       
         public async Task<IEnumerable<ApproveChangeRBEMappingModelOutput>> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
         {
             var procedureName = "UspApproveChangeRBEMapping";
             var parameters = new DynamicParameters();
+            parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ApproveChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+        {
+            var procedureName = "UspGetRbeMappingStatus";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
     }
