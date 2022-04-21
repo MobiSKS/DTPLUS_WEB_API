@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.Settings
@@ -9,11 +10,11 @@ namespace HPCL.DataModel.Settings
     }
     public class SettingGetEntityModelOutput
     {
-        [JsonPropertyName("EntityId")]
+        [JsonProperty("EntityId")]
         [DataMember]
         public int EntityId { get; set; }
 
-        [JsonPropertyName("EntityName")]
+        [JsonProperty("EntityName")]
         [DataMember]
         public string EntityName { get; set; }
     }
