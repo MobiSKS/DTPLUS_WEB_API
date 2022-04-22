@@ -19,6 +19,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Net.Http.Headers;
+using HPCL.Infrastructure.CommonClass;
 
 namespace HPCL_WebApi.Controllers
 {
@@ -29,10 +30,12 @@ namespace HPCL_WebApi.Controllers
         private readonly ILogger<TMSController> _logger;
 
         private readonly ITMSRepository _tmsRepo;
-        public TMSController(ILogger<TMSController> logger, ITMSRepository tmsRepo)
+        private readonly IConfiguration _configuration;
+        public TMSController(ILogger<TMSController> logger, ITMSRepository tmsRepo, IConfiguration configuration)
         {
             _logger = logger;
             _tmsRepo = tmsRepo;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -40,7 +43,7 @@ namespace HPCL_WebApi.Controllers
         [Route("get_enroll_transport_management_system")]
         public async Task<IActionResult> GetEnrollTransportManagementSystem([FromBody] GetEnrollTransportManagementSystemModelInput ObjClass)
         {
-          
+            
 
             if (ObjClass == null)
             {
@@ -55,22 +58,53 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    //IConfiguration _configuration;
-                    //string APIUrl;
                     if (result.Cast<GetEnrollTransportManagementSystemModelOutput>().ToList()[0].Status == 1)
                     {
-                        //APIUrl = configuration.GetSection("TokenSettings:APIUrl").Value;
-                        //_configuration = configuration;
-                        //string[] scopes = new string[] { "user.read" };
-                        //HttpClient client = new HttpClient();
-                        //HttpResponseMessage response = client.GetAsync(APIUrl).Result;
-                        //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
-                        //string json = await client.GetStringAsync(APIUrl);
-                        //if (response.IsSuccessStatusCode)
-                        //{
-                        //
-                        //}
-                        return this.OkCustom(ObjClass, result, _logger);
+                        ApiRequestResponse response = new ApiRequestResponse();
+                        CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse(); 
+                        CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value};
+                       // string cargofl_userid = "admin";
+                        string apiurl = _configuration.GetSection("TMSSettings:APIUrl").Value;                          
+
+                        string json = Variables.CallPostAPI(apiurl+ "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                       if(!string.IsNullOrEmpty(json))
+                        {
+                            cargoFlLoginResponse=JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
+                        }
+                        var dat = JObject.Parse(json);
+
+                        response.apiurl = apiurl + "v1/common/loginSuperUser";
+                        response.request = JsonConvert.SerializeObject(obj);
+                        response.response = json;
+                        response.UserId = "Test";
+                        _tmsRepo.InsertAPIRequestResponse(response);
+
+                        CargoFlRegisterTrucker objcargoFL = new CargoFlRegisterTrucker();
+                        var cargoflUser = _tmsRepo.GetCargoFlRegisterTruckerDetail(ObjClass.CustomerId).Result.ToList<CargoFlRegisterTrucker>();
+                        if (cargoflUser != null && cargoflUser.Count > 0)
+                        {
+                            objcargoFL = cargoflUser.ToList().FirstOrDefault();
+                        }
+                       string res = Variables.CallPostAPI(apiurl+ "v1/user/registerTrucker", JsonConvert.SerializeObject(objcargoFL), cargoFlLoginResponse.access_token).Result;
+                       
+                        response.apiurl = apiurl + "v1/user/registerTrucker";
+                        response.request = JsonConvert.SerializeObject(obj);                   
+
+
+                            response.response = res;
+                        if (string.IsNullOrEmpty(res))
+                        {
+                            CargoFlLogin objval = new CargoFlLogin();
+                            objval = JsonConvert.DeserializeObject<CargoFlLogin>(res);
+
+                            response.TMSUserId = objval.cargofl_userid;
+                            response.CustomerId = ObjClass.CustomerId;
+                            response.TMSStatus = 1;
+
+                        }
+
+                            _tmsRepo.InsertAPIRequestResponse(response);
+                        return this.OkCustom(ObjClass, JObject.Parse(res), _logger);
                     }
                     else
                     {
@@ -163,5 +197,83 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Get_Customer_Detail_For_Enrollment_Approval")]
+        public async Task<IActionResult> GetCustomerDetailForEnrollmentApproval([FromBody] GetCustomerDetailForEnrollmentApprovalInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.GetCustomerDetailForEnrollmentApproval(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetCustomerDetailForEnrollmentApprovalOutput> item = result.Cast<GetCustomerDetailForEnrollmentApprovalOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+        [HttpGet]
+       // [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Get_TMSEnrollment_Status")]
+        public async Task<IActionResult> GetEnrollmentStatus()
+        {
+           
+                var result = await _tmsRepo.GetEnrollmentStatus();
+                if (result == null)
+                {
+                    return this.NotFoundCustom(null, null, _logger);
+                }
+                else
+                {
+                    List<GetEnrollmentStatusModelOutput> item = result.Cast<GetEnrollmentStatusModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(null, result, _logger);
+                    else
+                        return this.Fail(null, result, _logger);
+                }
+            
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Update_TMS_Enrollment_TMS_Status")]
+        public async Task<IActionResult> UpdateTMSEnrollmentTMSStatus([FromBody] TMSUpdateEnrollmentStatusModelInput ObjClass)
+        {
+            
+            string apiurl = _configuration.GetSection("TMSSettings:APIUrl").Value;
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.TMSInsertCustomerTracking(ObjClass, apiurl);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {                    
+                        return this.OkCustom(ObjClass, result, _logger);
+                   
+                }
+            }
+
+        }
+
     }
+
+    
 }
