@@ -625,7 +625,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       // [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("request_to_change_rbe_mapping")]
         public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
         {
@@ -740,5 +740,34 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("change_rbe_user")]
+        public async Task<IActionResult> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ChangeRbeUser(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ChangeRbeUserModelOutput> item = result.Cast<ChangeRbeUserModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
     }
 }

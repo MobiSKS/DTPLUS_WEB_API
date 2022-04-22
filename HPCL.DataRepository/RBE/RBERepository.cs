@@ -415,13 +415,23 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ApproveChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
         public async Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
         {
             var procedureName = "UspGetRbeMappingStatus";
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<ChangeRbeUserModelOutput>> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        {
+            var procedureName = "UspChangeRbeUser";
+            var parameters = new DynamicParameters();
+            parameters.Add("PreRBEUserName", ObjClass.PreRBEUserName, DbType.String, ParameterDirection.Input);
+            parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ChangeRbeUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }
