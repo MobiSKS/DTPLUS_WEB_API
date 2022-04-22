@@ -3,16 +3,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
+
 namespace HPCL.DataModel.RBE
 {
-    public class RequestToChangeRBEMappingModelInput : BaseClass
+    public class ValidateOtpRBEMappingModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("PreRBEUserName")]
         [DataMember]
         public string PreRBEUserName { get; set; }
 
-        //[Required]
+        [Required]
         [JsonPropertyName("NewRBEUserName")]
         [DataMember]
         public string NewRBEUserName { get; set; }
@@ -21,13 +22,15 @@ namespace HPCL.DataModel.RBE
         [JsonPropertyName("CreatedBy")]
         [DataMember]
         public string CreatedBy { get; set; }
-    }
 
-    public class RequestToChangeRBEMappingModelOutput : BaseClassOutput
-    {
-
-        [JsonProperty("OTP")]
+        [Required]
+        [JsonPropertyName("OTP")]
         [DataMember]
         public string OTP { get; set; }
+    }
+
+    public class ValidateOtpRBEMappingModelOutput : BaseClassOutput
+    {
+
     }
 }

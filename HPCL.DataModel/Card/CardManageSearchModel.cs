@@ -188,7 +188,9 @@ namespace HPCL.DataModel.Card
 
     public class BindPendingCustomerforCardModelOutput
     {
-
+        [JsonProperty("CustomerId")]
+        [DataMember]
+        public Int64 CustomerId { get; set; }
 
         [JsonProperty("FormNumber")]
         [DataMember]
@@ -204,6 +206,10 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string CustomerName { get; set; }
 
+        [JsonProperty("CustomerType")]
+        [DataMember]
+        public string CustomerType { get; set; }
+
 
         [JsonProperty("CustomerAddress")]
         [DataMember]
@@ -218,6 +224,10 @@ namespace HPCL.DataModel.Card
         [JsonProperty("MobileNo")]
         [DataMember]
         public string MobileNo { get; set; }
+
+        [JsonProperty("NoofVechileforAllCards")]
+        [DataMember]
+        public Int32 NoofVechileforAllCards { get; set; }
 
 
         [JsonProperty("TotalCards")]
@@ -245,20 +255,20 @@ namespace HPCL.DataModel.Card
         public string CreatedDate { get; set; }
 
 
-        [JsonProperty("StatusId")]
+        [JsonProperty("Action")]
         [DataMember]
-        public Int32 StatusId { get; set; }
+        public string Action { get; set; }
 
 
 
-        [JsonProperty("StatusName")]
-        [DataMember]
-        public string StatusName { get; set; }
+        //[JsonProperty("StatusName")]
+        //[DataMember]
+        //public string StatusName { get; set; }
 
 
-        [JsonProperty("KYCStatus")]
-        [DataMember]
-        public string KYCStatus { get; set; }
+        //[JsonProperty("KYCStatus")]
+        //[DataMember]
+        //public string KYCStatus { get; set; }
 
 
     }
@@ -322,9 +332,9 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public Int32 YearOfRegistration { get; set; }
 
-        [JsonProperty("VechileOwnerName")]
+        [JsonProperty("Mobileno")]
         [DataMember]
-        public string VechileOwnerName { get; set; }
+        public string Mobileno { get; set; }
 
         [JsonProperty("RBEId")]
         [DataMember]
