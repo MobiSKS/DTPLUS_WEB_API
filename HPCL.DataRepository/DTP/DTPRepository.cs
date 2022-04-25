@@ -95,15 +95,23 @@ namespace HPCL.DataRepository.DTP
         }
 
 
-        public async Task<IEnumerable<DeleteHTeamMappingModelOutput>> DeleteTeamMapping([FromBody] DeleteTeamMappingModelInput ObjClass)
+        public async Task<IEnumerable<DeleteTeamMappingModelOutput>> DeleteTeamMapping([FromBody] DeleteTeamMappingModelInput ObjClass)
         {
             var procedureName = "UspInactiveTeamMapping";
             var parameters = new DynamicParameters();
             parameters.Add("TeamMappingId", ObjClass.TeamMappingId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<DeleteHTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<DeleteTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetEntityFieldByEntityTypeIdModelOutput>> GetEntityFieldByEntityTypeId([FromBody] GetEntityFieldByEntityTypeIdModelInput ObjClass)
+        {
+            var procedureName = "GetEntityFieldByEntityTypeId";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetEntityFieldByEntityTypeIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

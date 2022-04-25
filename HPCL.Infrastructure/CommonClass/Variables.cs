@@ -1,10 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HPCL.Infrastructure.CommonClass
 {
@@ -131,6 +136,29 @@ namespace HPCL.Infrastructure.CommonClass
             {
                 return _configuration.GetSection("ConnectionStrings:HPCLConnectionString").Value.ToString();
             }
+        }
+
+
+
+        public static async Task<string> CallPostAPI(string apiurl,string data,string authorizationToken="")
+        {
+            string result = string.Empty;
+            HttpClient client = new HttpClient();
+            HttpContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri("http://dtplus-test1.cargofl.com/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            if(authorizationToken != "")
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", authorizationToken);
+            }
+
+            HttpResponseMessage response = client.PostAsync(apiurl, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                result= await response.Content.ReadAsStringAsync();
+            }
+            return result;
         }
 
         public static bool FunSendMail(string strEmailId, string strMailMessage, string strSubject)

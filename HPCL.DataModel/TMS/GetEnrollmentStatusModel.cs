@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -10,8 +11,14 @@ namespace HPCL.DataModel.TMS
     }
     public class GetEnrollmentStatusModelOutput
     {
-        [JsonPropertyName("StatusName")]
+        [JsonProperty("StatusName")]
         [DataMember]
-        public string StatusName { get; set; }      
+        public string StatusName { get; set; }
+
+        [JsonProperty("StatusId")]
+        [DataMember]
+        public string StatusId { get; set; }
     }
+
+   
 }

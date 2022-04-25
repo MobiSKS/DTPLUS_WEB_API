@@ -6,8 +6,6 @@ using System.Text.Json.Serialization;
 namespace HPCL.DataModel.DTP
 {
 
-    //TeamMappingId,ZBMID,ZBMName,RSMID,RSMName,RBEID,RBEName,Location
-
     public class GetTeamMappingModelInput : BaseClass
     {
        
@@ -198,7 +196,7 @@ namespace HPCL.DataModel.DTP
 
     }
 
-    public class DeleteHTeamMappingModelOutput : BaseClassOutput
+    public class DeleteTeamMappingModelOutput : BaseClassOutput
     {
 
     }
