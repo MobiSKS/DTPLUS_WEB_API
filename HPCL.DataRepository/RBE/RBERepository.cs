@@ -415,21 +415,21 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ApproveChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        public async Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+        public async Task<IEnumerable<GetRbeMappingStatusModelOutput>> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass)
         {
             var procedureName = "UspGetRbeMappingStatus";
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<RbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetRbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<ChangeRbeUserModelOutput>> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        public async Task<IEnumerable<ApproveRejectChangedRbeMappingModelOutput>> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass)
         {
-            var procedureName = "UspChangeRbeUser";
+            var procedureName = "UspApproveRejectChangedRbeMapping";
             var parameters = new DynamicParameters();
             parameters.Add("PreRBEUserName", ObjClass.PreRBEUserName, DbType.String, ParameterDirection.Input);
             parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<ChangeRbeUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<ApproveRejectChangedRbeMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
 

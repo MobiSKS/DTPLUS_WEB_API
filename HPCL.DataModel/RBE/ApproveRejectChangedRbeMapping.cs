@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HPCL.DataModel.RBE
 {
-    public class ChangeRbeUserModelInput : BaseClass
+    public class ApproveRejectChangedRbeMappingModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("PreRBEUserName")]
@@ -22,7 +22,7 @@ namespace HPCL.DataModel.RBE
         public string MappingStatus { get; set; }
         
     }
-    public class ChangeRbeUserModelOutput : BaseClassOutput
+    public class ApproveRejectChangedRbeMappingModelOutput : BaseClassOutput
     {
         
     }

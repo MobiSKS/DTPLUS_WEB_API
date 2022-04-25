@@ -55,9 +55,9 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<ApproveChangeRBEMappingModelOutput>> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass);
 
-        public Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass);
+        public Task<IEnumerable<GetRbeMappingStatusModelOutput>> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass);
 
-        public Task<IEnumerable<ChangeRbeUserModelOutput>> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass);
+        public Task<IEnumerable<ApproveRejectChangedRbeMappingModelOutput>> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass);
 
     }
 }

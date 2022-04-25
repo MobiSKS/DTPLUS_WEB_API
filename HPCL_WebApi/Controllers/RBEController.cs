@@ -625,7 +625,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-       // [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("request_to_change_rbe_mapping")]
         public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
         {
@@ -715,7 +715,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_rbe_mapping_status")]
-        public async Task<IActionResult> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+        public async Task<IActionResult> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -724,14 +724,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.RbeMappingStatus(ObjClass);
+                var result = await _RBERepo.GetRbeMappingStatus(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<RbeMappingStatusModelOutput> item = result.Cast<RbeMappingStatusModelOutput>().ToList();
+                    List<GetRbeMappingStatusModelOutput> item = result.Cast<GetRbeMappingStatusModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -744,7 +744,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("approve_reject_changed_rbe_mapping")]
-        public async Task<IActionResult> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        public async Task<IActionResult> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -752,14 +752,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.ChangeRbeUser(ObjClass);
+                var result = await _RBERepo.ApproveRejectChangedRbeMapping(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<ChangeRbeUserModelOutput> item = result.Cast<ChangeRbeUserModelOutput>().ToList();
+                    List<ApproveRejectChangedRbeMappingModelOutput> item = result.Cast<ApproveRejectChangedRbeMappingModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
