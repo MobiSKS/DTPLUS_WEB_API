@@ -687,7 +687,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("approve_change_rbe_mapping")]
+        [Route("get_approve_changed_rbe_mapping")]
         public async Task<IActionResult> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -714,7 +714,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_mapping_status")]
+        [Route("get_rbe_mapping_status")]
         public async Task<IActionResult> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
         {
 
@@ -743,7 +743,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("change_rbe_user")]
+        [Route("approve_reject_changed_rbe_mapping")]
         public async Task<IActionResult> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
         {
             if (ObjClass == null)
