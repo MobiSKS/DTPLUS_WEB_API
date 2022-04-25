@@ -45,4 +45,29 @@ namespace HPCL.DataModel
         [DataMember]
         public string Reason { get; set; }
     }
+
+    public abstract class CustomerAPIBaseClassInput
+    {
+        [Required]
+        [JsonPropertyName("Username")]
+        [DataMember]
+        public string Username { get; set; }
+
+        [Required]
+        [JsonPropertyName("Password")]
+        [DataMember]
+        public string Password { get; set; }
+    }
+
+    public abstract class CustomerAPIBaseClassOutput
+    {
+        [JsonProperty("responseCode")]
+        [DataMember]
+        public string responseCode { get; set; }
+
+        [JsonProperty("responseMessage")]
+        [DataMember]
+        public string responseMessage { get; set; }
+    }
+
 }

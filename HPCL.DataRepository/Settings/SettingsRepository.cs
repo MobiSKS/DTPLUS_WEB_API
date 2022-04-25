@@ -99,5 +99,13 @@ namespace HPCL.DataRepository.Settings
             return await connection.QueryAsync<SettingGetSalesareaModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetStatusTypesForTerminalModelOutput>> GetStatusTypesForTerminal([FromBody] GetStatusTypesForTerminalModelInput ObjClass)
+        {
+            var procedureName = "UspGetStatusTypesForTerminal";
+            var parameters = new DynamicParameters();
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetStatusTypesForTerminalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
