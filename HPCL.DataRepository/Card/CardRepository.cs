@@ -458,6 +458,16 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<CardCheckVechileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CheckFastagNoDuplicacyInCardModelOutput>> CheckFastagNoDuplicacyInCard([FromBody] CheckFastagNoDuplicacyInCardModelInput ObjClass)
+        {
+            var procedureName = "UspCheckFastagNoDuplicacyInCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("FastagNo", ObjClass.FastagNo, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckFastagNoDuplicacyInCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<IEnumerable<AddOnCardModelOutput>> AddOnCard([FromBody] AddOnCardModelInput ObjClass)
         {
             var dtDBR = new DataTable("UserDTNoofCards");

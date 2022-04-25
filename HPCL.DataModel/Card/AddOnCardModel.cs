@@ -29,17 +29,17 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public string RBEId { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("FeePaymentsCollectFeeWaiver")]
         [DataMember]
         public Int16 FeePaymentsCollectFeeWaiver { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("FeePaymentNo")]
         [DataMember]
         public string FeePaymentNo { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("FeePaymentDate")]
         [DataMember]
         public DateTime FeePaymentDate { get; set; }
