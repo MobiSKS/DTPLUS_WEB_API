@@ -113,5 +113,31 @@ namespace HPCL.DataRepository.DTP
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetEntityFieldByEntityTypeIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<UpdateGeneralEntityFieldModelOutput>> UpdateGeneralEntityField([FromBody] UpdateGeneralEntityFieldModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateGeneralEntityField";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("EntityFieldId", ObjClass.EntityFieldId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerIdOrCardOrMerchantId", ObjClass.CustomerIdOrCardOrMerchantId, DbType.String, ParameterDirection.Input);
+            parameters.Add("NewValue", ObjClass.NewValue, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateGeneralEntityFieldModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetEntityOldFieldValueModelOutput>> GetEntityOldFieldValue([FromBody] GetEntityOldFieldValueModelInput ObjClass)
+        {
+            var procedureName = "UspGetEntityOldFieldValue";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityTypeId", ObjClass.EntityTypeId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("EntityFieldId", ObjClass.EntityFieldId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CustomerIdOrCardOrMerchantId", ObjClass.CustomerIdOrCardOrMerchantId, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetEntityOldFieldValueModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
