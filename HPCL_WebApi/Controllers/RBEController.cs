@@ -688,7 +688,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_approve_changed_rbe_mapping")]
-        public async Task<IActionResult> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
+        public async Task<IActionResult> GetApproveChangeRBEMapping([FromBody] GetApproveChangeRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -696,14 +696,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.ApproveChangeRBEMapping(ObjClass);
+                var result = await _RBERepo.GetApproveChangeRBEMapping(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<ApproveChangeRBEMappingModelOutput> item = result.Cast<ApproveChangeRBEMappingModelOutput>().ToList();
+                    List<GetApproveChangeRBEMappingModelOutput> item = result.Cast<GetApproveChangeRBEMappingModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else

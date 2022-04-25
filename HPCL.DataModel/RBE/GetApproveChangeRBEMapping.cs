@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.RBE
 {
-    public class ApproveChangeRBEMappingModelInput : BaseClass
+    public class GetApproveChangeRBEMappingModelInput : BaseClass
     {
         [JsonPropertyName("MappingStatus")]
         [DataMember]
@@ -19,7 +19,7 @@ namespace HPCL.DataModel.RBE
         public string MobileNo { get; set; }
     }
 
-    public class ApproveChangeRBEMappingModelOutput
+    public class GetApproveChangeRBEMappingModelOutput
     {
         [JsonProperty("RBEID")]
         [DataMember]
