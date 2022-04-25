@@ -15,9 +15,15 @@ namespace HPCL.DataModel.RBE
     }
     public class GetRbeMappingStatusModelOutput
     {
+        [JsonPropertyName("StatusId")]
+        [DataMember]
+        public int StatusId { get; set; }
+
         [JsonPropertyName("MappingStatus")]
         [DataMember]
         public string MappingStatus { get; set; }
+
+      
 
     }
 }
