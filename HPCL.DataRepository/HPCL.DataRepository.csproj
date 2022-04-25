@@ -47,7 +47,6 @@
     <Folder Include="City\" />
     <Folder Include="CountryZone\" />
     <Folder Include="Country\" />
-    <Folder Include="CustomerAPI\" />
     <Folder Include="State\" />
   </ItemGroup>
 

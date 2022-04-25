@@ -331,6 +331,35 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_status_types_for_terminal")]
+        public async Task<IActionResult> GetStatusTypesForTerminal([FromBody] GetStatusTypesForTerminalModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _settingRepo.GetStatusTypesForTerminal(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetStatusTypesForTerminalModelOutput> item = result.Cast<GetStatusTypesForTerminalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
     }
 
 }
