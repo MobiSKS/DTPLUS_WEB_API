@@ -786,7 +786,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].Status == 1)
                     {
                         Variables.SendSMS(1, "1007281863891553879", ObjClass.NewMobileNo, ObjClass.CreatedBy,
                             result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].OTP);
@@ -828,6 +828,34 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_approve_change_rbe_mobile")]
+        public async Task<IActionResult> GetApproveChangedRBEMobile([FromBody] GetApproveChangedRBEMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetApproveChangedRBEMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetApproveChangedRBEMobileModelOutput> item = result.Cast<GetApproveChangedRBEMobileModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
 
     }
 }

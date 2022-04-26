@@ -455,5 +455,16 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<ValidateOtpChangeRbeMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetApproveChangedRBEMobileModelOutput>> GetApproveChangedRBEMobile([FromBody] GetApproveChangedRBEMobileModelInput ObjClass)
+        {
+            var procedureName = "UspGetApproveChangedRBEMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetApproveChangedRBEMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
