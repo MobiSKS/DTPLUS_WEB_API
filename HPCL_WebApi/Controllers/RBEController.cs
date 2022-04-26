@@ -599,8 +599,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_mobile_change_request")]
-        public async Task<IActionResult> RBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
+        [Route("get_rbe_mobile_change_request")]
+        public async Task<IActionResult> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
         {
             if (ObjClass == null)
             {
