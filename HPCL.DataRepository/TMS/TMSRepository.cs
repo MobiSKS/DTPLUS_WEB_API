@@ -100,7 +100,6 @@ namespace HPCL.DataRepository.TMS
         }
         public async Task<IEnumerable<GetEnrollmentStatusModelOutput>> GetEnrollmentStatus()
         {
-            string str = _configuration.GetSection("TMSSettings:CargoFLUser").Value;
         var procedureName = "UspGetTMSEnrollmentStatus";
             var parameters = new DynamicParameters();
             using var connection = _context.CreateConnection();
@@ -194,6 +193,64 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("CustomerTracking", dtDBR, DbType.Object, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<TMSUpdateEnrollmentStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+
+        public async Task<IEnumerable<GetEnrollVehicleManagementModeloutput>> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
+        {
+            var procedureName = "UspGetEnrollVehicleManagementDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("EnrollmentStatus", ObjClass.EnrollmentStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("VehicleNo", ObjClass.VehicleNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetEnrollVehicleManagementModeloutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetEnrollVehicleManagementStatusOutput>> GetEnrollVehicleManagementStatus()
+        {
+            var procedureName = "UspGetVehicleEnrollmentStatus";
+            var parameters = new DynamicParameters();
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetEnrollVehicleManagementStatusOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<InsertVehicleEnrollmentStatusOutput>> InsertVehicleEnrollmentStatus(InsertVehicleEnrollmentStatusInput ObjClass)
+        {
+            var dtDBR = new DataTable("CardVehicleDetail");
+            dtDBR.Columns.Add("CustomerID", typeof(string));
+            //dtDBR.Columns.Add("TMSUserId", typeof(string));
+            dtDBR.Columns.Add("EnrollmentStatus", typeof(int));
+            dtDBR.Columns.Add("CardNo", typeof(string));
+            dtDBR.Columns.Add("VehicleNo", typeof(string));
+            dtDBR.Columns.Add("CreatedBy", typeof(string));
+
+            if (ObjClass.VehicleEnrollmentStatusList != null)
+            {
+                
+                foreach (var item in ObjClass.VehicleEnrollmentStatusList)
+                {                   
+
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CustomerID"] = item.CustomerID;
+                    dr["EnrollmentStatus"] = 1;
+                    dr["CardNo"] = item.CardNo;
+                    dr["VehicleNo"] =item.VehicleNo;
+                    dr["CreatedBy"] = item.CreatedBy;
+
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+
+
+                }
+               
+            }
+            var procedureName = "UspInsertVehicleEnrollmentStatus";
+            var parameters = new DynamicParameters();
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<InsertVehicleEnrollmentStatusOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 
