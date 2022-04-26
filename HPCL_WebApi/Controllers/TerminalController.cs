@@ -45,7 +45,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.ObjMerchantDetail.Count > 0)
+                    if (result.ObjMerchantDetail.Count > 0 || result.ObjTerminalDetail.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
                         return this.Fail(ObjClass, result, _logger);

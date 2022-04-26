@@ -47,17 +47,23 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<RBEDeviceIdResetRequestModelOutput>> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass);
        
-        public Task<IEnumerable<RBEMobileChangeRequestModelOutput>> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass);
+        public Task<IEnumerable<GetRBEMobileChangeRequestModelOutput>> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass);
        
         public Task<IEnumerable<RequestToChangeRBEMappingModelOutput>> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass);
        
         public Task<IEnumerable<ValidateOtpRBEMappingModelOutput>> ValidateOtpRBEMapping([FromBody] ValidateOtpRBEMappingModelInput ObjClass);
 
-        public Task<IEnumerable<ApproveChangeRBEMappingModelOutput>> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass);
+        public Task<IEnumerable<GetApproveChangeRBEMappingModelOutput>> GetApproveChangeRBEMapping([FromBody] GetApproveChangeRBEMappingModelInput ObjClass);
 
-        public Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass);
+        public Task<IEnumerable<GetRbeMappingStatusModelOutput>> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass);
 
-        public Task<IEnumerable<ChangeRbeUserModelOutput>> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass);
+        public Task<IEnumerable<ApproveRejectChangedRbeMappingModelOutput>> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass);
+
+
+        public Task<IEnumerable<SendOtpChangeRBEMobileModelOutput>> SendOtpChangeRBEMobile([FromBody] SendOtpChangeRBEMobileModelInput ObjClass);
+
+        public Task<IEnumerable<ValidateOtpChangeRbeMobileModelOutput>> ValidateOtpChangeRbeMobile([FromBody] ValidateOtpChangeRbeMobileModelInput ObjClass);
+
 
     }
 }

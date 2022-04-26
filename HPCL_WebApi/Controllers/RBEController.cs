@@ -599,8 +599,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_mobile_change_request")]
-        public async Task<IActionResult> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass)
+        [Route("get_rbe_mobile_change_request")]
+        public async Task<IActionResult> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -608,14 +608,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.RBEMobileChangeRequest(ObjClass);
+                var result = await _RBERepo.GetRBEMobileChangeRequest(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<RBEMobileChangeRequestModelOutput> item = result.Cast<RBEMobileChangeRequestModelOutput>().ToList();
+                    List<GetRBEMobileChangeRequestModelOutput> item = result.Cast<GetRBEMobileChangeRequestModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -625,7 +625,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-       // [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("request_to_change_rbe_mapping")]
         public async Task<IActionResult> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
         {
@@ -687,8 +687,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("approve_change_rbe_mapping")]
-        public async Task<IActionResult> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
+        [Route("get_approve_changed_rbe_mapping")]
+        public async Task<IActionResult> GetApproveChangeRBEMapping([FromBody] GetApproveChangeRBEMappingModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -696,14 +696,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.ApproveChangeRBEMapping(ObjClass);
+                var result = await _RBERepo.GetApproveChangeRBEMapping(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<ApproveChangeRBEMappingModelOutput> item = result.Cast<ApproveChangeRBEMappingModelOutput>().ToList();
+                    List<GetApproveChangeRBEMappingModelOutput> item = result.Cast<GetApproveChangeRBEMappingModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -714,8 +714,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_mapping_status")]
-        public async Task<IActionResult> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+        [Route("get_rbe_mapping_status")]
+        public async Task<IActionResult> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass)
         {
 
             if (ObjClass == null)
@@ -724,14 +724,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.RbeMappingStatus(ObjClass);
+                var result = await _RBERepo.GetRbeMappingStatus(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<RbeMappingStatusModelOutput> item = result.Cast<RbeMappingStatusModelOutput>().ToList();
+                    List<GetRbeMappingStatusModelOutput> item = result.Cast<GetRbeMappingStatusModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -743,8 +743,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("change_rbe_user")]
-        public async Task<IActionResult> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        [Route("approve_reject_changed_rbe_mapping")]
+        public async Task<IActionResult> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -752,14 +752,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.ChangeRbeUser(ObjClass);
+                var result = await _RBERepo.ApproveRejectChangedRbeMapping(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<ChangeRbeUserModelOutput> item = result.Cast<ChangeRbeUserModelOutput>().ToList();
+                    List<ApproveRejectChangedRbeMappingModelOutput> item = result.Cast<ApproveRejectChangedRbeMappingModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -768,6 +768,66 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("send_otp_change_rbe_mobile")]
+        public async Task<IActionResult> SendOtpChangeRBEMobile([FromBody] SendOtpChangeRBEMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.SendOtpChangeRBEMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<RequestToChangeRBEMappingModelOutput>().ToList()[0].Status == 1)
+                    {
+                        Variables.SendSMS(1, "1007281863891553879", ObjClass.NewMobileNo, ObjClass.CreatedBy,
+                            result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].OTP);
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("validate_otp_change_rbe_mobile")]
+        public async Task<IActionResult> ValidateOtpChangeRbeMobile([FromBody] ValidateOtpChangeRbeMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ValidateOtpChangeRbeMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ValidateOtpChangeRbeMobileModelOutput> item = result.Cast<ValidateOtpChangeRbeMobileModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
 
     }
 }

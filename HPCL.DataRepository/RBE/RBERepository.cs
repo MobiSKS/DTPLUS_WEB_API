@@ -372,14 +372,14 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<RBEDeviceIdResetRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<RBEMobileChangeRequestModelOutput>> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass)
+        public async Task<IEnumerable<GetRBEMobileChangeRequestModelOutput>> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
         {
-            var procedureName = "UspRBEMobileChangeRequest";
+            var procedureName = "UspGetRBEMobileChangeRequest";
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<RBEMobileChangeRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetRBEMobileChangeRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<RequestToChangeRBEMappingModelOutput>> RequestToChangeRBEMapping([FromBody] RequestToChangeRBEMappingModelInput ObjClass)
@@ -405,33 +405,55 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<ValidateOtpRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
        
-        public async Task<IEnumerable<ApproveChangeRBEMappingModelOutput>> ApproveChangeRBEMapping([FromBody] ApproveChangeRBEMappingModelInput ObjClass)
+        public async Task<IEnumerable<GetApproveChangeRBEMappingModelOutput>> GetApproveChangeRBEMapping([FromBody] GetApproveChangeRBEMappingModelInput ObjClass)
         {
-            var procedureName = "UspApproveChangeRBEMapping";
+            var procedureName = "UspGetApproveChangeRBEMapping";
             var parameters = new DynamicParameters();
             parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<ApproveChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetApproveChangeRBEMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-        public async Task<IEnumerable<RbeMappingStatusModelOutput>> RbeMappingStatus([FromBody] RbeMappingStatusModelInput ObjClass)
+       
+        public async Task<IEnumerable<GetRbeMappingStatusModelOutput>> GetRbeMappingStatus([FromBody] GetRbeMappingStatusModelInput ObjClass)
         {
             var procedureName = "UspGetRbeMappingStatus";
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<RbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetRbeMappingStatusModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
         }
-
-        public async Task<IEnumerable<ChangeRbeUserModelOutput>> ChangeRbeUser([FromBody] ChangeRbeUserModelInput ObjClass)
+        
+        public async Task<IEnumerable<ApproveRejectChangedRbeMappingModelOutput>> ApproveRejectChangedRbeMapping([FromBody] ApproveRejectChangedRbeMappingModelInput ObjClass)
         {
-            var procedureName = "UspChangeRbeUser";
+            var procedureName = "UspApproveRejectChangedRbeMapping";
             var parameters = new DynamicParameters();
             parameters.Add("PreRBEUserName", ObjClass.PreRBEUserName, DbType.String, ParameterDirection.Input);
             parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<ChangeRbeUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<ApproveRejectChangedRbeMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<SendOtpChangeRBEMobileModelOutput>> SendOtpChangeRBEMobile([FromBody] SendOtpChangeRBEMobileModelInput ObjClass)
+        {
+            var procedureName = "UspSendOtpChangeRBEMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("NewMobileNo", ObjClass.NewMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SendOtpChangeRBEMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ValidateOtpChangeRbeMobileModelOutput>> ValidateOtpChangeRbeMobile([FromBody] ValidateOtpChangeRbeMobileModelInput ObjClass)
+        {
+            var procedureName = "UspValidateOtpChangeRbeMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("ExistingMobileNo", ObjClass.ExistingMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("NewMobileNo", ObjClass.NewMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateOtpChangeRbeMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
 
     }
 }

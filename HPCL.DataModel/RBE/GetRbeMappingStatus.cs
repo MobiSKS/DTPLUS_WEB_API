@@ -9,15 +9,21 @@ using System.Threading.Tasks;
 namespace HPCL.DataModel.RBE
 {
 
-    public class RbeMappingStatusModelInput : BaseClass
+    public class GetRbeMappingStatusModelInput : BaseClass
     {
 
     }
-    public class RbeMappingStatusModelOutput
+    public class GetRbeMappingStatusModelOutput
     {
+        [JsonPropertyName("StatusId")]
+        [DataMember]
+        public int StatusId { get; set; }
+
         [JsonPropertyName("MappingStatus")]
         [DataMember]
         public string MappingStatus { get; set; }
+
+      
 
     }
 }

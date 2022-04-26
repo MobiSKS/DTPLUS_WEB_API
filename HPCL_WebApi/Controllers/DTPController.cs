@@ -220,16 +220,103 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.Cast<DeleteHTeamMappingModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<DeleteTeamMappingModelOutput>().ToList()[0].Status == 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
-                        return this.FailCustom(ObjClass, result, _logger, result.Cast<DeleteHTeamMappingModelOutput>().ToList()[0].Reason);
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<DeleteTeamMappingModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_field_by_entity_type_id")]
+        public async Task<IActionResult> GetEntityFieldByEntityTypeId([FromBody] GetEntityFieldByEntityTypeIdModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.GetEntityFieldByEntityTypeId(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetEntityFieldByEntityTypeIdModelOutput> item = result.Cast<GetEntityFieldByEntityTypeIdModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_general_entity_field")]
+        public async Task<IActionResult> UpdateGeneralEntityField([FromBody] UpdateGeneralEntityFieldModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.UpdateGeneralEntityField(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateGeneralEntityFieldModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<UpdateGeneralEntityFieldModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_old_field_value")]
+        public async Task<IActionResult> GetEntityOldFieldValue([FromBody] GetEntityOldFieldValueModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.GetEntityOldFieldValue(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetEntityOldFieldValueModelOutput> item = result.Cast<GetEntityOldFieldValueModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
         }
     }
 }
