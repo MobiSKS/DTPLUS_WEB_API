@@ -599,8 +599,8 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_mobile_change_request")]
-        public async Task<IActionResult> RBEMobileChangeRequest([FromBody] RBEMobileChangeRequestModelInput ObjClass)
+        [Route("get_rbe_mobile_change_request")]
+        public async Task<IActionResult> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -608,14 +608,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.RBEMobileChangeRequest(ObjClass);
+                var result = await _RBERepo.GetRBEMobileChangeRequest(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<RBEMobileChangeRequestModelOutput> item = result.Cast<RBEMobileChangeRequestModelOutput>().ToList();
+                    List<GetRBEMobileChangeRequestModelOutput> item = result.Cast<GetRBEMobileChangeRequestModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -768,6 +768,119 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("send_otp_change_rbe_mobile")]
+        public async Task<IActionResult> SendOtpChangeRBEMobile([FromBody] SendOtpChangeRBEMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.SendOtpChangeRBEMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].Status == 1)
+                    {
+                        Variables.SendSMS(1, "1007281863891553879", ObjClass.NewMobileNo, ObjClass.CreatedBy,
+                            result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].OTP);
 
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<SendOtpChangeRBEMobileModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("validate_otp_change_rbe_mobile")]
+        public async Task<IActionResult> ValidateOtpChangeRbeMobile([FromBody] ValidateOtpChangeRbeMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ValidateOtpChangeRbeMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ValidateOtpChangeRbeMobileModelOutput> item = result.Cast<ValidateOtpChangeRbeMobileModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_approve_change_rbe_mobile")]
+        public async Task<IActionResult> GetApproveChangedRBEMobile([FromBody] GetApproveChangedRBEMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.GetApproveChangedRBEMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetApproveChangedRBEMobileModelOutput> item = result.Cast<GetApproveChangedRBEMobileModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("approve_reject_changed_rbe_mobile")]
+        public async Task<IActionResult> ApproveRejectChangedRbeMobile([FromBody] ApproveRejectChangedRbeMobileModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _RBERepo.ApproveRejectChangedRbeMobile(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ApproveRejectChangedRbeMobileModelOutput> item = result.Cast<ApproveRejectChangedRbeMobileModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }

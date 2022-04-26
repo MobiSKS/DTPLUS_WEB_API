@@ -223,25 +223,32 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-        [HttpGet]
-       // [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("Get_TMSEnrollment_Status")]
-        public async Task<IActionResult> GetEnrollmentStatus()
+        public async Task<IActionResult> GetEnrollmentStatusDetail(GetEnrollmentStatusModelInput ObjClass)
         {
-           
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+
                 var result = await _tmsRepo.GetEnrollmentStatus();
                 if (result == null)
                 {
-                    return this.NotFoundCustom(null, null, _logger);
+                    return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
                     List<GetEnrollmentStatusModelOutput> item = result.Cast<GetEnrollmentStatusModelOutput>().ToList();
                     if (item.Count > 0)
-                        return this.OkCustom(null, result, _logger);
+                        return this.OkCustom(ObjClass, result, _logger);
                     else
-                        return this.Fail(null, result, _logger);
+                        return this.Fail(ObjClass, result, _logger);
                 }
+            }
             
         }
 
@@ -268,6 +275,93 @@ namespace HPCL_WebApi.Controllers
                 {                    
                         return this.OkCustom(ObjClass, result, _logger);
                    
+                }
+            }
+
+        }
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Get_Vehicle_Enrollment_Detail")]
+        public async Task<IActionResult> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.GetEnrollVehicleManagementDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetCustomerDetailForEnrollmentApprovalOutput> item = result.Cast<GetCustomerDetailForEnrollmentApprovalOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Get_Vehicle_Enrollment_Status")]
+        public async Task<IActionResult> GetEnrollVehicleManagementStatus([FromBody] GetEnrollVehicleManagementStatusInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.GetEnrollVehicleManagementStatus();
+                if (result == null)
+                {
+                    return this.NotFoundCustom(null, null, _logger);
+                }
+                else
+                {
+                    List<GetEnrollVehicleManagementStatusOutput> item = result.Cast<GetEnrollVehicleManagementStatusOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(null, result, _logger);
+                    else
+                        return this.Fail(null, result, _logger);
+                }
+            }
+            
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Insert_Vehicle_Enrollment_Status")]
+        public async Task<IActionResult> InsertVehicleEnrollmentStatus([FromBody] InsertVehicleEnrollmentStatusInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.InsertVehicleEnrollmentStatus(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(null, null, _logger);
+                }
+                else
+                {
+                    List<InsertVehicleEnrollmentStatusOutput> item = result.Cast<InsertVehicleEnrollmentStatusOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(null, result, _logger);
+                    else
+                        return this.Fail(null, result, _logger);
                 }
             }
 
