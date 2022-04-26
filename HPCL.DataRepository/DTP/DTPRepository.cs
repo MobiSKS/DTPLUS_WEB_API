@@ -139,5 +139,26 @@ namespace HPCL.DataRepository.DTP
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetEntityOldFieldValueModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GetDetailForUserUnblockByCustomerIdOrUserNameModelOutput>> GetDetailForUserUnblockByCustomerIdOrUserName([FromBody] GetDetailForUserUnblockByCustomerIdOrUserNameModelInput ObjClass)
+        {
+            var procedureName = "UspGetDetailForUserUnblockByCustomerIdOrUserName";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetDetailForUserUnblockByCustomerIdOrUserNameModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+        public async Task<IEnumerable<UserUnBlockModelOutput>> UserUnBlock([FromBody] UserUnBlockModelInput ObjClass)
+        {
+            var procedureName = "UspUserUnBlock";
+            var parameters = new DynamicParameters();
+            parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
+            parameters.Add("BloackUnblockStatus", ObjClass.BloackUnblockStatus, DbType.Int32, ParameterDirection.Input);            
+            parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UserUnBlockModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
