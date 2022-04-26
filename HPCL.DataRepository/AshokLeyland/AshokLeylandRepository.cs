@@ -227,8 +227,8 @@ namespace HPCL.DataRepository.AshokLeyland
             dtDBR.Columns.Add("CardNo", typeof(string));
             dtDBR.Columns.Add("VechileNo", typeof(string));
             dtDBR.Columns.Add("VehicleType", typeof(string));
-            dtDBR.Columns.Add("VINNumber", typeof(int));
-            dtDBR.Columns.Add("MobileNo", typeof(int));
+            dtDBR.Columns.Add("VINNumber", typeof(string));
+            dtDBR.Columns.Add("MobileNo", typeof(string));
 
             var procedureName = "UspInsertAlAddOnOTCCardMapping";
             var parameters = new DynamicParameters();
