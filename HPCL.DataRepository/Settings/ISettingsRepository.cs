@@ -19,5 +19,8 @@ namespace HPCL.DataRepository.Settings
         public Task<IEnumerable<SettingGetRecordTypeModelOutput>> GetRecordType([FromBody] SettingGetRecordTypeModelInput ObjClass);
 
         public Task<IEnumerable<SettingGetSalesareaModelOutput>> GetSalesAreaByMultipleRegion([FromBody] SettingGetSalesAreaByMultipleRegionModelInput ObjClass);
+
+        public Task<IEnumerable<GetStatusTypesForTerminalModelOutput>> GetStatusTypesForTerminal([FromBody] GetStatusTypesForTerminalModelInput ObjClass);
+
     }
 }
