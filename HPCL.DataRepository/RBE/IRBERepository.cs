@@ -68,6 +68,10 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<ApproveRejectChangedRbeMobileModelOutput>> ApproveRejectChangedRbeMobile([FromBody] ApproveRejectChangedRbeMobileModelInput ObjClass);
 
+        public Task<IEnumerable<SendOtpResetRBEDeviceModelOutput>> SendOtpResetRBEDevice([FromBody] SendOtpResetRBEDeviceModelInput ObjClass);
+
+        public Task<IEnumerable<ValidateOtpResetRBEDeviceModelOutput>> ValidateOtpResetRBEDevice([FromBody] ValidateOtpResetRBEDeviceModelInput ObjClass);
+
 
     }
 }

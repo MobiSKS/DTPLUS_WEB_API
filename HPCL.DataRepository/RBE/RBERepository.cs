@@ -476,5 +476,26 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<ApproveRejectChangedRbeMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<SendOtpResetRBEDeviceModelOutput>> SendOtpResetRBEDevice([FromBody] SendOtpResetRBEDeviceModelInput ObjClass)
+        {
+            var procedureName = "UspSendOtpResetRBEDevice";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SendOtpResetRBEDeviceModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ValidateOtpResetRBEDeviceModelOutput>> ValidateOtpResetRBEDevice([FromBody] ValidateOtpResetRBEDeviceModelInput ObjClass)
+        {
+            var procedureName = "UspValidateOtpResetRBEDevice";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateOtpResetRBEDeviceModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
