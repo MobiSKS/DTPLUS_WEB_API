@@ -29,8 +29,15 @@ namespace HPCL.DataModel.Merchant
 
         [JsonProperty("ObjTerminalDetail")]
         public List<TerminalDetailOutput> ObjTerminalDetail { get; set; }
+
+        [JsonProperty("ObjStatusDetail")]
+        public List<StatusOutput> ObjStatusDetail { get; set; }
     }
 
+    public class StatusOutput : BaseClassOutput
+    {
+
+    }
 
     public class MerchantDetailOutput
     {

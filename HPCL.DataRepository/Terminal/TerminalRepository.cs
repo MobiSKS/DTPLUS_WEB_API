@@ -30,6 +30,7 @@ namespace HPCL.DataRepository.Terminal
             var storedProcedureResult = new MerchantSearchForTerminalInstallationRequestModelOutput();
             storedProcedureResult.ObjMerchantDetail = (List<MerchantDetailOutput>)await result.ReadAsync<MerchantDetailOutput>();
             storedProcedureResult.ObjTerminalDetail = (List<TerminalDetailOutput>)await result.ReadAsync<TerminalDetailOutput>();
+            storedProcedureResult.ObjStatusDetail = (List<StatusOutput>)await result.ReadAsync<StatusOutput>();
             return storedProcedureResult;
 
         }
