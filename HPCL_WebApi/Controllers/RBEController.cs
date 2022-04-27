@@ -573,7 +573,7 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_rbe_deviceid_reset_request")]
-        public async Task<IActionResult> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass)
+        public async Task<IActionResult> GetRBEDeviceIdResetRequest([FromBody] GetRBEDeviceIdResetRequestModelInput ObjClass)
         {
             if (ObjClass == null)
             {
@@ -581,14 +581,14 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _RBERepo.RBEDeviceIdResetRequest(ObjClass);
+                var result = await _RBERepo.GetRBEDeviceIdResetRequest(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<RBEDeviceIdResetRequestModelOutput> item = result.Cast<RBEDeviceIdResetRequestModelOutput>().ToList();
+                    List<GetRBEDeviceIdResetRequestModelOutput> item = result.Cast<GetRBEDeviceIdResetRequestModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
