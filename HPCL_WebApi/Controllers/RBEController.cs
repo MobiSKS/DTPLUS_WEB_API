@@ -572,7 +572,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("rbe_deviceid_reset_request")]
+        [Route("get_rbe_deviceid_reset_request")]
         public async Task<IActionResult> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass)
         {
             if (ObjClass == null)
