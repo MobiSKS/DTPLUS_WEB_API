@@ -7,17 +7,17 @@ namespace HPCL.DataModel.RBE
    
     public class GetApproveChangedRBEMobileModelInput : BaseClass
     {
-        [JsonPropertyName("MappingStatus")]
+        [JsonPropertyName("ApprovalStatus")]
         [DataMember]
-        public string MappingStatus { get; set; }
+        public string ApprovalStatus { get; set; }
 
         [JsonPropertyName("FirstName")]
         [DataMember]
         public string FirstName { get; set; }
 
-        [JsonPropertyName("MobileNo")]
+        [JsonPropertyName("RBEId")]
         [DataMember]
-        public string MobileNo { get; set; }
+        public string RBEId { get; set; }
     }
 
     public class GetApproveChangedRBEMobileModelOutput
