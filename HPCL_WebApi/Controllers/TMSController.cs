@@ -61,23 +61,29 @@ namespace HPCL_WebApi.Controllers
                     if (result.Cast<GetEnrollTransportManagementSystemModelOutput>().ToList()[0].Status == 1)
                     {
                         ApiRequestResponse response = new ApiRequestResponse();
-                        CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse(); 
-                        CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value};
-                       // string cargofl_userid = "admin";
-                        string apiurl = _configuration.GetSection("TMSSettings:APIUrl").Value;                          
+                        CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse();
+                        CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value };
+                        // string cargofl_userid = "admin";
+                        string apiurl = _configuration.GetSection("TMSSettings:APIUrl").Value;
 
-                        string json = Variables.CallPostAPI(apiurl+ "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
-                       if(!string.IsNullOrEmpty(json))
+                         HttpResponseMessage apiResponse = Variables.CallPostAPI(apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                        string json=string.Empty;
+                        if (apiResponse.IsSuccessStatusCode)
                         {
-                            cargoFlLoginResponse=JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
+                            json = apiResponse.Content.ReadAsStringAsync().Result;
                         }
-                        var dat = JObject.Parse(json);
+                        if (!string.IsNullOrEmpty(json))
+                        {
+                            cargoFlLoginResponse = JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
+                        }
+                        //var dat = JObject.Parse(json);
 
                         response.apiurl = apiurl + "v1/common/loginSuperUser";
                         response.request = JsonConvert.SerializeObject(obj);
-                        response.response = json;
+                        response.response = apiResponse.Content.ReadAsStringAsync().Result;
                         response.UserId = "Test";
                         _tmsRepo.InsertAPIRequestResponse(response);
+
 
                         CargoFlRegisterTrucker objcargoFL = new CargoFlRegisterTrucker();
                         var cargoflUser = _tmsRepo.GetCargoFlRegisterTruckerDetail(ObjClass.CustomerId).Result.ToList<CargoFlRegisterTrucker>();
@@ -85,13 +91,17 @@ namespace HPCL_WebApi.Controllers
                         {
                             objcargoFL = cargoflUser.ToList().FirstOrDefault();
                         }
-                       string res = Variables.CallPostAPI(apiurl+ "v1/user/registerTrucker", JsonConvert.SerializeObject(objcargoFL), cargoFlLoginResponse.access_token).Result;
-                       
+                        HttpResponseMessage apiResult = Variables.CallPostAPI(apiurl + "v1/user/registerTrucker", JsonConvert.SerializeObject(objcargoFL), cargoFlLoginResponse.access_token).Result;
+                        string res = string.Empty;
+                        if (apiResult.IsSuccessStatusCode)
+                        {
+                            res = apiResult.Content.ReadAsStringAsync().Result;
+                        }
                         response.apiurl = apiurl + "v1/user/registerTrucker";
-                        response.request = JsonConvert.SerializeObject(obj);                   
+                        response.request = JsonConvert.SerializeObject(obj);
 
 
-                            response.response = res;
+                        response.response = apiResult.Content.ReadAsStringAsync().Result;
                         if (string.IsNullOrEmpty(res))
                         {
                             CargoFlLogin objval = new CargoFlLogin();
@@ -103,7 +113,7 @@ namespace HPCL_WebApi.Controllers
 
                         }
 
-                            _tmsRepo.InsertAPIRequestResponse(response);
+                        _tmsRepo.InsertAPIRequestResponse(response);
                         return this.OkCustom(ObjClass, JObject.Parse(res), _logger);
                     }
                     else
@@ -115,6 +125,9 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        
+
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_enrollment_status")]
@@ -362,6 +375,72 @@ namespace HPCL_WebApi.Controllers
                         return this.OkCustom(null, result, _logger);
                     else
                         return this.Fail(null, result, _logger);
+                }
+            }
+
+        }
+
+
+        [HttpPost]
+        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("Get_Transport_Management_System_Url")]
+        public async Task<IActionResult> GetTransportManagementSystemUrl([FromBody] GetTransportManagementSystemModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.GetActiveApprovedCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetTransportManagementSystemModelOutput> item = result.Cast<GetTransportManagementSystemModelOutput>().ToList();
+                    if (item.Count > 0)
+                    {
+                        if(item[0].Status == 1)
+                        {
+                            ApiRequestResponse response = new ApiRequestResponse();
+                            CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse();
+                            CargoFlLogin obj= new CargoFlLogin() {cargofl_userid= item[0].TMSUserId};
+                            string apiurl = _configuration.GetSection("TMSSettings:APIUrl").Value;
+                            HttpResponseMessage apiResponse = Variables.CallPostAPI(apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                            string json="";
+                            if(apiResponse.IsSuccessStatusCode)
+                            {
+                                json = apiResponse.Content.ReadAsStringAsync().Result;  
+                            }                           
+                            
+                            if (!string.IsNullOrEmpty(json))
+                            {
+                                cargoFlLoginResponse = JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
+                            }
+                            //var dat = JObject.Parse(json);
+
+                            response.apiurl = apiurl + "v1/common/loginSuperUser";
+                            response.request = JsonConvert.SerializeObject(obj);
+                            response.response = apiResponse.Content.ReadAsStringAsync().Result;
+                            response.UserId = "Test";
+                            _tmsRepo.InsertAPIRequestResponse(response);
+
+                            if (cargoFlLoginResponse != null && cargoFlLoginResponse.message.ToUpper().Contains("USER LOGGED IN SUCCESSFULLY"))
+                            {
+                                item[0].Url = _configuration.GetSection("TMSSettings:TransportSystemUrl").Value;
+                            }
+                            item[0].access_token = cargoFlLoginResponse.access_token;
+                            item[0].message = cargoFlLoginResponse.message;
+                            item[0].refresh_token = cargoFlLoginResponse.refresh_token;
+                            return this.OkCustom(ObjClass, item, _logger);
+                        }
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                        return this.Fail(ObjClass, result, _logger);
                 }
             }
 

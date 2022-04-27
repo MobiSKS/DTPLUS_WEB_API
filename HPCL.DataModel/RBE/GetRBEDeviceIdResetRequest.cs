@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.RBE
 {
-    public class RBEDeviceIdResetRequestModelInput : BaseClass
+    public class GetRBEDeviceIdResetRequestModelInput : BaseClass
     {
         [JsonPropertyName("FirstName")]
         [DataMember]
@@ -18,7 +18,7 @@ namespace HPCL.DataModel.RBE
         public string MobileNo { get; set; }
     }
 
-    public class RBEDeviceIdResetRequestModelOutput
+    public class GetRBEDeviceIdResetRequestModelOutput
     {
         [JsonProperty("RBEID")]
         [DataMember]
