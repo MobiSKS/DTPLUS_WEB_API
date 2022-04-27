@@ -4,8 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.RBE
 {
-   
-    public class GetApproveChangedRBEMobileModelInput : BaseClass
+    public class GetApproveChangedRBEDeviceResetModelInput : BaseClass
     {
         [JsonPropertyName("MappingStatus")]
         [DataMember]
@@ -20,7 +19,7 @@ namespace HPCL.DataModel.RBE
         public string MobileNo { get; set; }
     }
 
-    public class GetApproveChangedRBEMobileModelOutput
+    public class GetApproveChangedRBEDeviceResetModelOutput
     {
         [JsonProperty("RBEID")]
         [DataMember]
@@ -30,13 +29,9 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string RBEName { get; set; }
 
-        [JsonProperty("ExistingMobileNo")]
+        [JsonProperty("MobileNo")]
         [DataMember]
-        public string ExistingMobileNo { get; set; }
-
-        [JsonProperty("NewMobileNo")]
-        [DataMember]
-        public string NewMobileNo { get; set; }
+        public string MobileNo { get; set; }
 
         [JsonProperty("Region")]
         [DataMember]
@@ -46,8 +41,8 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string Status { get; set; }
 
-        [JsonProperty("ChangeRBEMobile")]
+        [JsonProperty("RBEDeviceReset")]
         [DataMember]
-        public string ChangeRBEMobile { get; set; }
+        public string RBEDeviceReset { get; set; }
     }
 }
