@@ -53,4 +53,21 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string Email { get; set; }
     }
+
+    public class GetTransportManagementSystemModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("CustomerId")]
+        [DataMember]
+        public string CustomerId { get; set; }
+
+    }
+    public class GetTransportManagementSystemModelOutput:BaseClassOutput
+    {
+        public string access_token { get; set; }
+        public string message { get; set; }
+        public string refresh_token { get; set; }
+        public string Url { get; set; }
+        public string TMSUserId { get; set; }
+    }
 }
