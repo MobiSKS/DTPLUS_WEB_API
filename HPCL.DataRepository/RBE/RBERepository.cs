@@ -364,7 +364,7 @@ namespace HPCL.DataRepository.RBE
 
         public async Task<IEnumerable<RBEDeviceIdResetRequestModelOutput>> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass)
         {
-            var procedureName = "UspRBEDeviceIdResetRequest";
+            var procedureName = "UspGetRBEDeviceIdResetRequest";
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
