@@ -362,14 +362,14 @@ namespace HPCL.DataRepository.RBE
             return await connection.QueryAsync<RBEApprovalRejectApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<RBEDeviceIdResetRequestModelOutput>> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass)
+        public async Task<IEnumerable<GetRBEDeviceIdResetRequestModelOutput>> GetRBEDeviceIdResetRequest([FromBody] GetRBEDeviceIdResetRequestModelInput ObjClass)
         {
-            var procedureName = "UspRBEDeviceIdResetRequest";
+            var procedureName = "UspGetRBEDeviceIdResetRequest";
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
             parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<RBEDeviceIdResetRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetRBEDeviceIdResetRequestModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<GetRBEMobileChangeRequestModelOutput>> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass)
@@ -453,6 +453,69 @@ namespace HPCL.DataRepository.RBE
             parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<ValidateOtpChangeRbeMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetApproveChangedRBEMobileModelOutput>> GetApproveChangedRBEMobile([FromBody] GetApproveChangedRBEMobileModelInput ObjClass)
+        {
+            var procedureName = "UspGetApproveChangedRBEMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("ApprovalStatus", ObjClass.ApprovalStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetApproveChangedRBEMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ApproveRejectChangedRbeMobileModelOutput>> ApproveRejectChangedRbeMobile([FromBody] ApproveRejectChangedRbeMobileModelInput ObjClass)
+        {
+            var procedureName = "UspApproveRejectChangedRbeMobile";
+            var parameters = new DynamicParameters();
+            parameters.Add("ExistingMobile", ObjClass.ExistingMobile, DbType.String, ParameterDirection.Input);
+            parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ApproveRejectChangedRbeMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<SendOtpResetRBEDeviceModelOutput>> SendOtpResetRBEDevice([FromBody] SendOtpResetRBEDeviceModelInput ObjClass)
+        {
+            var procedureName = "UspSendOtpResetRBEDevice";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<SendOtpResetRBEDeviceModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ValidateOtpResetRBEDeviceModelOutput>> ValidateOtpResetRBEDevice([FromBody] ValidateOtpResetRBEDeviceModelInput ObjClass)
+        {
+            var procedureName = "UspValidateOtpResetRBEDevice";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ValidateOtpResetRBEDeviceModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+        
+        public async Task<IEnumerable<GetApproveChangedRBEDeviceResetModelOutput>> GetApproveChangedRBEDeviceReset([FromBody] GetApproveChangedRBEDeviceResetModelInput ObjClass)
+        {
+            var procedureName = "UspGetApproveChangedRBEDeviceReset";
+            var parameters = new DynamicParameters();
+            parameters.Add("ApprovalStatus", ObjClass.ApprovalStatus, DbType.String, ParameterDirection.Input);
+            parameters.Add("FirstName", ObjClass.FirstName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEId", ObjClass.RBEId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetApproveChangedRBEDeviceResetModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<ApproveRejectChangedRBEDeviceResetModelOutput>> ApproveRejectChangedRBEDeviceReset([FromBody] ApproveRejectChangedRBEDeviceResetModelInput ObjClass)
+        {
+            var procedureName = "UspApproveRejectChangedRBEDeviceReset";
+            var parameters = new DynamicParameters();
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("MappingStatus", ObjClass.MappingStatus, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ApproveRejectChangedRBEDeviceResetModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

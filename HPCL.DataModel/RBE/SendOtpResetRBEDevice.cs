@@ -1,23 +1,20 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.RBE
 {
-    internal class SendOtpChangeRBEMobile
+    internal class SendOtpResetRBEDevice
     {
     }
 
-    public class SendOtpChangeRBEMobileModelInput : BaseClass
+    public class SendOtpResetRBEDeviceModelInput : BaseClass
     {
         [Required]
-        [JsonPropertyName("NewMobileNo")]
+        [JsonPropertyName("MobileNo")]
         [DataMember]
-        public string NewMobileNo { get; set; }
+        public string MobileNo { get; set; }
 
         [Required]
         [JsonPropertyName("CreatedBy")]
@@ -25,7 +22,7 @@ namespace HPCL.DataModel.RBE
         public string CreatedBy { get; set; }
     }
 
-    public class SendOtpChangeRBEMobileModelOutput : BaseClassOutput
+    public class SendOtpResetRBEDeviceModelOutput : BaseClassOutput
     {
 
         [JsonProperty("OTP")]
