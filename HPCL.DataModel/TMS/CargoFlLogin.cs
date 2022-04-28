@@ -58,14 +58,14 @@ namespace HPCL.DataModel.TMS
 
     public class AddVehicleAPIRequest
     {
-        public string Cargofl_userid { get; set; }
-        public List<Vehicle> Vehicles { get; set; }
+        public string cargofl_userid { get; set; }
+        public List<Vehicle> vehicles { get; set; }
     }
 
     public class Vehicle
     {
-        public string VehicleNo { get; set; }
-        public string VehicleType { get; set; }
+        public string vehicleNo { get; set; }
+        public string vehicleType { get; set; }
     }
 
 

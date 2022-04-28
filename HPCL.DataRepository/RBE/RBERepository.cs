@@ -465,7 +465,6 @@ namespace HPCL.DataRepository.RBE
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetApproveChangedRBEMobileModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
         public async Task<IEnumerable<ApproveRejectChangedRbeMobileModelOutput>> ApproveRejectChangedRbeMobile([FromBody] ApproveRejectChangedRbeMobileModelInput ObjClass)
         {
             var procedureName = "UspApproveRejectChangedRbeMobile";
