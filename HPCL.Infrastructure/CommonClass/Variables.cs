@@ -138,9 +138,7 @@ namespace HPCL.Infrastructure.CommonClass
             }
         }
 
-
-
-        public static async Task<string> CallPostAPI(string apiurl,string data,string authorizationToken="")
+        public static async Task<HttpResponseMessage> CallPostAPI(string apiurl,string data,string authorizationToken="")
         {
             string result = string.Empty;
             HttpClient client = new HttpClient();
@@ -152,13 +150,8 @@ namespace HPCL.Infrastructure.CommonClass
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", authorizationToken);
             }
 
-            HttpResponseMessage response = client.PostAsync(apiurl, content).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                result= await response.Content.ReadAsStringAsync();
-            }
-            return result;
+            return client.PostAsync(apiurl, content).Result;
+           
         }
 
         public static bool FunSendMail(string strEmailId, string strMailMessage, string strSubject)

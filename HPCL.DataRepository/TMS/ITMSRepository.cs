@@ -20,6 +20,7 @@ namespace HPCL.DataRepository.TMS
         public Task<IEnumerable<GetEnrollVehicleManagementModeloutput>> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass);
         public Task<IEnumerable<GetEnrollVehicleManagementStatusOutput>> GetEnrollVehicleManagementStatus();
         public Task<IEnumerable<InsertVehicleEnrollmentStatusOutput>> InsertVehicleEnrollmentStatus(InsertVehicleEnrollmentStatusInput ObjClass);
+        public Task<IEnumerable<GetTransportManagementSystemModelOutput>> GetActiveApprovedCustomer(GetTransportManagementSystemModelInput ObjClass);
         public Task<IEnumerable<BindEnrollTransportManagementSystemModelOutput>> BindEnrollTransportManagementSystem(BindEnrollTransportManagementSystemModelInput ObjClass);
     }
 }

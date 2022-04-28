@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -128,7 +129,12 @@ namespace HPCL.DataRepository.TMS
                     CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse();
                     CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value};
 
-                    string json = Variables.CallPostAPI(Apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                    HttpResponseMessage apiResponse = Variables.CallPostAPI(Apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                    string json = "";
+                    if (apiResponse.IsSuccessStatusCode)
+                    {
+                        json = apiResponse.Content.ReadAsStringAsync().Result;
+                    }
                     if (!string.IsNullOrEmpty(json))
                     {
                         cargoFlLoginResponse = JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
@@ -136,7 +142,7 @@ namespace HPCL.DataRepository.TMS
                     //var dat = JObject.Parse(json);
                     response.apiurl = Apiurl + "v1/common/loginSuperUser";
                     response.request = JsonConvert.SerializeObject(obj);
-                    response.response = json;
+                    response.response = apiResponse.Content.ReadAsStringAsync().Result;
                     response.UserId = ObjDetail.CreatedBy;
                     InsertAPIRequestResponse(response);
 
@@ -152,13 +158,17 @@ namespace HPCL.DataRepository.TMS
                         }
 
 
-                        string res = Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
-
+                         HttpResponseMessage apiResult= Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
+                        string res = string.Empty;
+                        if (apiResult.IsSuccessStatusCode)
+                        {
+                            res = apiResult.Content.ReadAsStringAsync().Result;
+                        }
                         response.apiurl = apiurl;
                         response.request = JsonConvert.SerializeObject(obj);
 
 
-                        response.response = res;
+                        response.response = apiResult.Content.ReadAsStringAsync().Result; ;
                         CargoFlLoginResponse objResponce = new CargoFlLoginResponse();
                         if (string.IsNullOrEmpty(res))
                         {
@@ -251,6 +261,16 @@ namespace HPCL.DataRepository.TMS
             var parameters = new DynamicParameters();
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<InsertVehicleEnrollmentStatusOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<GetTransportManagementSystemModelOutput>> GetActiveApprovedCustomer(GetTransportManagementSystemModelInput ObjClass)
+        {
+            var procedureName = "UspGetActiveApprovedCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetTransportManagementSystemModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<BindEnrollTransportManagementSystemModelOutput>> BindEnrollTransportManagementSystem([FromBody] BindEnrollTransportManagementSystemModelInput ObjClass)
