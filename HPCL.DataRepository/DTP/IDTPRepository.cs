@@ -25,6 +25,6 @@ namespace HPCL.DataRepository.DTP
         public Task<IEnumerable<UpdateGeneralEntityFieldModelOutput>> UpdateGeneralEntityField([FromBody] UpdateGeneralEntityFieldModelInput ObjClass);
         public Task<IEnumerable<GetDetailForUserUnblockByCustomerIdOrUserNameModelOutput>> GetDetailForUserUnblockByCustomerIdOrUserName([FromBody] GetDetailForUserUnblockByCustomerIdOrUserNameModelInput ObjClass);
         public Task<IEnumerable<UserUnBlockModelOutput>> UserUnBlock([FromBody] UserUnBlockModelInput ObjClass);
-
+    
     }
 }

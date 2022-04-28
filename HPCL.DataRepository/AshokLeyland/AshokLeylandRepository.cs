@@ -258,5 +258,18 @@ namespace HPCL.DataRepository.AshokLeyland
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<AlAddOnOTCCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GetALVerifyCustomerDocumentModelOutput>> GetALVerifyCustomerDocument([FromBody] ALVerifyCustomerDocumentModelInput ObjClass)
+        {
+            var procedureName = "UspGetALVerifyCustomerDocument";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerStatus", ObjClass.CustomerStatus, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetALVerifyCustomerDocumentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
