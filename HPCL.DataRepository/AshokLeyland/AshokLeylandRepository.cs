@@ -184,7 +184,7 @@ namespace HPCL.DataRepository.AshokLeyland
             return await connection.QueryAsync<GetAvailityALOTCCardCardOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
+        
         public async Task<ALViewCardMerchantAllocationModelOutput> ViewALOTCCardDealerAllocation([FromBody] ALViewCardDealerAllocationModelInput ObjClass)
         {
             var procedureName = "UspViewCardDealerAllocation";
