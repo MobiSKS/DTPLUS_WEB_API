@@ -382,7 +382,7 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("Get_Transport_Management_System_Url")]
         public async Task<IActionResult> GetTransportManagementSystemUrl([FromBody] GetTransportManagementSystemModelInput ObjClass)
         {
