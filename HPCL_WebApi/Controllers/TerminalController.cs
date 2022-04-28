@@ -650,7 +650,7 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_manage_terminal_detail")]
         public async Task<IActionResult> GetManageTerminalDetails([FromBody] MerchantGetManageTerminalDetailsModelInput ObjClass)
         {

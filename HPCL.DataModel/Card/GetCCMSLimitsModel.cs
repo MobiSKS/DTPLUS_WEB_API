@@ -138,5 +138,9 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public float UnallocatedCCMSBalance { get; set; }
 
+        [JsonProperty("CCMSUnlimitedStatus")]
+        [DataMember]
+        public int CCMSUnlimitedStatus { get; set; }
+
     }
 }
