@@ -14,15 +14,7 @@ namespace HPCL.DataModel.TMS
     }
     public class GetDetailsForCustomerUpdateModelOutput
     {
-        [Required]
-        [JsonPropertyName("CustomerId")]
-        [DataMember]
-        public string CustomerId { get; set; }
-
-        [JsonProperty("ModifiedBy")]
-        [DataMember]
-        public string ModifiedBy { get; set; }
-
+       
         [JsonProperty("CommunicationAddress1")]
         [DataMember]
         public string CommunicationAddress1 { get; set; }
@@ -44,9 +36,17 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string CommunicationPincode { get; set; }
 
+       [JsonProperty("CommunicationStateId")]
+        [DataMember]
+        public int CommunicationStateId { get; set; }
+
         [JsonProperty("CommunicationState")]
         [DataMember]
         public string CommunicationState { get; set; }
+
+        [JsonProperty("CommunicationDistrictId")]
+        [DataMember]
+        public int CommunicationDistrictId { get; set; }
 
         [JsonProperty("CommunicationDistrict")]
         [DataMember]
@@ -96,9 +96,17 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string PermanentPincode { get; set; }
 
+        [JsonProperty("PermanentStateId")]
+        [DataMember]
+        public int PermanentStateId { get; set; }
+
         [JsonProperty("PermanentState")]
         [DataMember]
         public string PermanentState { get; set; }
+
+        [JsonProperty("PermanentDistrictId")]
+        [DataMember]
+        public int PermanentDistrictId { get; set; }
 
         [JsonProperty("PermanentDistrict")]
         [DataMember]

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
@@ -38,13 +39,13 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string CommunicationPincode { get; set; }
 
-        [JsonProperty("CommunicationState")]
+        [JsonProperty("CommunicationStateId")]
         [DataMember]
-        public string CommunicationState { get; set; }
+        public int CommunicationStateId { get; set; }
 
-        [JsonProperty("CommunicationDistrict")]
+        [JsonProperty("CommunicationDistrictId")]
         [DataMember]
-        public string CommunicationDistrict { get; set; }
+        public int CommunicationDistrictId { get; set; }
 
         [JsonProperty("CommunicationPhoneNo")]
         [DataMember]
@@ -90,13 +91,13 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string PermanentPincode { get; set; }
 
-        [JsonProperty("PermanentState")]
+        [JsonProperty("PermanentStateId")]
         [DataMember]
-        public string PermanentState { get; set; }
+        public int PermanentStateId { get; set; }
 
-        [JsonProperty("PermanentDistrict")]
+        [JsonProperty("PermanentDistrictId")]
         [DataMember]
-        public string PermanentDistrict { get; set; }
+        public int PermanentDistrictId { get; set; }
 
         [JsonProperty("PermanentPhoneNo")]
         [DataMember]
