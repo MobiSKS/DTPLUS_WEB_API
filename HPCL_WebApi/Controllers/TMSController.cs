@@ -473,7 +473,65 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_details_for_customer_update")]
+        public async Task<IActionResult> GetDetailsForCustomerUpdate([FromBody] GetDetailsForCustomerUpdateModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.GetDetailsForCustomerUpdate(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetDetailsForCustomerUpdateModelOutput> item = result.Cast<GetDetailsForCustomerUpdateModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_customer_address")]
+        public async Task<IActionResult> UpdateCustomerAddress([FromBody] UpdateCustomerAddressModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.UpdateCustomerAddress(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateCustomerAddressModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateCustomerAddressModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
     }
 
-    
 }

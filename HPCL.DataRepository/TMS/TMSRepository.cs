@@ -282,6 +282,49 @@ namespace HPCL.DataRepository.TMS
             return await connection.QueryAsync<BindEnrollTransportManagementSystemModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetDetailsForCustomerUpdateModelOutput>> GetDetailsForCustomerUpdate([FromBody] GetDetailsForCustomerUpdateModelInput ObjClass)
+        {
+            var procedureName = "UspGetDetailsForCustomerUpdate";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetDetailsForCustomerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateCustomerAddressModelOutput>> UpdateCustomerAddress([FromBody] UpdateCustomerAddressModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateCustomerAddress";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress1", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress2", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress3", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationCityName", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationPincode", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CustomerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CustomerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationPhoneNo", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationMobileNo", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationFax", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationEmailid", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("IncomeTaxPan", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress1", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress2", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress3", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentLocation", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentCityName", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentPincode", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentStateId", ObjClass.CustomerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("PermanentDistrictId", ObjClass.CustomerId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("PermanentPhoneNo", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentFax", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateCustomerAddressModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 
 }
