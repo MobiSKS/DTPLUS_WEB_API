@@ -271,5 +271,29 @@ namespace HPCL.DataRepository.AshokLeyland
             return await connection.QueryAsync<GetALVerifyCustomerDocumentModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<GetALUploadKycDocumentsModelOutput>> GetALUploadKycDocument([FromBody] GetALUploadKycDocumentsModelInput ObjClass)
+        {
+            var procedureName = "UspGetALUploadKycDocument";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetALUploadKycDocumentsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<InsertALCustomerKYCModelOutput>> InsertALCustomerKYC([FromBody] InsertALCustomerKYCModelInput ObjClass)
+        {
+            var procedureName = "UspInsertALCustomerKYC";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("IdProofType", ObjClass.IdProofType, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("IdProofFront", ObjClass.IdProofFront, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Useragent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<InsertALCustomerKYCModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
