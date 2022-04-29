@@ -102,7 +102,7 @@ namespace HPCL_WebApi.Controllers
 
 
                         response.response = apiResult.Content.ReadAsStringAsync().Result;
-                        if (string.IsNullOrEmpty(res))
+                        if (!string.IsNullOrEmpty(res))
                         {
                             CargoFlLogin objval = new CargoFlLogin();
                             objval = JsonConvert.DeserializeObject<CargoFlLogin>(res);
@@ -114,7 +114,7 @@ namespace HPCL_WebApi.Controllers
                         }
 
                         _tmsRepo.InsertAPIRequestResponse(response);
-                        return this.OkCustom(ObjClass, JObject.Parse(res), _logger);
+                        return this.OkCustom(ObjClass, JObject.Parse(response.response), _logger);
                     }
                     else
                     {

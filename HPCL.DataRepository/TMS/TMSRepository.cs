@@ -73,7 +73,7 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("UserId", ObjClass.UserId, DbType.String, ParameterDirection.Input);
             parameters.Add("TMSUserId", ObjClass.TMSUserId, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
-            parameters.Add("@TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
+            //parameters.Add("@TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             var res = await connection.QueryAsync<object>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
