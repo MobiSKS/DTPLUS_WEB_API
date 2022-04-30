@@ -37,9 +37,6 @@ namespace HPCL.DataModel.RBE
         [DataMember]
         public string Region { get; set; }
 
-        [JsonProperty("Status")]
-        [DataMember]
-        public string Status { get; set; }
 
         [JsonProperty("RBEDeviceReset")]
         [DataMember]
