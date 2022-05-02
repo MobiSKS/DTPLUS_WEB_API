@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -72,7 +73,7 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("UserId", ObjClass.UserId, DbType.String, ParameterDirection.Input);
             parameters.Add("TMSUserId", ObjClass.TMSUserId, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
-            parameters.Add("@TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
+            //parameters.Add("@TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             var res = await connection.QueryAsync<object>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -128,7 +129,12 @@ namespace HPCL.DataRepository.TMS
                     CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse();
                     CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value};
 
-                    string json = Variables.CallPostAPI(Apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                    HttpResponseMessage apiResponse = Variables.CallPostAPI(Apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
+                    string json = "";
+                    if (apiResponse.IsSuccessStatusCode)
+                    {
+                        json = apiResponse.Content.ReadAsStringAsync().Result;
+                    }
                     if (!string.IsNullOrEmpty(json))
                     {
                         cargoFlLoginResponse = JsonConvert.DeserializeObject<CargoFlLoginResponse>(json);
@@ -136,7 +142,7 @@ namespace HPCL.DataRepository.TMS
                     //var dat = JObject.Parse(json);
                     response.apiurl = Apiurl + "v1/common/loginSuperUser";
                     response.request = JsonConvert.SerializeObject(obj);
-                    response.response = json;
+                    response.response = apiResponse.Content.ReadAsStringAsync().Result;
                     response.UserId = ObjDetail.CreatedBy;
                     InsertAPIRequestResponse(response);
 
@@ -152,13 +158,17 @@ namespace HPCL.DataRepository.TMS
                         }
 
 
-                        string res = Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
-
+                         HttpResponseMessage apiResult= Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
+                        string res = string.Empty;
+                        if (apiResult.IsSuccessStatusCode)
+                        {
+                            res = apiResult.Content.ReadAsStringAsync().Result;
+                        }
                         response.apiurl = apiurl;
                         response.request = JsonConvert.SerializeObject(obj);
 
 
-                        response.response = res;
+                        response.response = apiResult.Content.ReadAsStringAsync().Result; ;
                         CargoFlLoginResponse objResponce = new CargoFlLoginResponse();
                         if (string.IsNullOrEmpty(res))
                         {
@@ -252,6 +262,70 @@ namespace HPCL.DataRepository.TMS
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<InsertVehicleEnrollmentStatusOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+
+        public async Task<IEnumerable<GetTransportManagementSystemModelOutput>> GetActiveApprovedCustomer(GetTransportManagementSystemModelInput ObjClass)
+        {
+            var procedureName = "UspGetActiveApprovedCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetTransportManagementSystemModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<BindEnrollTransportManagementSystemModelOutput>> BindEnrollTransportManagementSystem([FromBody] BindEnrollTransportManagementSystemModelInput ObjClass)
+        {
+            var procedureName = "UspBindEnrollTransportManagementSystem";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindEnrollTransportManagementSystemModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetDetailsForCustomerUpdateModelOutput>> GetDetailsForCustomerUpdate([FromBody] GetDetailsForCustomerUpdateModelInput ObjClass)
+        {
+            var procedureName = "UspGetDetailsForCustomerUpdate";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetDetailsForCustomerUpdateModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateCustomerAddressModelOutput>> UpdateCustomerAddress([FromBody] UpdateCustomerAddressModelInput ObjClass)
+        {
+            var procedureName = "UspUpdateCustomerAddress";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress2", ObjClass.CommunicationAddress2, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationAddress3", ObjClass.CommunicationAddress3, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationCityName", ObjClass.CommunicationCityName, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationPincode", ObjClass.CommunicationPincode, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CommunicationPhoneNo", ObjClass.CommunicationPhoneNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationMobileNo", ObjClass.CommunicationMobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationFax", ObjClass.CommunicationFax, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationEmailid", ObjClass.CommunicationEmailid, DbType.String, ParameterDirection.Input);
+            parameters.Add("IncomeTaxPan", ObjClass.IncomeTaxPan, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress1", ObjClass.PermanentAddress1, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress2", ObjClass.PermanentAddress2, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentAddress3", ObjClass.PermanentAddress3, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentLocation", ObjClass.PermanentLocation, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentCityName", ObjClass.PermanentCityName, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentPincode", ObjClass.PermanentPincode, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentStateId", ObjClass.PermanentStateId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("PermanentDistrictId", ObjClass.PermanentDistrictId, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("PermanentPhoneNo", ObjClass.PermanentPhoneNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentFax", ObjClass.PermanentFax, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateCustomerAddressModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 
 }

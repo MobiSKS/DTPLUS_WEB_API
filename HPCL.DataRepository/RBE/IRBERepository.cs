@@ -45,7 +45,7 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<RBEApprovalRejectApprovalModelOutput>> ApproveRejectRBE([FromBody] RBEApprovalRejectModelInput ObjClass);
 
-        public Task<IEnumerable<RBEDeviceIdResetRequestModelOutput>> RBEDeviceIdResetRequest([FromBody] RBEDeviceIdResetRequestModelInput ObjClass);
+        public Task<IEnumerable<GetRBEDeviceIdResetRequestModelOutput>> GetRBEDeviceIdResetRequest([FromBody] GetRBEDeviceIdResetRequestModelInput ObjClass);
        
         public Task<IEnumerable<GetRBEMobileChangeRequestModelOutput>> GetRBEMobileChangeRequest([FromBody] GetRBEMobileChangeRequestModelInput ObjClass);
        
@@ -72,6 +72,9 @@ namespace HPCL.DataRepository.RBE
 
         public Task<IEnumerable<ValidateOtpResetRBEDeviceModelOutput>> ValidateOtpResetRBEDevice([FromBody] ValidateOtpResetRBEDeviceModelInput ObjClass);
 
+        public Task<IEnumerable<GetApproveChangedRBEDeviceResetModelOutput>> GetApproveChangedRBEDeviceReset([FromBody] GetApproveChangedRBEDeviceResetModelInput ObjClass);
+
+        public Task<IEnumerable<ApproveRejectChangedRBEDeviceResetModelOutput>> ApproveRejectChangedRBEDeviceReset([FromBody] ApproveRejectChangedRBEDeviceResetModelInput ObjClass);
 
     }
 }

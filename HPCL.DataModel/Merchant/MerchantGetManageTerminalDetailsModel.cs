@@ -60,5 +60,9 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public string EffectiveDate { get; set; }
 
+        [JsonProperty("TerminalStatus")]
+        [DataMember]
+        public string TerminalStatus { get; set; }
+
     }
 }
