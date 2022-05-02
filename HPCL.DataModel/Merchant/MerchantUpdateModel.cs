@@ -41,7 +41,7 @@ namespace HPCL.DataModel.Merchant
         [DataMember]
         public Int32 OutletCategoryId { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("HighwayNo1")]
         [DataMember]
         public string HighwayNo1 { get; set; }
@@ -167,12 +167,12 @@ namespace HPCL.DataModel.Merchant
         public string ContactPersonNameFirstName { get; set; }
 
 
-        [Required]
+        //[Required]
         [JsonPropertyName("ContactPersonNameMiddleName")]
         [DataMember]
         public string ContactPersonNameMiddleName { get; set; }
 
-        [Required]
+        //[Required]
         [JsonPropertyName("ContactPersonNameLastName")]
         [DataMember]
         public string ContactPersonNameLastName { get; set; }
