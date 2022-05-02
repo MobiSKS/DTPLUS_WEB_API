@@ -97,7 +97,7 @@ namespace HPCL.DataRepository.Driver
             {
                 if (ImageFileNameAddressProofFront.Length > 0)
                 {
-                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg", ".doc", ".docx" };
                     var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
                     var extension = ext.ToLower();
                     if (AllowedFileExtensions.Contains(extension))
