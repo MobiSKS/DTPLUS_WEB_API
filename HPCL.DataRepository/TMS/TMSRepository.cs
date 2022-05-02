@@ -106,8 +106,6 @@ namespace HPCL.DataRepository.TMS
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetEnrollmentStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
-
         public async Task<IEnumerable<TMSUpdateEnrollmentStatusModelOutput>> TMSInsertCustomerTracking([FromBody] TMSUpdateEnrollmentStatusModelInput ObjClass, string Apiurl)
         {
             var dtDBR = new DataTable("CustomerTracking");
@@ -205,8 +203,6 @@ namespace HPCL.DataRepository.TMS
             return await connection.QueryAsync<TMSUpdateEnrollmentStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
-
         public async Task<IEnumerable<GetEnrollVehicleManagementModeloutput>> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
         {
             var procedureName = "UspGetEnrollVehicleManagementDetail";
@@ -263,7 +259,6 @@ namespace HPCL.DataRepository.TMS
             return await connection.QueryAsync<InsertVehicleEnrollmentStatusOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-
         public async Task<IEnumerable<GetTransportManagementSystemModelOutput>> GetActiveApprovedCustomer(GetTransportManagementSystemModelInput ObjClass)
         {
             var procedureName = "UspGetActiveApprovedCustomer";
@@ -300,6 +295,7 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("CommunicationAddress1", ObjClass.CommunicationAddress1, DbType.String, ParameterDirection.Input);
             parameters.Add("CommunicationAddress2", ObjClass.CommunicationAddress2, DbType.String, ParameterDirection.Input);
             parameters.Add("CommunicationAddress3", ObjClass.CommunicationAddress3, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationLocation", ObjClass.CommunicationLocation, DbType.String, ParameterDirection.Input);
             parameters.Add("CommunicationCityName", ObjClass.CommunicationCityName, DbType.String, ParameterDirection.Input);
             parameters.Add("CommunicationPincode", ObjClass.CommunicationPincode, DbType.String, ParameterDirection.Input);
             parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.Int32, ParameterDirection.Input);

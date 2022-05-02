@@ -15,10 +15,10 @@ namespace HPCL_WebApi.Controllers
     [ApiController]
     public class MerchantController : ControllerBase
     {
-        private readonly ILogger<HQController> _logger;
+        private readonly ILogger<MerchantController> _logger;
 
         private readonly IMerchantRepository _merchant;
-        public MerchantController(ILogger<HQController> logger, IMerchantRepository merchant)
+        public MerchantController(ILogger<MerchantController> logger, IMerchantRepository merchant)
         {
             _logger = logger;
             _merchant = merchant;
