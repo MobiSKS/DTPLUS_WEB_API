@@ -27,6 +27,10 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string CommunicationAddress3 { get; set; }
 
+        [JsonProperty("CommunicationLocation")]
+        [DataMember]
+        public string CommunicationLocation { get; set; }
+
         [JsonProperty("CommunicationCityName")]
         [DataMember]
         public string CommunicationCityName { get; set; }
