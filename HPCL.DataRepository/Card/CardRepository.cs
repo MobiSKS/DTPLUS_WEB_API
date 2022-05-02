@@ -551,5 +551,82 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CardCheckMobileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<TransferAmountCCMSToCardModelOutput>> TransferAmountCCMSToCard([FromBody] TransferAmountCCMSToCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("CCMSToCardTransfer");
+            dtDBR.Columns.Add("CardNo", typeof(string));
+            dtDBR.Columns.Add("TransferAmount", typeof(string));
+
+            foreach (var item in ObjClass.CCMSToCardTransfer)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["CardNo"] = item.CardNo;
+                dr["TransferAmount"] = item.TransferAmount;
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+
+            }
+           
+            var procedureName = "UspTransferAmountCCMSToCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("CCMSToCardTransfer", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransferAmountCCMSToCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<TransferAmountCardToCCMSModeloutput>> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCCMSModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("CardToCCMSTransfer");
+            dtDBR.Columns.Add("CardNo", typeof(string));
+            dtDBR.Columns.Add("TransferAmount", typeof(string));
+
+            foreach (var item in ObjClass.CardToCCMSTransfer)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["CardNo"] = item.CardNo;
+                dr["TransferAmount"] = item.TransferAmount;
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+
+            }
+
+            var procedureName = "UspTransferAmountCardToCCMS";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardToCCMSTransfer", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransferAmountCardToCCMSModeloutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<TransferAmountCardToCardModelOutput>> TransferAmountCardToCard([FromBody] TransferAmountCardToCardModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("CardToCardTransfer");
+            dtDBR.Columns.Add("FromCardNo", typeof(string));
+            dtDBR.Columns.Add("ToCardNo", typeof(string));
+            dtDBR.Columns.Add("TransferAmount", typeof(string));
+
+            foreach (var item in ObjClass.CardToCardTransfer)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["FromCardNo"] = item.FromCardNo;
+                dr["ToCardNo"] = item.ToCardNo;
+                dr["TransferAmount"] = item.TransferAmount;
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+
+            }
+
+            var procedureName = "UspTransferAmountCardToCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardToCardTransfer", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransferAmountCardToCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

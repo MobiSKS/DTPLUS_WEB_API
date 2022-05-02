@@ -51,5 +51,10 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<BindPendingCustomerForAddOnCardApprovalModelOutput>> BindPendingCustomerForAddOnCardApproval([FromBody] BindPendingCustomerForAddOnCardApprovalModelInput ObjClass);
 
         public Task<IEnumerable<CardCheckMobileNoModelOutput>> CheckMobileNo([FromBody] CardCheckMobileNoModelInput ObjClass);
+        public Task<IEnumerable<TransferAmountCCMSToCardModelOutput>> TransferAmountCCMSToCard([FromBody] TransferAmountCCMSToCardModelInput ObjClass);
+        public Task<IEnumerable<TransferAmountCardToCCMSModeloutput>> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCCMSModelInput ObjClass);
+        public Task<IEnumerable<TransferAmountCardToCardModelOutput>> TransferAmountCardToCard([FromBody] TransferAmountCardToCardModelInput ObjClass);
+
+
     }
 }
