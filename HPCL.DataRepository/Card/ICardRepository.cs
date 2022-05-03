@@ -55,6 +55,6 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<TransferAmountCardToCCMSModeloutput>> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCCMSModelInput ObjClass);
         public Task<IEnumerable<TransferAmountCardToCardModelOutput>> TransferAmountCardToCard([FromBody] TransferAmountCardToCardModelInput ObjClass);
 
-
+        public Task<IEnumerable<CheckCardIdentifierNoModelOutput>> CheckCardIdentifierNo([FromBody] CheckCardIdentifierNoModelInput ObjClass);
     }
 }

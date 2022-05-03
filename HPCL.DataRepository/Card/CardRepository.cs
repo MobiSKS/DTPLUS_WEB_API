@@ -552,6 +552,16 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<CardCheckMobileNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CheckCardIdentifierNoModelOutput>> CheckCardIdentifierNo([FromBody] CheckCardIdentifierNoModelInput ObjClass)
+        {
+            var procedureName = "UspCheckCardIdentifierNo";
+            var parameters = new DynamicParameters();
+            parameters.Add("CardIdentifier", ObjClass.CardIdentifier, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CheckCardIdentifierNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public async Task<IEnumerable<TransferAmountCCMSToCardModelOutput>> TransferAmountCCMSToCard([FromBody] TransferAmountCCMSToCardModelInput ObjClass)
         {
             var dtDBR = new DataTable("CCMSToCardTransfer");
