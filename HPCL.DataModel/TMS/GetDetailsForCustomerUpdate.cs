@@ -139,7 +139,8 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string PanCardRemarks { get; set; }
 
-        
-
+        [JsonProperty("IndividualOrgName")]
+        [DataMember]
+        public string IndividualOrgName { get; set; }
     }
 }
