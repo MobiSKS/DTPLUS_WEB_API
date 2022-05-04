@@ -14,7 +14,18 @@ namespace HPCL.DataModel.TMS
     }
     public class GetDetailsForCustomerUpdateModelOutput
     {
-       
+        [JsonProperty("CustomerReferenceNo")]
+        [DataMember]
+        public long CustomerReferenceNo { get; set; }
+
+        [JsonProperty("TBEntityId")]
+        [DataMember]
+        public int TBEntityId { get; set; }
+
+        [JsonProperty("TBEntityName")]
+        [DataMember]
+        public string TBEntityName { get; set; }
+
         [JsonProperty("CommunicationAddress1")]
         [DataMember]
         public string CommunicationAddress1 { get; set; }

@@ -1307,5 +1307,32 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("customer_add_on_user")]
+        public async Task<IActionResult> CustomerAddOnUser([FromBody] CustomerAddOnUserModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _customerRepo.CustomerAddOnUser(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CustomerAddOnUserModelOutput> item = result.Cast<CustomerAddOnUserModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
     }
 }

@@ -80,6 +80,7 @@ namespace HPCL.DataRepository.Customer
         public Task<IEnumerable<GetNameandFormNumberbyCustomerIdModelOutput>> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass);
 
         public Task<IEnumerable<CustomerGetCustomerReferenceNoModelOutput>> GetNameandFormNumberbyReferenceNoforAddCard([FromBody] CustomerGetCustomerReferenceNoModelInput ObjClass);
+        public Task<IEnumerable<CustomerAddOnUserModelOutput>> CustomerAddOnUser([FromBody] CustomerAddOnUserModelInput ObjClass);
 
     }
 

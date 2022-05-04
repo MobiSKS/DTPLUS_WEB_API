@@ -110,6 +110,10 @@ namespace HPCL.DataModel.TMS
         [JsonProperty("PermanentFax")]
         [DataMember]
         public string PermanentFax { get; set; }
+
+        [JsonProperty("PanCardRemarks")]
+        [DataMember]
+        public string PanCardRemarks { get; set; }
     }
     public class UpdateCustomerAddressModelOutput : BaseClassOutput
     {

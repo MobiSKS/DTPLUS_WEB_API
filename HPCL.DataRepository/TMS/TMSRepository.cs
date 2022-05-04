@@ -315,6 +315,7 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("PermanentDistrictId", ObjClass.PermanentDistrictId, DbType.Int32, ParameterDirection.Input);
             parameters.Add("PermanentPhoneNo", ObjClass.PermanentPhoneNo, DbType.String, ParameterDirection.Input);
             parameters.Add("PermanentFax", ObjClass.PermanentFax, DbType.String, ParameterDirection.Input);
+            parameters.Add("PanCardRemarks", ObjClass.PanCardRemarks, DbType.String, ParameterDirection.Input);
             parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
             parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
