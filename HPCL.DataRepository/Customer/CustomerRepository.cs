@@ -891,5 +891,16 @@ namespace HPCL.DataRepository.Customer
             return await connection.QueryAsync<CustomerGetCustomerReferenceNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<CustomerAddOnUserModelOutput>> CustomerAddOnUser([FromBody] CustomerAddOnUserModelInput ObjClass)
+        {
+            var procedureName = "UspCustomerAddOnUser";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CustomerAddOnUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }
