@@ -238,7 +238,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_TMSEnrollment_Status")]
+        [Route("get_tmsenrollment_status")]
         public async Task<IActionResult> GetEnrollmentStatusDetail(GetEnrollmentStatusModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -267,7 +267,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Update_TMS_Enrollment_TMS_Status")]
+        [Route("update_tms_enrollment_tms_status")]
         public async Task<IActionResult> UpdateTMSEnrollmentTMSStatus([FromBody] TMSUpdateEnrollmentStatusModelInput ObjClass)
         {
             
@@ -324,7 +324,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Vehicle_Enrollment_Status")]
+        [Route("get_vehicle_enrollment_status")]
         public async Task<IActionResult> GetEnrollVehicleManagementStatus([FromBody] GetEnrollVehicleManagementStatusInput ObjClass)
         {
 
@@ -353,7 +353,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Insert_Vehicle_Enrollment_Status")]
+        [Route("insert_vehicle_enrollment_status")]
         public async Task<IActionResult> InsertVehicleEnrollmentStatus([FromBody] InsertVehicleEnrollmentStatusInput ObjClass)
         {
 
@@ -383,7 +383,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Transport_Management_System_Url")]
+        [Route("get_transport_management_system_url")]
         public async Task<IActionResult> GetTransportManagementSystemUrl([FromBody] GetTransportManagementSystemModelInput ObjClass)
         {
 

@@ -79,18 +79,13 @@ namespace HPCL_WebApi.ActionFilters
                 Request = request;
             }
 
-            public ApiResponseMessage Execute()
+            public CustomerAPIReponseMessage Execute()
             {
 
-                ApiResponseMessage response = new ApiResponseMessage
+                CustomerAPIReponseMessage response = new CustomerAPIReponseMessage
                 {
-                    Status_Code = (int)HttpStatusCode.Unauthorized,
-                    Message = "Not authorized to Access this API.",
-                    Success = false,
-                    Method_Name = MethodName,
-                    Data = new { Message = ReasonPhrase },
-                    Internel_Status_Code = (int)StatusInformation.Invalid_Username_Password,
-                    Model_State = null
+                    responseCode = "0",
+                    responseMessage = ReasonPhrase
                 };
                 return (response);
 

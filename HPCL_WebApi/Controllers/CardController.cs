@@ -905,7 +905,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_CCMS_To_Card")]
+        [Route("transfer_amount_ccms_to_card")]
         public async Task<IActionResult> TransferAmountCCMSToCard([FromBody] TransferAmountCCMSToCardModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -931,7 +931,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_Card_To_CCMS")]
+        [Route("transfer_amount_card_to_ccms")]
         public async Task<IActionResult> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCCMSModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -958,7 +958,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_Card_To_Card")]
+        [Route("transfer_amount_card_to_card")]
         public async Task<IActionResult> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCardModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -975,6 +975,33 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     List<TransferAmountCardToCardModelOutput> item = result.Cast<TransferAmountCardToCardModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("check_card_identifier_no")]
+        public async Task<IActionResult> CheckCardIdentifierNo([FromBody] CheckCardIdentifierNoModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.CheckCardIdentifierNo(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<CheckCardIdentifierNoModelOutput> item = result.Cast<CheckCardIdentifierNoModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
