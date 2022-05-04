@@ -135,5 +135,11 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string PermanentFax { get; set; }
 
+        [JsonProperty("PanCardRemarks")]
+        [DataMember]
+        public string PanCardRemarks { get; set; }
+
+        
+
     }
 }
