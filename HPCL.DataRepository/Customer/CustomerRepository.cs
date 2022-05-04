@@ -338,7 +338,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameIdProofFront = ObjClass.IdProofFront;
             if (ImageFileNameIdProofFront.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg", ".doc", ".docx" };
                 var ext = ImageFileNameIdProofFront.FileName.Substring(ImageFileNameIdProofFront.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -358,7 +358,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameIdProofBack = ObjClass.IdProofBack;
             if (ImageFileNameIdProofBack.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg", ".doc", ".docx" };
                 var ext = ImageFileNameIdProofBack.FileName.Substring(ImageFileNameIdProofBack.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -377,7 +377,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameAddressProofFront = ObjClass.AddressProofFront;
             if (ImageFileNameAddressProofFront.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg", ".doc", ".docx" };
                 var ext = ImageFileNameAddressProofFront.FileName.Substring(ImageFileNameAddressProofFront.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
@@ -397,7 +397,7 @@ namespace HPCL.DataRepository.Customer
             var ImageFileNameAddressProofBack = ObjClass.AddressProofBack;
             if (ImageFileNameAddressProofBack.Length > 0)
             {
-                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg" };
+                IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png", ".pdf", ".gif", ".jpeg", ".doc", ".docx" };
                 var ext = ImageFileNameAddressProofBack.FileName.Substring(ImageFileNameAddressProofBack.FileName.LastIndexOf('.'));
                 var extension = ext.ToLower();
                 if (AllowedFileExtensions.Contains(extension))
