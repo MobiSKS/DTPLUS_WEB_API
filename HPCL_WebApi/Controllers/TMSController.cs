@@ -212,7 +212,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Customer_Detail_For_Enrollment_Approval")]
+        [Route("get_customer_detail_for_enrollment_approval")]
         public async Task<IActionResult> GetCustomerDetailForEnrollmentApproval([FromBody] GetCustomerDetailForEnrollmentApprovalInput ObjClass)
         {
             if (ObjClass == null)
@@ -238,7 +238,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_tmsenrollment_status")]
+        [Route("get_tms_enrollment_status")]
         public async Task<IActionResult> GetEnrollmentStatusDetail(GetEnrollmentStatusModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -297,7 +297,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Vehicle_Enrollment_Detail")]
+        [Route("get_vehicle_enrollment_detail")]
         public async Task<IActionResult> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
         {
             if (ObjClass == null)
