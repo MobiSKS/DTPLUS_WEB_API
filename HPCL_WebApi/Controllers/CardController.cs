@@ -905,7 +905,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_CCMS_To_Card")]
+        [Route("transfer_amount_ccms_to_card")]
         public async Task<IActionResult> TransferAmountCCMSToCard([FromBody] TransferAmountCCMSToCardModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -931,7 +931,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_Card_To_CCMS")]
+        [Route("transfer_amount_card_to_ccms")]
         public async Task<IActionResult> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCCMSModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -958,7 +958,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Transfer_Amount_Card_To_Card")]
+        [Route("transfer_amount_card_to_card")]
         public async Task<IActionResult> TransferAmountCardToCCMS([FromBody] TransferAmountCardToCardModelInput ObjClass)
         {
             if (ObjClass == null)

@@ -98,7 +98,7 @@ namespace HPCL_WebApi.Controllers
                             res = apiResult.Content.ReadAsStringAsync().Result;
                         }
                         response.apiurl = apiurl + "v1/user/registerTrucker";
-                        response.request = JsonConvert.SerializeObject(obj);
+                        response.request = JsonConvert.SerializeObject(objcargoFL);
 
 
                         response.response = apiResult.Content.ReadAsStringAsync().Result;
@@ -212,7 +212,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Customer_Detail_For_Enrollment_Approval")]
+        [Route("get_customer_detail_for_enrollment_approval")]
         public async Task<IActionResult> GetCustomerDetailForEnrollmentApproval([FromBody] GetCustomerDetailForEnrollmentApprovalInput ObjClass)
         {
             if (ObjClass == null)
@@ -238,7 +238,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_TMSEnrollment_Status")]
+        [Route("get_tms_enrollment_status")]
         public async Task<IActionResult> GetEnrollmentStatusDetail(GetEnrollmentStatusModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -267,7 +267,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Update_TMS_Enrollment_TMS_Status")]
+        [Route("update_tms_enrollment_tms_status")]
         public async Task<IActionResult> UpdateTMSEnrollmentTMSStatus([FromBody] TMSUpdateEnrollmentStatusModelInput ObjClass)
         {
             
@@ -297,7 +297,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Vehicle_Enrollment_Detail")]
+        [Route("get_vehicle_enrollment_detail")]
         public async Task<IActionResult> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -313,7 +313,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetCustomerDetailForEnrollmentApprovalOutput> item = result.Cast<GetCustomerDetailForEnrollmentApprovalOutput>().ToList();
+                    List<GetEnrollVehicleManagementModeloutput> item = result.Cast<GetEnrollVehicleManagementModeloutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -324,7 +324,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Vehicle_Enrollment_Status")]
+        [Route("get_vehicle_enrollment_status")]
         public async Task<IActionResult> GetEnrollVehicleManagementStatus([FromBody] GetEnrollVehicleManagementStatusInput ObjClass)
         {
 
@@ -353,7 +353,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Insert_Vehicle_Enrollment_Status")]
+        [Route("insert_vehicle_enrollment_status")]
         public async Task<IActionResult> InsertVehicleEnrollmentStatus([FromBody] InsertVehicleEnrollmentStatusInput ObjClass)
         {
 
@@ -383,7 +383,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Transport_Management_System_Url")]
+        [Route("get_transport_management_system_url")]
         public async Task<IActionResult> GetTransportManagementSystemUrl([FromBody] GetTransportManagementSystemModelInput ObjClass)
         {
 

@@ -32,7 +32,7 @@ namespace HPCL.DataModel.TMS
     }
 
 
-    public class GetEnrollVehicleManagementModeloutput
+    public class GetEnrollVehicleManagementModeloutput:BaseClassOutput
     {
         [JsonProperty("CustomerID")]
         [DataMember]
@@ -43,6 +43,14 @@ namespace HPCL.DataModel.TMS
         [JsonProperty("CardNo")]
         [DataMember]
         public string CardNo { get; set; }
+
+        [JsonProperty("VehicleType")]
+        [DataMember]
+        public string VehicleType { get; set; }
+
+        [JsonProperty("TMSUserId")]
+        [DataMember]
+        public string TMSUserId { get; set; }
 
     }
 
