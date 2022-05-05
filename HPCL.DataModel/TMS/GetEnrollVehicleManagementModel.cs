@@ -48,6 +48,10 @@ namespace HPCL.DataModel.TMS
         [DataMember]
         public string VehicleType { get; set; }
 
+        [JsonProperty("TMSUserId")]
+        [DataMember]
+        public string TMSUserId { get; set; }
+
     }
 
 
