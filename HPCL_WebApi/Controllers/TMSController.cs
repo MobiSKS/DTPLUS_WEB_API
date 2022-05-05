@@ -98,7 +98,7 @@ namespace HPCL_WebApi.Controllers
                             res = apiResult.Content.ReadAsStringAsync().Result;
                         }
                         response.apiurl = apiurl + "v1/user/registerTrucker";
-                        response.request = JsonConvert.SerializeObject(obj);
+                        response.request = JsonConvert.SerializeObject(objcargoFL);
 
 
                         response.response = apiResult.Content.ReadAsStringAsync().Result;
