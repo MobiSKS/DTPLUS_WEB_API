@@ -32,7 +32,7 @@ namespace HPCL.DataModel.TMS
     }
 
 
-    public class GetEnrollVehicleManagementModeloutput
+    public class GetEnrollVehicleManagementModeloutput:BaseClassOutput
     {
         [JsonProperty("CustomerID")]
         [DataMember]

@@ -313,7 +313,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetCustomerDetailForEnrollmentApprovalOutput> item = result.Cast<GetCustomerDetailForEnrollmentApprovalOutput>().ToList();
+                    List<GetEnrollVehicleManagementModeloutput> item = result.Cast<GetEnrollVehicleManagementModeloutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
