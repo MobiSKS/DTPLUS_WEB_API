@@ -40,6 +40,7 @@ using HPCL.DataRepository.RBE;
 using HPCL.DataRepository.TMS;
 using HPCL.DataRepository.DTP;
 using HPCL.DataRepository.CustomerAPI;
+using HPCL.DataRepository.AggregatorCustomer;
 
 namespace HPCL_WebApi
 {
@@ -115,6 +116,7 @@ namespace HPCL_WebApi
             services.AddScoped<IRBERepository, RBERepository>();
             services.AddScoped<IDTPRepository, DTPRepository>();
             services.AddScoped<ICustomerAPIRepository, CustomerAPIRepository>();
+            services.AddScoped<IAggregatorCustomerRepository, AggregatorCustomerRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.AddScoped<CustomerAPIAuthenticationFilter>();
             services.Configure<ApiBehaviorOptions>(opt =>
