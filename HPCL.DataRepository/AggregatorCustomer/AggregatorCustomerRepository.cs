@@ -368,6 +368,208 @@ namespace HPCL.DataRepository.AggregatorCustomer
             return storedProcedureResult;
         }
 
+        public async Task<IEnumerable<AggregatorCustomerGetCustomerReferenceNoModelOutput>> GetAggregatorNameandFormNumberbyReferenceNo([FromBody] AggregatorCustomerGetCustomerReferenceNoModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorNameandFormNumberbyReferenceNo";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AggregatorCustomerGetCustomerReferenceNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<AggregatorCustomerGetCustomerReferenceNoModelOutput>> GetAggregatorNameandFormNumberbyReferenceNoforAddCard([FromBody] AggregatorCustomerGetCustomerReferenceNoModelInput ObjClass)
+        {
+            var procedureName = "UspGetNameandFormNumberbyReferenceNoforAddCard";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AggregatorCustomerGetCustomerReferenceNoModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AggregatorCustomerDetailsModelOutput> GetAggregatorCustomerDetails([FromBody] AggregatorCustomerDetailsModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorCustomerDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerSubtypeId", ObjClass.CustomerSubtypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeID", ObjClass.ZonalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeID", ObjClass.RegionalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
+            parameters.Add("TypeOfBusinessEntity", ObjClass.TypeOfBusinessEntity, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentStateId", ObjClass.PermanentStateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentDistrictId", ObjClass.PermanentDistrictId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Email", ObjClass.Email, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("TypeOfFleetId", ObjClass.TypeOfFleetId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", ObjClass.ReferenceId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerStatusId", ObjClass.CustomerStatusId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedonFromDate", ObjClass.ApprovedonFromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedonToDate", ObjClass.ApprovedonToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerStatusFeewaiverID", ObjClass.CustomerStatusFeewaiverID, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedBy", ObjClass.FeewaiverApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedOnFromDate", ObjClass.FeewaiverApprovedOnFromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedOnToDate", ObjClass.FeewaiverApprovedOnToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new AggregatorCustomerDetailsModelOutput();
+            storedProcedureResult.GetAggregatorCustomerDetails = (List<AggregatorCustomerDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerDetailsModelOutput>();
+            storedProcedureResult.AggregatorCustomerKYCDetails = (List<AggregatorCustomerKYCDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<AggregatorCustomerDetailsModelOutput> GetAggregatorCustomerByCustomerId([FromBody] AggregatorCustomerGetByCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorCustomerDetailByCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new AggregatorCustomerDetailsModelOutput();
+            storedProcedureResult.GetAggregatorCustomerDetails = (List<AggregatorCustomerDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerDetailsModelOutput>();
+            storedProcedureResult.AggregatorCustomerKYCDetails = (List<AggregatorCustomerKYCDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+            //return await connection.QueryAsync<CustomerDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AggregatorCustomerDetailsModelOutput> GetRawAggregatorCustomerDetails([FromBody] AggregatorCustomerDetailsModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorRawCustomerDetail";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerTypeId", ObjClass.CustomerTypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerSubtypeId", ObjClass.CustomerSubtypeId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZonalOfficeID", ObjClass.ZonalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeID", ObjClass.RegionalOfficeID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("NameOnCard", ObjClass.NameOnCard, DbType.String, ParameterDirection.Input);
+            parameters.Add("TypeOfBusinessEntity", ObjClass.TypeOfBusinessEntity, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationStateId", ObjClass.CommunicationStateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("CommunicationDistrictId", ObjClass.CommunicationDistrictId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentStateId", ObjClass.PermanentStateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("PermanentDistrictId", ObjClass.PermanentDistrictId, DbType.String, ParameterDirection.Input);
+            parameters.Add("Email", ObjClass.Email, DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("TypeOfFleetId", ObjClass.TypeOfFleetId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeePaymentsCollectFeeWaiver", ObjClass.FeePaymentsCollectFeeWaiver, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", ObjClass.ReferenceId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerReferenceNo", ObjClass.CustomerReferenceNo, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerStatusId", ObjClass.CustomerStatusId, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedBy", ObjClass.ApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedonFromDate", ObjClass.ApprovedonFromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ApprovedonToDate", ObjClass.ApprovedonToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerStatusFeewaiverID", ObjClass.CustomerStatusFeewaiverID, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedBy", ObjClass.FeewaiverApprovedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedOnFromDate", ObjClass.FeewaiverApprovedOnFromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("FeewaiverApprovedOnToDate", ObjClass.FeewaiverApprovedOnToDate, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new AggregatorCustomerDetailsModelOutput();
+            storedProcedureResult.GetAggregatorCustomerDetails = (List<AggregatorCustomerDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerDetailsModelOutput>();
+            storedProcedureResult.AggregatorCustomerKYCDetails = (List<AggregatorCustomerKYCDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<BindPendingAggregatorCustomerModelOutput>> BindPendingAggregatorCustomer([FromBody] BindPendingAggregatorCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspBindPendingAggregatorCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindPendingAggregatorCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<BindPendingAggregatorCustomerModelOutput>> BindUnverfiedAggregatorCustomer([FromBody] BindPendingAggregatorCustomerModelInput ObjClass)
+        {
+            var procedureName = "UspBindUnverfiedAggregatorCustomer";
+            var parameters = new DynamicParameters();
+            parameters.Add("StateId", ObjClass.StateId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
+            parameters.Add("FromDate", ObjClass.FromDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("ToDate", ObjClass.ToDate, DbType.String, ParameterDirection.Input);
+            parameters.Add("Createdby", ObjClass.Createdby, DbType.String, ParameterDirection.Input);
+            parameters.Add("RegionalOfficeId", ObjClass.RegionalOfficeId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<BindPendingAggregatorCustomerModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<AggregatorCustomerDetailsModelOutput> GetUnverfiedAggregatorCustomerDetailbyFormNumber([FromBody] AggregatorCustomerDetailsbyFormNumberModelInput ObjClass)
+        {
+            var procedureName = "UspGetUnverfiedAggregatorCustomerDetailbyFormNumber";
+            var parameters = new DynamicParameters();
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int64, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new AggregatorCustomerDetailsModelOutput();
+            storedProcedureResult.GetAggregatorCustomerDetails = (List<AggregatorCustomerDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerDetailsModelOutput>();
+            storedProcedureResult.AggregatorCustomerKYCDetails = (List<AggregatorCustomerKYCDetailsModelOutput>)await result.ReadAsync<AggregatorCustomerKYCDetailsModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<AggregatorCustomerGetCustomerNameModelOutput>> GetAggregatorCustomerNameByCustomerId([FromBody] AggregatorCustomerGetByCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorCustomerNameByCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AggregatorCustomerGetCustomerNameModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<AggregatorCustomerGetCustomerDetailsForSearchModelOutput>> GetAggregatorCustomerDetailsForSearch([FromBody] AggregatorCustomerGetByCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorCustomerDetailsForSearch";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<AggregatorCustomerGetCustomerDetailsForSearchModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<SearchAggregatorCustomerandCardFormModelOutput> SearchAggregatorCustomerandCardForm([FromBody] SearchAggregatorCustomerandCardFormModelInput ObjClass)
+        {
+            var procedureName = "UspSearchAggregatorCustomerandCardForm";
+            var parameters = new DynamicParameters();
+            parameters.Add("EntityId", ObjClass.EntityId, DbType.String, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
+            parameters.Add("StateID", ObjClass.StateID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CityName", ObjClass.CityName, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            var storedProcedureResult = new SearchAggregatorCustomerandCardFormModelOutput();
+            storedProcedureResult.GetAggregatorCustomerSearchOutput = (List<AggregatorCustomerSearchModelOutput>)await result.ReadAsync<AggregatorCustomerSearchModelOutput>();
+            storedProcedureResult.GetAggregatorCardSearchOutput = (List<AggregatorCardSearchModelOutput>)await result.ReadAsync<AggregatorCardSearchModelOutput>();
+            return storedProcedureResult;
+        }
+
+        public async Task<IEnumerable<GetAggregatorNameandFormNumberbyCustomerIdModelOutput>> GetAggregatorNameandFormNumberbyCustomerId([FromBody] GetAggregatorNameandFormNumberbyCustomerIdModelInput ObjClass)
+        {
+            var procedureName = "UspGetAggregatorNameandFormNumberbyCustomerId";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetAggregatorNameandFormNumberbyCustomerIdModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 
 }
