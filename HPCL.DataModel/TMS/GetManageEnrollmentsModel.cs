@@ -52,6 +52,10 @@ namespace HPCL.DataModel.TMS
         [JsonProperty("Email")]
         [DataMember]
         public string Email { get; set; }
+
+        [JsonProperty("TMSStatus")]
+        [DataMember]
+        public string TMSStatus { get; set; }
     }
 
     public class GetTransportManagementSystemModelInput : BaseClass

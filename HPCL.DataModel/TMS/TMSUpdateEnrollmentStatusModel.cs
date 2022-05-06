@@ -25,7 +25,7 @@ namespace HPCL.DataModel.TMS
         public string TMSUserId { get; set; }
         [JsonPropertyName("TMSStatusID")]
         [DataMember]
-        public string TMSStatusID { get; set; }
+        public int TMSStatusID { get; set; }
         [JsonPropertyName("Remarks")]
         [DataMember]
         public string Remarks { get; set; }
