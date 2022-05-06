@@ -493,7 +493,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_al_customer_detail_for_verification")]
+        [Route("update_al_customerstatus")]
         public async Task<IActionResult> UpdateALCustomerStatus([FromBody] UpdateALCustomerStatusModelInput ObjClass)
         {
 
