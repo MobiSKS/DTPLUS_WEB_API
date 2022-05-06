@@ -144,7 +144,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_team_mapping")]
         public async Task<IActionResult> GetTeamMapping([FromBody] GetTeamMappingModelInput ObjClass)
         {
