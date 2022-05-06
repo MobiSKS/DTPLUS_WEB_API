@@ -428,9 +428,13 @@ namespace HPCL_WebApi.Controllers
                             response.UserId = "Test";
                             _tmsRepo.InsertAPIRequestResponse(response);
 
-                            if (cargoFlLoginResponse != null && cargoFlLoginResponse.message.ToUpper().Contains("USER LOGGED IN SUCCESSFULLY"))
+                            if (cargoFlLoginResponse != null && !string.IsNullOrEmpty(cargoFlLoginResponse.message) && cargoFlLoginResponse.message.ToUpper().Contains("USER LOGGED IN SUCCESSFULLY"))
                             {
                                 item[0].Url = _configuration.GetSection("TMSSettings:TransportSystemUrl").Value;
+                            }
+                            else
+                            {
+                                item[0].Reason =" User Logged in fail in API";
                             }
                             item[0].access_token = cargoFlLoginResponse.access_token;
                             item[0].message = cargoFlLoginResponse.message;
