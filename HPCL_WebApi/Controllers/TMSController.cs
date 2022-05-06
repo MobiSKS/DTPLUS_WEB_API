@@ -435,6 +435,7 @@ namespace HPCL_WebApi.Controllers
                             else
                             {
                                 item[0].Reason =" User Logged in fail in API";
+                                item[0].Status = 0;
                             }
                             item[0].access_token = cargoFlLoginResponse.access_token;
                             item[0].message = cargoFlLoginResponse.message;
