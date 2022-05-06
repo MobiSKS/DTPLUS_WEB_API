@@ -82,7 +82,7 @@ namespace HPCL.DataRepository.DTP
             parameters.Add("Location", ObjClass.Location, DbType.String, ParameterDirection.Input);
            
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<UpdateTeamMappingModelOutput>> UpdateTeamMapping([FromBody] UpdateTeamMappingModelInput ObjClass)
