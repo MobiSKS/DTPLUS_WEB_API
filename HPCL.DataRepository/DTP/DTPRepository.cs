@@ -79,8 +79,7 @@ namespace HPCL.DataRepository.DTP
             parameters.Add("RSMName", ObjClass.RSMName, DbType.String, ParameterDirection.Input);
             parameters.Add("RBEID", ObjClass.RBEID, DbType.String, ParameterDirection.Input);
             parameters.Add("RBEName", ObjClass.RBEName, DbType.String, ParameterDirection.Input);
-            parameters.Add("Location", ObjClass.Location, DbType.String, ParameterDirection.Input);
-           
+            parameters.Add("Location", ObjClass.Location, DbType.String, ParameterDirection.Input);           
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
