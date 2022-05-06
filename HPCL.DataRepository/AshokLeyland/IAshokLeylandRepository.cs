@@ -32,6 +32,8 @@ namespace HPCL.DataRepository.AshokLeyland
         public Task<IEnumerable<GetALUploadKycDocumentsModelOutput>> GetALUploadKycDocument([FromBody] GetALUploadKycDocumentsModelInput ObjClass);
 
         public Task<IEnumerable<InsertALCustomerKYCModelOutput>> InsertALCustomerKYC([FromBody] InsertALCustomerKYCModelInput ObjClass);
+        public Task<IEnumerable<GetAlCustomerDetailForVerificationModelOutput>> GetAlCustomerDetailForVerification([FromBody] GetAlCustomerDetailForVerificationModelInput ObjClass);
+        public Task<IEnumerable<UpdateALCustomerStatusModelOutput>> UpdateALCustomerStatus([FromBody] UpdateALCustomerStatusModelInput ObjClass);
 
     }
 }

@@ -146,11 +146,11 @@ namespace HPCL.DataRepository.TMS
 
                     if (cargoFlLoginResponse != null && !string.IsNullOrEmpty(cargoFlLoginResponse.access_token))
                     {
-                        if (ObjDetail.TMSStatusID == "2")
+                        if (ObjDetail.TMSStatusID == 2)
                         {
                             apiurl = Apiurl + "v1/user/enableTrucker";
                         }
-                        else if (ObjDetail.TMSStatusID == "3" || ObjDetail.TMSStatusID == "4")
+                        else if (ObjDetail.TMSStatusID == 3 || ObjDetail.TMSStatusID == 4)
                         {
                             apiurl = Apiurl + "v1/user/disableTrucker";
                         }
