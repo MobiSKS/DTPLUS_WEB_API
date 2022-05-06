@@ -693,5 +693,47 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetDetailForCorpMultiRechargeLimitConfigModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<CorpMultiRechargeLimitConfigModelOutput>> CorpMultiRechargeLimitConfig([FromBody] CorpMultiRechargeLimitConfigModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeCorpMultiRechargeLimitConfig");
+            dtDBR.Columns.Add("CustomerId", typeof(string));
+            dtDBR.Columns.Add("Limittype", typeof(int));
+            dtDBR.Columns.Add("StatusFlag", typeof(float));
+
+
+            var procedureName = "UspCorpMultiRechargeLimitConfig";
+            var parameters = new DynamicParameters();
+
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+
+            foreach (MultiRechargeLimitConfigModelInpu ObjCardLimits in ObjClass.ObjLimitConfig)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["CustomerID"] = ObjCardLimits.CustomerID;
+                dr["Limittype"] = ObjCardLimits.Limittype;
+                dr["StatusFlag"] = ObjCardLimits.StatusFlag;
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+
+            parameters.Add("TypeCorpMultiRechargeLimitConfig", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<CorpMultiRechargeLimitConfigModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<EmergencyReplacementCardModelOutput>> GetDetailForEmergencyReplacementCards([FromBody] EmergencyReplacementCardModelInput ObjClass)
+        {
+            var procedureName = "UspGetDetailForEmergencyReplacementCards";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<EmergencyReplacementCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

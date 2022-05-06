@@ -29,4 +29,41 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public int CheckUncheckId { get; set; }
     }
+
+    public class CorpMultiRechargeLimitConfigModelInput : BaseClass
+    {
+        [Required]
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+
+        [JsonPropertyName("ObjLimitConfig")]
+        [DataMember]
+        public List<MultiRechargeLimitConfigModelInpu> ObjLimitConfig { get; set; }
+    }
+
+    public class MultiRechargeLimitConfigModelInpu
+    {
+
+        [Required]
+        [JsonPropertyName("CustomerID")]
+        [DataMember]
+        public string CustomerID { get; set; }
+
+        [JsonPropertyName("Limittype")]
+        [DataMember]
+        public int Limittype { get; set; }
+
+        [Required]
+        [JsonPropertyName("StatusFlag")]
+        [DataMember]
+        public int StatusFlag { get; set; }
+
+
+    }
+
+    public class CorpMultiRechargeLimitConfigModelOutput : BaseClassOutput
+    {
+
+    }
 }
