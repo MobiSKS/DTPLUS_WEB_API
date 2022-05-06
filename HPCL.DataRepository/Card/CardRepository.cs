@@ -638,5 +638,60 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<TransferAmountCardToCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<IEnumerable<GetCardsForLimitUpdateForSingleRechargeModelOutput>> GetCardsForLimitUpdateForSingleRecharge([FromBody] GetCardsForLimitUpdateForSingleRechargeModelInput ObjClass)
+        {
+            var procedureName = "UspGetCardsForLimitUpdateForSingleRecharge";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetCardsForLimitUpdateForSingleRechargeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<LimitUpdateForSingleRechargeCardModelOutput>> LimitUpdateForSingleRecharge([FromBody] LimitUpdateForSingleRechargeCardModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeLimitUpdateForSingleRechargeCard");
+            dtDBR.Columns.Add("Cardno", typeof(string));
+            dtDBR.Columns.Add("Limittype", typeof(int));
+            dtDBR.Columns.Add("Amount", typeof(float));
+            
+
+            var procedureName = "UspLimitUpdateForSingleRechargeCard";
+            var parameters = new DynamicParameters();
+           
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+
+            foreach (SinglerecgargeCCMSLimitsModelInput ObjCardLimits in ObjClass.ObjCCMSLimits)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["Cardno"] = ObjCardLimits.Cardno;
+                dr["Limittype"] = ObjCardLimits.Limittype;
+                dr["Amount"] = ObjCardLimits.Amount;              
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+
+            parameters.Add("TypeLimitUpdateForSingleRechargeCard", dtDBR, DbType.Object, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<LimitUpdateForSingleRechargeCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<GetDetailForCorpMultiRechargeLimitConfigModelOutput>> GetDetailForCorpMultiRechargeLimitConfig([FromBody] GetDetailForCorpMultiRechargeLimitConfigModelInput ObjClass)
+        {
+            var procedureName = "UspGetDetailForCorpMultiRechargeLimitConfig";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+           
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetDetailForCorpMultiRechargeLimitConfigModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }

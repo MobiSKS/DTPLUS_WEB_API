@@ -98,7 +98,7 @@ namespace HPCL_WebApi.Controllers
                             res = apiResult.Content.ReadAsStringAsync().Result;
                         }
                         response.apiurl = apiurl + "v1/user/registerTrucker";
-                        response.request = JsonConvert.SerializeObject(obj);
+                        response.request = JsonConvert.SerializeObject(objcargoFL);
 
 
                         response.response = apiResult.Content.ReadAsStringAsync().Result;
@@ -212,7 +212,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Customer_Detail_For_Enrollment_Approval")]
+        [Route("get_customer_detail_for_enrollment_approval")]
         public async Task<IActionResult> GetCustomerDetailForEnrollmentApproval([FromBody] GetCustomerDetailForEnrollmentApprovalInput ObjClass)
         {
             if (ObjClass == null)
@@ -238,7 +238,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_tmsenrollment_status")]
+        [Route("get_tms_enrollment_status")]
         public async Task<IActionResult> GetEnrollmentStatusDetail(GetEnrollmentStatusModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -297,7 +297,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Vehicle_Enrollment_Detail")]
+        [Route("get_vehicle_enrollment_detail")]
         public async Task<IActionResult> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -313,7 +313,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetCustomerDetailForEnrollmentApprovalOutput> item = result.Cast<GetCustomerDetailForEnrollmentApprovalOutput>().ToList();
+                    List<GetEnrollVehicleManagementModeloutput> item = result.Cast<GetEnrollVehicleManagementModeloutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
@@ -428,9 +428,14 @@ namespace HPCL_WebApi.Controllers
                             response.UserId = "Test";
                             _tmsRepo.InsertAPIRequestResponse(response);
 
-                            if (cargoFlLoginResponse != null && cargoFlLoginResponse.message.ToUpper().Contains("USER LOGGED IN SUCCESSFULLY"))
+                            if (cargoFlLoginResponse != null && !string.IsNullOrEmpty(cargoFlLoginResponse.message) && cargoFlLoginResponse.message.ToUpper().Contains("USER LOGGED IN SUCCESSFULLY"))
                             {
                                 item[0].Url = _configuration.GetSection("TMSSettings:TransportSystemUrl").Value;
+                            }
+                            else
+                            {
+                                item[0].Reason =" User Logged in fail in API";
+                                item[0].Status = 0;
                             }
                             item[0].access_token = cargoFlLoginResponse.access_token;
                             item[0].message = cargoFlLoginResponse.message;
