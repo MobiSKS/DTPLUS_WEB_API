@@ -20,12 +20,13 @@ namespace HPCL.DataModel.DTP
     public class GetDetailForUserUnblockByCustomerIdOrUserNameModelOutput : BaseClassOutput
     {
         [Required]
-        [JsonPropertyName("UserName")]
+        [JsonProperty("UserName")]
         [DataMember]
-        public string UserIdOrUserName { get; set; }
+        //public string UserIdOrUserName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
-        [JsonPropertyName("CreatedTime")]
+        [JsonProperty("CreatedTime")]
         [DataMember]
         public string CreatedTime { get; set; }
 

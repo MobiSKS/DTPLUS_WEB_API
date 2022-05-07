@@ -47,8 +47,7 @@ namespace HPCL.DataModel.DTP
     public class GetEntityOldFieldValueModelOutput : BaseClassOutput
     {
 
-        [Required]
-        [JsonPropertyName("OldValue")]
+        [JsonProperty("OldValue")]
         [DataMember]
         public string OldValue { get; set; }
 
