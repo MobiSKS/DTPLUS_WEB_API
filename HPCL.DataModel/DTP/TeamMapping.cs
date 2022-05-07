@@ -44,41 +44,41 @@ namespace HPCL.DataModel.DTP
     }
     public class GetTeamMappingModelOutput
     {
-        [Required]
+        
         [JsonProperty("TeamMappingId")]
         [DataMember]
         public int TeamMappingId { get; set; }
 
-        [Required]
+       
         [JsonProperty("ZBMID")]
         [DataMember]
         public string ZBMID { get; set; }
 
-        [Required]
+        
         [JsonProperty("ZBMName")]
         [DataMember]
         public string ZBMName { get; set; }
-        [Required]
+       
         [JsonProperty("RSMID")]
         [DataMember]
         public string RSMID { get; set; }
 
-        [Required]
+        
         [JsonProperty("RSMName")]
         [DataMember]
         public string RSMName { get; set; }
 
-        [Required]
+        
         [JsonProperty("RBEID")]
         [DataMember]
         public string RBEID { get; set; }
 
-        [Required]
+       
         [JsonProperty("RBEName")]
         [DataMember]
         public string RBEName { get; set; }
 
-        [Required]
+   
         [JsonProperty("Location")]
         [DataMember]
         public string Location { get; set; }
