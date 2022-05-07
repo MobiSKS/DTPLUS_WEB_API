@@ -22,7 +22,8 @@ namespace HPCL.DataModel.DTP
         [Required]
         [JsonProperty("UserName")]
         [DataMember]
-        public string UserIdOrUserName { get; set; }
+        //public string UserIdOrUserName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [JsonProperty("CreatedTime")]
