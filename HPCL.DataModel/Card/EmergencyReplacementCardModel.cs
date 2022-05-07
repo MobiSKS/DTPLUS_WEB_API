@@ -17,8 +17,7 @@ namespace HPCL.DataModel.Card
     }
 
     public class EmergencyReplacementCardModelOutput : BaseClassOutput
-    {
-      
+    {      
         [JsonProperty("CardNo")]
         [DataMember]
         public string CardNo { get; set; }
