@@ -40,9 +40,9 @@ namespace HPCL.DataModel.TMS
 
     public class TMSUpdateEnrollmentStatusModelOutput:BaseClassOutput
     {
-        [JsonProperty("Status")]
-        [DataMember]
-        public int Status { get; set; }
+        //[JsonProperty("Status")]
+        //[DataMember]
+        //public int Status { get; set; }
 
     }
 }
