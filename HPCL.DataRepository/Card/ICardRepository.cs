@@ -60,7 +60,9 @@ namespace HPCL.DataRepository.Card
 
         public Task<IEnumerable<LimitUpdateForSingleRechargeCardModelOutput>> LimitUpdateForSingleRecharge([FromBody] LimitUpdateForSingleRechargeCardModelInput ObjClass);
         public Task<IEnumerable<GetDetailForCorpMultiRechargeLimitConfigModelOutput>> GetDetailForCorpMultiRechargeLimitConfig([FromBody] GetDetailForCorpMultiRechargeLimitConfigModelInput ObjClass);
+        public Task<IEnumerable<CorpMultiRechargeLimitConfigModelOutput>> CorpMultiRechargeLimitConfig([FromBody] CorpMultiRechargeLimitConfigModelInput ObjClass);
 
+        public Task<IEnumerable<EmergencyReplacementCardModelOutput>> GetDetailForEmergencyReplacementCards([FromBody] EmergencyReplacementCardModelInput ObjClass);
 
     }
 }

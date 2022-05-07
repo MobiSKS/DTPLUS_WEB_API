@@ -72,8 +72,16 @@ namespace HPCL.DataRepository.DTP
         public async Task<IEnumerable<GetTeamMappingModelOutput>> GetTeamMapping([FromBody] GetTeamMappingModelInput ObjClass)
         {
             var procedureName = "UspGetTeamMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZBMID", ObjClass.ZBMID, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZBMName", ObjClass.ZBMName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RSMID", ObjClass.RSMID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RSMName", ObjClass.RSMName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEID", ObjClass.RBEID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEName", ObjClass.RBEName, DbType.String, ParameterDirection.Input);
+            parameters.Add("Location", ObjClass.Location, DbType.String, ParameterDirection.Input);           
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<UpdateTeamMappingModelOutput>> UpdateTeamMapping([FromBody] UpdateTeamMappingModelInput ObjClass)

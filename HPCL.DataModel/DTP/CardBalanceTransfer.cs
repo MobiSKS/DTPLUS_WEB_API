@@ -19,18 +19,8 @@ namespace HPCL.DataModel.DTP
         public string Cardno { get; set; }
     }
 
-    public class CardBalanceTransferModelOutput : BaseClass
+    public class CardBalanceTransferModelOutput : BaseClassOutput
     {
-
-        [Required]
-        [JsonProperty("Status")]
-        [DataMember]
-        public int Status { get; set; }
-
-        [Required]
-        [JsonProperty("Reason")]
-        [DataMember]
-        public string Reason { get; set; }
 
     }
 

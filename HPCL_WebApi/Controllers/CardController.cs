@@ -1070,9 +1070,8 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_detail_for_corp_multi_recharge_limit_config")]
-
         public async Task<IActionResult> GetDetailForCorpMultiRechargeLimitConfig([FromBody] GetDetailForCorpMultiRechargeLimitConfigModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -1089,6 +1088,66 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     List<GetDetailForCorpMultiRechargeLimitConfigModelOutput> item = result.Cast<GetDetailForCorpMultiRechargeLimitConfigModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("corp_multi_recharge_limit_config")]
+        public async Task<IActionResult> CorpMultiRechargeLimitConfig([FromBody] CorpMultiRechargeLimitConfigModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.CorpMultiRechargeLimitConfig(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<CorpMultiRechargeLimitConfigModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<CorpMultiRechargeLimitConfigModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_detail_for_emergency_replacement_cards")]
+        public async Task<IActionResult> GetDetailForEmergencyReplacementCards([FromBody] EmergencyReplacementCardModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _cardRepo.GetDetailForEmergencyReplacementCards(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<EmergencyReplacementCardModelOutput> item = result.Cast<EmergencyReplacementCardModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
