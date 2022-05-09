@@ -234,6 +234,35 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_for_general_updates")]
+        public async Task<IActionResult> GetEntityForGeneralUpdates([FromBody] GetEntityForGeneralUpdatesModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.GetEntityGeneralUpdates(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetEntityForGeneralUpdatesModelOutput> item = result.Cast<GetEntityForGeneralUpdatesModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_entity_field_by_entity_type_id")]
         public async Task<IActionResult> GetEntityFieldByEntityTypeId([FromBody] GetEntityFieldByEntityTypeIdModelInput ObjClass)
         {
