@@ -493,7 +493,7 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("update_al_customerstatus")]
+        [Route("update_al_customer_status")]
         public async Task<IActionResult> UpdateALCustomerStatus([FromBody] UpdateALCustomerStatusModelInput ObjClass)
         {
 
@@ -540,21 +540,14 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _ALRepo.GetALCustomerDetail(ObjClass);
-                if (result == null)
+                if (result == null || result.Count() ==0)
                 {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
+                    return this.NotFoundCustom(ObjClass, result, _logger);
                 }
                 else
                 {
-                    if (result.Cast<GetALCustomerDetailModelOutput>().ToList()[0].Status == 1)
-                    {
                         return this.OkCustom(ObjClass, result, _logger);
-                    }
-                    else
-                    {
-                        return this.FailCustom(ObjClass, result, _logger,
-                            result.Cast<GetALCustomerDetailModelOutput>().ToList()[0].Reason);
-                    }
+                   
 
 
                 }
