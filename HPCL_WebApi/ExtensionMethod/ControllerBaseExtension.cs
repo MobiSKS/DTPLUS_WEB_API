@@ -445,7 +445,7 @@ namespace HPCL_WebApi.ExtensionMethod
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
-            string MessageStr = StatusInformation.Fail.ToString();
+            string MessageStr = StatusInformation.Fail.GetDisplayName().ToString();
             ApiResponseMessage response = new ApiResponseMessage
             {
                 Message = MessageStr,

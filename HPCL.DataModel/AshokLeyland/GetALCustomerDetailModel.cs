@@ -18,7 +18,7 @@ namespace HPCL.DataModel.AshokLeyland
         public string CustomerID { get; set; }
     }
 
-    public class GetALCustomerDetailModelOutput : BaseClassOutput
+    public class GetALCustomerDetailModelOutput 
     {
 
         [JsonProperty("CustomerID")]
