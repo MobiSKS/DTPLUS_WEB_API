@@ -320,7 +320,7 @@ namespace HPCL_WebApi.Controllers
             }
         }
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_entity_old_field_value")]
         public async Task<IActionResult> GetEntityOldFieldValue([FromBody] GetEntityOldFieldValueModelInput ObjClass)
         {
@@ -338,11 +338,15 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetEntityOldFieldValueModelOutput> item = result.Cast<GetEntityOldFieldValueModelOutput>().ToList();
-                    if (item.Count > 0)
+
+                    if (result.Cast<GetEntityOldFieldValueModelOutput>().ToList()[0].Status == 1)
+                    {
                         return this.OkCustom(ObjClass, result, _logger);
+                    }
                     else
-                        return this.Fail(ObjClass, result, _logger);
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<GetEntityOldFieldValueModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 
