@@ -6,6 +6,25 @@ using System.Text.Json.Serialization;
 namespace HPCL.DataModel.DTP
 {
 
+    public class GetEntityForGeneralUpdatesModelInput //: BaseClass
+    {
+    }
+
+    public class GetEntityForGeneralUpdatesModelOutput
+    {
+        [JsonProperty("EntityId")]
+        [DataMember]
+        public int EntityId { get; set; }
+
+
+        [JsonProperty("EntityName")]
+        [DataMember]
+        public string EntityName { get; set; }
+
+
+    }
+
+
     public class GetEntityFieldByEntityTypeIdModelInput : BaseClass
     {
         [Required]
