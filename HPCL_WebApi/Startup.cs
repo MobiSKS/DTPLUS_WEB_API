@@ -80,7 +80,7 @@ namespace HPCL_WebApi
                         .AllowAnyMethod();
                 });
             });
-
+            // jhi
             //services.add
             //services.AddEntityFramework()
             //Register dapper in scope
