@@ -1028,10 +1028,19 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.ObjGetCard.Count > 0)
+
+                    if (result.Cast<GetCardsForLimitUpdateForSingleRechargeModelOutput>().ToList()[0].Status == 1)
+                    {
                         return this.OkCustom(ObjClass, result, _logger);
+                    }
                     else
-                        return this.Fail(ObjClass, result, _logger);
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<GetCardsForLimitUpdateForSingleRechargeModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                  
                 }
             }
         }
