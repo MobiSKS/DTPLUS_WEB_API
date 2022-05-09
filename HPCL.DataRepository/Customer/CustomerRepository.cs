@@ -898,6 +898,7 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerAddOnUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
