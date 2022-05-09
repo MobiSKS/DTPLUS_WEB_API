@@ -39,9 +39,9 @@ namespace HPCL.DataModel.DTP
         public string UserName { get; set; }
 
         [Required]
-        [JsonPropertyName("BloackUnblockStatus")]
+        [JsonPropertyName("BlockUnblockStatus")]
         [DataMember]
-        public int BloackUnblockStatus { get; set; }
+        public int BlockUnblockStatus { get; set; }
         
         [JsonPropertyName("Remark")]
         [DataMember]
