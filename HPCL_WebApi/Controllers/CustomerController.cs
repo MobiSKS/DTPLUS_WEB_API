@@ -609,7 +609,7 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-         
+
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -987,11 +987,11 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-       
 
-        
 
-        
+
+
+
 
 
         [HttpPost]
@@ -1027,7 +1027,7 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-      
+
 
 
         [HttpPost]
@@ -1145,7 +1145,7 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
-        
+
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -1309,7 +1309,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-       [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("customer_add_on_user")]
         public async Task<IActionResult> CustomerAddOnUser([FromBody] CustomerAddOnUserModelInput ObjClass)
         {
