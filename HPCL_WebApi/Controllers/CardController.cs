@@ -1013,7 +1013,6 @@ namespace HPCL_WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_cards_for_limit_update_for_single_recharge")]
-
         public async Task<IActionResult> GetCardsForLimitUpdateForSingleRecharge([FromBody] GetCardsForLimitUpdateForSingleRechargeModelInput ObjClass)
         {
             if (ObjClass == null)
@@ -1029,8 +1028,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<GetCardsForLimitUpdateForSingleRechargeModelOutput> item = result.Cast<GetCardsForLimitUpdateForSingleRechargeModelOutput>().ToList();
-                    if (item.Count > 0)
+                    if (result.ObjGetCard.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else
                         return this.Fail(ObjClass, result, _logger);
