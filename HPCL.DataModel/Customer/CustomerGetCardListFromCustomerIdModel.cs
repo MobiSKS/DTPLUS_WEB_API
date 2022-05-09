@@ -13,7 +13,7 @@ namespace HPCL.DataModel.Customer
         public string CustomerID { get; set; }
     }
 
-    public class CustomerGetCardListFromCustomerIdModelOutput
+    public class CustomerGetCardListFromCustomerIdModelOutput  
     {
         [JsonProperty("CardNo")]
         [DataMember]
