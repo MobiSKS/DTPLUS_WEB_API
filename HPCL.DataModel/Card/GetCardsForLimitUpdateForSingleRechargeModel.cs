@@ -21,13 +21,6 @@ namespace HPCL.DataModel.Card
     
     public class GetCardsForLimitUpdateForSingleRechargeModelOutput : BaseClassOutput
     {
-        [JsonPropertyName("ObjGetCard")]
-        [DataMember]
-        public List<GetCardsForLimitUpdateForSingleRecharge> ObjGetCard { get; set; }
-    }
-
-    public class GetCardsForLimitUpdateForSingleRecharge 
-    {
         [JsonProperty("CardNumber")]
         [DataMember]
         public string CardNumber { get; set; }
@@ -60,4 +53,6 @@ namespace HPCL.DataModel.Card
         [DataMember]
         public float CCMSLimitValue { get; set; }
     }
+
+     
 }

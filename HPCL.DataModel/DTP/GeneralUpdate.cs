@@ -70,6 +70,13 @@ namespace HPCL.DataModel.DTP
         [DataMember]
         public string OldValue { get; set; }
 
+        [JsonProperty("RegionID")]
+        [DataMember]
+        public int RegionID { get; set; }
+
+        [JsonProperty("RegionName")]
+        [DataMember]
+        public string RegionName { get; set; }
     }
 
     public class UpdateGeneralEntityFieldModelInput : BaseClass

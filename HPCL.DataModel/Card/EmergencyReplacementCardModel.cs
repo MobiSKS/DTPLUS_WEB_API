@@ -23,4 +23,7 @@ namespace HPCL.DataModel.Card
         public string CardNo { get; set; }
 
     }
+
+
+
 }

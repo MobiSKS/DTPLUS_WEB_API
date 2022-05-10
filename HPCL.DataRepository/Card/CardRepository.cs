@@ -639,23 +639,16 @@ namespace HPCL.DataRepository.Card
             return await connection.QueryAsync<TransferAmountCardToCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        
 
-        public async Task<GetCardsForLimitUpdateForSingleRechargeModelOutput> GetCardsForLimitUpdateForSingleRecharge([FromBody] GetCardsForLimitUpdateForSingleRechargeModelInput ObjClass)
+        public async Task<IEnumerable<GetCardsForLimitUpdateForSingleRechargeModelOutput>> GetCardsForLimitUpdateForSingleRecharge([FromBody] GetCardsForLimitUpdateForSingleRechargeModelInput ObjClass)
         {
             var procedureName = "UspGetCardsForLimitUpdateForSingleRecharge";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
-            var result = await connection.QueryMultipleAsync(procedureName, parameters, commandType: CommandType.StoredProcedure);
-            var storedProcedureResult = new GetCardsForLimitUpdateForSingleRechargeModelOutput();
-            storedProcedureResult.ObjGetCard = (List<GetCardsForLimitUpdateForSingleRecharge>)await result.ReadAsync<GetCardsForLimitUpdateForSingleRecharge>();
-            return storedProcedureResult;
-
-            //return await connection.QueryAsync<GetApproveFeeWaiverDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetCardsForLimitUpdateForSingleRechargeModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
-
 
         public async Task<IEnumerable<LimitUpdateForSingleRechargeCardModelOutput>> LimitUpdateForSingleRecharge([FromBody] LimitUpdateForSingleRechargeCardModelInput ObjClass)
         {
