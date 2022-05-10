@@ -321,7 +321,7 @@ namespace HPCL_WebApi.Controllers
         }
         [HttpPost]
        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_entity_old_field_value")]
+        [Route("get_entity_old_field_value")] 
         public async Task<IActionResult> GetEntityOldFieldValue([FromBody] GetEntityOldFieldValueModelInput ObjClass)
         {
 
@@ -332,7 +332,7 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _dtpRepo.GetEntityOldFieldValue(ObjClass);
-                if (result == null)
+                if (result == null || result.Count()==0)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
