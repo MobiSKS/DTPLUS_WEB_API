@@ -454,8 +454,7 @@ namespace HPCL_WebApi.Controllers
 
         }
 
-        ////////
-        ///
+        
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_al_customer_detail_for_verification")]
@@ -469,7 +468,7 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _ALRepo.GetAlCustomerDetailForVerification(ObjClass);
-                if (result == null)
+                if (result == null || result.Count() ==0) 
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
