@@ -61,7 +61,6 @@ namespace HPCL.DataModel.DTP
         [JsonPropertyName("CustomerIdOrCardOrMerchantId")]
         [DataMember]
         public string CustomerIdOrCardOrMerchantId { get; set; }
-
     }
     public class GetEntityOldFieldValueModelOutput : BaseClassOutput
     {
