@@ -365,7 +365,7 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _dtpRepo.GetDetailForUserUnblockByCustomerIdOrUserName(ObjClass);
-                if (result == null)
+                if (result == null || result.Count() == 0)                 
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
@@ -382,7 +382,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("user_unblock")]
         public async Task<IActionResult> UserUnBlock([FromBody] UserUnBlockModelInput ObjClass)
         {
