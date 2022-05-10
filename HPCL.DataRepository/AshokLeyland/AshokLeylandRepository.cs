@@ -299,10 +299,10 @@ namespace HPCL.DataRepository.AshokLeyland
         {
             var procedureName = "UspGetAlCustomerDetailForVerification";
             var parameters = new DynamicParameters();
-            parameters.Add("StateID", ObjClass.StateID, DbType.String, ParameterDirection.Input);
-            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("StateID", ObjClass.StateID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("FormNumber", ObjClass.FormNumber, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerName", ObjClass.CustomerName, DbType.String, ParameterDirection.Input);
-            parameters.Add("Status", ObjClass.Status, DbType.String, ParameterDirection.Input);
+            parameters.Add("Status", ObjClass.Status, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetAlCustomerDetailForVerificationModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -313,6 +313,7 @@ namespace HPCL.DataRepository.AshokLeyland
             var parameters = new DynamicParameters();
             parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerStatus", ObjClass.CustomerStatus, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateALCustomerStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
