@@ -470,7 +470,7 @@ namespace HPCL_WebApi.Controllers
                 var result = await _ALRepo.GetAlCustomerDetailForVerification(ObjClass);
                 if (result == null || result.Count() ==0) 
                 {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
+                    return this.Fail(ObjClass, null, _logger);
                 }
                 else
                 {
@@ -541,7 +541,7 @@ namespace HPCL_WebApi.Controllers
                 var result = await _ALRepo.GetALCustomerDetail(ObjClass);
                 if (result == null || result.Count() ==0)
                 {
-                    return this.NotFoundCustom(ObjClass, result, _logger);
+                    return this.Fail(ObjClass, result, _logger);
                 }
                 else
                 {
