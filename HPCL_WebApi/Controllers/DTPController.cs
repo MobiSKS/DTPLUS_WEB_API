@@ -332,7 +332,7 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _dtpRepo.GetEntityOldFieldValue(ObjClass);
-                if (result == null)
+                if (result == null || result.Count()==0)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
