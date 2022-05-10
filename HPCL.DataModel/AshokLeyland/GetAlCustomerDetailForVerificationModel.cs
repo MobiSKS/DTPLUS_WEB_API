@@ -35,7 +35,7 @@ namespace HPCL.DataModel.AshokLeyland
     {
         [JsonProperty("FormNumber")]
         [DataMember]
-        public Int64 FormNumber { get; set; }
+        public string FormNumber { get; set; }
         [JsonProperty("CustomerID")]
         [DataMember]
         public string CustomerID { get; set; }
