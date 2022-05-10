@@ -11,8 +11,13 @@ using System.Threading.Tasks;
 namespace HPCL.DataModel.DTP
 {
    
-    public class CardBalanceTransferModelInput 
-    {    
+    public class CardBalanceTransferModelInput
+    {
+        [Required]
+        [JsonPropertyName("CardStatus")]
+        [DataMember]
+        public int CardStatus { get; set; }
+
         [Required]
         [JsonPropertyName("CardNo")]
         [DataMember]
