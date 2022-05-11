@@ -12,6 +12,6 @@ namespace HPCL.DataRepository.ConfigureAlert
     { 
          public Task<GetSmsAlertForMultipleMobileDetailModelOutput> GetSmsAlertForMultipleMobile([FromBody] GetSmsAlertForMultipleMobileDetailModelInput ObjClass);
         public Task<IEnumerable<UpdateSmsAlertForMultipleMobileDetailModelOutput>> UpdateSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass);
-    
+        public Task<IEnumerable<DeleteSmsAlertForMultipleMobileDetailModelOutput>> DeleteSmsAlertForMultipleMobileDetail([FromBody] DeleteSmsAlertForMultipleMobileDetailModelInput ObjClass);
     }
 }

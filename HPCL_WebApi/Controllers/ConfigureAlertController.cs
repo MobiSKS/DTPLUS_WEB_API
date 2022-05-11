@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
-    public class ConfigureAlertController : Controller
+    [ApiController]
+    [Route("/api/dtplus/ConfigureAlert")]
+    public class ConfigureAlertController : ControllerBase
     {
         private readonly ILogger<ConfigureAlertController> _logger;
 
@@ -22,8 +24,8 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Sms_Alert_For_Multiple_Mobile_Detail")]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_sms_alert_for_multiple_mobile_detail")]
         public async Task<IActionResult> GetSmsAlertForMultipleMobileDetail([FromBody] GetSmsAlertForMultipleMobileDetailModelInput ObjClass)
         {
 
@@ -52,7 +54,7 @@ namespace HPCL_WebApi.Controllers
 
             [HttpPost]
             [ServiceFilter(typeof(CustomAuthenticationFilter))]
-            [Route("Update_Sms_Alert_For_Multiple_MobileDetail")]
+            [Route("update_sms_alert_for_multiple_mobiledetail")]
             public async Task<IActionResult> UpdateSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass)
             {
 
@@ -84,8 +86,41 @@ namespace HPCL_WebApi.Controllers
                 }
             }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("delete_sms_alert_for_multiple_mobiledetail")]
+        public async Task<IActionResult> DeleteSmsAlertForMultipleMobileDetail([FromBody] DeleteSmsAlertForMultipleMobileDetailModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.DeleteSmsAlertForMultipleMobileDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<DeleteSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<DeleteSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Reason);
+                    }
 
 
-
+                }
+            }
         }
+
+
+
     }
+}

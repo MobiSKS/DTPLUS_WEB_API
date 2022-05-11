@@ -81,7 +81,7 @@ namespace HPCL_WebApi.Controllers
                         response.apiurl = apiurl + "v1/common/loginSuperUser";
                         response.request = JsonConvert.SerializeObject(obj);
                         response.response = apiResponse.Content.ReadAsStringAsync().Result;
-                        response.UserId = "Test";
+                        response.UserId = ObjClass.Userid;
                         _tmsRepo.InsertAPIRequestResponse(response);
 
 
@@ -285,9 +285,13 @@ namespace HPCL_WebApi.Controllers
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
-                {                    
+                {
+                    if (result.Cast<TMSUpdateEnrollmentStatusModelOutput>().ToList()[0].Status==1)
                         return this.OkCustom(ObjClass, result, _logger);
-                   
+                    else
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<TMSUpdateEnrollmentStatusModelOutput>().ToList()[0].Reason);
+
                 }
             }
 

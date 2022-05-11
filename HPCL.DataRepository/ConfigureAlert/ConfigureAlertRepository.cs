@@ -64,20 +64,20 @@ namespace HPCL.DataRepository.ConfigureAlert
             var procedureName = "UspUpdateSmsAlertForMultipleMobileDetail";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerMultiMobile",dtDBR, DbType.Object, ParameterDirection.Input);
-           
+            parameters.Add("userId", ObjClass.Userid, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateSmsAlertForMultipleMobileDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<UpdateSmsAlertForMultipleMobileDetailModelOutput>> DeleteSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass)
+        public async Task<IEnumerable<DeleteSmsAlertForMultipleMobileDetailModelOutput>> DeleteSmsAlertForMultipleMobileDetail([FromBody] DeleteSmsAlertForMultipleMobileDetailModelInput ObjClass)
         {
-            var procedureName = "UspUpdateSmsAlertForMultipleMobileDetail";
+            var procedureName = "UspDeleteSmsAlertForMultipleMobileDetail";
             var parameters = new DynamicParameters();
-            parameters.Add("CustomerID","" , DbType.Object, ParameterDirection.Input);
-            parameters.Add("MobileNo","" , DbType.Object, ParameterDirection.Input);
+            parameters.Add("CustomerID",ObjClass.CustomerID , DbType.String, ParameterDirection.Input);
+            parameters.Add("MobileNo", ObjClass.MobileNo, DbType.String, ParameterDirection.Input);
 
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<UpdateSmsAlertForMultipleMobileDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<DeleteSmsAlertForMultipleMobileDetailModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
 
         }

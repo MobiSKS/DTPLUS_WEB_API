@@ -73,7 +73,7 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("UserId", ObjClass.UserId, DbType.String, ParameterDirection.Input);
             parameters.Add("TMSUserId", ObjClass.TMSUserId, DbType.String, ParameterDirection.Input);
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
-            //parameters.Add("@TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("TMSStatus", ObjClass.TMSStatus, DbType.Int32, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             var res = await connection.QueryAsync<object>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
@@ -101,7 +101,7 @@ namespace HPCL.DataRepository.TMS
         }
         public async Task<IEnumerable<GetEnrollmentStatusModelOutput>> GetEnrollmentStatus()
         {
-        var procedureName = "UspGetTMSEnrollmentStatus";
+            var procedureName = "UspGetTMSEnrollmentStatus";
             var parameters = new DynamicParameters();
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<GetEnrollmentStatusModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
@@ -115,7 +115,7 @@ namespace HPCL.DataRepository.TMS
             dtDBR.Columns.Add("Remarks", typeof(string));
             dtDBR.Columns.Add("CreatedBy", typeof(string));
 
-
+            List<TMSUpdateEnrollmentStatusModelOutput> resultobj=new List<TMSUpdateEnrollmentStatusModelOutput>();
 
             if (ObjClass.TMSUpdateEnrollmentCustomerList != null)
             {
@@ -125,7 +125,7 @@ namespace HPCL.DataRepository.TMS
 
                     ApiRequestResponse response = new ApiRequestResponse();
                     CargoFlLoginResponse cargoFlLoginResponse = new CargoFlLoginResponse();
-                    CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value};
+                    CargoFlLogin obj = new CargoFlLogin() { cargofl_userid = _configuration.GetSection("TMSSettings:CargoFLUser").Value };
 
                     HttpResponseMessage apiResponse = Variables.CallPostAPI(Apiurl + "v1/common/loginSuperUser", JsonConvert.SerializeObject(obj), "").Result;
                     string json = "";
@@ -143,6 +143,14 @@ namespace HPCL.DataRepository.TMS
                     response.response = apiResponse.Content.ReadAsStringAsync().Result;
                     response.UserId = ObjDetail.CreatedBy;
                     InsertAPIRequestResponse(response);
+                    if (string.IsNullOrEmpty(json) && response.response.Contains("message"))
+                    {
+                        cargoFlLoginResponse = JsonConvert.DeserializeObject<CargoFlLoginResponse>(response.response);
+
+                        TMSUpdateEnrollmentStatusModelOutput tmsobj = new TMSUpdateEnrollmentStatusModelOutput() { Status = 0, Reason = cargoFlLoginResponse.message };
+                        resultobj.Add(tmsobj);
+                        return resultobj;
+                    }
 
                     if (cargoFlLoginResponse != null && !string.IsNullOrEmpty(cargoFlLoginResponse.access_token))
                     {
@@ -156,7 +164,7 @@ namespace HPCL.DataRepository.TMS
                         }
 
 
-                         HttpResponseMessage apiResult= Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
+                        HttpResponseMessage apiResult = Variables.CallPostAPI(apiurl, JsonConvert.SerializeObject(obj), cargoFlLoginResponse.access_token).Result;
                         string res = string.Empty;
                         if (apiResult.IsSuccessStatusCode)
                         {
@@ -168,18 +176,27 @@ namespace HPCL.DataRepository.TMS
 
                         response.response = apiResult.Content.ReadAsStringAsync().Result; ;
                         CargoFlLoginResponse objResponce = new CargoFlLoginResponse();
-                        if (string.IsNullOrEmpty(res))
+                        if (!string.IsNullOrEmpty(res))
                         {
 
                             objResponce = JsonConvert.DeserializeObject<CargoFlLoginResponse>(res);
 
                             response.TMSUserId = obj.cargofl_userid;
                             response.CustomerId = ObjDetail.CustomerID;
+                            response.TMSStatus = ObjDetail.TMSStatusID;
 
                         }
 
                         InsertAPIRequestResponse(response);
-                        if (!string.IsNullOrEmpty(objResponce.message) && (objResponce.message.Trim().ToUpper() == "USER ENABLED SUCCESSFULLY") || objResponce.message.Trim().ToUpper() == "USER DISABLED SUCCESSFULLY")
+                        if (string.IsNullOrEmpty(res) && response.response.Contains("message"))
+                        {
+                            objResponce = JsonConvert.DeserializeObject<CargoFlLoginResponse>(response.response);
+                            
+                            TMSUpdateEnrollmentStatusModelOutput tmsobj = new TMSUpdateEnrollmentStatusModelOutput() {Status = 0,Reason = objResponce.message };
+                            resultobj.Add(tmsobj);
+                            return resultobj;
+                        }
+                        if (!string.IsNullOrEmpty(objResponce.message) && ((objResponce.message.Trim().ToUpper() == "USER ENABLED SUCCESSFULLY") || objResponce.message.Trim().ToUpper() == "USER DISABLED SUCCESSFULLY"))
                         {
 
                             DataRow dr = dtDBR.NewRow();
@@ -188,14 +205,14 @@ namespace HPCL.DataRepository.TMS
                             dr["TMSUserId"] = ObjDetail.TMSUserId;
                             dr["TMSStatusID"] = Convert.ToInt32(ObjDetail.TMSStatusID);
 
-                            dr["CreatedBy"] = ObjDetail.CreatedBy;
+                            dr["CreatedBy"] = ObjClass.Userid;
 
                             dtDBR.Rows.Add(dr);
                             dtDBR.AcceptChanges();
                         }
                     }
                 }
-            }            
+            }
             var procedureName = "UspTMSInsertEnrollmentCustomerTracking";
             var parameters = new DynamicParameters();
             parameters.Add("CustomerTracking", dtDBR, DbType.Object, ParameterDirection.Input);
@@ -235,15 +252,15 @@ namespace HPCL.DataRepository.TMS
 
             if (ObjClass.VehicleEnrollmentStatusList != null)
             {
-                
+
                 foreach (var item in ObjClass.VehicleEnrollmentStatusList)
-                {                   
+                {
 
                     DataRow dr = dtDBR.NewRow();
                     dr["CustomerID"] = item.CustomerID;
                     dr["EnrollmentStatus"] = 1;
                     dr["CardNo"] = item.CardNo;
-                    dr["VehicleNo"] =item.VehicleNo;
+                    dr["VehicleNo"] = item.VehicleNo;
                     dr["CreatedBy"] = item.CreatedBy;
 
                     dtDBR.Rows.Add(dr);
@@ -251,7 +268,7 @@ namespace HPCL.DataRepository.TMS
 
 
                 }
-               
+
             }
             var procedureName = "UspInsertVehicleEnrollmentStatus";
             var parameters = new DynamicParameters();
