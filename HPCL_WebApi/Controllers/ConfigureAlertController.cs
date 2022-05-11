@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
-    public class ConfigureAlertController : Controller
+    public class ConfigureAlertController : ControllerBase
     {
         private readonly ILogger<ConfigureAlertController> _logger;
 
@@ -22,8 +22,8 @@ namespace HPCL_WebApi.Controllers
 
 
         [HttpPost]
-        //[ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("Get_Sms_Alert_For_Multiple_Mobile_Detail")]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_sms_alert_for_multiple_mobile_detail")]
         public async Task<IActionResult> GetSmsAlertForMultipleMobileDetail([FromBody] GetSmsAlertForMultipleMobileDetailModelInput ObjClass)
         {
 
@@ -41,10 +41,6 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     return this.OkCustom(ObjClass, result, _logger);
-
-
-
-                    //}
                 }
             }
         }
@@ -52,7 +48,7 @@ namespace HPCL_WebApi.Controllers
 
             [HttpPost]
             [ServiceFilter(typeof(CustomAuthenticationFilter))]
-            [Route("Update_Sms_Alert_For_Multiple_MobileDetail")]
+            [Route("update_sms_alert_for_multiple_mobiledetail")]
             public async Task<IActionResult> UpdateSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass)
             {
 
@@ -78,14 +74,8 @@ namespace HPCL_WebApi.Controllers
                             return this.FailCustom(ObjClass, result, _logger,
                                 result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Reason);
                         }
-
-
                     }
                 }
             }
-
-
-
-
         }
     }
