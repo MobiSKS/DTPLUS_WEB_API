@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
+    [Route("api/dtplus/configure")]
+    [ApiController]
     public class ConfigureAlertController : ControllerBase
     {
         private readonly ILogger<ConfigureAlertController> _logger;
