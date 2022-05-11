@@ -9347,25 +9347,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\sujit\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DTPLUS\\HPCL.DataRepository\\HPCL.DataRepository.csproj",
+      "projectUniqueName": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.DataRepository\\HPCL.DataRepository.csproj",
       "projectName": "HPCL.DataRepository",
-      "projectPath": "D:\\DTPLUS\\HPCL.DataRepository\\HPCL.DataRepository.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\DTPLUS\\HPCL.DataRepository\\obj\\",
+      "projectPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.DataRepository\\HPCL.DataRepository.csproj",
+      "packagesPath": "C:\\Users\\sujit\\.nuget\\packages\\",
+      "outputPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.DataRepository\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sujit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -9373,11 +9379,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\DTPLUS\\HPCL.DataModel\\HPCL.DataModel.csproj": {
-              "projectPath": "D:\\DTPLUS\\HPCL.DataModel\\HPCL.DataModel.csproj"
+            "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.DataModel\\HPCL.DataModel.csproj": {
+              "projectPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.DataModel\\HPCL.DataModel.csproj"
             },
-            "D:\\DTPLUS\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {
-              "projectPath": "D:\\DTPLUS\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj"
+            "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {
+              "projectPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj"
             }
           }
         }
@@ -9436,7 +9442,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
