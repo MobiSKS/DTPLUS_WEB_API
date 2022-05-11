@@ -63,5 +63,6 @@ namespace HPCL.DataRepository.Card
 
         public Task<IEnumerable<EmergencyReplacementCardModelOutput>> GetDetailForEmergencyReplacementCards([FromBody] EmergencyReplacementCardModelInput ObjClass);
 
+        public Task<IEnumerable<EmergencyReplacementCardsModelOutput>> EmergencyReplacementCards([FromBody] UpdateEmergencyReplacementCardsModelInput ObjClass);
     }
 }

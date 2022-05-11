@@ -733,6 +733,40 @@ namespace HPCL.DataRepository.Card
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<EmergencyReplacementCardModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
+        
+        public async Task<IEnumerable<EmergencyReplacementCardsModelOutput>> EmergencyReplacementCards([FromBody] UpdateEmergencyReplacementCardsModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeEmergencyReplacementCard");
+            dtDBR.Columns.Add("CustomerId", typeof(string));
+            dtDBR.Columns.Add("OldCardNo", typeof(string));
+            dtDBR.Columns.Add("NewCardNo", typeof(string));
+
+            var procedureName = "UspEmergencyReplacementCards";
+            var parameters = new DynamicParameters();
+
+
+            foreach (objEmergencyReplacementCardsModelInput objdtl in ObjClass.objEmergencyReplacementCards)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["CustomerId"] = objdtl.CustomerId;
+                dr["OldCardNo"] = objdtl.OldCardNo;
+                dr["NewCardNo"] = objdtl.NewCardNo;
+               
+
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+
+            parameters.Add("TypeEmergencyReplacementCard", dtDBR, DbType.Object, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<EmergencyReplacementCardsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
 
     }
 }
