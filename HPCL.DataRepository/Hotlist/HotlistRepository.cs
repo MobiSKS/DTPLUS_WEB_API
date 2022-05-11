@@ -107,5 +107,26 @@ namespace HPCL.DataRepository.Hotlist
             return await connection.QueryAsync<UpdateHotlistApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public async Task<IEnumerable<HotlistGetHotlistCardsDetailsModelOutput>> GetHotlistCardsDetails([FromBody] HotlistGetHotlistCardsDetailsModelInput ObjClass)
+        {
+            var procedureName = "UspGetHotlistCardsDetails";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("CardNo", ObjClass.CardNo, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<HotlistGetHotlistCardsDetailsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<HotlistGetHotlistReasonModelOutput>> GetHotlistReason([FromBody] HotlistGetHotlistReasonModelInput ObjClass)
+        {
+            var procedureName = "UspGetHotlistReason";
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<HotlistGetHotlistReasonModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+        }
+
+
+
+
     }
 }

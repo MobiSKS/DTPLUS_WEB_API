@@ -4,6 +4,7 @@ using HPCL_WebApi.ActionFilters;
 using HPCL_WebApi.ExtensionMethod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +16,11 @@ namespace HPCL_WebApi.Controllers
     {
         private readonly ILogger<ConfigureAlertController> _logger;
 
-        private readonly IConfigureAlertRepository _ALRepo;
-        public ConfigureAlertController(ILogger<ConfigureAlertController> logger, IConfigureAlertRepository ALRepo)
+        private readonly IConfigureAlertRepository _CALRepo;
+        public ConfigureAlertController(ILogger<ConfigureAlertController> logger, IConfigureAlertRepository CALRepo)
         {
             _logger = logger;
-            _ALRepo = ALRepo;
+            _CALRepo = CALRepo;
         }
 
 
@@ -35,7 +36,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _ALRepo.GetSmsAlertForMultipleMobile(ObjClass);
+                var result = await _CALRepo.GetSmsAlertForMultipleMobile(ObjClass);
                 if (result == null || result.CustomerDetail.Count == 0)
                 {
                     return this.Fail(ObjClass, null, _logger);
@@ -48,37 +49,37 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-            [HttpPost]
-            [ServiceFilter(typeof(CustomAuthenticationFilter))]
-            [Route("update_sms_alert_for_multiple_mobiledetail")]
-            public async Task<IActionResult> UpdateSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass)
-            {
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_sms_alert_for_multiple_mobiledetail")]
+        public async Task<IActionResult> UpdateSmsAlertForMultipleMobileDetail([FromBody] UpdateSmsAlertForMultipleMobileDetailModelinput ObjClass)
+        {
 
-                if (ObjClass == null)
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CALRepo.UpdateSmsAlertForMultipleMobileDetail(ObjClass);
+                if (result == null)
                 {
-                    return this.BadRequestCustom(ObjClass, null, _logger);
+                    return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    var result = await _ALRepo.UpdateSmsAlertForMultipleMobileDetail(ObjClass);
-                    if (result == null)
+                    if (result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Status == 1)
                     {
-                        return this.NotFoundCustom(ObjClass, null, _logger);
+                        return this.OkCustom(ObjClass, result, _logger);
                     }
                     else
                     {
-                        if (result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Status == 1)
-                        {
-                            return this.OkCustom(ObjClass, result, _logger);
-                        }
-                        else
-                        {
-                            return this.FailCustom(ObjClass, result, _logger,
-                                result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Reason);
-                        }
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Reason);
                     }
                 }
             }
+        }
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -92,7 +93,7 @@ namespace HPCL_WebApi.Controllers
             }
             else
             {
-                var result = await _ALRepo.DeleteSmsAlertForMultipleMobileDetail(ObjClass);
+                var result = await _CALRepo.DeleteSmsAlertForMultipleMobileDetail(ObjClass);
                 if (result == null)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
@@ -110,6 +111,128 @@ namespace HPCL_WebApi.Controllers
                     }
 
 
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_configure_sms_alerts_details_by_customerid")]
+        public async Task<IActionResult> GetConfigureSMSAlertsDetailsByCustomerID([FromBody] ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CALRepo.GetConfigureSMSAlertsDetailsByCustomerID(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelOutput> item = result.Cast<ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_configure_sms_alerts")]
+        public async Task<IActionResult> UpdateConfigureSMSAlerts([FromBody] UpdateConfigureSMSAlertsModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CALRepo.UpdateConfigureSMSAlerts(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateConfigureSMSAlertsModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateConfigureSMSAlertsModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_configure_email_alerts")]
+        public async Task<IActionResult> GetConfigureEmailAlerts([FromBody] GetConfigureEmailAlertsModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CALRepo.GetConfigureEmailAlerts(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetConfigureEmailAlertsOutput> item = result.Cast<GetConfigureEmailAlertsOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_configure_email_alert")]
+        public async Task<IActionResult> UpdateConfigureEmailAlert([FromBody] UpdateConfigureEmailAlertModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _CALRepo.UpdateConfigureEmailAlert(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateConfigureEmailAlertModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateConfigureEmailAlertModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
         }

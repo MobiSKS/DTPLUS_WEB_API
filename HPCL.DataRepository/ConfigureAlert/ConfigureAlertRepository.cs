@@ -83,5 +83,89 @@ namespace HPCL.DataRepository.ConfigureAlert
         }
 
 
+        public async Task<IEnumerable<ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelOutput>> GetConfigureSMSAlertsDetailsByCustomerID([FromBody] ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelInput ObjClass)
+        {
+            var procedureName = "UspGetConfigureSMSAlertsDetailsByCustomerID";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ConfigureAlertGetConfigureSMSAlertsDetailsByCustomerIDModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<UpdateConfigureSMSAlertsModelOutput>> UpdateConfigureSMSAlerts([FromBody] UpdateConfigureSMSAlertsModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeConfigureSMSAlerts");
+            dtDBR.Columns.Add("CustomerID", typeof(string));
+            dtDBR.Columns.Add("TransactionID", typeof(string));
+            dtDBR.Columns.Add("StatusId", typeof(string));
+
+
+            if (ObjClass.TypeConfigureSMSAlerts != null)
+            {
+                foreach (var ObjDetail in ObjClass.TypeConfigureSMSAlerts)
+                {
+                    DataRow dr = dtDBR.NewRow();
+                    dr["CustomerID"] = ObjDetail.CustomerID;
+                    dr["TransactionID"] = ObjDetail.TransactionID;
+                    dr["StatusId"] = ObjDetail.StatusId;
+                    // dr["Designation"] = ObjDetail.Designation;
+
+                    //dr["CreatedBy"] = ObjDetail.CreatedBy;
+
+                    dtDBR.Rows.Add(dr);
+                    dtDBR.AcceptChanges();
+
+                }
+            }
+            var procedureName = "UspUpdateConfigureSMSAlerts";
+            var parameters = new DynamicParameters();
+            parameters.Add("TypeConfigureSMSAlerts", dtDBR, DbType.Object, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateConfigureSMSAlertsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task<IEnumerable<GetConfigureEmailAlertsOutput>> GetConfigureEmailAlerts([FromBody] GetConfigureEmailAlertsModelInput ObjClass)
+        {
+            var procedureName = "UspGetConfigureEmailAlerts";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetConfigureEmailAlertsOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateConfigureEmailAlertModelOutput>> UpdateConfigureEmailAlert([FromBody] UpdateConfigureEmailAlertModelInput ObjClass)
+        {
+
+            var dtDBR = new DataTable("TypeServiceName");
+            dtDBR.Columns.Add("ServiceId", typeof(string));
+            dtDBR.Columns.Add("AllowedStatus", typeof(float));
+
+            var procedureName = "UspUpdateConfigureEmailAlert";
+            var parameters = new DynamicParameters();
+
+            foreach (ConfigureEmailAlertModelInput objConfigureEmailAlert in ObjClass.objConfigureEmailAlert)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["ServiceId"] = objConfigureEmailAlert.ServiceId;
+                dr["AllowedStatus"] = objConfigureEmailAlert.AllowedStatus;
+
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+            parameters.Add("CustomerId", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("TypeServiceName", dtDBR, DbType.Object, ParameterDirection.Input);
+
+            parameters.Add("UserAgent", ObjClass.Useragent, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userid", ObjClass.Userid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<UpdateConfigureEmailAlertModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

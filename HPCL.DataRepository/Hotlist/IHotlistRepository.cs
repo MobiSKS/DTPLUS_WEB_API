@@ -21,5 +21,9 @@ namespace HPCL.DataRepository.Hotlist
         public Task<IEnumerable<GetHotlistApprovalModelOutput>> GetHotlistApproval([FromBody] GetHotlistApprovalModelInput ObjClass);
 
         public Task<IEnumerable<UpdateHotlistApprovalModelOutput>> UpdateHotlistApproval([FromBody] UpdateHotlistApprovalModelInput ObjClass);
+
+        public Task<IEnumerable<HotlistGetHotlistCardsDetailsModelOutput>> GetHotlistCardsDetails([FromBody] HotlistGetHotlistCardsDetailsModelInput ObjClass);
+
+        public Task<IEnumerable<HotlistGetHotlistReasonModelOutput>> GetHotlistReason([FromBody] HotlistGetHotlistReasonModelInput ObjClass);
     }
 }

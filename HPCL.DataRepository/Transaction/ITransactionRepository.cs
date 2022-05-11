@@ -24,5 +24,9 @@ namespace HPCL.DataRepository.Transaction
         public Task<TransactionGetRegistrationProcessModelOutput> GetRegistrationParameters([FromBody] TransactionGetRegistrationProcessModelInput ObjClass);
 
         public Task<IEnumerable<TransactionReloadAccountModelOutput>> ReloadAccount([FromBody] TransactionReloadAccountModelInput ObjClass);
+
+        public Task<IEnumerable<TransactionBalanceEnquiryModelOutput>> BalanceEnquiry([FromBody] TransactionBalanceEnquiryModelInput ObjClass);
+
+        public Task<IEnumerable<TransactionCCMSBalanceEnquiryModelOutput>> CCMSBalanceEnquiry([FromBody] TransactionCCMSBalanceEnquiryModelInput ObjClass);
     }
 }

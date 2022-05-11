@@ -224,6 +224,41 @@ namespace HPCL.DataRepository.Transaction
         }
 
 
+        public async Task<IEnumerable<TransactionBalanceEnquiryModelOutput>> BalanceEnquiry([FromBody] TransactionBalanceEnquiryModelInput ObjClass)
+        {
+            var procedureName = "UspBalanceEnquiry";
+            var parameters = new DynamicParameters();
+            parameters.Add("Merchantid", ObjClass.Merchantid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
+            parameters.Add("Sourceid", ObjClass.Sourceid, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Formfactor", ObjClass.Formfactor, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransactionBalanceEnquiryModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<TransactionCCMSBalanceEnquiryModelOutput>> CCMSBalanceEnquiry([FromBody] TransactionCCMSBalanceEnquiryModelInput ObjClass)
+        {
+            var procedureName = "UspCCMSBalanceEnquiry";
+            var parameters = new DynamicParameters();
+            parameters.Add("Merchantid", ObjClass.Merchantid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
+            parameters.Add("CCN", ObjClass.CCN, DbType.String, ParameterDirection.Input);
+            parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
+            parameters.Add("Sourceid", ObjClass.Sourceid, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("Formfactor", ObjClass.Formfactor, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransactionCCMSBalanceEnquiryModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
 
     }
 }

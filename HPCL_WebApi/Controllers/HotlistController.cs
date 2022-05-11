@@ -226,5 +226,62 @@ namespace HPCL_WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_hotlist_cards_details")]
+        public async Task<IActionResult> GetHotlistCardsDetails([FromBody] HotlistGetHotlistCardsDetailsModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _HLRepo.GetHotlistCardsDetails(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<HotlistGetHotlistCardsDetailsModelOutput> item = result.Cast<HotlistGetHotlistCardsDetailsModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_hotlist_reason")]
+        public async Task<IActionResult> GetHotlistReason([FromBody] HotlistGetHotlistReasonModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _HLRepo.GetHotlistReason(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<HotlistGetHotlistReasonModelOutput> item = result.Cast<HotlistGetHotlistReasonModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
     }
 }

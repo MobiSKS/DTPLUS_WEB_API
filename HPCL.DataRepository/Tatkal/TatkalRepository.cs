@@ -201,8 +201,6 @@ namespace HPCL.DataRepository.Tatkal
             return storedProcedureResult;
         }
 
-
-
         public async Task<IEnumerable<UpdateMapTatkalCardsToTatkalCustomerModelOutput>> UpdateMapTatkalCardsToTatkalCustomer([FromBody] UpdateMapTatkalCardsToTatkalCustomerModelInput ObjClass)
         {
 
