@@ -72,8 +72,16 @@ namespace HPCL.DataRepository.DTP
         public async Task<IEnumerable<GetTeamMappingModelOutput>> GetTeamMapping([FromBody] GetTeamMappingModelInput ObjClass)
         {
             var procedureName = "UspGetTeamMapping";
+            var parameters = new DynamicParameters();
+            parameters.Add("ZBMID", ObjClass.ZBMID, DbType.String, ParameterDirection.Input);
+            parameters.Add("ZBMName", ObjClass.ZBMName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RSMID", ObjClass.RSMID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RSMName", ObjClass.RSMName, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEID", ObjClass.RBEID, DbType.String, ParameterDirection.Input);
+            parameters.Add("RBEName", ObjClass.RBEName, DbType.String, ParameterDirection.Input);
+            parameters.Add("Location", ObjClass.Location, DbType.String, ParameterDirection.Input);           
             using var connection = _context.CreateConnection();
-            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, null, commandType: CommandType.StoredProcedure);
+            return await connection.QueryAsync<GetTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<UpdateTeamMappingModelOutput>> UpdateTeamMapping([FromBody] UpdateTeamMappingModelInput ObjClass)
@@ -103,6 +111,14 @@ namespace HPCL.DataRepository.DTP
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<DeleteTeamMappingModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<GetEntityForGeneralUpdatesModelOutput>> GetEntityGeneralUpdates([FromBody] GetEntityForGeneralUpdatesModelInput ObjClass)
+        {
+            var procedureName = "UspGetEntityForGeneralUpdates";
+            var parameters = new DynamicParameters();
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetEntityForGeneralUpdatesModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<IEnumerable<GetEntityFieldByEntityTypeIdModelOutput>> GetEntityFieldByEntityTypeId([FromBody] GetEntityFieldByEntityTypeIdModelInput ObjClass)
@@ -154,7 +170,7 @@ namespace HPCL.DataRepository.DTP
             var procedureName = "UspUserUnBlock";
             var parameters = new DynamicParameters();
             parameters.Add("UserName", ObjClass.UserName, DbType.String, ParameterDirection.Input);
-            parameters.Add("BloackUnblockStatus", ObjClass.BloackUnblockStatus, DbType.Int32, ParameterDirection.Input);            
+            parameters.Add("BlockUnblockStatus", ObjClass.BlockUnblockStatus, DbType.Int32, ParameterDirection.Input);            
             parameters.Add("Remark", ObjClass.Remark, DbType.String, ParameterDirection.Input);
             parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();

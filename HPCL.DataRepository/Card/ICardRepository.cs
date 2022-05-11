@@ -56,5 +56,12 @@ namespace HPCL.DataRepository.Card
         public Task<IEnumerable<TransferAmountCardToCardModelOutput>> TransferAmountCardToCard([FromBody] TransferAmountCardToCardModelInput ObjClass);
 
         public Task<IEnumerable<CheckCardIdentifierNoModelOutput>> CheckCardIdentifierNo([FromBody] CheckCardIdentifierNoModelInput ObjClass);
+        public Task<IEnumerable<GetCardsForLimitUpdateForSingleRechargeModelOutput>> GetCardsForLimitUpdateForSingleRecharge([FromBody] GetCardsForLimitUpdateForSingleRechargeModelInput ObjClass);
+        public Task<IEnumerable<LimitUpdateForSingleRechargeCardModelOutput>> LimitUpdateForSingleRecharge([FromBody] LimitUpdateForSingleRechargeCardModelInput ObjClass);
+        public Task<IEnumerable<GetDetailForCorpMultiRechargeLimitConfigModelOutput>> GetDetailForCorpMultiRechargeLimitConfig([FromBody] GetDetailForCorpMultiRechargeLimitConfigModelInput ObjClass);
+        public Task<IEnumerable<CorpMultiRechargeLimitConfigModelOutput>> CorpMultiRechargeLimitConfig([FromBody] CorpMultiRechargeLimitConfigModelInput ObjClass);
+
+        public Task<IEnumerable<EmergencyReplacementCardModelOutput>> GetDetailForEmergencyReplacementCards([FromBody] EmergencyReplacementCardModelInput ObjClass);
+
     }
 }

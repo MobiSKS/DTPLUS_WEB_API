@@ -50,23 +50,23 @@ namespace HPCL_WebApi.ExtensionMethod
         {
             string ResponseMessage = StatusInformation.Fail.GetDisplayName();
             int IntResponseMessage = (int)StatusInformation.Fail;
-            if (Message == "Mobile No is already exits")
+            if (Message == "Mobile No is already exists")
             {
                 ResponseMessage = StatusInformation.Mobile_Number_Card_Already_Exists.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Mobile_Number_Card_Already_Exists;
             }
-            if (Message == "Username or Emp Id is already exits")
+            if (Message == "Username or Emp Id is already exists")
             {
                 ResponseMessage = StatusInformation.Username_or_Emp_Id_is_already_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Username_or_Emp_Id_is_already_exits;
             }
-            if (Message == "Email Id is already exits")
+            if (Message == "Email Id is already exists")
             {
                 ResponseMessage = StatusInformation.Email_Id_is_already_present.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Email_Id_is_already_present;
             }
 
-            if (Message == "Officer not exits")
+            if (Message == "Officer not exists")
             {
                 ResponseMessage = StatusInformation.Officer_not_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Officer_not_exits;
@@ -78,7 +78,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Location_already_mapped;
             }
 
-            if (Message == "Location not exits")
+            if (Message == "Location not exists")
             {
                 ResponseMessage = StatusInformation.Location_not_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Location_not_exits;
@@ -90,7 +90,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Username_available;
             }
 
-            if (Message == "Username exits")
+            if (Message == "Username exists")
             {
                 ResponseMessage = StatusInformation.Username_exits.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Username_exits;
@@ -304,7 +304,7 @@ namespace HPCL_WebApi.ExtensionMethod
                 IntResponseMessage = (int)StatusInformation.Form_Number_is_already_exits;
             }
 
-            if (Message == "Pancard is already exits")
+            if (Message == "Pancard is already exists")
             {
                 ResponseMessage = StatusInformation.Pancard_is_already_present.GetDisplayName().ToString();
                 IntResponseMessage = (int)StatusInformation.Pancard_is_already_present;
@@ -445,7 +445,7 @@ namespace HPCL_WebApi.ExtensionMethod
         {
             var jsonInput = Newtonsoft.Json.JsonConvert.SerializeObject(input);
             string MethodName = controller.ControllerContext.ActionDescriptor.ActionName;
-            string MessageStr = StatusInformation.Fail.ToString();
+            string MessageStr = StatusInformation.Fail.GetDisplayName().ToString();
             ApiResponseMessage response = new ApiResponseMessage
             {
                 Message = MessageStr,

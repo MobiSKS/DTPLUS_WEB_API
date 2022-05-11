@@ -9,7 +9,7 @@ namespace HPCL.DataModel.TMS
     {
 
     }
-    public class GetEnrollmentStatusModelOutput
+    public class GetEnrollmentStatusModelOutput 
     {
         [JsonProperty("StatusName")]
         [DataMember]

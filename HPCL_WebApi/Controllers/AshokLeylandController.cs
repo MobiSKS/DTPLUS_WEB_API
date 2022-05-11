@@ -454,6 +454,138 @@ namespace HPCL_WebApi.Controllers
 
         }
 
+        
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_al_customer_detail_for_verification")]
+        public async Task<IActionResult> GetAlCustomerDetailForVerification([FromBody] GetAlCustomerDetailForVerificationModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.GetAlCustomerDetailForVerification(ObjClass);
+                if (result == null || result.Count() ==0) 
+                {
+                    return this.Fail(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<GetAlCustomerDetailForVerificationModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<GetAlCustomerDetailForVerificationModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_al_customer_status")]
+        public async Task<IActionResult> UpdateALCustomerStatus([FromBody] UpdateALCustomerStatusModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.UpdateALCustomerStatus(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateALCustomerStatusModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateALCustomerStatusModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+        }
+
+
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_al_customer_detail")]
+        public async Task<IActionResult> GetALCustomerDetail([FromBody] GetALCustomerDetailModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.GetALCustomerDetail(ObjClass);
+                if (result == null || result.Count() ==0)
+                {
+                    return this.Fail(ObjClass, result, _logger);
+                }
+                else
+                {
+                        return this.OkCustom(ObjClass, result, _logger);
+                   
+
+
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_al_customer_detail")]
+        public async Task<IActionResult> UpdateALCustomerDetail([FromBody] UpdateALCustomerDetailModelinput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _ALRepo.UpdateALCustomerDetail(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<UpdateALCustomerDetailModelOutput>().ToList()[0].Status == 1)
+                    {
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<UpdateALCustomerDetailModelOutput>().ToList()[0].Reason);
+                    }
+
+
+                }
+            }
+        }
     }
 
 }
