@@ -35,18 +35,41 @@ namespace HPCL.DataModel.ConfigureAlert
 
     public class SmsAlertForMultipleMobileDetail
     {
+        [JsonProperty("CustomerID")]
+        [DataMember]
         public string CustomerID { get; set; }
+        [JsonProperty("MobileNo")]
+        [DataMember]
         public string MobileNo { get; set; }
+        [JsonProperty("Name")]
+        [DataMember]
         public string Name { get; set; }
+
+        [JsonProperty("Designation")]
+        [DataMember]
         public string Designation { get; set; }
+
+        [JsonProperty("StatusFlag")]
+        [DataMember]
         public string StatusFlag { get; set; }
     }
 
     public class CustomerDetail
     {
+        [JsonProperty("CustomerName")]
+        [DataMember]
         public string CustomerName { get; set; }
+
+        [JsonProperty("NameOnCard")]
+        [DataMember]
         public string NameOnCard { get; set; }
+
+        [JsonProperty("CommunicationMobileNo")]
+        [DataMember]
         public string CommunicationMobileNo { get; set; }
+
+        [JsonProperty("CustomerID")]
+        [DataMember]
         public string CustomerID { get; set; }
     }
 }

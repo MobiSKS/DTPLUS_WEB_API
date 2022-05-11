@@ -29,7 +29,12 @@ namespace HPCL.DataModel.ConfigureAlert
         [DataMember]
         public string MobileNo { get; set; }
 
+        [JsonPropertyName("Name")]
+        [DataMember]
         public string Name { get; set; }
+
+        [JsonPropertyName("Designation")]
+        [DataMember]
         public string Designation { get; set; }
     }
 
