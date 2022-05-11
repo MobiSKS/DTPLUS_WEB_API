@@ -234,6 +234,35 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_for_general_updates")]
+        public async Task<IActionResult> GetEntityForGeneralUpdates([FromBody] GetEntityForGeneralUpdatesModelInput ObjClass)
+        {
+
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _dtpRepo.GetEntityGeneralUpdates(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<GetEntityForGeneralUpdatesModelOutput> item = result.Cast<GetEntityForGeneralUpdatesModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+
+        }
+
+        [HttpPost]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("get_entity_field_by_entity_type_id")]
         public async Task<IActionResult> GetEntityFieldByEntityTypeId([FromBody] GetEntityFieldByEntityTypeIdModelInput ObjClass)
         {
@@ -291,8 +320,8 @@ namespace HPCL_WebApi.Controllers
             }
         }
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
-        [Route("get_entity_old_field_value")]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("get_entity_old_field_value")] 
         public async Task<IActionResult> GetEntityOldFieldValue([FromBody] GetEntityOldFieldValueModelInput ObjClass)
         {
 
@@ -303,17 +332,21 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _dtpRepo.GetEntityOldFieldValue(ObjClass);
-                if (result == null)
+                if (result == null || result.Count()==0)
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
                 else
                 {
-                    List<GetEntityOldFieldValueModelOutput> item = result.Cast<GetEntityOldFieldValueModelOutput>().ToList();
-                    if (item.Count > 0)
+
+                    if (result.Cast<GetEntityOldFieldValueModelOutput>().ToList()[0].Status == 1)
+                    {
                         return this.OkCustom(ObjClass, result, _logger);
+                    }
                     else
-                        return this.Fail(ObjClass, result, _logger);
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<GetEntityOldFieldValueModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
 
@@ -332,7 +365,7 @@ namespace HPCL_WebApi.Controllers
             else
             {
                 var result = await _dtpRepo.GetDetailForUserUnblockByCustomerIdOrUserName(ObjClass);
-                if (result == null)
+                if (result == null || result.Count() == 0)                 
                 {
                     return this.NotFoundCustom(ObjClass, null, _logger);
                 }
@@ -349,7 +382,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("user_unblock")]
         public async Task<IActionResult> UserUnBlock([FromBody] UserUnBlockModelInput ObjClass)
         {

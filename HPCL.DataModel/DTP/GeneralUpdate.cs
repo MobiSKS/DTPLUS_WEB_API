@@ -6,6 +6,25 @@ using System.Text.Json.Serialization;
 namespace HPCL.DataModel.DTP
 {
 
+    public class GetEntityForGeneralUpdatesModelInput //: BaseClass
+    {
+    }
+
+    public class GetEntityForGeneralUpdatesModelOutput
+    {
+        [JsonProperty("EntityId")]
+        [DataMember]
+        public int EntityId { get; set; }
+
+
+        [JsonProperty("EntityName")]
+        [DataMember]
+        public string EntityName { get; set; }
+
+
+    }
+
+
     public class GetEntityFieldByEntityTypeIdModelInput : BaseClass
     {
         [Required]
@@ -42,16 +61,21 @@ namespace HPCL.DataModel.DTP
         [JsonPropertyName("CustomerIdOrCardOrMerchantId")]
         [DataMember]
         public string CustomerIdOrCardOrMerchantId { get; set; }
-
     }
     public class GetEntityOldFieldValueModelOutput : BaseClassOutput
     {
 
-        [Required]
-        [JsonPropertyName("OldValue")]
+        [JsonProperty("OldValue")]
         [DataMember]
         public string OldValue { get; set; }
 
+        [JsonProperty("RegionID")]
+        [DataMember]
+        public int RegionID { get; set; }
+
+        [JsonProperty("RegionName")]
+        [DataMember]
+        public string RegionName { get; set; }
     }
 
     public class UpdateGeneralEntityFieldModelInput : BaseClass

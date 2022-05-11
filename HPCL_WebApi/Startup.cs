@@ -41,6 +41,7 @@ using HPCL.DataRepository.TMS;
 using HPCL.DataRepository.DTP;
 using HPCL.DataRepository.CustomerAPI;
 using HPCL.DataRepository.AggregatorCustomer;
+using HPCL.DataRepository.ConfigureAlert;
 
 namespace HPCL_WebApi
 {
@@ -80,7 +81,7 @@ namespace HPCL_WebApi
                         .AllowAnyMethod();
                 });
             });
-
+         
             //services.add
             //services.AddEntityFramework()
             //Register dapper in scope
@@ -119,6 +120,7 @@ namespace HPCL_WebApi
             services.AddScoped<IAggregatorCustomerRepository, AggregatorCustomerRepository>();
             services.AddScoped<CustomAuthenticationFilter>();
             services.AddScoped<CustomerAPIAuthenticationFilter>();
+            services.AddScoped<IConfigureAlertRepository, ConfigureAlertRepository>();
             services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;

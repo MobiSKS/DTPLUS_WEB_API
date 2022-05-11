@@ -14,7 +14,7 @@ namespace HPCL.DataModel.AshokLeyland
         [Required]
         [JsonProperty("CustomerID")]
         [DataMember]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
 
         [Required]
         [JsonProperty("CustomerStatus")]

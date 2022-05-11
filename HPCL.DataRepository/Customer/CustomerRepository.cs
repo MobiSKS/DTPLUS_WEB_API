@@ -870,7 +870,7 @@ namespace HPCL.DataRepository.Customer
         //    storedProcedureResult.GetNameandFormNumberOutput = (List<GetNameandFormNumberModelOutput>)await result.ReadAsync<GetNameandFormNumberModelOutput>();
         //    return storedProcedureResult;
         //}
- 
+
 
         public async Task<IEnumerable<GetNameandFormNumberbyCustomerIdModelOutput>> GetNameandFormNumberbyCustomerId([FromBody] GetNameandFormNumberbyCustomerIdModelInput ObjClass)
         {
@@ -898,8 +898,23 @@ namespace HPCL.DataRepository.Customer
             parameters.Add("CustomerId", ObjClass.CustomerId, DbType.String, ParameterDirection.Input);
             parameters.Add("EmailId", ObjClass.EmailId, DbType.String, ParameterDirection.Input);
             parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("ReferenceId", Variables.FunGenerateStringUId(), DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<CustomerAddOnUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+
+        public async Task<IEnumerable<ConfigureSMSAlertsModelOutput>> ConfigureSMSAlerts([FromBody] ConfigureSMSAlertsModelInput ObjClass)
+        {
+            var procedureName = "UspConfigureSMSAlerts";
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", ObjClass.CustomerID, DbType.String, ParameterDirection.Input);
+            parameters.Add("ModifiedBy", ObjClass.ModifiedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("TransactionID", ObjClass.TransactionID, DbType.String, ParameterDirection.Input);
+            parameters.Add("Action", ObjClass.Action, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<ConfigureSMSAlertsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

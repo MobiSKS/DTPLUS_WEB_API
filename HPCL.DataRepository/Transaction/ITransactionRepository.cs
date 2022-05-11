@@ -22,5 +22,7 @@ namespace HPCL.DataRepository.Transaction
         public Task<IEnumerable<TransactionBatchSettlementModelOutput>> BatchSettlement([FromBody] TransactionBatchSettlementModelInput ObjClass);
 
         public Task<TransactionGetRegistrationProcessModelOutput> GetRegistrationParameters([FromBody] TransactionGetRegistrationProcessModelInput ObjClass);
+
+        public Task<IEnumerable<TransactionReloadAccountModelOutput>> ReloadAccount([FromBody] TransactionReloadAccountModelInput ObjClass);
     }
 }

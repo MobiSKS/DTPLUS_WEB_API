@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.City
@@ -10,24 +11,24 @@ namespace HPCL.DataModel.City
     }
     public class GetCityModelOutput
     {
-        [JsonPropertyName("StateId")]
+        [JsonProperty("StateId")]
         [DataMember]
         public int StateId { get; set; }
 
-        [JsonPropertyName("CityId")]
+        [JsonProperty("CityId")]
         [DataMember]
         public int CityId { get; set; }
 
-        [JsonPropertyName("CityCode")]
+        [JsonProperty("CityCode")]
         [DataMember]
         public string CityCode { get; set; }
 
-        [JsonPropertyName("CityName")]
+        [JsonProperty("CityName")]
         [DataMember]
         public string CityName { get; set; }
 
 
-        [JsonPropertyName("CityShortName")]
+        [JsonProperty("CityShortName")]
         [DataMember]
         public string CityShortName { get; set; }
     }

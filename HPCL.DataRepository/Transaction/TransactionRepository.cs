@@ -197,5 +197,33 @@ namespace HPCL.DataRepository.Transaction
         }
 
 
+
+        public async Task<IEnumerable<TransactionReloadAccountModelOutput>> ReloadAccount([FromBody] TransactionReloadAccountModelInput ObjClass)
+        {
+            var procedureName = "UspReloadAccount";
+            var parameters = new DynamicParameters();
+            parameters.Add("Merchantid", ObjClass.Merchantid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Terminalid", ObjClass.Terminalid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Cardno", ObjClass.Cardno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Batchid", ObjClass.Batchid, DbType.Int64, ParameterDirection.Input);
+            parameters.Add("Invoiceamount", ObjClass.Invoiceamount, DbType.Double, ParameterDirection.Input);
+            parameters.Add("Transtype", ObjClass.Transtype, DbType.String, ParameterDirection.Input);
+            parameters.Add("Invoiceid", ObjClass.Invoiceid, DbType.String, ParameterDirection.Input);
+            parameters.Add("Invoicedate", ObjClass.Invoicedate, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("Mobileno", ObjClass.Mobileno, DbType.String, ParameterDirection.Input);
+            parameters.Add("Chequeno", ObjClass.Chequeno, DbType.String, ParameterDirection.Input);
+            parameters.Add("MICR", ObjClass.MICR, DbType.String, ParameterDirection.Input);
+            parameters.Add("OTP", ObjClass.OTP, DbType.String, ParameterDirection.Input);
+            parameters.Add("Pin", ObjClass.Pin, DbType.String, ParameterDirection.Input);
+            parameters.Add("Sourceid", ObjClass.Sourceid, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("CreatedBy", ObjClass.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("Formfactor", ObjClass.Formfactor, DbType.Int32, ParameterDirection.Input);
+            
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<TransactionReloadAccountModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
+
     }
 }

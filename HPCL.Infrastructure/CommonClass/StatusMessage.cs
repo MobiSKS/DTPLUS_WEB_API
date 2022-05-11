@@ -94,7 +94,6 @@ namespace HPCL.Infrastructure.CommonClass
             [Display(Name = "Country not found")] Country_not_found = 1083,
             [Display(Name = "Country Zone not found")] Country_Zone_not_found = 1084,
             [Display(Name = "Invalid Username and Password")] Invalid_Username_Password = 1085,
-
             None = int.MaxValue
         }
 

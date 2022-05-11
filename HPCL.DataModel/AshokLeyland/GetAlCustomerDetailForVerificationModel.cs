@@ -16,14 +16,14 @@ namespace HPCL.DataModel.AshokLeyland
         [JsonPropertyName("StateID")]
         [DataMember]
         public int StateID { get; set; }
-        [Required]
+     
         [JsonPropertyName("FormNumber")]
         [DataMember]
-        public string FormNumber { get; set; }
-        [Required]
+        public string? FormNumber { get; set; }
+      
         [JsonPropertyName("CustomerName")]
         [DataMember]
-        public string CustomerName { get; set; }
+        public string? CustomerName { get; set; }
 
         [Required]
         [JsonPropertyName("Status")]
@@ -35,22 +35,22 @@ namespace HPCL.DataModel.AshokLeyland
     {
         [JsonProperty("FormNumber")]
         [DataMember]
-        public int FormNumber { get; set; }
+        public string FormNumber { get; set; }
         [JsonProperty("CustomerID")]
         [DataMember]
-        public int CustomerID { get; set; }
+        public string CustomerID { get; set; }
         [JsonProperty("CustomerName")]
         [DataMember]
-        public int CustomerName { get; set; }
+        public string CustomerName { get; set; }
         [JsonProperty("CustomerAddress")]
         [DataMember]
-        public int CustomerAddress { get; set; }
+        public string CustomerAddress { get; set; }
         [JsonProperty("PhoneNo")]
         [DataMember]
-        public int PhoneNo { get; set; }
+        public string PhoneNo { get; set; }
         [JsonProperty("MobileNo")]
         [DataMember]
-        public int MobileNo { get; set; }
+        public string MobileNo { get; set; }
        
     }
 }

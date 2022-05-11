@@ -609,7 +609,7 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
-         
+
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -987,11 +987,11 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-       
 
-        
 
-        
+
+
+
 
 
         [HttpPost]
@@ -1027,7 +1027,7 @@ namespace HPCL_WebApi.Controllers
         }
 
 
-      
+
 
 
         [HttpPost]
@@ -1145,7 +1145,7 @@ namespace HPCL_WebApi.Controllers
             }
 
         }
-        
+
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
@@ -1309,7 +1309,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-       [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("customer_add_on_user")]
         public async Task<IActionResult> CustomerAddOnUser([FromBody] CustomerAddOnUserModelInput ObjClass)
         {
@@ -1326,11 +1326,19 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    List<CustomerAddOnUserModelOutput> item = result.Cast<CustomerAddOnUserModelOutput>().ToList();
-                    if (item.Count > 0)
+                    //List<CustomerAddOnUserModelOutput> item = result.Cast<CustomerAddOnUserModelOutput>().ToList();
+                    //if (item.Count > 0)
+                    //    return this.OkCustom(ObjClass, result, _logger);
+                    //else
+                    //    return this.Fail(ObjClass, result, _logger);
+                    if (result.Cast<CustomerAddOnUserModelOutput>().ToList()[0].Status == 1)
+                    {
                         return this.OkCustom(ObjClass, result, _logger);
+                    }
                     else
-                        return this.Fail(ObjClass, result, _logger);
+                    {
+                        return this.FailCustom(ObjClass, result, _logger, result.Cast<CustomerAddOnUserModelOutput>().ToList()[0].Reason);
+                    }
                 }
             }
         }
