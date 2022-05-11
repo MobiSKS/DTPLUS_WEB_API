@@ -27,5 +27,14 @@ namespace HPCL.DataRepository.Login
             return await connection.QueryAsync<GetLoginModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
 
         }
+
+        public async Task<IEnumerable<GetMenuDetailsForUserModelOutput>> GetMenuDetailsForUser([FromBody] GetMenuDetailsForUserModelInput ObjClass)
+        {
+            var procedureName = "UspGetMenuDetailsForUser";
+            var parameters = new DynamicParameters();
+            parameters.Add("UserType", ObjClass.UserType, DbType.String, ParameterDirection.Input);
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<GetMenuDetailsForUserModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
     }
 }
