@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace HPCL_WebApi.Controllers
 {
+    [Route("api/dtplus/configure")]
     [ApiController]
-    [Route("/api/dtplus/ConfigureAlert")]
     public class ConfigureAlertController : ControllerBase
     {
         private readonly ILogger<ConfigureAlertController> _logger;
@@ -43,10 +43,6 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     return this.OkCustom(ObjClass, result, _logger);
-
-
-
-                    //}
                 }
             }
         }
@@ -80,8 +76,6 @@ namespace HPCL_WebApi.Controllers
                             return this.FailCustom(ObjClass, result, _logger,
                                 result.Cast<UpdateSmsAlertForMultipleMobileDetailModelOutput>().ToList()[0].Reason);
                         }
-
-
                     }
                 }
             }

@@ -24,6 +24,44 @@ namespace HPCL.DataModel.Card
 
     }
 
+    // for update 
+    public class UpdateEmergencyReplacementCardsModelInput : BaseClass
+    {       
+        [JsonPropertyName("objEmergencyReplacementCards")]
+        [DataMember]
+        public List<objEmergencyReplacementCardsModelInput> objEmergencyReplacementCards { get; set; }
+
+        [Required]
+        [JsonPropertyName("ModifiedBy")]
+        [DataMember]
+        public string ModifiedBy { get; set; }
+    }
+
+
+    public class objEmergencyReplacementCardsModelInput
+    {
+        [Required]
+        [JsonPropertyName("CustomerId")]
+        [DataMember]
+        public string CustomerId { get; set; }
+
+        [Required]
+        [JsonPropertyName("OldCardNo")]
+        [DataMember]
+        public string OldCardNo { get; set; }
+
+        [Required]
+        [JsonPropertyName("NewCardNo")]
+        [DataMember]
+        public string NewCardNo { get; set; }
+
+    }
+
+    public class EmergencyReplacementCardsModelOutput : BaseClassOutput
+    {
+
+    }
+
 
 
 }

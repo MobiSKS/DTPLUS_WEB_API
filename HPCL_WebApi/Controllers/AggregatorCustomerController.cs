@@ -91,6 +91,38 @@ namespace HPCL_WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("insert_aggregator_normal_fleet_customer")]
+        public async Task<IActionResult> InsertAggregatorNormalFleetCustomer([FromBody] AggregatorNormalFleetCustomerModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _aggregatorCustomerRepo.InsertAggregatorNormalFleetCustomer(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    if (result.Cast<AggregatorNormalFleetCustomerModelOutput>().ToList()[0].Status == 1)
+                    {
+
+                        return this.OkCustom(ObjClass, result, _logger);
+                    }
+                    else
+                    {
+                        return this.FailCustom(ObjClass, result, _logger,
+                            result.Cast<AggregatorNormalFleetCustomerModelOutput>().ToList()[0].Reason);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("upload_aggregator_customer_kyc")]
         public async Task<IActionResult> UploadCustomerKYC([Microsoft.AspNetCore.Mvc.FromForm] AggregatorCustomerKYCModelInput ObjClass)
         {
@@ -504,6 +536,33 @@ namespace HPCL_WebApi.Controllers
                 else
                 {
                     List<GetAggregatorNameandFormNumberbyCustomerIdModelOutput> item = result.Cast<GetAggregatorNameandFormNumberbyCustomerIdModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("aggregator_customer_add_on_user")]
+        public async Task<IActionResult> AggregatorCustomerAddOnUser([FromBody] AggregatorCustomerAddOnUserModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _aggregatorCustomerRepo.AggregatorCustomerAddOnUser(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<AggregatorCustomerAddOnUserModelOutput> item = result.Cast<AggregatorCustomerAddOnUserModelOutput>().ToList();
                     if (item.Count > 0)
                         return this.OkCustom(ObjClass, result, _logger);
                     else

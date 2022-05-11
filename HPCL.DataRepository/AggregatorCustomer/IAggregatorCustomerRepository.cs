@@ -12,6 +12,8 @@ namespace HPCL.DataRepository.AggregatorCustomer
     {
         public Task<IEnumerable<AggregatorCustomerInsertModelOutput>> InsertAggregatorCustomer([FromBody] AggregatorCustomerInsertModelInput ObjClass);
 
+        public Task<IEnumerable<AggregatorNormalFleetCustomerModelOutput>> InsertAggregatorNormalFleetCustomer([FromBody] AggregatorNormalFleetCustomerModelInput ObjClass);
+
         public Task<IEnumerable<AggregatorCustomerUpdateModelOutput>> UpdateAggregatorCustomer([FromBody] AggregatorCustomerUpdateModelInput ObjClass);
 
         public Task<IEnumerable<AggregatorCustomerKYCModelOutput>> UploadAggregatorCustomerKYC([FromBody] AggregatorCustomerKYCModelInput ObjClass);
@@ -45,6 +47,9 @@ namespace HPCL.DataRepository.AggregatorCustomer
         public Task<SearchAggregatorCustomerandCardFormModelOutput> SearchAggregatorCustomerandCardForm([FromBody] SearchAggregatorCustomerandCardFormModelInput ObjClass);
 
         public Task<IEnumerable<GetAggregatorNameandFormNumberbyCustomerIdModelOutput>> GetAggregatorNameandFormNumberbyCustomerId([FromBody] GetAggregatorNameandFormNumberbyCustomerIdModelInput ObjClass);
+
+        public Task<IEnumerable<AggregatorCustomerAddOnUserModelOutput>> AggregatorCustomerAddOnUser([FromBody] AggregatorCustomerAddOnUserModelInput ObjClass);
+
 
     }
 }

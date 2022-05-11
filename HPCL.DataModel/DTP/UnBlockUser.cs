@@ -21,13 +21,16 @@ namespace HPCL.DataModel.DTP
     {
       
         [JsonProperty("UserName")]
-        [DataMember]
-        //public string UserIdOrUserName { get; set; }
+        [DataMember]      
         public string UserName { get; set; }
 
         [JsonProperty("CreatedTime")]
         [DataMember]
         public string CreatedTime { get; set; }
+
+        [JsonProperty("Name")]
+        [DataMember]
+        public string Name { get; set; }
 
     }
     
