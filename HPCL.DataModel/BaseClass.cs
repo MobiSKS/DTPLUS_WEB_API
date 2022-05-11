@@ -57,6 +57,10 @@ namespace HPCL.DataModel
         [JsonPropertyName("Password")]
         [DataMember]
         public string Password { get; set; }
+
+        [JsonPropertyName("TransactionId")]
+        [DataMember]
+        public string TransactionId { get; set; }
     }
 
     public abstract class CustomerAPIBaseClassOutput

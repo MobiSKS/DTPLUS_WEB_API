@@ -17,14 +17,26 @@ namespace HPCL_WebApi.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-           
+            var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
+            var controllerName = descriptor.ControllerName;
 
             if (!context.ModelState.IsValid)
             {
-                context.Result = new JsonResult
-                 (
-                 new RouteValueDictionary(new BadRequestFailureResult(context).Execute()
-                 ));
+                if (controllerName == "CustomerAPI")
+                {
+                    context.Result = new JsonResult
+                     (
+                     new RouteValueDictionary(new BadRequestFailureResultCustomerAPI(context).Execute()
+                     ));
+                }
+                else
+                {
+                    context.Result = new JsonResult
+                     (
+                     new RouteValueDictionary(new BadRequestFailureResult(context).Execute()
+                     ));
+                }
+
                 // context.Result = new BadRequestObjectResult(context.ModelState);
             }
             base.OnActionExecuting(context);
@@ -60,6 +72,34 @@ namespace HPCL_WebApi.ActionFilters
                 logger.Error(string.Join(" - ", allErrors.Select(e => e.ErrorMessage)));
                 return (response);
 
+            }
+
+
+        }
+
+        public class BadRequestFailureResultCustomerAPI
+        {
+            readonly ActionExecutingContext _context;
+
+            public BadRequestFailureResultCustomerAPI(ActionExecutingContext context)
+            {
+                _context = context;
+            }
+
+            public CustomerAPIReponseMessage Execute()
+            {
+                var descriptor = _context.ActionDescriptor as ControllerActionDescriptor;
+                var actionName = descriptor.ActionName;
+                var missingFieldName = _context.ModelState.Keys.SingleOrDefault();
+                CustomerAPIReponseMessage response = new CustomerAPIReponseMessage
+                {
+                    responseCode = "0",
+                    responseMessage = "Mandatory Field is missing: " + missingFieldName
+                };
+
+                var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+                logger.Error(string.Join(" - ", "CustomerAPI Action: "+ actionName + ", Mandatory Field is missing:" + missingFieldName));
+                return (response);
             }
 
 
