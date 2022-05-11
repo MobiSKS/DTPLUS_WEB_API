@@ -1,11 +1,17 @@
-﻿using HPCL.Infrastructure.Response;
+﻿using Dapper;
+using HPCL.DataModel.CustomerAPI;
+using HPCL.DataRepository.DBDapper;
+using HPCL.Infrastructure.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -16,16 +22,28 @@ namespace HPCL_WebApi.ActionFilters
 {
     public class CustomerAPIAuthenticationFilter : Attribute, IAuthorizationFilter
     {
+        private readonly DapperContext _context;
+
+        public CustomerAPIAuthenticationFilter(DapperContext context)
+        {
+            _context = context;
+        }
         public class Root
         {
             public string Username;
             public string Password;
+            public string TransactionId;
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            // string authString;
             HttpRequest request = context.HttpContext.Request;
             var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
             var actionName = descriptor.ActionName;
+
+            // context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+            context.HttpContext.Request.EnableBuffering();
+            //StreamReader reader = new StreamReader(context.HttpContext.Request.Body);
 
             var bodyStr = "";
             var req = context.HttpContext.Request;
@@ -41,7 +59,7 @@ namespace HPCL_WebApi.ActionFilters
             }
 
             // Rewind, so the core is not lost when it looks the body for the request
-            //req.Body.Position = 0;
+            req.Body.Position = 0;
 
 
             // var body = reader.ReadToEnd();
@@ -53,16 +71,44 @@ namespace HPCL_WebApi.ActionFilters
             bodyStr = bodyStr.Replace("'", "''");
             Root objObject = JsonConvert.DeserializeObject<Root>(bodyStr, settings);
 
-            string username = objObject.Username;
-            string password = objObject.Password;
+            string transactionId = objObject.TransactionId;
 
-            string authorization = request.Headers["Authorization"];
-            if (string.IsNullOrEmpty(authorization))
+            if (string.IsNullOrEmpty(objObject.Username))
             {
                 context.Result = new JsonResult
                      (
-                     new RouteValueDictionary(new CustomerAPIAuthenticationFailureResult("Not authorized to Access this API.", request, actionName).Execute()
+                     new RouteValueDictionary(new CustomerAPIAuthenticationFailureResult("Mandatory Field is missing: Username", request, actionName).Execute()
                      ));
+            }
+            else if (string.IsNullOrEmpty(objObject.Password))
+            {
+                context.Result = new JsonResult
+                     (
+                     new RouteValueDictionary(new CustomerAPIAuthenticationFailureResult("Mandatory Field is missing: Password", request, actionName).Execute()
+                     ));
+            }
+            else
+            {
+                IEnumerable<CustomerAPIValidateCredentialsModelOutput> Validation = new List<CustomerAPIValidateCredentialsModelOutput>();
+
+                var procedureName = "UspCustomerAPIValidateCredentials";
+                var parameters = new DynamicParameters();
+                parameters.Add("Username", objObject.Username, DbType.String, ParameterDirection.Input);
+                parameters.Add("Password", objObject.Password, DbType.String, ParameterDirection.Input);
+                using var connection = _context.CreateConnection();
+                Validation = connection.Query<CustomerAPIValidateCredentialsModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                foreach (var obj in Validation)
+                {
+                    if (obj.responseCode == "0")
+                    {
+                        context.Result = new JsonResult
+                             (
+                             new RouteValueDictionary(new CustomerAPIAuthenticationFailureResult("Not authorized to Access this API.", request, actionName).Execute()
+                             ));
+                    }
+                    break;
+                }
             }
         }
 

@@ -12,6 +12,7 @@ namespace HPCL_WebApi.Controllers
 {
     [ApiController]
     [Route("/api/CustomerInterface/CustomerAPI")]
+    [ServiceFilter(typeof(CustomerAPIAuthenticationFilter))]
     public class CustomerAPIController : ControllerBase
     {
         private readonly ILogger<CustomerAPIController> _logger;
@@ -24,7 +25,6 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomerAPIAuthenticationFilter))]
         [Route("customerapi_check_vechile_no")]
         public async Task<IActionResult> CustomerAPICheckVechileNo([FromBody] CustomerAPICheckVechileNoModelInput ObjClass)
         {
