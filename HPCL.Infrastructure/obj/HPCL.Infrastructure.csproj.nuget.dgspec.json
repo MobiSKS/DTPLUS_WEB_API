@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {}
+    "D:\\DPLUSNEW\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {
+    "D:\\DPLUSNEW\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj",
+        "projectUniqueName": "D:\\DPLUSNEW\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj",
         "projectName": "HPCL.Infrastructure",
-        "projectPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\sujit\\.nuget\\packages\\",
-        "outputPath": "D:\\SUJIT_WORK\\SERVICES\\DTPLUS_WEB_API\\HPCL.Infrastructure\\obj\\",
+        "projectPath": "D:\\DPLUSNEW\\DTPLUS_WEB_API\\HPCL.Infrastructure\\HPCL.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\DPLUSNEW\\DTPLUS_WEB_API\\HPCL.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\sujit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.1.config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -97,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

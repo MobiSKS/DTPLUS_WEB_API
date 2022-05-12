@@ -28,11 +28,18 @@ namespace HPCL_WebApi.ExceptionFilter
             var result = JsonConvert.SerializeObject(
                 new
                 {
-                    message = customErrorMessage,
-                    isError = true,
-                    errorMessage = errorMessage,
-                    errorCode = statusCode,
-                    model = string.Empty
+                    Message = customErrorMessage,
+                    Method_Name = string.Empty,
+                    Status_Code = statusCode,
+                    Internel_Status_Code = statusCode,
+                    Success = false,
+                    Token = string.Empty,
+                    Model_State = string.Empty
+                    //message = customErrorMessage,
+                    //isError = true,
+                    //errorMessage = errorMessage,
+                    //errorCode = statusCode,
+                    //model = string.Empty
                 });
             #region Logging  
             //if (ConfigurationHelper.GetConfig()[ConfigurationHelper.environment].ToLower() != "dev")  
