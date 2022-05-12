@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace HPCL.DataModel.AggregatorCustomer
 {
-    public class AggregatorCustomerUpdateModelInput : BaseClass
+    public class AggregatorNormalFleetCustomerUpdateModelInput : BaseClass
     {
         [Required]
         [JsonPropertyName("CustomerReferenceNo")]
@@ -377,7 +377,7 @@ namespace HPCL.DataModel.AggregatorCustomer
 
     //}
 
-    public class AggregatorCustomerUpdateModelOutput : BaseClassOutput
+    public class AggregatorNormalFleetCustomerUpdateModelOutput : BaseClassOutput
     {
 
         [JsonProperty("ReferenceId")]
