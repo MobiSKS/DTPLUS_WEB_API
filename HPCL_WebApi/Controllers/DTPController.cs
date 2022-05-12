@@ -367,7 +367,7 @@ namespace HPCL_WebApi.Controllers
                 var result = await _dtpRepo.GetDetailForUserUnblockByCustomerIdOrUserName(ObjClass);
                 if (result == null || result.Count() == 0)                 
                 {
-                    return this.NotFoundCustom(ObjClass, null, _logger);
+                    return this.Fail(ObjClass, null, _logger);
                 }
                 else
                 {
