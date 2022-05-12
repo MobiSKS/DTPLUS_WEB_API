@@ -111,11 +111,11 @@ namespace HPCL.DataRepository.TMS
             var dtDBR = new DataTable("CustomerTracking");
             dtDBR.Columns.Add("CustomerID", typeof(string));
             dtDBR.Columns.Add("TMSUserId", typeof(string));
-            dtDBR.Columns.Add("TMSStatusID", typeof(int));
+            dtDBR.Columns.Add("TMSStatus", typeof(int));
             dtDBR.Columns.Add("Remarks", typeof(string));
             dtDBR.Columns.Add("CreatedBy", typeof(string));
 
-            List<TMSUpdateEnrollmentStatusModelOutput> resultobj=new List<TMSUpdateEnrollmentStatusModelOutput>();
+            List<TMSUpdateEnrollmentStatusModelOutput> resultobj = new List<TMSUpdateEnrollmentStatusModelOutput>();
 
             if (ObjClass.TMSUpdateEnrollmentCustomerList != null)
             {
@@ -191,8 +191,8 @@ namespace HPCL.DataRepository.TMS
                         if (string.IsNullOrEmpty(res) && response.response.Contains("message"))
                         {
                             objResponce = JsonConvert.DeserializeObject<CargoFlLoginResponse>(response.response);
-                            
-                            TMSUpdateEnrollmentStatusModelOutput tmsobj = new TMSUpdateEnrollmentStatusModelOutput() {Status = 0,Reason = objResponce.message };
+
+                            TMSUpdateEnrollmentStatusModelOutput tmsobj = new TMSUpdateEnrollmentStatusModelOutput() { Status = 0, Reason = objResponce.message };
                             resultobj.Add(tmsobj);
                             return resultobj;
                         }
@@ -203,7 +203,7 @@ namespace HPCL.DataRepository.TMS
                             dr["Remarks"] = ObjDetail.Remarks;
                             dr["CustomerID"] = ObjDetail.CustomerID;
                             dr["TMSUserId"] = ObjDetail.TMSUserId;
-                            dr["TMSStatusID"] = Convert.ToInt32(ObjDetail.TMSStatusID);
+                            dr["TMSStatus"] = Convert.ToInt32(ObjDetail.TMSStatusID);
 
                             dr["CreatedBy"] = ObjClass.Userid;
 
@@ -338,6 +338,42 @@ namespace HPCL.DataRepository.TMS
             parameters.Add("Userip", ObjClass.Userip, DbType.String, ParameterDirection.Input);
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UpdateCustomerAddressModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public async Task<IEnumerable<UpdateCustomerDetailForEnrollmentApprovalModelOutput>> UpdateCustomerDetailForEnrollmentApproval([FromBody] UpdateCustomerDetailForEnrollmentApprovalModelInput ObjClass)
+        {
+            var dtDBR = new DataTable("CustomerTracking");
+            dtDBR.Columns.Add("CustomerID", typeof(string));
+            dtDBR.Columns.Add("TMSUserId", typeof(string));
+            dtDBR.Columns.Add("TMSStatus", typeof(int));
+            dtDBR.Columns.Add("Remarks", typeof(string));
+            dtDBR.Columns.Add("CreatedBy", typeof(string));
+
+            foreach (var ObjDetail in ObjClass.CustomerDetailForEnrollmentApproval)
+            {
+                DataRow dr = dtDBR.NewRow();
+                dr["Remarks"] = ObjDetail.Remarks;
+                dr["CustomerID"] = ObjDetail.CustomerID;
+                dr["TMSUserId"] = 0;
+                dr["TMSStatus"] = Convert.ToInt32(ObjDetail.TMSStatus);
+
+                dr["CreatedBy"] = ObjClass.Userid;
+
+                dtDBR.Rows.Add(dr);
+                dtDBR.AcceptChanges();
+            }
+            if (dtDBR.Rows.Count > 0)
+            {
+                var procedureName = "UspUpdateCustomerDetailForEnrollmentApproval";
+                var parameters = new DynamicParameters();
+                parameters.Add("CustomerTracking", dtDBR, DbType.Object, ParameterDirection.Input);
+                using var connection = _context.CreateConnection();
+                return await connection.QueryAsync<UpdateCustomerDetailForEnrollmentApprovalModelOutput>(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }

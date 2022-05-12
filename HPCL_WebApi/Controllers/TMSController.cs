@@ -356,7 +356,7 @@ namespace HPCL_WebApi.Controllers
         }
 
         [HttpPost]
-        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+       [ServiceFilter(typeof(CustomAuthenticationFilter))]
         [Route("insert_vehicle_enrollment_status")]
         public async Task<IActionResult> InsertVehicleEnrollmentStatus([FromBody] InsertVehicleEnrollmentStatusInput ObjClass)
         {
@@ -541,6 +541,34 @@ namespace HPCL_WebApi.Controllers
                 }
             }
         }
+
+        [HttpPost]
+        [ServiceFilter(typeof(CustomAuthenticationFilter))]
+        [Route("update_customer_detail_for_enrollment_approval")]
+        public async Task<IActionResult> GeUpdateCustomerDetailForEnrollmentApproval([FromBody] UpdateCustomerDetailForEnrollmentApprovalModelInput ObjClass)
+        {
+            if (ObjClass == null)
+            {
+                return this.BadRequestCustom(ObjClass, null, _logger);
+            }
+            else
+            {
+                var result = await _tmsRepo.UpdateCustomerDetailForEnrollmentApproval(ObjClass);
+                if (result == null)
+                {
+                    return this.NotFoundCustom(ObjClass, null, _logger);
+                }
+                else
+                {
+                    List<UpdateCustomerDetailForEnrollmentApprovalModelOutput> item = result.Cast<UpdateCustomerDetailForEnrollmentApprovalModelOutput>().ToList();
+                    if (item.Count > 0)
+                        return this.OkCustom(ObjClass, result, _logger);
+                    else
+                        return this.Fail(ObjClass, result, _logger);
+                }
+            }
+        }
+
     }
 
 }

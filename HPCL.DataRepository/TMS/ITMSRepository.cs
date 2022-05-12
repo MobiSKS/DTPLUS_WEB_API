@@ -15,6 +15,8 @@ namespace HPCL.DataRepository.TMS
         public void InsertAPIRequestResponse([FromBody] ApiRequestResponse ObjClass);
         public Task<IEnumerable<CargoFlRegisterTrucker>> GetCargoFlRegisterTruckerDetail([FromBody] string CustomerId);
         public Task<IEnumerable<GetCustomerDetailForEnrollmentApprovalOutput>> GetCustomerDetailForEnrollmentApproval([FromBody] GetCustomerDetailForEnrollmentApprovalInput ObjClass);
+        public Task<IEnumerable<UpdateCustomerDetailForEnrollmentApprovalModelOutput>> UpdateCustomerDetailForEnrollmentApproval([FromBody] UpdateCustomerDetailForEnrollmentApprovalModelInput ObjClass);
+
         public Task<IEnumerable<GetEnrollmentStatusModelOutput>> GetEnrollmentStatus();
         public Task<IEnumerable<TMSUpdateEnrollmentStatusModelOutput>> TMSInsertCustomerTracking([FromBody] TMSUpdateEnrollmentStatusModelInput ObjClass,string ApiUrl);
         public Task<IEnumerable<GetEnrollVehicleManagementModeloutput>> GetEnrollVehicleManagementDetail([FromBody] GetEnrollVehicleManagementModelInput ObjClass);
