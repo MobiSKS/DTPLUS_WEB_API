@@ -73,7 +73,7 @@ namespace HPCL_WebApi.Controllers
                 }
                 else
                 {
-                    if (result.Cast<GetMenuDetailsForUserModelOutput>().ToList()[0].Status == 1)
+                    if (result.Cast<GetMenuDetailsForUserModelOutput>().ToList().Count > 1)
                     {
                         return this.OkCustom(ObjClass, result, _logger);
                     }
